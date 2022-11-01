@@ -1,0 +1,315 @@
+@import url(reset.css);
+@import url("https://fonts.googleapis.com/css2?family=Nanum+Gothic:wght@700&family=Noto+Sans+KR&display=swap");
+
+@font-face {
+  font-family: "EliceDigitalBaeum-Bd";
+  src: url("https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_elice@1.0/EliceDigitalBaeum-Bd.woff2")
+    format("woff2");
+  font-weight: normal;
+  font-style: normal;
+}
+:root {
+  --font-color: #fff;
+  --background-color: #000;
+  --sub-background-color: #222;
+  --boder-silver: 1px solid silver;
+  --main-color: #3e065f;
+  --point-color: #ff00d7;
+}
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  text-decoration: none;
+  color: silver;
+}
+::-webkit-scrollbar {
+  display: none; /* Chrome, Safari, Opera*/
+}
+body {
+  width: 100vw;
+  height: 100vh;
+  font-family: "Noto Sans KR", sans-serif;
+  position: relative;
+  background: #000;
+}
+
+.wrap {
+  width: 100vw;
+  height: 100%;
+  position: relative;
+  height: 100vh;
+  height: -webkit-fill-available;
+  height: fill-available;
+}
+a {
+  cursor: pointer;
+}
+
+#Header {
+  width: 230px;
+  height: 100vh;
+  padding: 0 24px;
+  background: #000;
+  position: absolute;
+  border-right: 1px solid silver;
+}
+
+#Header a {
+  display: block;
+}
+
+#logo {
+  width: 100%;
+  text-align: center;
+  height: 80px;
+  margin-top: 15px;
+  margin-bottom: 15px;
+  display: inline-block;
+}
+#logo a {
+  display: inline-block;
+  width: 100%;
+  height: 100%;
+  border: none;
+}
+
+#logo a img {
+  width: 100%;
+  height: 100%;
+}
+#LoginBox {
+  width: 100%;
+  border: none;
+  cursor: pointer;
+}
+
+.loginBtn {
+  width: 100%;
+  height: 40px;
+  text-align: center;
+  line-height: 40px;
+  border: none;
+  border-top: 1px solid silver;
+  border-bottom: 1px solid silver;
+  margin-bottom: 20px;
+}
+
+.tog {
+  width: 140px;
+  right: 24px;
+  padding: 10px 0px;
+  top: 135px;
+  float: right;
+  border: none;
+  position: absolute;
+  border-radius: 4px;
+  display: none;
+  background: #222;
+}
+
+.block {
+  display: block;
+}
+
+.tog li {
+  height: 35px;
+  text-align: center;
+  border: none;
+}
+.tog li:hover {
+  opacity: 0.5;
+}
+.tog li a {
+  border: none;
+  font-size: 14px;
+  line-height: 35px;
+  color: white;
+}
+
+#search {
+  height: 40px;
+  width: 100%;
+  border-radius: 5px;
+  padding: 10px;
+  margin-bottom: 10px;
+  border: none;
+  outline: none;
+  background: #222;
+  text-align: center;
+}
+
+#searchIcon {
+  color: black;
+  background-color: black;
+}
+#GNB {
+  margin-bottom: 20px;
+  text-align: center;
+}
+#GNB ul {
+  padding-bottom: 20px;
+  border-bottom: 1px solid silver;
+}
+#GNB ul li {
+  height: 40px;
+  line-height: 40px;
+}
+#GNB ul li a:hover {
+  color: #fff;
+}
+
+#FloatArea {
+}
+
+#FloatArea a {
+  width: 100%;
+  height: 50px;
+  text-align: center;
+  line-height: 50px;
+  border-radius: 5px;
+  font-family: "EliceDigitalBaeum-Bd";
+  font-size: 20px;
+}
+#FloatArea a:hover {
+  color: #fff;
+}
+#FloatArea a:nth-child(1) {
+  background-image: linear-gradient(#000, #000),
+    linear-gradient(to right, #3e065f 0%, #ff00d7 100%);
+  border: 1px solid transparent;
+  border-radius: 5px;
+  background-origin: border-box;
+  background-clip: content-box, border-box;
+  margin-bottom: 10px;
+}
+
+#FloatArea a:nth-child(2) {
+  border: 1px solid #222;
+}
+#FloatArea a:nth-child(2):hover {
+  border: 1px solid silver;
+}
+
+#MusicControl {
+  bottom: 0;
+  width: 100%;
+  position: absolute;
+  background: var(--main-color);
+}
+#MusicControl .gageBar {
+}
+
+#MusicControl .hidden {
+  width: 100vw;
+  height: 90vh;
+  background: #222;
+  display: none;
+  opacity: 1;
+}
+#MusicControl .controller {
+  width: 100%;
+  height: 10vh;
+  min-height: 80px;
+  padding: 15px;
+  bottom: 0;
+  display: flex;
+}
+.controller ul {
+  display: flex;
+}
+.controller > .musicInfo {
+  width: 280px;
+  display: flex;
+  border: 1px solid white;
+}
+
+.musicInfo li {
+  border: 1px solid white;
+  margin-right: 10px;
+}
+.musicInfo li:nth-child(1) {
+  background: blue;
+  width: 60px;
+  height: 60px;
+}
+.musicInfo li:nth-child(2) {
+  width: 120px;
+  overflow: hidden;
+}
+.musicInfo li:nth-child(2) > p,
+strong {
+  display: block;
+  height: 30px;
+  border: 1px solid white;
+}
+.musicInfo > li:nth-child(3),
+.musicInfo > li:nth-child(4) {
+  width: 30px;
+  height: 30px;
+  margin-top: 15px;
+  background: yellow;
+}
+
+.musicInfo li button {
+  cursor: pointer;
+}
+
+.controller > .volum {
+  width: 300px;
+  border: 1px solid white;
+  display: flex;
+  flex-direction: row;
+}
+.volum > * {
+  background: green;
+}
+.volum li {
+  margin-right: 20px;
+}
+.volum li:nth-child(1) {
+  width: 60px;
+  height: 100%;
+  padding: 15px;
+}
+.volum .volumBar {
+  width: 200px;
+  height: 10px;
+  margin: auto 0;
+  background: silver;
+}
+
+.volum .volumBar > div {
+  width: 100px;
+  height: 10px;
+  background: #fff;
+}
+
+#openList {
+  cursor: pointer;
+  width: 60px;
+  border: 1px solid white;
+}
+
+#openList:hover {
+  color: white;
+}
+
+#events {
+  width: 100%;
+  border-bottom: 1px solid silver;
+  padding-bottom: 20px;
+  margin-bottom: 20px;
+}
+
+#events ul li {
+  height: 30px;
+  line-height: 30px;
+  text-align: center;
+}
+
+.service {
+  margin-top: 10px;
+  text-align: center;
+  color: #333;
+}
