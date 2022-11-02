@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+pageEncoding="UTF-8"%>
+
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -56,8 +57,10 @@
       }
 
       .wrap form {
-        width: 100%;
+        width: 250px;
+        margin: 0 auto;
         text-align: center;
+        display: block;
       }
 
       .wrap a {
@@ -65,6 +68,13 @@
         margin-top: 10px;
         color: silver;
         font-size: 0.8rem;
+      }
+
+      form p {
+        text-align: left;
+        margin-bottom: 10px;
+        margin-left: 5px;
+        font-size: 14px;
       }
 
       form input {
@@ -90,6 +100,19 @@
         font-weight: bolder;
         font-size: 1rem;
         cursor: pointer;
+        margin-bottom: 10px;
+      }
+      #submitNumber {
+        width: 250px;
+        height: 50px;
+        margin-top: 5px;
+        background: var(--sub-background-color);
+        border-radius: 4px;
+        color: var(--font-color);
+        font-weight: bolder;
+        font-size: 1rem;
+        cursor: pointer;
+        margin-bottom: 10px;
       }
 
       form button:hover {
@@ -110,33 +133,72 @@
         display: none; /* Chrome, Safari, Opera*/
       }
     </style>
+    <script
+      src="https://code.jquery.com/jquery-3.6.1.min.js"
+      integrity="sha256-o88AwQnZB+VDvE9tvIXrMQaPlFFSUTR+nldQm1LuPXQ="
+      crossorigin="anonymous"
+    ></script>
   </head>
   <body>
     <div class="wrap">
-      <h1 id="logo">
-        <a href="index.html"><img src="src/image/logo-f-5.png" alt="" /></a>
-      </h1>
+      <h1>이메일 인증</h1>
       <form action="" method="post">
-        <input type="text" name="id" placeholder="email" />
-        <input type="text" name="password" placeholder="password" />
-        <button type="submit" id="loginBtn">로그인</button>
+        <p>이메일</p>
+        <input type="text" name="id" placeholder="email" id="email" />
+        <p id="msg"></p>
+        <button type="button" id="submitNumber">인증번호 전송</button>
+        <p>인증번호</p>
+        <input type="text" name="password" id="number" placeholder="인증번호" />
+        <button type="button" id="numberCheck">확인</button>
+        <p id="msg"></p>
       </form>
-      <a href="InputForm.jsp">회원가입</a>
-      <a href="find.jsp">아이디/비밀번호 찾기</a>
     </div>
-    <!-- <footer>
-      포도뮤직(주) 대표이사 : 조성태 사업자등록번호 : 220-81-99999
-      통신판매업신고번호 : 제2006-경기성남-9999호 주소 : 서울 중구 남대문로 120
-      대일빌딩 2층,3층 대표전화 : 1155-9999 이메일 : xorrn93@gmail.com 호스팅
-      서비스 제공 : AWS 개인정보처리방침 PODO 이용약관 고객센터 결제/환불안내
-      상담 © PODO Music Corp.
-    </footer> -->
+    <script>
+      var emailRegex =
+        /^([\w-]+(?:\.[\w-]+)*)@((?:[\w-]+\.)*\w[\w-]{0,66})\.([a-z]{2,6}(?:\.[a-z]{2})?)$/;
+      var number = "0102";
+      $("#email").keyup(function () {
+        let result = emailRegex.test($(this).val());
+        if ($(this).val() == "") {
+          $(this).val("");
+        } else if (!result) {
+          $(this)
+            .next("#msg")
+            .css("color", "#888")
+            .text("올바른 이메일 형식을 입력해주세요!");
+        } else {
+          $(this).next("#msg").text("");
+        }
+      });
 
-    <footer>
-      <p>개인정보처리방침 | PODO 이용약관 | 고객센터 | 결제/환불안내 | 상담</p>
-      <br />
-      <img src="src/image/logo-footer.png" alt="" style="width: 60px" />
-      <p>© PODO Music Corp.</p>
-    </footer>
+      $("#email").change(function () {
+        let result = emailRegex.test($(this).val());
+        if (!result) {
+          $(this).val("");
+        } else {
+        }
+      });
+
+      $("#submitNumber").click(function () {
+        let email = $("#email").val();
+        alert("인증번호 : " + number);
+      });
+
+      $("#numberCheck").click(function () {
+        let result = $("#number").val() == number;
+        if ($("#number").val() == "") {
+          $("#number").val("");
+        } else if (!result) {
+          $(this)
+            .next("#msg")
+            .css("color", "#888")
+            .text("인증번호가 틀립니다.");
+          $("#number").val("");
+        } else {
+          alert("인증번호 일치!");
+          window.close();
+        }
+      });
+    </script>
   </body>
 </html>
