@@ -135,7 +135,7 @@
  <body>
     <div class="wrap">
       <h1 id="logo">
-        <a href="index.jsp"><img src="src/image/logo-f-5.png" alt="" /></a>
+        <a href="index.jsp"><img src="image/logo-f-5.png" alt="" /></a>
       </h1>
       <form action="" method="post">
         <p>이메일</p>
@@ -175,7 +175,7 @@
     <footer>
       <p>개인정보처리방침 | PODO 이용약관 | 고객센터 | 결제/환불안내 | 상담</p>
       <br />
-      <img src="src/image/logo-footer.png" alt="" style="width: 60px" />
+      <img src="image/logo-footer.png" alt="" style="width: 60px" />
       <p>© PODO Music Corp.</p>
     </footer>
     <!-- 유효성 검사 -->
