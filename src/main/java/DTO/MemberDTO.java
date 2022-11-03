@@ -12,13 +12,13 @@ public class MemberDTO {
 	private String profileimg;
 	private String nickname;
 	private String name;
-	private String phone;
+	private int phone;
 	
 	public MemberDTO() {
 	}
 	
 	public MemberDTO(String eamil, String pw, String membership, Timestamp scribedate, Timestamp joindate,
-			String profileimg, String nickname, String name, String phone) {
+			String profileimg, String nickname, String name, int phone) {
 		super();
 		this.eamil = eamil;
 		this.pw = pw;
@@ -80,10 +80,10 @@ public class MemberDTO {
 	public void setName(String name) {
 		this.name = name;
 	}
-	public String getPhone() {
+	public int getPhone() {
 		return phone;
 	}
-	public void setPhone(String phone) {
+	public void setPhone(int phone) {
 		this.phone = phone;
 	}
 
