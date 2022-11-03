@@ -9,7 +9,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import DAO.MemberDAO;
 
-@WebServlet("*.mem")
+@WebServlet("*.member")
 public class MemberController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
@@ -21,15 +21,15 @@ public class MemberController extends HttpServlet {
 		System.out.println(uri);
 		
 		try {
-			if(uri.equals("/signup.mem")) {
+			if(uri.equals("/signup.member")) {
 				String email = request.getParameter("email");
 				String pw = request.getParameter("pw");
 				String nickname = request.getParameter("nickname");
 				String name = request.getParameter("name");
 				int phone = Integer.parseInt(request.getParameter("phone"));
-				
+				System.out.println(email+pw+nickname+name+phone);
 				MemberDAO dao = MemberDAO.getInstance();
-				int result = dao.signup(email,pw,null,null, null, null,nickname, name, phone);
+				int result = dao.signup(email,pw,nickname, name, phone);
 				response.sendRedirect("/index.jsp");
 			}
 		}
