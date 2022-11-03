@@ -116,9 +116,9 @@
       <h1 id="logo">
         <a href="index.jsp"><img src="image/web/logo-f-5.png" alt="" /></a>
       </h1>
-      <form action="" method="post">
-        <input type="text" name="id" placeholder="email" />
-        <input type="text" name="password" placeholder="password" />
+      <form action="/login.member" method="post">
+        <input type="text" name="email" placeholder="email" />
+        <input type="text" name="pw" placeholder="password" />
         <button type="submit" id="loginBtn">로그인</button>
       </form>
       <a href="InputForm.jsp">회원가입</a>

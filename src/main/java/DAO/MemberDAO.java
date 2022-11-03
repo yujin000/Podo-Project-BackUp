@@ -2,6 +2,7 @@ package DAO;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.Timestamp;
 
 import javax.naming.Context;
@@ -30,7 +31,7 @@ public class MemberDAO {
 	  String nickname,String name,
 	 int phone
 			) throws Exception {
-		String sql = "insert into member values(?,?,'기본등급',null,sysdate,null,?,?,?)";
+		String sql = "insert into member values(?,?,'basic',null,sysdate,null,?,?,?)";
 
 		try(	Connection con = this.getConnection();
 					PreparedStatement pstat = con.prepareStatement(sql);) {
@@ -59,10 +60,38 @@ public class MemberDAO {
 		return 0;
 	}
 	
-	public boolean login() {
-		return false; 
+	public boolean login(String email, String pw) throws Exception{
+		String sql = "select * from member where email=? and pw=?";
+		try (Connection con = this.getConnection();
+				PreparedStatement pstat = con.prepareStatement(sql);
+				){
+			pstat.setString(1,email);
+			pstat.setString(2,pw);
+			
+			System.out.println(email+pw);
+			ResultSet rs = pstat.executeQuery();
+			
+			return rs.next();
+			}
+			}
+		
+	public String getNick(String email) throws Exception{
+		String sql = "select * from member where email = ?";
+		try (Connection con = this.getConnection();
+				PreparedStatement pstat = con.prepareStatement(sql);
+				){
+			pstat.setString(1, email);
+			System.out.println(email);
+			try(ResultSet rs = pstat.executeQuery();){
+				rs.next();
+				return rs.getString("nickname");
+			}
+			
+			
+			
+		}
 	}
-	
+		
 	public boolean emailCheck() {
 		return false;
 	}

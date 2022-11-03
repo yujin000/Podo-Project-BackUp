@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-pageEncoding="UTF-8"%>
+pageEncoding="UTF-8"%><%@ taglib prefix="c"
+uri="http://java.sun.com/jsp/jstl/core"%>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -31,7 +32,12 @@ pageEncoding="UTF-8"%>
           <a href="index.jsp"><img src="image/web/logo-f-5.png" alt="" /></a>
         </h1>
         <div id="LoginBox">
-          <a class="loginBtn" href="loginForm.jsp">로그인</a>
+
+        <c:choose>
+        	<c:when test="${email != null}">
+          <div class="mypage">
+            <img src="src/lmage/profile-default.jpg" alt="" /><span>${nickname }</span>
+          </div>
           <ul class="tog">
             <li><a href="#">마이페이지</a></li>
             <li><a href="#">공지사항</a></li>
@@ -39,9 +45,16 @@ pageEncoding="UTF-8"%>
             <li><a href="#">친구초대 </a></li>
             <li><a href="#">로그아웃</a></li>
           </ul>
+        	</c:when>
+        	<c:otherwise>
+          <a class="loginBtn" href="loginForm.jsp">로그인</a> 
+        	</c:otherwise>
+        </c:choose>
         </div>
 
         <input type="search" placeholder="MUSIC 검색" id="search" />
+
+        <!-- login 성공 시  -->
         <div id="GNB">
           <ul>
             <li><a id="today">투데이</a></li>
@@ -156,9 +169,9 @@ pageEncoding="UTF-8"%>
     </script>
     <script>
       // loginBox button toggle
-      let lb = document.getElementById("LoginBox");
+      let lb = document.getElementsByClassName("mypage");
       $(lb).click(function () {
-        $(this).find(".tog").toggle();
+        $(this).next(".tog").toggle();
       });
     </script>
     <script>
