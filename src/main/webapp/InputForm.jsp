@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+     <%@ taglib prefix="c"
+uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -133,9 +135,19 @@
       crossorigin="anonymous"></script>
 </head>
  <body>
+ <% 
+ 	String email = request.getParameter("email");
+ 	
+  if(email == null){
+	  email = "";
+  }else{
+	  
+  }
+ %>
+ 
     <div class="wrap">
       <h1 id="logo">
-        <a href="index.jsp"><img src="image/logo-f-5.png" alt="" /></a>
+        <a href="index.jsp"><img src="image/web/logo-f-5.png" alt="" /></a>
       </h1>
       <form action="" method="post">
         <p>이메일</p>
@@ -144,6 +156,7 @@
           name="email"
           id="email"
           placeholder="exam@gamil.com"
+          value="<%=email %>"
           readonly
         />
         <button id="emailCheck" type="button">이메일 인증</button>
@@ -175,7 +188,7 @@
     <footer>
       <p>개인정보처리방침 | PODO 이용약관 | 고객센터 | 결제/환불안내 | 상담</p>
       <br />
-      <img src="image/logo-footer.png" alt="" style="width: 60px" />
+      <img src="image/web/logo-footer.png" alt="" style="width: 60px" />
       <p>© PODO Music Corp.</p>
     </footer>
     <!-- 유효성 검사 -->

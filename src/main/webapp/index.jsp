@@ -28,7 +28,7 @@ pageEncoding="UTF-8"%>
     <div class="wrap">
       <div id="Header">
         <h1 id="logo">
-          <a href="index.jsp"><img src="image/logo-f-5.png" alt="" /></a>
+          <a href="index.jsp"><img src="image/web/logo-f-5.png" alt="" /></a>
         </h1>
         <div id="LoginBox">
           <a class="loginBtn" href="loginForm.jsp">로그인</a>
@@ -93,7 +93,7 @@ pageEncoding="UTF-8"%>
         <div class="controller">
           <ul class="musicInfo">
             <li>
-              <a href=""><img src="image/album-p.png" alt="" /></a>
+              <a href=""><img src="image/web/album-p.png" alt="" /></a>
             </li>
             <li>
               <strong>ttile</strong>

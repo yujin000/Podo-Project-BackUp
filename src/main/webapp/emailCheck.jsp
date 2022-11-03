@@ -142,14 +142,14 @@ pageEncoding="UTF-8"%>
   <body>
     <div class="wrap">
       <h1>이메일 인증</h1>
-      <form action="" method="post">
+      <form action="InputForm.jsp" method="post">
         <p>이메일</p>
         <input type="text" name="id" placeholder="email" id="email" />
         <p id="msg"></p>
         <button type="button" id="submitNumber">인증번호 전송</button>
         <p>인증번호</p>
         <input type="text" name="password" id="number" placeholder="인증번호" />
-        <button type="button" id="numberCheck">확인</button>
+        <button type="submit" id="numberCheck">확인</button>
         <p id="msg"></p>
       </form>
     </div>
@@ -195,7 +195,9 @@ pageEncoding="UTF-8"%>
             .text("인증번호가 틀립니다.");
           $("#number").val("");
         } else {
+         	let email =$("#email").val();'
           alert("인증번호 일치!");
+          location.href ="/InputForm.jsp?email="+email;
           window.close();
         }
       });
