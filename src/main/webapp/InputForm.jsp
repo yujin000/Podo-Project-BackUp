@@ -147,7 +147,7 @@ uri="http://java.sun.com/jsp/jstl/core"%>
       <h1 id="logo">
         <a href="index.jsp"><img src="image/web/logo-f-5.png" alt="" /></a>
       </h1>
-      <form action="" method="post">
+      <form action="/signup.mem" method="post">
         <p>이메일</p>
         <input
           type="text"
@@ -163,7 +163,7 @@ uri="http://java.sun.com/jsp/jstl/core"%>
         <input type="text" name="pw" id="pw" placeholder="최소 7자~최대20자" />
         <p id="msg"></p>
         <p>비밀번호 재확인</p>
-        <input type="text" name="pwCheck" id="pwCheck" />
+        <input type="text" id="pwCheck" />
         <p id="msg"></p>
         <p>닉네임</p>
         <input type="text" name="nickname" id="nickname" placeholder="5글자" />
@@ -176,7 +176,7 @@ uri="http://java.sun.com/jsp/jstl/core"%>
           type="text"
           name="phone"
           id="phone"
-          placeholder="010-1234-5678"
+          placeholder="01012345678"
         />
         <p id="msg"></p>
         <button type="submit" id="inputSubmit">회원가입</button>
