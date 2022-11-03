@@ -137,11 +137,9 @@ uri="http://java.sun.com/jsp/jstl/core"%>
  <body>
  <% 
  	String email = request.getParameter("email");
- 	
+
   if(email == null){
-	  email = "";
-  }else{
-	  
+	  /* email = ""; */
   }
  %>
  
@@ -156,8 +154,8 @@ uri="http://java.sun.com/jsp/jstl/core"%>
           name="email"
           id="email"
           placeholder="exam@gamil.com"
-          value="<%=email %>"
-          readonly
+          value=""
+         
         />
         <button id="emailCheck" type="button">이메일 인증</button>
         <p id="msg"></p>

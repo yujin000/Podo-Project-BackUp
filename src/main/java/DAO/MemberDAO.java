@@ -26,10 +26,10 @@ public class MemberDAO {
 		return ds.getConnection();
 	}
 	
-	public int insert(String email,	String pw, String membership, Timestamp scribedate,
+	public int signup(String email,	String pw, String membership, Timestamp scribedate,
 	 Timestamp joindate, String profileimg,String nickname,String name,
 	 int phone
-			) throws Exception { String sql = "insert into member values(?,?,null,null,sysdate,null,?,?,?";
+			) throws Exception { String sql = "insert into member values(?,?,?,?,sysdate,?,?,?,?";
 			try(	Connection con = this.getConnection();
 					PreparedStatement pstat = con.prepareStatement(sql);) {
 					
