@@ -26,22 +26,20 @@ public class MemberDAO {
 		return ds.getConnection();
 	}
 	
-	public int insert(String email,	String pw, String membership, Timestamp scribedate,
-	 Timestamp joindate, String profileimg,String nickname,String name,
+	public int signup(String email,	String pw, 
+	  String nickname,String name,
 	 int phone
-			) throws Exception { String sql = "insert into member values(?,?,null,null,sysdate,null,?,?,?";
-			try(	Connection con = this.getConnection();
+			) throws Exception {
+		String sql = "insert into member values(?,?,'기본등급',null,sysdate,null,?,?,?)";
+
+		try(	Connection con = this.getConnection();
 					PreparedStatement pstat = con.prepareStatement(sql);) {
 					
 				pstat.setString(1, email);
 				pstat.setString(2, pw);
-				pstat.setString(3, membership);
-				pstat.setTimestamp(4,scribedate);
-				pstat.setTimestamp(5,joindate);
-				pstat.setString(6, profileimg);
-				pstat.setString(7, nickname);
-				pstat.setString(8,name);
-				pstat.setInt(9, phone);
+				pstat.setString(3, nickname);
+				pstat.setString(4,name);
+				pstat.setInt(5, phone);
 					
 					
 				int result = pstat.executeUpdate();

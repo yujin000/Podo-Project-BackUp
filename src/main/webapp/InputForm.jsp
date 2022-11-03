@@ -137,11 +137,9 @@ uri="http://java.sun.com/jsp/jstl/core"%>
  <body>
  <% 
  	String email = request.getParameter("email");
- 	
+
   if(email == null){
-	  email = "";
-  }else{
-	  
+	  /* email = ""; */
   }
  %>
  
@@ -149,15 +147,15 @@ uri="http://java.sun.com/jsp/jstl/core"%>
       <h1 id="logo">
         <a href="index.jsp"><img src="image/web/logo-f-5.png" alt="" /></a>
       </h1>
-      <form action="" method="post">
+      <form action="/signup.member" method="post">
         <p>이메일</p>
         <input
           type="text"
           name="email"
           id="email"
           placeholder="exam@gamil.com"
-          value="<%=email %>"
-          readonly
+          value=""
+         
         />
         <button id="emailCheck" type="button">이메일 인증</button>
         <p id="msg"></p>
@@ -165,20 +163,20 @@ uri="http://java.sun.com/jsp/jstl/core"%>
         <input type="text" name="pw" id="pw" placeholder="최소 7자~최대20자" />
         <p id="msg"></p>
         <p>비밀번호 재확인</p>
-        <input type="text" name="pwCheck" id="pwCheck" />
+        <input type="text" id="pwCheck" />
         <p id="msg"></p>
         <p>닉네임</p>
         <input type="text" name="nickname" id="nickname" placeholder="5글자" />
         <p id="msg"></p>
         <p>이름</p>
-        <input type="text" name="name" id="name" placeholder="5글자" />
+        <input type="text" name="name" id="name" placeholder="10자" />
         <p id="msg"></p>
         <p>전화번호</p>
         <input
           type="text"
           name="phone"
           id="phone"
-          placeholder="010-1234-5678"
+          placeholder="01012345678"
         />
         <p id="msg"></p>
         <button type="submit" id="inputSubmit">회원가입</button>
@@ -198,8 +196,8 @@ uri="http://java.sun.com/jsp/jstl/core"%>
         /^([\w-]+(?:\.[\w-]+)*)@((?:[\w-]+\.)*\w[\w-]{0,66})\.([a-z]{2,6}(?:\.[a-z]{2})?)$/;
       var pwRegex = /^([A-Za-z\d\!|\@|\#|\$|\%]){7,20}$/;
       var nameRegex = /^[가-힣]{1,5}$/;
-      var nicknameRegex = /^[가-힣a-zA-z\d]{1,5}$/;
-      var phoneRegex = /^[\d]{3}[\d]{3,4}[\d]{4}$/g;
+      var nicknameRegex = /^[가-힣a-zA-z\d]{1,10}$/;
+      var phoneRegex = /(\d{3}).*(\d{3}).*(\d{4})/;
 
       $("#emailCheck").click(function () {
         window.open(
@@ -283,7 +281,7 @@ uri="http://java.sun.com/jsp/jstl/core"%>
           $(this)
             .next("#msg")
             .css("color", "#888")
-            .text("한글,영문,숫자 5자 만 사용 가능 합니다 ");
+            .text("한글,영문,숫자 10자 만 사용 가능 합니다 ");
         } else {
           $(this).next("#msg").text("");
         }
