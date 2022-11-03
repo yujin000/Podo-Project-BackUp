@@ -186,7 +186,7 @@
       var pwRegex = /^([A-Za-z\d\!|\@|\#|\$|\%]){7,20}$/;
       var nameRegex = /^[가-힣]{1,5}$/;
       var nicknameRegex = /^[가-힣a-zA-z\d]{1,5}$/;
-      var phoneRegex = /^01[\d][\d]{3,4}[\d]{4}$/g;
+      var phoneRegex = /^[\d]{3}[\d]{3,4}[\d]{4}$/g;
 
       $("#emailCheck").click(function () {
         window.open(
