@@ -9,8 +9,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import MusicDAO.MusicDAO;
-import MusicDTO.MusicDTO;
+import DAO.MusicDAO;
+import DTO.MusicDTO;
 
 
 @WebServlet("*.music")
