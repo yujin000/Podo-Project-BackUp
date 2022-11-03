@@ -42,25 +42,35 @@ public class MemberController extends HttpServlet {
 				boolean result = dao.login(email, pw);
 				System.out.println(email + "님 로그인");
 				System.out.println(result);
-				
+
 				String nickname = dao.getNick(email);
-				
-				 if(result) {
-				
-					 request.getSession().setAttribute("email", email);
-					 request.setAttribute("nickname",nickname);
-					 System.out.println(nickname);
-				 }else {
-				 
-						/*
-						 * response.setContentType("text/html; charset=UTF-8"); PrintWriter out =
-						 * response.getWriter(); out.println("<script language='javascript'>");
-						 * out.println("alert('회원정보가 존재하지 않습니다.')"); out.println("</script>");
-						 * out.flush(); response.sendRedirect("error.jsp");
-						 */
-				 }
-				 response.sendRedirect("index.jsp");
-				 
+
+				if (result) {
+
+					request.getSession().setAttribute("email", email);
+					request.setAttribute("nickname", nickname);
+					System.out.println(nickname);
+				} /*
+					 * else {
+					 * 
+					 * 
+					 * response.setContentType("text/html; charset=UTF-8"); PrintWriter out =
+					 * response.getWriter(); out.println("<script language='javascript'>");
+					 * out.println("alert('회원정보가 존재하지 않습니다.')"); out.println("</script>");
+					 * out.flush(); response.sendRedirect("error.jsp");
+					 * 
+					 * 
+					 * 
+					 * 
+					 * }
+					 */
+				response.sendRedirect("index.jsp");
+
+			}
+
+			else if (uri.equals("/logout.member")) {
+				request.getSession().invalidate();
+				response.sendRedirect("index.jsp");
 			}
 		} catch (Exception e) {
 			e.printStackTrace();

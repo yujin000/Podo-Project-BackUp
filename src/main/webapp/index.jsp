@@ -23,7 +23,50 @@ uri="http://java.sun.com/jsp/jstl/core"%>
       href="https://fonts.googleapis.com/icon?family=Material+Icons"
     />
     <link rel="stylesheet" href="src/css/style.css" />
-    <style></style>
+    <style>
+    
+    	#mypage {
+  width: 100%;
+  height: 50px;
+  text-align: center;
+  line-height: 50px;
+  border-top: 1px solid silver;
+  border-bottom: 1px solid silver;
+  margin-bottom: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+ 
+}
+
+#mypage > img {
+  width: 30px;
+  height: 30px;
+  border-radius: 40px;
+  margin-left: 10px;
+}
+
+#mypage > span {
+  width: 140px;
+  text-align: left;
+  margin-left: 10px;
+}
+
+.tog {
+  width: 140px;
+  right: 24px;
+  padding: 10px 0px;
+  top: 150px;
+  float: right;
+  border: none;
+  position: absolute;
+  border-radius: 4px;
+  display: none;
+  background: #222;
+  opacity:0.9;
+}
+
+    </style>
   </head>
   <body>
     <div class="wrap">
@@ -35,15 +78,15 @@ uri="http://java.sun.com/jsp/jstl/core"%>
 
         <c:choose>
         	<c:when test="${email != null}">
-          <div class="mypage">
-            <img src="src/lmage/profile-default.jpg" alt="" /><span>${nickname }</span>
+          <div id="mypage">
+            <img src="image/web/profile-default.jpg" alt="" /><span>${nickname}</span>
           </div>
           <ul class="tog">
             <li><a href="#">마이페이지</a></li>
             <li><a href="#">공지사항</a></li>
             <li><a href="#">계정설정</a></li>
             <li><a href="#">친구초대 </a></li>
-            <li><a href="#">로그아웃</a></li>
+            <li><a href="logout.member">로그아웃</a></li>
           </ul>
         	</c:when>
         	<c:otherwise>
@@ -169,9 +212,9 @@ uri="http://java.sun.com/jsp/jstl/core"%>
     </script>
     <script>
       // loginBox button toggle
-      let lb = document.getElementsByClassName("mypage");
+      let lb = document.getElementById("mypage");
       $(lb).click(function () {
-        $(this).next(".tog").toggle();
+        $(this).next(".tog").fadeToggle();
       });
     </script>
     <script>

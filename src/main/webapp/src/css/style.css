@@ -97,7 +97,7 @@ a {
   margin-bottom: 20px;
 }
 
-.mypage {
+#mypage {
   width: 100%;
   height: 50px;
   text-align: center;
@@ -111,24 +111,23 @@ a {
  
 }
 
-.mypage img {
+#mypage > img {
   width: 30px;
   height: 30px;
   border-radius: 40px;
   margin-left: 10px;
 }
 
-.mypage span {
+#mypage > span {
   width: 140px;
   text-align: left;
   margin-left: 10px;
-   color:red;
 }
 .tog {
   width: 140px;
   right: 24px;
   padding: 10px 0px;
-  top: 170px;
+  top: 200px;
   float: right;
   border: none;
   position: absolute;

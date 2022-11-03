@@ -70,9 +70,9 @@ public class MemberDAO {
 			
 			System.out.println(email+pw);
 			ResultSet rs = pstat.executeQuery();
-			
 			return rs.next();
-			}
+				
+				}
 			}
 		
 	public String getNick(String email) throws Exception{
@@ -86,11 +86,10 @@ public class MemberDAO {
 				rs.next();
 				return rs.getString("nickname");
 			}
-			
-			
-			
 		}
 	}
+	
+	
 		
 	public boolean emailCheck() {
 		return false;
