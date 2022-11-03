@@ -1,4 +1,4 @@
-package MusicDAO;
+package DAO;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -10,7 +10,7 @@ import javax.naming.Context;
 import javax.naming.InitialContext;
 import javax.sql.DataSource;
 
-import MusicDTO.MusicDTO;
+import DTO.MusicDTO;
 
 public class MusicDAO {
 	private static MusicDAO instance = null;

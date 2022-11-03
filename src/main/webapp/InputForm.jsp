@@ -135,7 +135,7 @@
  <body>
     <div class="wrap">
       <h1 id="logo">
-        <a href="index.jsp"><img src="src/image/logo-f-5.png" alt="" /></a>
+        <a href="index.jsp"><img src="image/logo-f-5.png" alt="" /></a>
       </h1>
       <form action="" method="post">
         <p>이메일</p>
@@ -175,7 +175,7 @@
     <footer>
       <p>개인정보처리방침 | PODO 이용약관 | 고객센터 | 결제/환불안내 | 상담</p>
       <br />
-      <img src="src/image/logo-footer.png" alt="" style="width: 60px" />
+      <img src="image/logo-footer.png" alt="" style="width: 60px" />
       <p>© PODO Music Corp.</p>
     </footer>
     <!-- 유효성 검사 -->
@@ -186,7 +186,7 @@
       var pwRegex = /^([A-Za-z\d\!|\@|\#|\$|\%]){7,20}$/;
       var nameRegex = /^[가-힣]{1,5}$/;
       var nicknameRegex = /^[가-힣a-zA-z\d]{1,5}$/;
-      var phoneRegex = /^01[\d][\d]{3,4}[\d]{4}$/g;
+      var phoneRegex = /^[\d]{3}[\d]{3,4}[\d]{4}$/g;
 
       $("#emailCheck").click(function () {
         window.open(

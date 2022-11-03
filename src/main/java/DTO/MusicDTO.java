@@ -1,4 +1,4 @@
-package MusicDTO;
+package DTO;
 
 public class MusicDTO {
 	int musicSeq;
