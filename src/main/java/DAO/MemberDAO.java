@@ -42,7 +42,7 @@ public class MemberDAO {
 		return toReturn;
 	}
 
-	public int signup(String email, String pw, String nickname, String name, int phone) throws Exception {
+	public int signup(String email, String pw, String nickname, String name, String phone) throws Exception {
 		String sql = "insert into member values(?,?,'basic',null,sysdate,null,?,?,?)";
 
 		try (Connection con = this.getConnection(); PreparedStatement pstat = con.prepareStatement(sql);) {
@@ -51,7 +51,7 @@ public class MemberDAO {
 			pstat.setString(2, getSHA512(pw));
 			pstat.setString(3, nickname);
 			pstat.setString(4, name);
-			pstat.setInt(5, phone);
+			pstat.setString(5, phone);
 
 			int result = pstat.executeUpdate();
 			con.commit();
