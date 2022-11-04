@@ -97,7 +97,7 @@
 			<div id="GNB">
 				<ul>
 					<li><a id="today">투데이</a></li>
-					<li><a id="chart">차트</a></li>
+					<li><a id="chart" href="/chart.music">차트</a></li>
 					<li><a href="#">보관함</a></li>
 					<li><a href="#">스테이션</a></li>
 					<li><a href="#">매거진</a></li>
@@ -130,6 +130,7 @@
 			</div>
 			<div class="hidden">
 				<h1>hidden</h1>
+				<ul></ul>
 			</div>
 			<div class="controller">
 				<ul class="musicInfo">
@@ -152,7 +153,9 @@
 					<li><span class="material-symbols-rounded"> repeat </span></li>
 					<li><span class="material-symbols-rounded">
 							skip_previous </span></li>
-					<li><span class="material-symbols-rounded"> play_arrow
+					<li><span class="material-symbols-rounded" id="playBtn">
+					<audio id="playAudio"></audio>
+					play_arrow
 					</span></li>
 					<li><span class="material-symbols-rounded"> skip_next </span></li>
 					<li><span class="material-symbols-rounded"> replay </span></li>
@@ -215,5 +218,51 @@
 			$("#loginPage").css("display", "none");
 		});
 	</script>
+	<script>
+    	// 목록페이지 전체 div값
+    	const musicListPage = document.querySelector(".hidden ul");
+    	musicListPage.setAttribute("id","변수확인용");
+    	// music list array
+    	let musicList = new Array();
+    		<c:forEach items="${musicChartList }" var="i">
+    			musicList.push({
+    				musicSeq : "${i.musicSeq}",
+    				musicName : "${i.musicName}",
+    				musicArtist : "${i.musicArtist}",
+    				musicAlbum : "${i.musicAlbum}",
+    				musicImg : "${i.musicImg}",
+    				musicMP3 : "${i.musicMp3}",
+    				musicChart : "${i.musicChart}",
+    				musicLylics : "${i.musicLylics}"
+    			})
+    		</c:forEach>
+    	// 현재 곡 번호 offset
+    	let musicIndex = 0;
+    	
+    	// PlayList 목록 출력하기
+    	for (let i=0; i<musicList.length; i++) {
+    		// 각 목록값이 들어갈 li 태그
+    		let li = `<li data-index="\${i+1}">
+    			<div>
+    				<div>\${musicList[i].musicName}</div>
+    				<div>\${musicList[i].musicArtist}</div>
+    				<div>\${musicList[i].musicAlbum}</div>
+    			</div>
+    			<audio class="audioList\${musicList[i].musicSeq}"
+    			src = "/audio/\${musicList[i].musicMp3}.mp3"></audio>
+    			</li>
+    		`;
+    		musicListPage.insertAdjacentHTML("beforeend",li);
+    	}
+    	
+    	// 재생 컨트롤러 구현
+    	const playAudio = document.querySelector("#playAudio");
+    	let playIndex = 0;
+    	
+    	playAudio.addEventListener("click",function(){
+    		playAudio.setAttribute("src","/audio/" + musicList[0].musicMp3 + ".mp3");
+    		playAudio.play();
+    	});
+    </script>
 </body>
 </html>
