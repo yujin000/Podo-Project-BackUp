@@ -12,14 +12,14 @@ public class MemberDTO {
 	private String profileimg;
 	private String nickname;
 	private String name;
-	private int phone;
+	private String phone;
 	private String emailHash;
 	private boolean emailChecked;
 	
 	public MemberDTO() {
 	}
 	public MemberDTO(String eamil, String pw, String membership, Timestamp scribedate, Timestamp joindate,
-			String profileimg, String nickname, String name, int phone, String emailHash, boolean emailChecked) {
+			String profileimg, String nickname, String name, String phone, String emailHash, boolean emailChecked) {
 		super();
 		this.eamil = eamil;
 		this.pw = pw;
@@ -81,10 +81,10 @@ public class MemberDTO {
 	public void setName(String name) {
 		this.name = name;
 	}
-	public int getPhone() {
+	public String getPhone() {
 		return phone;
 	}
-	public void setPhone(int phone) {
+	public void setPhone(String phone) {
 		this.phone = phone;
 	}
 	public String getEmailHash() {
