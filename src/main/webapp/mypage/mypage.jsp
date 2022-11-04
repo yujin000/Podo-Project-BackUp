@@ -202,6 +202,11 @@
             border: 1px solid silver;
         }
     </style>
+        <script
+      src="https://code.jquery.com/jquery-3.6.1.min.js"
+      integrity="sha256-o88AwQnZB+VDvE9tvIXrMQaPlFFSUTR+nldQm1LuPXQ="
+      crossorigin="anonymous"
+    ></script>
 </head>
 
 <body>
@@ -211,10 +216,10 @@
             <div class="profileDiv">
                 <img src="/image/web/profile-default.jpg" class="profile">
             </div>
-            <span class="nameText">이웃집 오리</span>
+            <span class="nameText">${loginNickname }</span>
             <span class="followerText">팔로워 27 </span>
             <div id="profileBtn">
-                <a href="modifyInformation.jsp" style="color: var(--font-color)">프로필 수정</a>
+                <a id="modifyBtn">프로필 수정</a>
             </div>
         </div>
 
@@ -274,6 +279,17 @@
             </table>
         </div>
     </div>
+    <div id="modifyProfile">
+    	this is modify Profile
+    </div>
+    <script>
+    let modify = document.getElementById("modifyBtn");
+    $(modify).click(function () {
+  	  console.log("돼?");
+  	  		$('.wrap').fadeOut(450).css("display","none");
+			$('#modifyProfile').css("display","block");
+      });
+    </script>
 </body>
 
 </html>
