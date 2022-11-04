@@ -166,10 +166,10 @@ uri="http://java.sun.com/jsp/jstl/core"%>
         <input type="text" id="pwCheck" />
         <p id="msg"></p>
         <p>닉네임</p>
-        <input type="text" name="nickname" id="nickname" placeholder="5글자" />
+        <input type="text" name="nickname" id="nickname" placeholder="10자" />
         <p id="msg"></p>
         <p>이름</p>
-        <input type="text" name="name" id="name" placeholder="10자" />
+        <input type="text" name="name" id="name" placeholder="5글자" />
         <p id="msg"></p>
         <p>전화번호</p>
         <input

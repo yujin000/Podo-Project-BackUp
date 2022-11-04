@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-pageEncoding="UTF-8"%>
+pageEncoding="UTF-8"%><%@ taglib prefix="c"
+uri="http://java.sun.com/jsp/jstl/core"%>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -22,7 +23,50 @@ pageEncoding="UTF-8"%>
       href="https://fonts.googleapis.com/icon?family=Material+Icons"
     />
     <link rel="stylesheet" href="src/css/style.css" />
-    <style></style>
+    <style>
+    
+    	#mypage {
+  width: 100%;
+  height: 50px;
+  text-align: center;
+  line-height: 50px;
+  border-top: 1px solid silver;
+  border-bottom: 1px solid silver;
+  margin-bottom: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+ 
+}
+
+#mypage > img {
+  width: 30px;
+  height: 30px;
+  border-radius: 40px;
+  margin-left: 10px;
+}
+
+#mypage > span {
+  width: 140px;
+  text-align: left;
+  margin-left: 10px;
+}
+
+.tog {
+  width: 140px;
+  right: 24px;
+  padding: 10px 0px;
+  top: 150px;
+  float: right;
+  border: none;
+  position: absolute;
+  border-radius: 4px;
+  display: none;
+  background: #222;
+  opacity:0.9;
+}
+
+    </style>
   </head>
   <body>
     <div class="wrap">
@@ -31,17 +75,29 @@ pageEncoding="UTF-8"%>
           <a href="index.jsp"><img src="image/web/logo-f-5.png" alt="" /></a>
         </h1>
         <div id="LoginBox">
-          <a class="loginBtn" href="loginForm.jsp">로그인</a>
+
+        <c:choose>
+        	<c:when test="${loginEmail != null}">
+          <div id="mypage">
+            <img src="image/web/profile-default.jpg" alt="" /><span>${loginNickname}</span>
+          </div>
           <ul class="tog">
             <li><a href="#">마이페이지</a></li>
             <li><a href="#">공지사항</a></li>
             <li><a href="#">계정설정</a></li>
             <li><a href="#">친구초대 </a></li>
-            <li><a href="#">로그아웃</a></li>
+            <li><a href="logout.member">로그아웃</a></li>
           </ul>
+        	</c:when>
+        	<c:otherwise>
+          <a class="loginBtn" href="loginForm.jsp">로그인</a> 
+        	</c:otherwise>
+        </c:choose>
         </div>
 
         <input type="search" placeholder="MUSIC 검색" id="search" />
+
+        <!-- login 성공 시  -->
         <div id="GNB">
           <ul>
             <li><a id="today">투데이</a></li>
@@ -156,9 +212,9 @@ pageEncoding="UTF-8"%>
     </script>
     <script>
       // loginBox button toggle
-      let lb = document.getElementById("LoginBox");
+      let lb = document.getElementById("mypage");
       $(lb).click(function () {
-        $(this).find(".tog").toggle();
+        $(this).next(".tog").fadeToggle();
       });
     </script>
     <script>
