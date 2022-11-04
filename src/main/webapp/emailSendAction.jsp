@@ -7,6 +7,23 @@
 <%@ page import="Util.Gmail"%>
 <%@ page import="java.io.PrintWriter"%>
 <% 
+
+	MemberDAO dao = new MemberDAO();
+	String userEmail = null;
+	if(session.getAttribute("userEmail") != null){
+		userEmail = (String) session.getAttribute("userEmail");
+	}
+	if(userEmail == null){
+		PrintWriter script = response.getWriter();
+		script.println("<script>");
+		script.println("alert('로그인을 해주세요');");
+		script.println("loaction.href ='InputFom.jsp'");
+		script.println("</script>");
+		script.close();
+		return;
+	}
+
+
 	request.setCharacterEncoding("UTF-8");
 	String userEmail = null;
 	String userPassword = null;
