@@ -29,7 +29,7 @@ public class MemberController extends HttpServlet {
 				String pw = request.getParameter("pw");
 				String nickname = request.getParameter("nickname");
 				String name = request.getParameter("name");
-				int phone = Integer.parseInt(request.getParameter("phone"));
+				String phone = request.getParameter("phone");
 				System.out.println(email + pw + nickname + name + phone);
 				MemberDAO dao = MemberDAO.getInstance();
 				int result = dao.signup(email, pw, nickname, name, phone);
