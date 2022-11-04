@@ -178,7 +178,7 @@
 
         <a href="" style="color: var(--font-color);">
           <div class="imgTop">
-            <img src="src/lmage/testPoster.jpg" style="width: 308px; height: 420px;">
+            <img src="/lmage/testPoster.jpg" style="width: 308px; height: 420px;">
             <p>뮤지컬 웨스트 사이드 스토어</p>
             <p style="color: lightgray;">멜론티켓 단독 NFT 증정</p>
           </div>
