@@ -46,8 +46,15 @@ public class MemberController extends HttpServlet {
 				if (result) {
 
 					String nickname = dao.getNick(email);
+					String membership = dao.getMembership(email);
+					String scribedate = dao.getScribeDate(email);
+					String name = dao.getName(email);
 					request.getSession().setAttribute("loginEmail", email);
+					request.getSession().setAttribute("loginName", name);
 					request.getSession().setAttribute("loginNickname", nickname);
+					request.getSession().setAttribute("loginMembership", membership);
+					request.getSession().setAttribute("loginScribedate", scribedate);
+					System.out.println(scribedate);
 					response.sendRedirect("/index.jsp");
 				} 
 					 else {

@@ -87,6 +87,21 @@ public class MemberDAO {
 	}
 
 	
+	 public String getName(String email) throws Exception{
+		 String sql = "select * from member where email = ?"; 
+		 try (Connection con =
+				 this.getConnection(); PreparedStatement pstat = con.prepareStatement(sql); )
+				 {
+				 pstat.setString(1, email); 
+				 
+				 try(ResultSet rs =pstat.executeQuery();){ 
+					 rs.next();
+					 return rs.getString("name"); 
+					 } 
+				} 
+		 }
+	
+	
 	 public String getNick(String email) throws Exception{ 
 		 String sql =
 	 "select * from member where email = ?"; 
@@ -98,9 +113,38 @@ public class MemberDAO {
 	 try(ResultSet rs =pstat.executeQuery();){ 
 		 rs.next();
 		 return rs.getString("nickname"); 
-		 } } }
+		 } 
+	 	} 
+	 }
 	 
-
+	 public String getMembership(String email) throws Exception{
+		 String sql = "select * from member where email = ?"; 
+		 try (Connection con =
+				 this.getConnection(); PreparedStatement pstat = con.prepareStatement(sql); )
+				 {
+				 pstat.setString(1, email); 
+				 
+				 try(ResultSet rs =pstat.executeQuery();){ 
+					 rs.next();
+					 return rs.getString("membership"); 
+					 } 
+				} 
+		 }
+	 	
+	 public String getScribeDate(String email) throws Exception{
+		 String sql = "select * from member where email = ?"; 
+		 try (Connection con =
+				 this.getConnection(); PreparedStatement pstat = con.prepareStatement(sql); )
+				 {
+				 pstat.setString(1, email); 
+				 
+				 try(ResultSet rs =pstat.executeQuery();){ 
+					 rs.next();
+					 return rs.getString("scribedate"); 
+					 } 
+				} 
+		 }
+	 
 	public boolean emailCheck() {
 		return false;
 	}
