@@ -82,7 +82,7 @@ uri="http://java.sun.com/jsp/jstl/core"%>
             <img src="image/web/profile-default.jpg" alt="" /><span>${loginNickname}</span>
           </div>
           <ul class="tog">
-            <li><a href="#">마이페이지</a></li>
+            <li><a href="/mypage/mypage.jsp">마이페이지</a></li>
             <li><a href="#">공지사항</a></li>
             <li><a href="#">계정설정</a></li>
             <li><a href="#">친구초대 </a></li>
@@ -137,6 +137,14 @@ uri="http://java.sun.com/jsp/jstl/core"%>
         height="100%"
         style="display: none; padding-left: 230px"
         id="test"
+      ></iframe>
+      
+      <iframe
+        src="/mypage.jsp"
+        width="100%"
+        height="100%"
+        style="display: none; padding-left: 230px"
+        id="mypage"
       ></iframe>
 
       <div id="MusicControl">
@@ -230,6 +238,7 @@ uri="http://java.sun.com/jsp/jstl/core"%>
       // page move action
       let today = document.getElementById("today");
       let chart = document.getElementById("chart");
+      let mypage = document.getElementById("mypageBtn");
 
       $(today).click(function () {
         $("#main").fadeIn(450).css("display", "block");
@@ -242,6 +251,13 @@ uri="http://java.sun.com/jsp/jstl/core"%>
         $("#main").css("display", "none");
         $("#loginPage").css("display", "none");
       });
+      
+      $(mypage).click(function () {
+          $("#mypage").fadeIn(450).css("display", "block");
+          $("#main").css("display", "none");
+          $("#test").css("display", "none");
+          $("#loginPage").css("display", "none");
+        });
     </script>
   </body>
 </html>
