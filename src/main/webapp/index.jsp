@@ -69,34 +69,21 @@
 
 				<c:choose>
 					<c:when test="${loginEmail != null}">
-						<c:choose>
-							<c:when test="${loginEmail eq 'podo@email.com'}">
-								<div id="mypage">
-									<img src="image/web/profile-default.jpg" alt="" /><span>${loginNickname}</span>
-								</div>
-								<ul class="tog">
-									<li><a href="#">마이페이지</a></li>
+						<div id="mypage">
+							<img src="image/web/profile-default.jpg" alt="" /><span>${loginNickname}</span>
+						</div>
+						<ul class="tog">
+							<li><a href="#">마이페이지</a></li>
+							<c:choose>
+								<c:when test="${loginEmail eq 'podo@email.com'}">
 									<li><a href="/admin/adminIndex.jsp">관리자페이지</a></li>
-									<li><a href="#">공지사항</a></li>
-									<li><a href="#">계정설정</a></li>
-									<li><a href="#">친구초대 </a></li>
-									<li><a href="logout.member">로그아웃</a></li>
-								</ul>
-							</c:when>
-							<c:otherwise>
-								<div id="mypage">
-									<img src="image/web/profile-default.jpg" alt="" /><span>${loginNickname}</span>
-								</div>
-								<ul class="tog">
-									<li><a href="#">마이페이지</a></li>
-									<li><a href="#">공지사항</a></li>
-									<li><a href="#">계정설정</a></li>
-									<li><a href="#">친구초대 </a></li>
-									<li><a href="logout.member">로그아웃</a></li>
-								</ul>
-							</c:otherwise>
-
-						</c:choose>
+								</c:when>
+							</c:choose>
+							<li><a href="#">공지사항</a></li>
+							<li><a href="#">계정설정</a></li>
+							<li><a href="#">친구초대 </a></li>
+							<li><a href="logout.member">로그아웃</a></li>
+						</ul>
 					</c:when>
 					<c:otherwise>
 						<a class="loginBtn" href="loginForm.jsp">로그인</a>
@@ -178,8 +165,8 @@
 							<span>00:00 /</span> <span>00:00 </span>
 						</div>
 					</li>
-					<li><a href=""><span
-							class="material-symbols-rounded"> volume_mute </span></a></li>
+					<li><a href=""><span class="material-symbols-rounded">
+								volume_mute </span></a></li>
 					<li><input type="range" /></li>
 					<li><a id="openList"><span
 							class="material-symbols-rounded"> queue_music </span></a></li>
