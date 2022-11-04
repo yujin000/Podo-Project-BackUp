@@ -13,12 +13,13 @@ public class MemberDTO {
 	private String nickname;
 	private String name;
 	private int phone;
+	private String emailHash;
+	private boolean emailChecked;
 	
 	public MemberDTO() {
 	}
-	
 	public MemberDTO(String eamil, String pw, String membership, Timestamp scribedate, Timestamp joindate,
-			String profileimg, String nickname, String name, int phone) {
+			String profileimg, String nickname, String name, int phone, String emailHash, boolean emailChecked) {
 		super();
 		this.eamil = eamil;
 		this.pw = pw;
@@ -29,9 +30,9 @@ public class MemberDTO {
 		this.nickname = nickname;
 		this.name = name;
 		this.phone = phone;
+		this.emailHash = emailHash;
+		this.emailChecked = emailChecked;
 	}
-
-	
 	public String getEamil() {
 		return eamil;
 	}
@@ -86,7 +87,20 @@ public class MemberDTO {
 	public void setPhone(int phone) {
 		this.phone = phone;
 	}
+	public String getEmailHash() {
+		return emailHash;
+	}
+	public void setEmailHash(String emailHash) {
+		this.emailHash = emailHash;
+	}
+	public boolean isEmailChecked() {
+		return emailChecked;
+	}
+	public void setEmailChecked(boolean emailChecked) {
+		this.emailChecked = emailChecked;
+	}
 
+	
 	
 	
 }
