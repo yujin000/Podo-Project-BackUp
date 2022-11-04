@@ -30,17 +30,20 @@
 	align-items: center;
 	justify-content: center;
 }
+
 #mypage>img {
 	width: 30px;
 	height: 30px;
 	border-radius: 40px;
 	margin-left: 10px;
 }
+
 #mypage>span {
 	width: 140px;
 	text-align: left;
 	margin-left: 10px;
 }
+
 .tog {
 	width: 140px;
 	right: 24px;
@@ -70,7 +73,7 @@
 							<img src="image/web/profile-default.jpg" alt="" /><span>${loginNickname}</span>
 						</div>
 						<ul class="tog">
-							<li><a href="#">마이페이지</a></li>
+							<li><a id="mypageBtn">마이페이지</a></li>
 							<c:choose>
 								<c:when test="${loginEmail eq 'podo@email.com'}">
 									<li><a href="/admin/adminIndex.jsp">관리자페이지</a></li>
@@ -78,7 +81,7 @@
 							</c:choose>
 							<li><a href="#">공지사항</a></li>
 							<li><a href="#">계정설정</a></li>
-							<li><a href="#">친구초대 </a></li>
+							<li><a id="modifyBtn">친구초대 </a></li>
 							<li><a href="logout.member">로그아웃</a></li>
 						</ul>
 					</c:when>
@@ -115,11 +118,8 @@
 			<a href="" class="service">서비스 소개</a>
 		</div>
 
-		<iframe src="main.html" width="100%" height="100%"
-			style="display: block; padding-left: 230px" id="main"></iframe>
-
-		<iframe src="test.html" width="100%" height="100%"
-			style="display: none; padding-left: 230px" id="test"></iframe>
+		<iframe src="main.jsp" width="100%" height="100%"
+			style="display: block; padding-left: 230px" id="iframe"></iframe>
 
 		<div id="MusicControl">
 			<div class="gageBar">
@@ -127,6 +127,9 @@
 			</div>
 			<div class="hidden">
 				<h1>hidden</h1>
+			</div>
+			<div class="gageBar">
+				<div class="gage"></div>
 			</div>
 			<div class="controller">
 				<ul class="musicInfo">
@@ -195,18 +198,16 @@
 		});
 	</script>
 	<script>
-		// page move action
-		let today = document.getElementById("today");
-		let chart = document.getElementById("chart");
-		$(today).click(function() {
-			$("#main").fadeIn(450).css("display", "block");
-			$("#test").css("display", "none");
-			$("#loginPage").css("display", "none");
+		$("#chart").click(function() {
+			$("#iframe").attr("src", "test.jsp");
 		});
-		$(chart).click(function() {
-			$("#test").fadeIn(450).css("display", "block");
-			$("#main").css("display", "none");
-			$("#loginPage").css("display", "none");
+
+		$("#today").click(function() {
+			$("#iframe").attr("src", "main.jsp");
+		});
+
+		$("#mypageBtn").click(function() {
+			$("#iframe").attr("src", "mypage.jsp");
 		});
 	</script>
 </body>

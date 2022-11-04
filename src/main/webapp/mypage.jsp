@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+    <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html>
 
@@ -210,7 +211,7 @@
 </head>
 
 <body>
-    <div class="wrap">
+    <div class="wrap" id="wrap1">
         <div class="mypage">
             <div class="titleText">마이페이지</div>
             <div class="profileDiv">
@@ -237,13 +238,18 @@
                     <tbody>
                         <tr class="List">
                             <th>
-                                <div style="padding-left: 1vw;">PODO 멤버십 음악 무제한</div>
+                                <div style="padding-left: 1vw;">${loginMembership }</div>
                             </th>
                             <td>
-                                <div>2022.11.02 ~ 2022.11.17</div>
+                                <div>${loginScribeDate }</div>
                             </td>
                             <td>
-                                <div>2022.11.18</div>
+                            	<div>
+                            	<c:choose>
+                            	<c:when test= "${!loginScribedate}">${loginScribedate }</c:when>
+                            		<c:otherwise>${loginScribedate }</c:otherwise>
+                            		</c:choose>
+                            	</div>
                             </td>
                         </tr>
                     </tbody>
@@ -279,15 +285,58 @@
             </table>
         </div>
     </div>
-    <div id="modifyProfile">
-    	this is modify Profile
+    
+    
+    
+    <div class="wrap" id="wrap2">
+        <div class="mypage">
+            <div class="titleText">프로필 수정</div>
+            <div class="profileDiv">
+                <img src="/image/web/profile-default.jpg" class="profile">
+            </div>
+            <div><a href="" style="color: var(--font-color)">프로필 이미지 업로드</a></div>
+            <div><a href="" style="color: var(--font-color)">프로필 이미지 삭제</a></div>
+        </div>
+	
+		
+		<form>
+        <div class="membership">
+            <div>
+                <div>Email</div>
+                <input type="text" value="${loginEmail }" disabled>
+            </div>
+            <div>
+                <div>이름</div>
+                <input type="text" value="${loginName }" disabled>
+            </div>
+            <div>
+                <div>닉네임</div>
+                <input type="text" value="${loginNickname }" name="nickname" id="nickname">
+            </div>
+            <div>
+                <div>비밀번호</div>
+                <input type="text" name="pw" id="pw">
+            </div>
+            <div>
+                <div>전화번호</div>
+                <input type="text" name="phone" id="phone">
+            </div>
+        </div>
+
+        <div id="profileBtn">
+            <a href="" style="color: var(--font-color)">프로필 수정</a>
+        </div>
+        </form>
+        <div id="profileBtn">
+            <a href="" style="color: var(--font-color)">회원 탈퇴</a>
+        </div>
     </div>
+
     <script>
     let modify = document.getElementById("modifyBtn");
     $(modify).click(function () {
-  	  console.log("돼?");
-  	  		$('.wrap').fadeOut(450).css("display","none");
-			$('#modifyProfile').css("display","block");
+  	  		$('#wrap1').fadeOut(450).css("display","none");
+			$('#wrap2').css("display","block");
       });
     </script>
 </body>
