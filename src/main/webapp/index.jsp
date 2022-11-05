@@ -122,8 +122,8 @@
 			style="display: block; padding-left: 230px" id="iframe"></iframe>
 
 		<div id="MusicControl">
-			<div class="gageBar">
-				<div class="gage"></div>
+			<div class="gageBar" id="entireTime">
+				<div class="gage" id="currentTime"></div>
 			</div>
 			<div class="hidden">
 				<h1>hidden</h1>
@@ -134,9 +134,9 @@
 			</div>
 			<div class="controller">
 				<ul class="musicInfo">
-					<li><a href=""><img src="image/web/album-p.png" alt="" /></a>
+					<li><img src="image/web/album-p.png" alt="" />
 					</li>
-					<li><strong>ttile</strong>
+					<li id="playInfo"><strong>title</strong>
 						<p>name</p></li>
 					<li>
 						<button>
@@ -154,7 +154,7 @@
 					<li><span class="material-symbols-rounded">
 							skip_previous </span></li>
 					<li><span class="material-symbols-rounded" id="playBtn">
-					<audio id="playAudio"></audio>
+					<audio id="playAudio" data-status="pause"></audio>
 					play_arrow
 					</span></li>
 					<li><span class="material-symbols-rounded"> skip_next </span></li>
@@ -168,9 +168,9 @@
 							<span>00:00 /</span> <span>00:00 </span>
 						</div>
 					</li>
-					<li><a href=""><span class="material-symbols-rounded">
-								volume_mute </span></a></li>
-					<li><input type="range" /></li>
+					<li><a><span class="material-symbols-rounded" id="volumeMute">
+								volume_up </span></a></li>
+					<li><input type="range" id=volumeBar min=0 max=100 /></li>
 					<li><a id="openList"><span
 							class="material-symbols-rounded"> queue_music </span></a></li>
 				</ul>
@@ -214,9 +214,28 @@
 		});
 	</script>
 	<script>
+		// Music Controller 부분
+		
     	// 목록페이지 전체 div값
     	const musicListPage = document.querySelector(".hidden ul");
     	musicListPage.setAttribute("id","변수확인용");
+    	// 현재 곡 번호 offset
+    	let playIndex = 0;
+    	// 플레이/일시정지 버튼
+    	const playBtn = document.querySelector("#playBtn");
+    	// 오디오를 재생할 a태그
+    	const playAudio = document.querySelector("#playAudio");
+    	// 좌측 하단에 뜨는 재생 정보
+    	const playInfo = document.querySelector("#playInfo");
+    	
+    	// 컨트롤러 볼륨 바
+    	const volumeBar = document.querySelector("#volumeBar");
+    	playAudio.volume = volumeBar.value/100; // 처음 홈페이지에 들어왔을 때, 컨트롤러 볼륨 초기화.
+    	// 음소거 버튼
+    	const volumeMute = document.querySelector("#volumeMute");
+    	
+    	// 타이머 변수 선언
+    	
     	// music list array
     	let musicList = new Array();
     		<c:forEach items="${musicChartList }" var="i">
@@ -226,38 +245,63 @@
     				musicArtist : "${i.musicArtist}",
     				musicAlbum : "${i.musicAlbum}",
     				musicImg : "${i.musicImg}",
-    				musicMP3 : "${i.musicMp3}",
+    				musicMp3 : "${i.musicMp3}",
     				musicChart : "${i.musicChart}",
     				musicLylics : "${i.musicLylics}"
     			})
     		</c:forEach>
-    	// 현재 곡 번호 offset
-    	let musicIndex = 0;
     	
     	// PlayList 목록 출력하기
     	for (let i=0; i<musicList.length; i++) {
     		// 각 목록값이 들어갈 li 태그
-    		let li = `<li data-index="\${i+1}">
+    		let li = `<li data-index="\${i}">
     			<div>
     				<div>\${musicList[i].musicName}</div>
     				<div>\${musicList[i].musicArtist}</div>
     				<div>\${musicList[i].musicAlbum}</div>
     			</div>
-    			<audio class="audioList\${musicList[i].musicSeq}"
-    			src = "/audio/\${musicList[i].musicMp3}.mp3"></audio>
     			</li>
     		`;
     		musicListPage.insertAdjacentHTML("beforeend",li);
     	}
     	
-    	// 재생 컨트롤러 구현
-    	const playAudio = document.querySelector("#playAudio");
-    	let playIndex = 0;
-    	
-    	playAudio.addEventListener("click",function(){
-    		playAudio.setAttribute("src","/audio/" + musicList[0].musicMp3 + ".mp3");
-    		playAudio.play();
+    	// 좌측 하단에 재생대기중인 음원의 정보를 알려주는 함수
+    	playInfo.firstChild.innerHTML = musicList[playIndex].musicName;
+    	playInfo.lastChild.innerHTML = musicList[playIndex].musicArtist;
+
+    	// 재생/일시정지 버튼 클릭시
+    	playBtn.addEventListener("click",function (){
+    		// 일시정지 상태에서 재생버튼을 클릭시 재생
+    		if (playAudio.getAttribute("data-status") == "pause") {
+    			playAudio.setAttribute("src","/audio/" + musicList[playIndex].musicMp3 + ".mp3");
+    			playAudio.setAttribute("data-status", "play");    			
+    			playAudio.play();
+    			// playBtn.innerText = "play_arrow";
+    			// 해당 코드 도입시, 브라우저가 재생을 막는 현상이 발생하여 임시잠금
+    		} else if (playAudio.getAttribute("data-status") == "play") {
+    			playAudio.setAttribute("data-status", "pause");    			
+    			playAudio.pause();
+    			// playBtn.innerText = "pause";
+    			// 해당 코드 도입시, 브라우저가 재생을 막는 현상이 발생하여 임시잠금
+    		}
     	});
+    	
+    	// 컨트롤러 볼륨 조절
+    	volumeBar.addEventListener("change", function(){
+    		playAudio.volume = this.value/100;
+    	});
+    	
+    	// 음소거 버튼 클릭시 음소거
+    	volumeMute.addEventListener("click", function(){
+    		if (playAudio.muted) {
+    			playAudio.muted = false;
+    			volumeMute.innerText = "volume_up";
+    		} else {
+    			playAudio.muted = true;
+    			volumeMute.innerText = "volume_off";
+    		}
+    	});
+    	
     </script>
 </body>
 </html>
