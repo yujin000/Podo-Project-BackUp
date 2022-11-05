@@ -122,8 +122,8 @@
 			style="display: block; padding-left: 230px" id="iframe"></iframe>
 
 		<div id="MusicControl">
-			<div class="gageBar" id="entireTime">
-				<div class="gage" id="currentTime"></div>
+			<div class="gageBar" id="gageBar">
+				<div class="gage" id="gage"></div>
 			</div>
 			<div class="hidden">
 				<h1>hidden</h1>
@@ -154,7 +154,7 @@
 					<li><span class="material-symbols-rounded">
 							skip_previous </span></li>
 					<li><span class="material-symbols-rounded" id="playBtn">
-					<audio id="playAudio" data-status="pause"></audio>
+					<audio id="playAudio" data-status="pause" title="재생/일시정지 선택"></audio>
 					play_arrow
 					</span></li>
 					<li><span class="material-symbols-rounded"> skip_next </span></li>
@@ -165,7 +165,7 @@
 				<ul class="volume">
 					<li>
 						<div>
-							<span>00:00 /</span> <span>00:00 </span>
+							<span id="currentTimeText">0 : 00</span><span> / </span><span id="entireTimeText">0 : 00</span>
 						</div>
 					</li>
 					<li><a><span class="material-symbols-rounded" id="volumeMute">
@@ -223,8 +223,8 @@
     	let playIndex = 0;
     	// 플레이/일시정지 버튼
     	const playBtn = document.querySelector("#playBtn");
-    	// 오디오를 재생할 a태그
-    	const playAudio = document.querySelector("#playAudio");
+    	// 오디오를 재생할 a태그 및 초기화
+    	const playAudio = document.querySelector("#playAudio");    	
     	// 좌측 하단에 뜨는 재생 정보
     	const playInfo = document.querySelector("#playInfo");
     	
@@ -234,7 +234,11 @@
     	// 음소거 버튼
     	const volumeMute = document.querySelector("#volumeMute");
     	
-    	// 타이머 변수 선언
+    	// 타이머 관련 변수 선언
+    	const gage = document.querySelector("#gage"); // 현재 시간바
+    	const gageBar = document.querySelector("#gageBar"); // 전체 시간바
+    	const currentTimeText = document.querySelector("#currentTimeText"); // 화면에 표시되는 재생시간대 타이머
+    	const entireTimeText = document.querySelector("#entireTimeText"); // 화면에 표시되는 전체 재생시간
     	
     	// music list array
     	let musicList = new Array();
@@ -250,6 +254,61 @@
     				musicLylics : "${i.musicLylics}"
     			})
     		</c:forEach>
+    	
+    	// 페이지 첫 화면 접속시, 받은 목록에서 기본 재생곡으로 맨 앞 곡을 선택해준다.
+    	playAudio.setAttribute("src","/audio/" + musicList[playIndex].musicMp3 + ".mp3");
+    	console.log(playAudio.duration);
+    	
+    	// 각 함수 구현
+    	// 재생 함수
+    	function playMusic() {
+			playAudio.setAttribute("data-status", "play");    			
+			playAudio.play();
+    	};
+    	
+    	// 일시정지 함수
+    	function pauseMusic() {
+    		playAudio.setAttribute("data-status", "play");    			
+			playAudio.play();
+    	}
+    	
+    	// 컨트롤러 타이머 구현
+    	playAudio.addEventListener("timeupdate", e=>{
+    		const currentTime = e.target.currentTime;
+    		const entireTime = e.target.duration;
+    		let currentBar = (currentTime/entireTime)*100; // %값이므로 100을 곱해준다.
+    		gage.style.width = `\${currentBar}%`; // 재생시간 진행에 따라 타이머 바가 증가한다.
+    		    		
+    		let entireMin = Math.floor(entireTime/60); // 음악 전체시간 (분)
+    		let entireSec = Math.floor(entireTime%60); // 음악 전체시간 (초)
+    			
+    		if (entireSec < 10) {
+    			entireSec = `0\${entireSec}`;    				
+    		} // 10초 미만인 경우, 앞에 0을 붙인다.
+    			
+    		//화면에 전체 시각 출력
+    		entireTimeText.innerText = `\${entireMin} : \${entireSec}`;
+    		
+    		let currentMin = Math.floor(currentTime/60);
+    		let currentSec = Math.floor(currentTime%60);
+    		if (currentSec < 10) {
+    			currentSec = `0\${currentSec}`;    			
+    		}
+    		
+    		//화면에 재생 진행 시각 출력
+    		currentTimeText.innerText = `\${currentMin} : \${currentSec}`;
+    	});
+    	
+    	// 타이머 클릭시, 해당 시점을 재생하는 이벤트 구현
+    	gageBar.addEventListener("click", function(e){
+    		let gageBarWidth = gageBar.clientWidth;
+    		console.log(gageBarWidth);
+    		let timerOffsetX = e.offsetX;
+    		console.log(timerOffsetX);
+    		
+    		playAudio.currentTime = (timerOffsetX / gageBarWidth) * playAudio.duration;
+    		playMusic();
+    	});
     	
     	// PlayList 목록 출력하기
     	for (let i=0; i<musicList.length; i++) {
@@ -273,7 +332,7 @@
     	playBtn.addEventListener("click",function (){
     		// 일시정지 상태에서 재생버튼을 클릭시 재생
     		if (playAudio.getAttribute("data-status") == "pause") {
-    			playAudio.setAttribute("src","/audio/" + musicList[playIndex].musicMp3 + ".mp3");
+    			// playAudio.setAttribute("src","/audio/" + musicList[playIndex].musicMp3 + ".mp3");
     			playAudio.setAttribute("data-status", "play");    			
     			playAudio.play();
     			// playBtn.innerText = "play_arrow";
