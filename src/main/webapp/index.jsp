@@ -134,7 +134,7 @@
 			</div>
 			<div class="controller">
 				<ul class="musicInfo">
-					<li><img src="image/web/album-p.png" alt="" />
+					<li><img src="/image/web/album-p.png" alt="/image/web/album-p.png" id="musicImg"/>
 					</li>
 					<li id="playInfo"><strong>title</strong>
 						<p>name</p></li>
@@ -151,13 +151,13 @@
 				</ul>
 				<ul class="controlBtn">
 					<li><span class="material-symbols-rounded"> repeat </span></li>
-					<li><span class="material-symbols-rounded">
+					<li><span class="material-symbols-rounded" id="playPrev">
 							skip_previous </span></li>
 					<li><span class="material-symbols-rounded" id="playBtn">
 					<audio id="playAudio" data-status="pause" title="재생/일시정지 선택"></audio>
 					play_arrow
 					</span></li>
-					<li><span class="material-symbols-rounded"> skip_next </span></li>
+					<li><span class="material-symbols-rounded" id="playNext"> skip_next </span></li>
 					<li><span class="material-symbols-rounded"> replay </span></li>
 
 				</ul>
@@ -223,10 +223,14 @@
     	let playIndex = 0;
     	// 플레이/일시정지 버튼
     	const playBtn = document.querySelector("#playBtn");
+    	// 이전/다음 재생 버튼
+    	const playPrev = document.querySelector("#playPrev");
+    	const playNext = document.querySelector("#playNext");
     	// 오디오를 재생할 a태그 및 초기화
     	const playAudio = document.querySelector("#playAudio");    	
     	// 좌측 하단에 뜨는 재생 정보
     	const playInfo = document.querySelector("#playInfo");
+    	const musicImg = document.querySelector("#musicImg");
     	
     	// 컨트롤러 볼륨 바
     	const volumeBar = document.querySelector("#volumeBar");
@@ -257,7 +261,11 @@
     	
     	// 페이지 첫 화면 접속시, 받은 목록에서 기본 재생곡으로 맨 앞 곡을 선택해준다.
     	playAudio.setAttribute("src","/audio/" + musicList[playIndex].musicMp3 + ".mp3");
-    	console.log(playAudio.duration);
+    	
+    	// 좌측 하단에 재생대기중인 음원의 정보를 표시한다.
+    	playInfo.firstChild.innerHTML = musicList[playIndex].musicName;
+    	playInfo.lastChild.innerHTML = musicList[playIndex].musicArtist;
+    	musicImg.src = `/image/music/\${musicList[playIndex].musicImg}.jpg`;
     	
     	// 각 함수 구현
     	// 재생 함수
@@ -268,10 +276,34 @@
     	
     	// 일시정지 함수
     	function pauseMusic() {
-    		playAudio.setAttribute("data-status", "play");    			
+    		playAudio.setAttribute("data-status", "pause");    			
 			playAudio.play();
     	}
     	
+    	// 음악 정보 가져오기 함수
+    	function loadMusic(index) {
+        	playInfo.firstChild.innerText = musicList[index].musicName;
+        	playInfo.lastChild.innerText = musicList[index].musicArtist;
+        	musicImg.src = `/image/music/\${musicList[index].musicImg}.jpg`;
+        	playAudio.setAttribute("src","/audio/" + musicList[index].musicMp3 + ".mp3");        	
+    	}
+    	
+    	// 이전 곡 듣기 함수
+    	function prevMusic(){
+    		playIndex--;
+    		playIndex < 0 ? playIndex = musicList.length-1 : playIndex = playIndex;
+    		loadMusic(playIndex);
+    		playMusic();
+    	}
+    	
+    	// 다음 곡 듣기 버튼    	
+    	function nextMusic(){
+    		playIndex++;
+    		playIndex > musicList.length-1 ? playIndex = 0 : playIndex = playIndex;
+    		console.log(playIndex);    		
+    		playMusic();
+    	}
+    	    	
     	// 컨트롤러 타이머 구현
     	playAudio.addEventListener("timeupdate", e=>{
     		const currentTime = e.target.currentTime;
@@ -322,19 +354,14 @@
     			</li>
     		`;
     		musicListPage.insertAdjacentHTML("beforeend",li);
-    	}
-    	
-    	// 좌측 하단에 재생대기중인 음원의 정보를 알려주는 함수
-    	playInfo.firstChild.innerHTML = musicList[playIndex].musicName;
-    	playInfo.lastChild.innerHTML = musicList[playIndex].musicArtist;
+    	}    	
 
     	// 재생/일시정지 버튼 클릭시
     	playBtn.addEventListener("click",function (){
     		// 일시정지 상태에서 재생버튼을 클릭시 재생
     		if (playAudio.getAttribute("data-status") == "pause") {
     			// playAudio.setAttribute("src","/audio/" + musicList[playIndex].musicMp3 + ".mp3");
-    			playAudio.setAttribute("data-status", "play");    			
-    			playAudio.play();
+    			playMusic();
     			// playBtn.innerText = "play_arrow";
     			// 해당 코드 도입시, 브라우저가 재생을 막는 현상이 발생하여 임시잠금
     		} else if (playAudio.getAttribute("data-status") == "play") {
@@ -344,6 +371,17 @@
     			// 해당 코드 도입시, 브라우저가 재생을 막는 현상이 발생하여 임시잠금
     		}
     	});
+    	
+    	// 이전 버튼 클릭시
+    	playPrev.addEventListener("click", function(){
+    		prevMusic();
+    	});
+    	
+    	// 다음 버튼 클릭시
+    	playNext.addEventListener("click", function(){
+    		nextMusic();
+    	});
+    	
     	
     	// 컨트롤러 볼륨 조절
     	volumeBar.addEventListener("change", function(){
