@@ -113,7 +113,8 @@
 			</div>
 
 			<div id="FloatArea">
-				<a href="">멤버쉽 구독</a> <a href="">포도 티켓</a>
+				<a href="">멤버쉽 구독</a> 
+				<a id="ticketing">포도 티켓</a>
 			</div>
 			<a href="" class="service">서비스 소개</a>
 		</div>
@@ -211,6 +212,9 @@
 
 		$("#mypageBtn").click(function() {
 			$("#iframe").attr("src", "mypage.jsp");
+		});
+		$("#ticketing").click(function() {
+			$("#iframe").attr("src", "/list.perform");
 		});
 	</script>
 	<script>
