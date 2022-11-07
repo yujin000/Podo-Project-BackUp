@@ -28,7 +28,7 @@ public class Performance extends HttpServlet {
 				PerformanceDAO dao = PerformanceDAO.getInstance();
 				List<PerformanceDTO> perform = dao.selectPerform();
 				request.getSession().setAttribute("perform", perform);
-				request.getRequestDispatcher("ticketing/ticketing.jsp").forward(request, response);
+				request.getRequestDispatcher("/ticketing/ticketing.jsp").forward(request, response);
 				
 			}
 		} catch(Exception e) {
