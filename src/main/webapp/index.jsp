@@ -210,7 +210,7 @@
 		});
 
 		$("#mypageBtn").click(function() {
-			$("#iframe").attr("src", "mypage.jsp");
+			$("#iframe").attr("src", "/mypage.member");
 		});
 	</script>
 	<script>
