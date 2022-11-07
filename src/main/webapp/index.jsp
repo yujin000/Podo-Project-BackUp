@@ -129,9 +129,6 @@
 				<h1>hidden</h1>
 				<ul></ul>
 			</div>
-			<div class="gageBar">
-				<div class="gage"></div>
-			</div>
 			<div class="controller">
 				<ul class="musicInfo">
 					<li><img src="/image/web/album-p.png" alt="/image/web/album-p.png" id="musicImg"/>
@@ -140,7 +137,7 @@
 						<p>name</p></li>
 					<li>
 						<button>
-							<span class="material-symbols-rounded"> favorite </span>
+							<span class="material-symbols-rounded" id="wish"> favorite </span>
 						</button>
 					</li>
 					<li>
@@ -150,11 +147,12 @@
 					</li>
 				</ul>
 				<ul class="controlBtn">
+				
 					<li><span class="material-symbols-rounded"> repeat </span></li>
 					<li><span class="material-symbols-rounded" id="playPrev">
 							skip_previous </span></li>
-					<li><span class="material-symbols-rounded" id="playBtn">
-					<audio id="playAudio" data-status="pause" title="재생/일시정지 선택"></audio>
+					<li><audio id="playAudio" data-status="pause" title="재생/일시정지 선택"></audio>
+					<span class="material-symbols-rounded" id="playBtn">					
 					play_arrow
 					</span></li>
 					<li><span class="material-symbols-rounded" id="playNext"> skip_next </span></li>
@@ -244,6 +242,9 @@
     	const currentTimeText = document.querySelector("#currentTimeText"); // 화면에 표시되는 재생시간대 타이머
     	const entireTimeText = document.querySelector("#entireTimeText"); // 화면에 표시되는 전체 재생시간
     	
+    	// 위시리스트 변수 선언
+    	const wish = document.querySelector("#wish");
+    	
     	// music list array
     	let musicList = new Array();
     		<c:forEach items="${musicChartList }" var="i">
@@ -272,12 +273,14 @@
     	function playMusic() {
 			playAudio.setAttribute("data-status", "play");    			
 			playAudio.play();
+			playBtn.innerText = "pause";
     	};
     	
     	// 일시정지 함수
     	function pauseMusic() {
     		playAudio.setAttribute("data-status", "pause");    			
-			playAudio.play();
+			playAudio.pause();
+			playBtn.innerText = "play_arrow";
     	}
     	
     	// 음악 정보 가져오기 함수
@@ -300,7 +303,7 @@
     	function nextMusic(){
     		playIndex++;
     		playIndex > musicList.length-1 ? playIndex = 0 : playIndex = playIndex;
-    		console.log(playIndex);    		
+    		loadMusic(playIndex);    		
     		playMusic();
     	}
     	    	
@@ -318,8 +321,23 @@
     			entireSec = `0\${entireSec}`;    				
     		} // 10초 미만인 경우, 앞에 0을 붙인다.
     			
-    		//화면에 전체 시각 출력
+    		// 화면에 전체 시각 출력
     		entireTimeText.innerText = `\${entireMin} : \${entireSec}`;
+    		
+    		// 컨트롤러가 음원을 받아온 직후
+    		playAudio.addEventListener("loadeddata", function() {
+    			let audioDuration = playAudio.duration;
+    			
+    			let loadEntireMin = Math.floor(audioDuration/60);
+        		let loadEntireSec = Math.floor(audioDuration%60);
+        		if (loadEntireSec < 10) {
+        			loadEntireSec = `0\${loadEntireSec}`;    			
+        		}
+        		
+        		//화면에 재생 진행 시각 출력
+        		entireTimeText.innerText = `\${loadEntireMin} : \${loadEntireSec}`;
+    			
+    		});
     		
     		let currentMin = Math.floor(currentTime/60);
     		let currentSec = Math.floor(currentTime%60);
@@ -334,9 +352,7 @@
     	// 타이머 클릭시, 해당 시점을 재생하는 이벤트 구현
     	gageBar.addEventListener("click", function(e){
     		let gageBarWidth = gageBar.clientWidth;
-    		console.log(gageBarWidth);
     		let timerOffsetX = e.offsetX;
-    		console.log(timerOffsetX);
     		
     		playAudio.currentTime = (timerOffsetX / gageBarWidth) * playAudio.duration;
     		playMusic();
@@ -345,7 +361,7 @@
     	// PlayList 목록 출력하기
     	for (let i=0; i<musicList.length; i++) {
     		// 각 목록값이 들어갈 li 태그
-    		let li = `<li data-index="\${i}">
+    		let li = `<li class="playList" data-index="musicList\${i}">
     			<div>
     				<div>\${musicList[i].musicName}</div>
     				<div>\${musicList[i].musicArtist}</div>
@@ -360,15 +376,10 @@
     	playBtn.addEventListener("click",function (){
     		// 일시정지 상태에서 재생버튼을 클릭시 재생
     		if (playAudio.getAttribute("data-status") == "pause") {
-    			// playAudio.setAttribute("src","/audio/" + musicList[playIndex].musicMp3 + ".mp3");
     			playMusic();
-    			// playBtn.innerText = "play_arrow";
-    			// 해당 코드 도입시, 브라우저가 재생을 막는 현상이 발생하여 임시잠금
+    			    			
     		} else if (playAudio.getAttribute("data-status") == "play") {
-    			playAudio.setAttribute("data-status", "pause");    			
-    			playAudio.pause();
-    			// playBtn.innerText = "pause";
-    			// 해당 코드 도입시, 브라우저가 재생을 막는 현상이 발생하여 임시잠금
+    			pauseMusic();
     		}
     	});
     	
@@ -382,9 +393,17 @@
     		nextMusic();
     	});
     	
+    	// 노래가 끝나고 다음곡 자동재생
+    	playAudio.addEventListener("ended", function(){
+    		nextMusic();
+    	})
+    	
     	
     	// 컨트롤러 볼륨 조절
     	volumeBar.addEventListener("change", function(){
+    		playAudio.volume = this.value/100;
+    	});
+    	volumeBar.addEventListener("mousemove", function(){
     		playAudio.volume = this.value/100;
     	});
     	
@@ -398,6 +417,8 @@
     			volumeMute.innerText = "volume_off";
     		}
     	});
+    	
+    	// 목록 클릭시, 해당 노래가 재생 - 미구현
     	
     </script>
 </body>
