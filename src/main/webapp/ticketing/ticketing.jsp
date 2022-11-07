@@ -159,45 +159,49 @@ a {
 		<div class="contents">
 			<h1>공연</h1>
 			<div class="contentsTitle">
-				<a href="" style="color: var(- -font-color);">
-					<div class="imgTop">
-						<img src="image/perform/${perform[3].poster }"
-							style="width: 308px; height: 420px;">
-						<p>${perform[3].performTitle }</p>
-						<p style="color: lightgray;">허밍어반스테레오, 리소, 밴젝스, 예슬...</p>
-					</div>
-				</a> <a href="" style="color: var(- -font-color);">
-					<div class="imgTop">
-						<img src="image/perform/${perform[11].poster }"
-							style="width: 308px; height: 420px;">
-						<p>${perform[11].performTitle }</p>
-						<p style="color: lightgray;">진짜배기 록밴드 동이혼의 폭발!</p>
-					</div>
-				</a> <a href="" style="color: var(- -font-color);">
-					<div class="imgTop">
-						<img src="image/perform/${perform[13].poster }"
-							style="width: 308px; height: 420px;">
-						<p>${perform[13].performTitle }</p>
-						<p style="color: lightgray;">새로운 의미를 담은 곡들 대방출!</p>
-					</div>
-				</a> <a href="" style="color: var(- -font-color);">
-					<div class="imgTop">
-						<img src="image/perform/${perform[12].poster }"
-							style="width: 308px; height: 420px;">
-						<p>${perform[12].performTitle }</p>
-						<p style="color: lightgray;">PODO티켓 단독 NFT 증정</p>
-					</div>
-				</a> <a href="" style="color: var(- -font-color);">
-					<div class="imgTop">
-						<img src="image/perform/${perform[1].poster }"
-							style="width: 308px; height: 420px;">
-						<p>${perform[1].performTitle }</p>
-						<p style="color: lightgray;">
-							회색단지부터 ㅠㅠ까지 <br>GongGongGoo009의 첫번째 단독 콘서트
 
-						</p>
-					</div>
-				</a>
+				<div class="imgTop">
+					<a href="" style="color: var(- -font-color);"> <img
+						src="image/perform/${perform[3].poster }"
+						style="width: 308px; height: 420px;">
+					</a>
+					<p>${perform[3].performTitle }</p>
+					<p style="color: lightgray;">허밍어반스테레오, 리소, 밴젝스, 예슬...</p>
+				</div>
+
+				<div class="imgTop">
+					<a href="" style="color: var(- -font-color);"> <img
+						src="image/perform/${perform[11].poster }"
+						style="width: 308px; height: 420px;">
+					</a>
+					<p>${perform[11].performTitle }</p>
+					<p style="color: lightgray;">진짜배기 록밴드 동이혼의 폭발!</p>
+				</div>
+				<div class="imgTop">
+					<a href="" style="color: var(- -font-color);"> <img
+						src="image/perform/${perform[13].poster }"
+						style="width: 308px; height: 420px;">
+					</a>
+					<p>${perform[13].performTitle }</p>
+					<p style="color: lightgray;">새로운 의미를 담은 곡들 대방출!</p>
+				</div>
+				<div class="imgTop">
+					<a href="" style="color: var(- -font-color);"> <img
+						src="image/perform/${perform[12].poster }"
+						style="width: 308px; height: 420px;">
+					</a>
+					<p>${perform[12].performTitle }</p>
+					<p style="color: lightgray;">PODO티켓 단독 NFT 증정</p>
+				</div>
+				<div class="imgTop">
+					<a href="" style="color: var(- -font-color);"> <img
+						src="image/perform/${perform[1].poster }"
+						style="width: 308px; height: 420px;">
+					</a>
+					<p>${perform[1].performTitle }</p>
+					<p style="color: lightgray;">회색단지부터 ㅠㅠ까지</p>
+				</div>
+
 			</div>
 			<div class="nameTop">
 				<div style="width: 10px;"></div>
@@ -209,15 +213,17 @@ a {
 
 			<c:forEach items="${perform }" var="p" begin="1" end="10" step="1">
 				<div class="perform1">
-
 					<div class="perform">
 						<ul class="listimg">
-							<li><img src="image/perform/${p.poster }"
-								style="width: 130px; height: 180px;" class="imgset"></li>
+							<li><a href="" style="color: var(- -font-color);">
+							<img src="image/perform/${p.poster }"
+								style="width: 130px; height: 180px;" class="imgset">
+								</a></li>
 
-							<li style="margin: 20px 0 0 0; max-width: 820px; min-width: 820px;">
-								<div class="saleText">판매중</div>
-								<br> ${p.performTitle}
+							<li
+								style="margin: 20px 0 0 0; max-width: 820px; min-width: 820px;">
+								<div class="saleText">판매중</div> <br> <a href="" style="color: var(- -font-color);">${p.performTitle}
+							</a>
 							</li>
 							<li class="flexli" style="width: 350px;"><fmt:formatDate
 									value="${p.startDate }" pattern="yyyy-MM-dd" /> - <fmt:formatDate
