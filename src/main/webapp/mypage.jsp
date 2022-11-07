@@ -100,7 +100,7 @@
 /*             background-color: #00000d50; */
         }
 
-        #profileBtn {
+        .profileBtn {
             margin-top: 2vh;
             width: 20vw;
             height: 50px;
@@ -111,10 +111,12 @@
             line-height: var(--line-height);
             border: 1px solid gray;
             cursor: pointer;
+            background: var(--background-color);
+            color: var(--font-color)
 /*             background-color: #00000d50; */
         }
 
-        #profileBtn:hover {
+        .profileBtn:hover {
             border: 1px solid silver;
         }
 
@@ -202,6 +204,19 @@
         #detailBtn a:hover {
             border: 1px solid silver;
         }
+        
+		/*프로필 수정 css */
+		.membership>div>input{
+		background : var(--background-color);
+		font-family: "Noto Sans KR", sans-serif;
+		color: var(--font-color);
+		border: 1px solid silver;
+		color: var(--font-color);
+		}
+		.notInput{
+		color: var(--font-color);
+		font-size:20px;
+		}
     </style>
         <script
       src="https://code.jquery.com/jquery-3.6.1.min.js"
@@ -217,10 +232,10 @@
             <div class="profileDiv">
                 <img src="/image/web/profile-default.jpg" class="profile">
             </div>
-            <span class="nameText">${loginNickname }</span>
+            <span class="nameText">${DTO.nickname }</span>
             <span class="followerText">팔로워 27 </span>
-            <div id="profileBtn">
-                <a id="modifyBtn">프로필 수정</a>
+            <div>
+                <button class="profileBtn" id="modifyBtn">프로필 수정</button>
             </div>
         </div>
 
@@ -238,15 +253,15 @@
                     <tbody>
                         <tr class="List">
                             <th>
-                                <div style="padding-left: 1vw;">${loginMembership }</div>
+                                <div style="padding-left: 1vw;">${DTO.membership }</div>
                             </th>
                             <td>
-                                <div>${loginScribeDate }</div>
+                                <div>${DTO.scribedate }</div>
                             </td>
                             <td>
                             	<div>
                             	<c:choose>
-                            	<c:when test= "${!loginScribedate}">${loginScribedate }</c:when>
+                            	<c:when test= "${!DTO.scribedate}">${DTO.scribedate }</c:when>
                             		<c:otherwise>${loginScribedate }</c:otherwise>
                             		</c:choose>
                             	</div>
@@ -287,7 +302,7 @@
     </div>
     
     
-    
+    <!-- 프로필 수정 -->
     <div class="wrap" id="wrap2">
         <div class="mypage">
             <div class="titleText">프로필 수정</div>
@@ -299,40 +314,43 @@
         </div>
 	
 		
-		<form>
         <div class="membership">
+        <form action="/informUpdate.member" method="post">
             <div>
                 <div>Email</div>
-                <input type="text" value="${loginEmail }" disabled>
-            </div>
-            <div>
-                <div>이름</div>
-                <input type="text" value="${loginName }" disabled>
-            </div>
-            <div>
-                <div>닉네임</div>
-                <input type="text" value="${loginNickname }" name="nickname" id="nickname">
+                <input type="text" value="${loginEmail }" class="notInput" disabled>
             </div>
             <div>
                 <div>비밀번호</div>
                 <input type="text" name="pw" id="pw">
             </div>
             <div>
-                <div>전화번호</div>
-                <input type="text" name="phone" id="phone">
+                <div>이름</div>
+                <input type="text" value="${loginName }" class="notInput" disabled>
             </div>
-        </div>
+            <div>
+                <div>닉네임</div>
+                <input type="text" value="${DTO.nickname }" name="nickname" id="nickname" class="inputAble">
+            </div>
+            <div>
+                <div>전화번호</div>
+                <input type="text" value="${DTO.phone }" name="phone" id="phone">
+            </div>
 
-        <div id="profileBtn">
-            <a href="" style="color: var(--font-color)">프로필 수정</a>
+        <div>
+            <button type="submit" class="profileBtn">프로필 수정</button>
         </div>
-        </form>
+       </form>
         <div id="profileBtn">
-            <a href="" style="color: var(--font-color)">회원 탈퇴</a>
+            <a href="#" style="color: var(--font-color)">회원 탈퇴</a>  
+        </div>
         </div>
     </div>
 
     <script>
+    window.onload = function() {
+    	$('#wrap2').css("display","none");
+    }
     let modify = document.getElementById("modifyBtn");
     $(modify).click(function () {
   	  		$('#wrap1').fadeOut(450).css("display","none");
