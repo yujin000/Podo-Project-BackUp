@@ -1,15 +1,14 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
-     <%@ taglib prefix="c"
+pageEncoding="UTF-8"%> <%@ taglib prefix="c"
 uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html>
-<head>
-<meta charset="UTF-8">
-<title>Insert title here</title>
-<style>
+  <head>
+    <meta charset="UTF-8" />
+    <title>Insert title here</title>
+    <style>
       /* 기본 Reset css 셋팅입니다 지우지 마세요 */
-      @import url(src/css/reset.css);
+      @import url(../src/css/reset.css);
       /* system font */
       @import url("https://fonts.googleapis.com/css2?family=Nanum+Gothic:wght@700&family=Noto+Sans+KR&display=swap");
       /* event font */
@@ -82,6 +81,17 @@ uri="http://java.sun.com/jsp/jstl/core"%>
         background-color: transparent;
       }
 
+      button#emailCheck {
+        width: 170px;
+        height: 50px;
+        background: var(--main-color);
+        border-radius: 4px;
+        border: none;
+        color: var(--font-color);
+        font-weight: bolder;
+        font-size: 1rem;
+        margin-right: 0px;
+      }
       form button#inputSubmit {
         width: 350px;
         height: 50px;
@@ -92,7 +102,6 @@ uri="http://java.sun.com/jsp/jstl/core"%>
         color: var(--font-color);
         font-weight: bolder;
         font-size: 1rem;
-        cursor: pointer;
       }
 
       form button#inputSubmit:hover {
@@ -100,11 +109,12 @@ uri="http://java.sun.com/jsp/jstl/core"%>
       }
 
       form button {
-        width: 350px;
+        width: 170px;
         height: 50px;
         background-color: var(--sub-background-color);
         border-radius: 4px;
         margin-bottom: 10px;
+        margin-right: 5px;
         color: var(--font-color);
         font-weight: bolder;
         font-size: 1rem;
@@ -132,20 +142,18 @@ uri="http://java.sun.com/jsp/jstl/core"%>
     <script
       src="https://code.jquery.com/jquery-3.6.1.min.js"
       integrity="sha256-o88AwQnZB+VDvE9tvIXrMQaPlFFSUTR+nldQm1LuPXQ="
-      crossorigin="anonymous"></script>
-</head>
- <body>
- <% 
- 	String email = request.getParameter("email");
+      crossorigin="anonymous"
+    ></script>
+  </head>
+  <body>
+    <% String email = request.getParameter("email"); if(email == null){ /* email
+    = ""; */ } %>
 
-  if(email == null){
-	  /* email = ""; */
-  }
- %>
- 
     <div class="wrap">
       <h1 id="logo">
-        <a href="index.jsp"><img src="image/web/logo-f-5.png" alt="" /></a>
+        <a href="../home.jsp"
+          ><img src="../image/web/logo-f-5.png" alt=""
+        /></a>
       </h1>
       <form action="/signup.member" method="post">
         <p>이메일</p>
@@ -154,9 +162,11 @@ uri="http://java.sun.com/jsp/jstl/core"%>
           name="email"
           id="email"
           placeholder="exam@gamil.com"
-          value=""
-         
         />
+        <p id="result"></p>
+        <button type="button" id="DupleCheck" onclick="emailDupleCheck()">
+          중복확인
+        </button>
         <button id="emailCheck" type="button">이메일 인증</button>
         <p id="msg"></p>
         <p>비밀번호</p>
@@ -172,12 +182,7 @@ uri="http://java.sun.com/jsp/jstl/core"%>
         <input type="text" name="name" id="name" placeholder="5글자" />
         <p id="msg"></p>
         <p>전화번호</p>
-        <input
-          type="text"
-          name="phone"
-          id="phone"
-          placeholder="01012345678"
-        />
+        <input type="text" name="phone" id="phone" placeholder="01012345678" />
         <p id="msg"></p>
         <button type="submit" id="inputSubmit">회원가입</button>
       </form>
@@ -191,7 +196,6 @@ uri="http://java.sun.com/jsp/jstl/core"%>
     </footer>
     <!-- 유효성 검사 -->
     <script>
-   
       var emailRegex =
         /^([\w-]+(?:\.[\w-]+)*)@((?:[\w-]+\.)*\w[\w-]{0,66})\.([a-z]{2,6}(?:\.[a-z]{2})?)$/;
       var pwRegex = /^([A-Za-z\d\!|\@|\#|\$|\%]){7,20}$/;
@@ -200,12 +204,54 @@ uri="http://java.sun.com/jsp/jstl/core"%>
       var phoneRegex = /(\d{3}).*(\d{3}).*(\d{4})/;
 
       $("#emailCheck").click(function () {
-        window.open(
-          "emailCheck.jsp",
-          "이메일인증",
-          "width=700px,height=700px"
-        );
+        if (
+          $("#result").text() == "사용가능한 ID입니다. " &&
+          $("#email").val() != ""
+        ) {
+          window.open(
+            "emailCheck.jsp?email=" + $("#email").val(),
+            "이메일인증",
+            "width=700px,height=700px"
+          );
+        } else {
+          $("#result")
+            .html("중복확인 을 먼저 수행해주세요!")
+            .css("color", "red");
+        }
       });
+
+      function emailDupleCheck() {
+        if ($("#email").val() == "") {
+          $("#result").html("작성란이 비어있습니다. ").css("color", "red");
+        } else {
+          $.ajax({
+            url: "/emailDupleCheck.member",
+            type: "post",
+            data: {
+              email: $("#email").val(),
+              // "email" : $("#Join_email").val()  -> 가독성이 더 좋음.
+            },
+            success: function (res) {
+              // res = response , req = request
+              // rs.next() -> true : 중복이 있다. / false : 중복이 없다.
+              // 기본적으로 out객체로 응답받는 데이터는 text/html 구조임.
+              // boolean false 로 받아온 객체는 String "false"로 받아짐.
+              if (res == "true") {
+                $("#email").val("");
+                $("#result").html("중복된 ID입니다. ").css("color", "red");
+              } else {
+                $("#result")
+                  .html("사용가능한 ID입니다. ")
+                  .css("color", "white");
+                $("#email").prop("readonly", true);
+              }
+            },
+            error: function () {
+              alert("요청실패");
+            },
+          });
+        }
+      }
 
       $("#email").keyup(function () {
         let result = emailRegex.test($(this).val());
@@ -337,7 +383,7 @@ uri="http://java.sun.com/jsp/jstl/core"%>
           $(this).val("");
         } else {
         }
-      }); 
+      });
     </script>
   </body>
 </html>

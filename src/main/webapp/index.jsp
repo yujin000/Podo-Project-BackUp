@@ -63,7 +63,7 @@
 	<div class="wrap">
 		<div id="Header">
 			<h1 id="logo">
-				<a href="index.jsp"><img src="image/web/logo-f-5.png" alt="" /></a>
+				<a href="home.jsp"><img src="image/web/logo-f-5.png" alt="" /></a>
 			</h1>
 			<div id="LoginBox">
 
@@ -86,7 +86,7 @@
 						</ul>
 					</c:when>
 					<c:otherwise>
-						<a class="loginBtn" href="loginForm.jsp">로그인</a>
+						<a class="loginBtn" href="/member/loginForm.jsp">로그인</a>
 					</c:otherwise>
 				</c:choose>
 			</div>
@@ -119,16 +119,16 @@
 			<a href="" class="service">서비스 소개</a>
 		</div>
 
-		<iframe src="main.jsp" width="100%" height="100%"
+		<iframe src="/main/main.jsp" width="100%" height="100%"
 			style="display: block; padding-left: 230px" id="iframe"></iframe>
 
 		<div id="MusicControl">
-			<div class="gageBar" id="gageBar">
-				<div class="gage" id="gage"></div>
-			</div>
 			<div class="hidden">
 				<h1>hidden</h1>
 				<ul></ul>
+			</div>
+			<div class="gageBar" id="gageBar">
+				<div class="gage" id="gage"></div>
 			</div>
 			<div class="controller">
 				<ul class="musicInfo">
@@ -205,7 +205,7 @@
 		});
 
 		$("#today").click(function() {
-			$("#iframe").attr("src", "main.jsp");
+			$("#iframe").attr("src", "/main/main.jsp");
 		});
 
 		$("#mypageBtn").click(function() {

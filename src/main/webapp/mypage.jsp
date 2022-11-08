@@ -256,13 +256,13 @@
                                 <div style="padding-left: 1vw;">${DTO.membership }</div>
                             </th>
                             <td>
-                                <div>${DTO.scribedate }</div>
+                                <div>${DTO.scribeDate }</div>
                             </td>
                             <td>
                             	<div>
                             	<c:choose>
-                            	<c:when test= "${!DTO.scribedate}">${DTO.scribedate }</c:when>
-                            		<c:otherwise>${loginScribedate }</c:otherwise>
+                            	<c:when test= "${!DTO.scribeDate}">${DTO.scribeDate }</c:when>
+                            		<c:otherwise>${DTO.scribeDate}</c:otherwise>
                             		</c:choose>
                             	</div>
                             </td>
