@@ -202,11 +202,13 @@ uri="http://java.sun.com/jsp/jstl/core"%>
       var nameRegex = /^[가-힣]{1,5}$/;
       var nicknameRegex = /^[가-힣a-zA-z\d]{1,10}$/;
       var phoneRegex = /(\d{3}).*(\d{3}).*(\d{4})/;
+      
+      var result = false;
 
       $("#emailCheck").click(function () {
         if (
           $("#result").text() == "사용가능한 ID입니다. " &&
-          $("#email").val() != ""
+          $("#email").val() != "" && result == true
         ) {
           window.open(
             "emailCheck.jsp?email=" + $("#email").val(),
@@ -243,7 +245,17 @@ uri="http://java.sun.com/jsp/jstl/core"%>
                 $("#result")
                   .html("사용가능한 ID입니다. ")
                   .css("color", "white");
-                $("#email").prop("readonly", true);
+//                 $("#email").prop("readonly", true);
+
+					result = true;
+					
+					$("#email").keyup(function () {
+						 $("#result")
+		                  .html("값이 바뀌었습니다. 중복확인을 다시 진행주세요!")
+		                  .css("color", "red");
+						result = false;
+					})
+					
               }
             },
             error: function () {
