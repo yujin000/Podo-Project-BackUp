@@ -28,14 +28,14 @@
 	font-style: normal;
 }
 
-:root { -
-	-font-color: #fff; -
-	-background-color: #000; -
-	-sub-background-color: #222; -
-	-boder-silver: 1px solid silver; -
-	-main-color: #3e065f; -
-	-point-color: #ff00d7;
-}
+ :root {
+      --font-color: #fff;
+      --background-color: #000;
+      --sub-background-color: #222;
+      --boder-silver: 1px solid silver;
+      --main-color: #3e065f;
+      --point-color: #ff00d7;
+    }
 
 * {
 	color: white;
@@ -228,7 +228,7 @@ a {
 							<li class="flexli" style="width: 350px;"><fmt:formatDate
 									value="${p.startDate }" pattern="yyyy-MM-dd" /> - <fmt:formatDate
 									value="${p.endDate }" pattern="yyyy-MM-dd" /></li>
-							<li class="flexli">${p.theaterSeq}</li>
+							<li class="flexli">${p.theaterName}</li>
 						</ul>
 					</div>
 

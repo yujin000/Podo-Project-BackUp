@@ -41,7 +41,7 @@ public class PerformanceDAO {
 			while (rs.next()) {
 				PerformanceDTO dto = new PerformanceDTO();
 				dto.setPerformTitle(rs.getString("performTitle"));
-				dto.setTheaterSeq(rs.getString("theaterSeq"));
+				dto.setTheaterName(rs.getString("theaterName"));
 				dto.setPoster(rs.getString("poster"));
 				dto.setStartDate(rs.getTimestamp("startDate"));
 				dto.setEndDate(rs.getTimestamp("endDate"));

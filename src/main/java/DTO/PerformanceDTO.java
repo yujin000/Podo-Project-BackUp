@@ -4,29 +4,33 @@ import java.sql.Timestamp;
 
 public class PerformanceDTO {
 	private int performSeq;
-	private String theaterSeq;
+	private int theterSeq;
+	private String theaterName;
 	private String performTitle;
 	private String poster;
 	private int showtime;
 	private Timestamp startDate;
 	private Timestamp endDate;
 	private String performPrice;
-
+	private String rating; 
+	
 	public PerformanceDTO() {
 
 	}
 
-	public PerformanceDTO(int performSeq, String theaterSeq, String performTitle, String poster, int showtime,
-			Timestamp startDate, Timestamp endDate, String performPrice) {
+	public PerformanceDTO(int performSeq, int theterSeq, String theaterName, String performTitle, String poster,
+			int showtime, Timestamp startDate, Timestamp endDate, String performPrice, String rating) {
 		super();
 		this.performSeq = performSeq;
-		this.theaterSeq = theaterSeq;
+		this.theterSeq = theterSeq;
+		this.theaterName = theaterName;
 		this.performTitle = performTitle;
 		this.poster = poster;
 		this.showtime = showtime;
 		this.startDate = startDate;
 		this.endDate = endDate;
 		this.performPrice = performPrice;
+		this.rating = rating;
 	}
 
 	public int getPerformSeq() {
@@ -37,12 +41,20 @@ public class PerformanceDTO {
 		this.performSeq = performSeq;
 	}
 
-	public String getTheaterSeq() {
-		return theaterSeq;
+	public int getTheterSeq() {
+		return theterSeq;
 	}
 
-	public void setTheaterSeq(String theaterSeq) {
-		this.theaterSeq = theaterSeq;
+	public void setTheterSeq(int theterSeq) {
+		this.theterSeq = theterSeq;
+	}
+
+	public String getTheaterName() {
+		return theaterName;
+	}
+
+	public void setTheaterName(String theaterName) {
+		this.theaterName = theaterName;
 	}
 
 	public String getPerformTitle() {
@@ -91,5 +103,13 @@ public class PerformanceDTO {
 
 	public void setPerformPrice(String performPrice) {
 		this.performPrice = performPrice;
+	}
+
+	public String getRating() {
+		return rating;
+	}
+
+	public void setRating(String rating) {
+		this.rating = rating;
 	}
 }
