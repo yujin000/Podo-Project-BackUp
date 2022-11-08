@@ -37,9 +37,8 @@
         background: var(--sub-background-color);
         color: var(--font-color);
       }
-      .wrap {
+      .container {
         padding: 0 40px;
-        width: 100%;
         height: 100%;
       }
       footer {
@@ -57,7 +56,7 @@
     </style>
   </head>
   <body>
-    <div class="wrap">
+    <div class="container">
       <h1>main</h1>
     </div>
     <footer>footer</footer>
