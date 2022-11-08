@@ -9,8 +9,9 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-
+import DAO.CastDAO;
 import DAO.PerformanceDAO;
+import DTO.CastDTO;
 import DTO.PerformanceDTO;
 
 @WebServlet("*.perform")
@@ -26,6 +27,17 @@ public class Performance extends HttpServlet {
 				List<PerformanceDTO> perform = dao.selectPerform();
 				request.getSession().setAttribute("perform", perform);
 				request.getRequestDispatcher("/ticketing/ticketing.jsp").forward(request, response);
+				
+			}else if(uri.equals("/performDetail.perform")){
+				int performSeq = Integer.parseInt(request.getParameter("performSeq"));
+				CastDAO dao1 = CastDAO.getInstance();
+				PerformanceDAO dao = PerformanceDAO.getInstance();
+				
+				List<CastDTO> cast = dao1.selectCast(performSeq);
+				PerformanceDTO list = dao.selectDetail(performSeq);
+				request.setAttribute("list", list);
+				request.setAttribute("cast", cast);
+				request.getRequestDispatcher("/ticketing/performDetail.jsp").forward(request, response);
 				
 			}
 		} catch(Exception e) {
