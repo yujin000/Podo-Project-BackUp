@@ -12,27 +12,36 @@ import javax.servlet.http.HttpServletResponse;
 import DAO.MusicDAO;
 import DTO.MusicDTO;
 
-
 @WebServlet("*.music")
 public class Music extends HttpServlet {
-	
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+
+	protected void doGet(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
 		request.setCharacterEncoding("utf8"); // post의 한글깨짐현상을 처리하기 위한 로직
-		
+
 		String uri = request.getRequestURI();
+		System.out.println(uri);
 		try {
 			if (uri.equals("/chart.music")) {
 				MusicDAO dao = MusicDAO.getInstance();
 				List<MusicDTO> musicChartList = dao.musicChartList();
 				request.setAttribute("musicChartList", musicChartList);
 				request.getRequestDispatcher("/index.jsp").forward(request, response);
+			} else if (uri.equals("/allList.music")) {
+				MusicDAO dao = MusicDAO.getInstance();
+				List<MusicDTO> musicList = dao.musicAllList();
+				String nickName = request.getParameter("nickname");
+				request.setAttribute("list", musicList);
+				request.setAttribute("nickname", nickName);
+				request.getRequestDispatcher("/admin/adminMusic.jsp").forward(request, response);
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
 	}
 
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	protected void doPost(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
 		doGet(request, response);
 	}
 
