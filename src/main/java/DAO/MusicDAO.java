@@ -53,7 +53,7 @@ public class MusicDAO {
 		}
 	}
 	
-	public List<MusicDTO> musicAllList() throws Exception { // TOP25 차트 재생목록을 불러오는 매소드
+	public List<MusicDTO> musicAllList() throws Exception { 
 		String sql = "select * from music";
 		try (Connection con = this.getConnection();
 				PreparedStatement pstat = con.prepareStatement(sql);) {

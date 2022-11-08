@@ -84,7 +84,6 @@ public class MemberController extends HttpServlet {
 				}
 				MemberDTO dto = new MemberDTO(email,pw,null,null,null,profileimg,nickname,null,phone,null,true);
 				dao.update(dto);
-				System.out.println(dto);
 				request.getRequestDispatcher("/mypage.member").forward(request, response);
 			}
 		} catch (Exception e) {
