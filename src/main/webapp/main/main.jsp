@@ -58,6 +58,7 @@
   <body>
     <div class="container">
       <h1>main</h1>
+      <p>contents</p>
     </div>
     <footer>footer</footer>
   </body>
