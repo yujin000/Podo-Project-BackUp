@@ -50,9 +50,8 @@
             font-family: "Noto Sans KR", sans-serif;
         }
 
-        .wrap {
+        .container {
             padding: 0 75px;
-            width: 100%;
             height: 100%;
 /*             background-color: bisque; */
             overflow-y: scroll;
@@ -217,6 +216,26 @@
 		color: var(--font-color);
 		font-size:20px;
 		}
+		
+		.filebox label {
+    	display: inline-block;
+    	padding: 10px 20px;
+    	color: #fff;
+    	vertical-align: middle;
+    	background-color: #3e065f;
+    	cursor: pointer;
+    	height: 40px;
+    	margin-left: 10px;
+		}
+
+		.filebox input[type="file"] {
+    	position: absolute;
+    	width: 0;
+    	height: 0;
+    	padding: 0;
+    	overflow: hidden;
+   		border: 0;
+		}
     </style>
         <script
       src="https://code.jquery.com/jquery-3.6.1.min.js"
@@ -226,7 +245,7 @@
 </head>
 
 <body>
-    <div class="wrap" id="wrap1">
+    <div class="container" id="wrap1">
         <div class="mypage">
             <div class="titleText">마이페이지</div>
             <div class="profileDiv">
@@ -303,13 +322,19 @@
     
     
     <!-- 프로필 수정 -->
-    <div class="wrap" id="wrap2">
+    <div class="container" id="wrap2">
+    <form action="/informUpdate.member" method="post" enctype="multipart/form-data" id="updateForm">
         <div class="mypage">
             <div class="titleText">프로필 수정</div>
             <div class="profileDiv">
-                <img src="/image/web/profile-default.jpg" class="profile">
+                <img src="/image/web/profile-default.jpg" class="profile" id="preview">
             </div>
-            <div><a href="" style="color: var(--font-color)">프로필 이미지 업로드</a></div>
+            
+            <div class="filebox">
+            <label for="file">프로필 이미지 업로드</label> <input
+            type="file" id="file" name="file" onchange="readURL(this)">
+            </div>
+            
             <div><a href="" style="color: var(--font-color)">프로필 이미지 삭제</a></div>
         </div>
 	
@@ -338,13 +363,14 @@
             </div>
 
         <div>
-            <button type="submit" class="profileBtn">프로필 수정</button>
+             <button type="button" id="profileBtn" class="profileBtn">프로필 수정</button>
         </div>
-       </form>
+       
         <div id="profileBtn">
-            <a href="#" style="color: var(--font-color)">회원 탈퇴</a>  
+            <button type="button" style="color: var(--font-color)" id="deleteBtn" class="profileBtn">회원 탈퇴</button>  
         </div>
         </div>
+        </form>
     </div>
 
     <script>
@@ -352,10 +378,36 @@
     	$('#wrap2').css("display","none");
     }
     let modify = document.getElementById("modifyBtn");
-    $(modify).click(function () {
-  	  		$('#wrap1').fadeOut(450).css("display","none");
-			$('#wrap2').css("display","block");
-      });
+	let completion = document.getElementById("profileBtn");
+	let memberDelete = document.getElementById("deleteBtn");
+	
+	$(modify).click(function() {
+		$('#wrap1').fadeOut(450).css("display", "none");
+		$('#wrap2').css("display", "block");
+	});
+
+	completion.addEventListener("click", function() {
+		document.getElementById("updateForm").submit();
+	});
+	
+	memberDelete.addEventListener("click", function() {
+		if (confirm("정말 회원 탈퇴를 하시겠습니까?")) {
+			location.href = "/delete.member"
+			alert("회원 탈퇴 완료");
+		} else {
+		}
+	});
+	function readURL(input) {
+		if (input.files && input.files[0]) {
+			var reader = new FileReader();
+			reader.onload = function(e) {
+				document.getElementById('preview').src = e.target.result;
+			};
+			reader.readAsDataURL(input.files[0]);
+		} else {
+			document.getElementById('preview').src = "";
+		}
+	}
     </script>
 </body>
 

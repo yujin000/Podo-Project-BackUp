@@ -49,9 +49,8 @@
             font-family: "Noto Sans KR", sans-serif;
         }
 
-        .wrap {
+        .container {
             padding: 0 75px;
-            width: 100%;
             height: 100%;
             background-color: bisque;
             overflow-y: scroll;
@@ -98,24 +97,57 @@
             font-weight: var(--font-weight);
             line-height: var(--line-height);
         }
+        
+        
+        #writeBtn {
+            margin-top: 2vh;
+            width: 6vw;
+            height: 40px;
+            text-align: center;
+            border-radius: 5px;
+            font-size: 18px;
+            font-weight: var(--font-weight);
+            line-height: var(--line-height);
+            border: 1px solid gray;
+            cursor: pointer;
+            background: var(--background-color);
+            color: var(--font-color)
+/*             background-color: #00000d50; */
+        }
+
+        #writeBtn:hover {
+            border: 1px solid silver;
+        }
     </style>
 </head>
 
 <body>
-    <div class="wrap">
+    <div class="container">
+    <form action="/insert.board" id="insertForm" method="post">
         <div class="qna">
             <div class="titleText">1:1 문의</div>
             <div class="qnalist">
                     <div id="category">문의 유형</div>
                     <div id="title">제목
-                        <input type="text" placeholder="제목을 입력하세요" name="title" id="title">
+                        <input type="text" placeholder="제목을 입력하세요" name="qnaTitle" id="qnaTitle">
                     </div>
                     <div id="contents">문의 내용
-                        <textarea placeholder="내용을 입력해주세요" name="contents" 
-                        cols="120" rows="13" id="contents"></textarea>
+                        <textarea placeholder="내용을 입력해주세요" name="qnaContents" 
+                        cols="120" rows="5" id="qnaContents"></textarea>
                     </div>
             </div>
+            
+            <div style="float:right;">
+              <button type="button" id="writeBtn">작성완료</button>
+            </div>
+            
         </div>
+        </form>
     </div>
+    <script>
+    document.getElementById("writeBtn").addEventListener("click", function() {
+    	document.getElementById("insertForm").submit();
+    })
+    </script>
 </body>
 </html>
