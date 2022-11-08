@@ -162,7 +162,7 @@
 						href="/allList.music?nickname=${loginNickname }">음원 관리</a></li>
 					<li><a id="chart">공연 관리</a></li>
 					<li><a href="#">회원 관리</a></li>
-					<li><a href="#">멤버십 관리</a></li>
+					<li><a href="/adminMemship.admin">멤버십 관리</a></li>
 					<li><a href="#">문의내역 확인</a></li>
 				</ul>
 			</div>

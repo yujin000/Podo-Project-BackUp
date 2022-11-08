@@ -9,7 +9,7 @@ import javax.servlet.http.HttpServletResponse;
 
 
 @WebServlet("*.admin")
-public class AdminController extends HttpServlet {
+public class Admin extends HttpServlet {
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		request.setCharacterEncoding("utf8");
@@ -20,6 +20,8 @@ public class AdminController extends HttpServlet {
 				String nickName = request.getParameter("nickname");
 				request.setAttribute("nickname", nickName);
 				request.getRequestDispatcher("/admin/adminIndex.jsp").forward(request, response);
+			}else if(uri.equals("/adminMemship.admin")) {
+				response.sendRedirect("/admin/adminMembership.jsp");
 			}
 			
 			
