@@ -20,8 +20,6 @@ public class Performance extends HttpServlet {
 		// post 방식으로 보낼때, 한글 깨지는 것을 방지
 
 		String uri = request.getRequestURI();
-		System.out.println(uri);
-		
 		try {
 			if(uri.equals("/list.perform")) {
 				PerformanceDAO dao = PerformanceDAO.getInstance();
