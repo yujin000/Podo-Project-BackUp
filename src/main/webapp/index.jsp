@@ -204,7 +204,7 @@
 		});
 
 		$("#today").click(function() {
-			$("#iframe").attr("src", "main.jsp");
+			$("#iframe").attr("src", "/main/main.jsp");
 		});
 
 		$("#mypageBtn").click(function() {

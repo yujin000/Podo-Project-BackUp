@@ -58,7 +58,7 @@ public class Member extends HttpServlet {
 					 PrintWriter out = response.getWriter(); 
 					 out.println("<script language='javascript'>");
 					 out.println("alert('회원정보가 존재하지 않습니다.')");
-					 out.println("location.href='loginForm.jsp'"); 
+					 out.println("location.href='/member/loginForm.jsp'"); 
 					 out.println("</script>");
 					 out.flush(); 
 					 
@@ -72,7 +72,7 @@ public class Member extends HttpServlet {
 				MemberDAO dao = MemberDAO.getInstance();
 				MemberDTO dto = dao.getMypage(request.getSession().getAttribute("loginEmail").toString());
 				request.setAttribute("DTO", dto);
-				request.getRequestDispatcher("/mypage.jsp").forward(request, response);
+				request.getRequestDispatcher("mypage.jsp").forward(request, response);
 			} else if(uri.equals("/informUpdate.member")) {
 				String email=request.getSession().getAttribute("loginEmail").toString();
 				String pw = request.getParameter("pw");
