@@ -9,6 +9,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.google.gson.Gson;
+
 import DAO.MemberDAO;
 import DTO.MemberDTO;
 
@@ -97,13 +99,14 @@ public class Member extends HttpServlet {
 				PrintWriter out = response.getWriter();
 				out.print(result);
 			}
-			else if(uri.equals("/naverMailSend.member")) {
+			else if(uri.equals("/MailSender.member")) {
 				String email = request.getParameter("email");
 				MemberDAO dao = new MemberDAO();
-				String result = dao.naverMailSend(email);
-				request.setAttribute("key", result);
-				System.out.println(result);
-				request.getRequestDispatcher("/emailCheck.jsp").forward(request, response);
+				String result = dao.MailSender(email);
+				
+				Gson g = new Gson();
+		          String jsonString = g.toJson(result);
+		          response.getWriter().append(jsonString);
 			}
 		} catch (Exception e) {
 			e.printStackTrace();

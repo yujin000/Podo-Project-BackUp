@@ -13,6 +13,7 @@ import java.util.List;
 import java.util.Properties;
 import java.util.Random;
 
+import javax.mail.Authenticator;
 import javax.mail.Message;
 import javax.mail.MessagingException;
 import javax.mail.PasswordAuthentication;
@@ -135,49 +136,38 @@ public class MemberDAO {
 		
 	}
 	
-	public String naverMailSend(String email) throws Exception{
+	public String MailSender(String email) throws Exception{
+	
+		Properties props = new Properties();
+		props.put("mail.smtp.host", "smtp.gmail.com");
+		props.put("mail.smtp.port", "587");
+		props.put("mail.smtp.auth", "true");
+		props.put("mail.smtp.starttls.enable", "true");
+		props.put("mail.smtp.ssl.trust", "smtp.gmail.com");
+		props.put("mail.smtp.ssl.protocols", "TLSv1.2");
+		
+		Session session = Session.getInstance(props, new Authenticator() {
+			@Override
+			protected PasswordAuthentication getPasswordAuthentication() {
+				return new PasswordAuthentication("dnfqh98@gmail.com", "edzofkldspdupiko");
+			}
+		});
 		String key = codeMaker();
-		
-		// mail server 설정
-		String host = "smtp.naver.com";
-		String user = "wjdxorrn";// 자신의  계정
-		String password = "wjd3669!";// 자신의  패스워드
-		
-		// 메일 받을 주소
-		System.out.println("inputedEmail : " + email);
-		
-		// SMTP 서버 정보를 설정한다.
-		 Properties props = new Properties();
-	        props.put("mail.smtp.host", host);
-	        props.put("mail.smtp.port", 587);
-	        props.put("mail.smtp.auth", "true");
-	        
-	        Session session = Session.getDefaultInstance(props, new javax.mail.Authenticator() {
-	            protected PasswordAuthentication getPasswordAuthentication() {
-	                return new PasswordAuthentication(user, password);
-	            }
-	        });
-		
-	        try {
-	            MimeMessage message = new MimeMessage(session);
-	            message.setFrom(new InternetAddress(user));
-	            message.addRecipient(Message.RecipientType.TO, new InternetAddress(email));
+		String receiver = email; // 메일 받을 주소
+		String title = "podo music 인증번호";
+		String content = "<h2 style='color:blue'>"+"인증번호:"+key+"</h2>";
+		Message message = new MimeMessage(session);
+		try {
+			message.setFrom(new InternetAddress("dnfqh98@gmail.com", "관리자", "utf-8"));
+			message.addRecipient(Message.RecipientType.TO, new InternetAddress(receiver));
+			message.setSubject(title);
+			message.setContent(content, "text/html; charset=utf-8");
 
-	            // 메일 제목
-	            message.setSubject("PODO SOUND 인증번호");
-
-	            // 메일 내용
-	            message.setText("인증번호"+key);
-
-	            // send the message
-	            Transport.send(message);
-	            System.out.println("Success Message Send");
-	            
-
-	        } catch (MessagingException e) {
-	            e.printStackTrace();
-	        }
-	        return key;
+			Transport.send(message);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return key;
 	}
 	public String codeMaker() {
 		String authCode = null;
