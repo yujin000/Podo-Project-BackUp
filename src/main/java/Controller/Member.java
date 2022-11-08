@@ -13,7 +13,7 @@ import DAO.MemberDAO;
 import DTO.MemberDTO;
 
 @WebServlet("*.member")
-public class MemberController extends HttpServlet {
+public class Member extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)

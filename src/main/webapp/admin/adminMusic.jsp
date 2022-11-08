@@ -261,10 +261,10 @@ hr {
 			<div id="GNB">
 				<ul>
 					<li><a id="today">공지사항 작성</a></li>
-					<li><a id="chart">음원 관리</a></li>
+					<li><a id="chart" href="/allList.music?nickname=${loginNickname }">음원 관리</a></li>
 					<li><a id="chart">공연 관리</a></li>
 					<li><a href="#">회원 관리</a></li>
-					<li><a href="#">멤버십 관리</a></li>
+					<li><a href="/adminMemship.admin">멤버십 관리</a></li>
 					<li><a href="#">문의내역 확인</a></li>
 				</ul>
 			</div>
@@ -406,7 +406,7 @@ hr {
 				alert("노래이름, 아티스트, 앨범명, 장르, 가사, 이미지, MP3파일 모두 입력되어야 합니다.");
 			}else{
 				if(confirm("추가하시겠습니까?")){
-					$("#form").attr("action","/addMusic.admusic");
+					$("#form").attr("action","/addMusic.music");
 		        	$("#form").attr("enctype","multipart/form-data");
 		        	$("#form").attr("method","post");
 		        	$("#form").submit();
@@ -417,7 +417,7 @@ hr {
 		$(".delete").on("click",function(){
 			if(confirm("삭제하시겠습니까?")){
 				let target = $(this).attr("seq");
-				location.href="/deleteMusic.admusic?seq="+target;
+				location.href="/deleteMusic.music?seq="+target;
 			}
 		})	
 		// 수정하기 버튼
@@ -506,7 +506,7 @@ hr {
 			if($(".updTxt").val() == ""){
 				alert("모든 항목을 입력해 주세요.");
 			}else{
-				$("#updateForm").attr("action","/update.admusic");
+				$("#updateForm").attr("action","/update.music");
 				$("#updateForm").submit();
 			}
 		})
