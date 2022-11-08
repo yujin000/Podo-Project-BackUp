@@ -4,25 +4,13 @@ public class MusicDTO {
 	int musicSeq;
 	String musicName;
 	String musicArtist;
+	String musicAlbum;
 	String musicImg;
 	String musicMp3;
 	int musicChart;
-	String musicgenre;
-	String musicLilycs;
+	String musicGenre;
+	String musicLylics;
 	
-	public MusicDTO() {}
-	public MusicDTO(int musicSeq, String musicName, String musicArtist, String musicImg, String musicMp3,
-			int musicChart, String musicgenre, String musicLilycs) {
-		super();
-		this.musicSeq = musicSeq;
-		this.musicName = musicName;
-		this.musicArtist = musicArtist;
-		this.musicImg = musicImg;
-		this.musicMp3 = musicMp3;
-		this.musicChart = musicChart;
-		this.musicgenre = musicgenre;
-		this.musicLilycs = musicLilycs;
-	}
 	public int getMusicSeq() {
 		return musicSeq;
 	}
@@ -40,6 +28,12 @@ public class MusicDTO {
 	}
 	public void setMusicArtist(String musicArtist) {
 		this.musicArtist = musicArtist;
+	}
+	public String getMusicAlbum() {
+		return musicAlbum;
+	}
+	public void setMusicAlbum(String musicAlbum) {
+		this.musicAlbum = musicAlbum;
 	}
 	public String getMusicImg() {
 		return musicImg;
@@ -59,20 +53,34 @@ public class MusicDTO {
 	public void setMusicChart(int musicChart) {
 		this.musicChart = musicChart;
 	}
-	public String getMusicgenre() {
-		return musicgenre;
+	public String getMusicGenre() {
+		return musicGenre;
 	}
-	public void setMusicgenre(String musicgenre) {
-		this.musicgenre = musicgenre;
+	public void setMusicGenre(String musicGenre) {
+		this.musicGenre = musicGenre;
 	}
-	public String getMusicLilycs() {
-		return musicLilycs;
+	public String getMusicLylics() {
+		return musicLylics;
 	}
-	public void setMusicLilycs(String musicLilycs) {
-		this.musicLilycs = musicLilycs;
+	public void setMusicLylics(String musicLylics) {
+		this.musicLylics = musicLylics;
 	}
-	
-	
+	public MusicDTO(int musicSeq, String musicName, String musicArtist, String musicAlbum, String musicImg,
+			String musicMp3, int musicChart, String musicGenre, String musicLylics) {
+		super();
+		this.musicSeq = musicSeq;
+		this.musicName = musicName;
+		this.musicArtist = musicArtist;
+		this.musicAlbum = musicAlbum;
+		this.musicImg = musicImg;
+		this.musicMp3 = musicMp3;
+		this.musicChart = musicChart;
+		this.musicGenre = musicGenre;
+		this.musicLylics = musicLylics;
+	}
+	public MusicDTO() {
+		super();
+	}
 	
 	
 }

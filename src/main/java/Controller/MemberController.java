@@ -40,11 +40,10 @@ public class MemberController extends HttpServlet {
 				String pw = request.getParameter("pw");
 
 				boolean result = dao.login(email, pw);
-				System.out.println(result);
 
 
 				if (result) {
-
+					
 					String nickname = dao.getNick(email);
 					request.getSession().setAttribute("loginEmail", email);
 					request.getSession().setAttribute("loginNickname", nickname);

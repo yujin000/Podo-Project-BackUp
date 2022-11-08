@@ -66,7 +66,6 @@
 				<a href="index.jsp"><img src="image/web/logo-f-5.png" alt="" /></a>
 			</h1>
 			<div id="LoginBox">
-
 				<c:choose>
 					<c:when test="${loginEmail != null}">
 						<div id="mypage">
@@ -76,7 +75,7 @@
 							<li><a href="#">마이페이지</a></li>
 							<c:choose>
 								<c:when test="${loginEmail eq 'podo@email.com'}">
-									<li><a href="/admin/adminIndex.jsp">관리자페이지</a></li>
+									<li><a href="/adminMain.admin?nickname=${loginNickname }">관리자페이지</a></li>
 								</c:when>
 							</c:choose>
 							<li><a href="#">공지사항</a></li>
@@ -90,9 +89,9 @@
 					</c:otherwise>
 				</c:choose>
 			</div>
-
+			
 			<input type="search" placeholder="MUSIC 검색" id="search" />
-
+			
 			<!-- login 성공 시  -->
 			<div id="GNB">
 				<ul>
