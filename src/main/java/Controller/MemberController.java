@@ -10,6 +10,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import DAO.MemberDAO;
+import DTO.MemberDTO;
 
 @WebServlet("*.member")
 public class MemberController extends HttpServlet {
@@ -41,30 +42,50 @@ public class MemberController extends HttpServlet {
 
 				boolean result = dao.login(email, pw);
 
-
 				if (result) {
 					
 					String nickname = dao.getNick(email);
+					String name = dao.getName(email);
 					request.getSession().setAttribute("loginEmail", email);
+					request.getSession().setAttribute("loginName", name);
 					request.getSession().setAttribute("loginNickname", nickname);
+					request.getSession().setAttribute("loginPw", pw);
 					response.sendRedirect("/index.jsp");
-				} 
-					 else {
-					  
-					 response.setContentType("text/html; charset=UTF-8"); 
-					 PrintWriter out = response.getWriter(); 
-					 out.println("<script language='javascript'>");
-					 out.println("alert('회원정보가 존재하지 않습니다.')"); 
-					 out.println("</script>");
-					 out.flush(); 
-					 response.sendRedirect("error.jsp");
-					 
-					 }
-			}
+				} else {
 
-			else if (uri.equals("/logout.member")) {
+					response.setContentType("text/html; charset=UTF-8");
+					PrintWriter out = response.getWriter();
+					out.println("<script language='javascript'>");
+					out.println("alert('회원정보가 존재하지 않습니다.')");
+					out.println("</script>");
+					out.flush();
+					response.sendRedirect("error.jsp");
+
+				}
+			} else if (uri.equals("/logout.member")) {
 				request.getSession().invalidate();
 				response.sendRedirect("index.jsp");
+			} else if (uri.equals("/mypage.member")) {
+				MemberDAO dao = MemberDAO.getInstance();
+				MemberDTO dto = dao.getMypage(request.getSession().getAttribute("loginEmail").toString());
+				request.setAttribute("DTO", dto);
+				request.getRequestDispatcher("/mypage.jsp").forward(request, response);
+			} else if(uri.equals("/informUpdate.member")) {
+				String email=request.getSession().getAttribute("loginEmail").toString();
+				String pw = request.getParameter("pw");
+				String profileimg = request.getParameter("profileimg");
+				String nickname = request.getParameter("nickname");
+				String phone = request.getParameter("phone");
+				MemberDAO dao = MemberDAO.getInstance();
+				if (pw=="") {
+					pw=request.getSession().getAttribute("loginPw").toString();
+				}else {
+					pw = request.getParameter("pw");
+				}
+				MemberDTO dto = new MemberDTO(email,pw,null,null,null,profileimg,nickname,null,phone,null,true);
+				dao.update(dto);
+				System.out.println(dto);
+				request.getRequestDispatcher("/mypage.member").forward(request, response);
 			}
 		} catch (Exception e) {
 			e.printStackTrace();

@@ -72,7 +72,7 @@
 							<img src="image/web/profile-default.jpg" alt="" /><span>${loginNickname}</span>
 						</div>
 						<ul class="tog">
-							<li><a href="#">마이페이지</a></li>
+							<li><a id="mypageBtn">마이페이지</a></li>
 							<c:choose>
 								<c:when test="${loginEmail eq 'podo@email.com'}">
 									<li><a href="/adminMain.admin?nickname=${loginNickname }">관리자페이지</a></li>
@@ -80,7 +80,7 @@
 							</c:choose>
 							<li><a href="#">공지사항</a></li>
 							<li><a href="#">계정설정</a></li>
-							<li><a href="#">친구초대 </a></li>
+							<li><a id="modifyBtn">친구초대 </a></li>
 							<li><a href="logout.member">로그아웃</a></li>
 						</ul>
 					</c:when>
@@ -96,7 +96,7 @@
 			<div id="GNB">
 				<ul>
 					<li><a id="today">투데이</a></li>
-					<li><a id="chart">차트</a></li>
+					<li><a id="chart" href="/chart.music">차트</a></li>
 					<li><a href="#">보관함</a></li>
 					<li><a href="#">스테이션</a></li>
 					<li><a href="#">매거진</a></li>
@@ -112,33 +112,32 @@
 			</div>
 
 			<div id="FloatArea">
-				<a href="">멤버쉽 구독</a> <a href="">포도 티켓</a>
+				<a href="">멤버쉽 구독</a> 
+				<a id="ticketing">포도 티켓</a>
 			</div>
 			<a href="" class="service">서비스 소개</a>
 		</div>
 
-		<iframe src="main.html" width="100%" height="100%"
-			style="display: block; padding-left: 230px" id="main"></iframe>
-
-		<iframe src="test.html" width="100%" height="100%"
-			style="display: none; padding-left: 230px" id="test"></iframe>
+		<iframe src="main.jsp" width="100%" height="100%"
+			style="display: block; padding-left: 230px" id="iframe"></iframe>
 
 		<div id="MusicControl">
-			<div class="gageBar">
-				<div class="gage"></div>
+			<div class="gageBar" id="gageBar">
+				<div class="gage" id="gage"></div>
 			</div>
 			<div class="hidden">
 				<h1>hidden</h1>
+				<ul></ul>
 			</div>
 			<div class="controller">
 				<ul class="musicInfo">
-					<li><a href=""><img src="image/web/album-p.png" alt="" /></a>
+					<li><img src="/image/web/album-p.png" alt="/image/web/album-p.png" id="musicImg"/>
 					</li>
-					<li><strong>ttile</strong>
+					<li id="playInfo"><strong>title</strong>
 						<p>name</p></li>
 					<li>
 						<button>
-							<span class="material-symbols-rounded"> favorite </span>
+							<span class="material-symbols-rounded" id="wish"> favorite </span>
 						</button>
 					</li>
 					<li>
@@ -148,12 +147,15 @@
 					</li>
 				</ul>
 				<ul class="controlBtn">
+				
 					<li><span class="material-symbols-rounded"> repeat </span></li>
-					<li><span class="material-symbols-rounded">
+					<li><span class="material-symbols-rounded" id="playPrev">
 							skip_previous </span></li>
-					<li><span class="material-symbols-rounded"> play_arrow
+					<li><audio id="playAudio" data-status="pause" title="재생/일시정지 선택"></audio>
+					<span class="material-symbols-rounded" id="playBtn">					
+					play_arrow
 					</span></li>
-					<li><span class="material-symbols-rounded"> skip_next </span></li>
+					<li><span class="material-symbols-rounded" id="playNext"> skip_next </span></li>
 					<li><span class="material-symbols-rounded"> replay </span></li>
 
 				</ul>
@@ -161,12 +163,12 @@
 				<ul class="volume">
 					<li>
 						<div>
-							<span>00:00 /</span> <span>00:00 </span>
+							<span id="currentTimeText">0 : 00</span><span> / </span><span id="entireTimeText">0 : 00</span>
 						</div>
 					</li>
-					<li><a href=""><span class="material-symbols-rounded">
-								volume_mute </span></a></li>
-					<li><input type="range" /></li>
+					<li><a><span class="material-symbols-rounded" id="volumeMute">
+								volume_up </span></a></li>
+					<li><input type="range" id=volumeBar min=0 max=100 /></li>
 					<li><a id="openList"><span
 							class="material-symbols-rounded"> queue_music </span></a></li>
 				</ul>
@@ -190,7 +192,6 @@
 	</script>
 	<script>
 		// login page move action
-
 		$(".loginBtn").click(function() {
 			$("#loginPage").fadeIn(450).css("display", "block");
 			$("#test").css("display", "none");
@@ -198,21 +199,239 @@
 		});
 	</script>
 	<script>
-		// page move action
-		let today = document.getElementById("today");
-		let chart = document.getElementById("chart");
-
-		$(today).click(function() {
-			$("#main").fadeIn(450).css("display", "block");
-			$("#test").css("display", "none");
-			$("#loginPage").css("display", "none");
+		$("#chart").click(function() {
+			$("#iframe").attr("src", "test.jsp");
 		});
 
-		$(chart).click(function() {
-			$("#test").fadeIn(450).css("display", "block");
-			$("#main").css("display", "none");
-			$("#loginPage").css("display", "none");
+		$("#today").click(function() {
+			$("#iframe").attr("src", "main.jsp");
+		});
+
+		$("#mypageBtn").click(function() {
+			$("#iframe").attr("src", "/mypage.member");
+		});
+		$("#ticketing").click(function() {
+			$("#iframe").attr("src", "/list.perform");
 		});
 	</script>
+	<script>
+		// Music Controller 부분
+		
+    	// 목록페이지 전체 div값
+    	const musicListPage = document.querySelector(".hidden ul");
+    	musicListPage.setAttribute("id","변수확인용");
+    	// 현재 곡 번호 offset
+    	let playIndex = 0;
+    	// 플레이/일시정지 버튼
+    	const playBtn = document.querySelector("#playBtn");
+    	// 이전/다음 재생 버튼
+    	const playPrev = document.querySelector("#playPrev");
+    	const playNext = document.querySelector("#playNext");
+    	// 오디오를 재생할 a태그 및 초기화
+    	const playAudio = document.querySelector("#playAudio");    	
+    	// 좌측 하단에 뜨는 재생 정보
+    	const playInfo = document.querySelector("#playInfo");
+    	const musicImg = document.querySelector("#musicImg");
+    	
+    	// 컨트롤러 볼륨 바
+    	const volumeBar = document.querySelector("#volumeBar");
+    	playAudio.volume = volumeBar.value/100; // 처음 홈페이지에 들어왔을 때, 컨트롤러 볼륨 초기화.
+    	// 음소거 버튼
+    	const volumeMute = document.querySelector("#volumeMute");
+    	
+    	// 타이머 관련 변수 선언
+    	const gage = document.querySelector("#gage"); // 현재 시간바
+    	const gageBar = document.querySelector("#gageBar"); // 전체 시간바
+    	const currentTimeText = document.querySelector("#currentTimeText"); // 화면에 표시되는 재생시간대 타이머
+    	const entireTimeText = document.querySelector("#entireTimeText"); // 화면에 표시되는 전체 재생시간
+    	
+    	// 위시리스트 변수 선언
+    	const wish = document.querySelector("#wish");
+    	
+    	// music list array
+    	let musicList = new Array();
+    		<c:forEach items="${musicChartList }" var="i">
+    			musicList.push({
+    				musicSeq : "${i.musicSeq}",
+    				musicName : "${i.musicName}",
+    				musicArtist : "${i.musicArtist}",
+    				musicAlbum : "${i.musicAlbum}",
+    				musicImg : "${i.musicImg}",
+    				musicMp3 : "${i.musicMp3}",
+    				musicChart : "${i.musicChart}",
+    				musicLylics : "${i.musicLylics}"
+    			})
+    		</c:forEach>
+    	
+    	// 페이지 첫 화면 접속시, 받은 목록에서 기본 재생곡으로 맨 앞 곡을 선택해준다.
+    	playAudio.setAttribute("src","/audio/" + musicList[playIndex].musicMp3 + ".mp3");
+    	
+    	// 좌측 하단에 재생대기중인 음원의 정보를 표시한다.
+    	playInfo.firstChild.innerHTML = musicList[playIndex].musicName;
+    	playInfo.lastChild.innerHTML = musicList[playIndex].musicArtist;
+    	musicImg.src = `/image/music/\${musicList[playIndex].musicImg}.jpg`;
+    	
+    	// 각 함수 구현
+    	// 재생 함수
+    	function playMusic() {
+			playAudio.setAttribute("data-status", "play");    			
+			playAudio.play();
+			playBtn.innerText = "pause";
+    	};
+    	
+    	// 일시정지 함수
+    	function pauseMusic() {
+    		playAudio.setAttribute("data-status", "pause");    			
+			playAudio.pause();
+			playBtn.innerText = "play_arrow";
+    	}
+    	
+    	// 음악 정보 가져오기 함수
+    	function loadMusic(index) {
+        	playInfo.firstChild.innerText = musicList[index].musicName;
+        	playInfo.lastChild.innerText = musicList[index].musicArtist;
+        	musicImg.src = `/image/music/\${musicList[index].musicImg}.jpg`;
+        	playAudio.setAttribute("src","/audio/" + musicList[index].musicMp3 + ".mp3");        	
+    	}
+    	
+    	// 이전 곡 듣기 함수
+    	function prevMusic(){
+    		playIndex--;
+    		playIndex < 0 ? playIndex = musicList.length-1 : playIndex = playIndex;
+    		loadMusic(playIndex);
+    		playMusic();
+    	}
+    	
+    	// 다음 곡 듣기 버튼    	
+    	function nextMusic(){
+    		playIndex++;
+    		playIndex > musicList.length-1 ? playIndex = 0 : playIndex = playIndex;
+    		loadMusic(playIndex);    		
+    		playMusic();
+    	}
+    	    	
+    	// 컨트롤러 타이머 구현
+    	playAudio.addEventListener("timeupdate", e=>{
+    		const currentTime = e.target.currentTime;
+    		const entireTime = e.target.duration;
+    		let currentBar = (currentTime/entireTime)*100; // %값이므로 100을 곱해준다.
+    		gage.style.width = `\${currentBar}%`; // 재생시간 진행에 따라 타이머 바가 증가한다.
+    		    		
+    		let entireMin = Math.floor(entireTime/60); // 음악 전체시간 (분)
+    		let entireSec = Math.floor(entireTime%60); // 음악 전체시간 (초)
+    			
+    		if (entireSec < 10) {
+    			entireSec = `0\${entireSec}`;    				
+    		} // 10초 미만인 경우, 앞에 0을 붙인다.
+    			
+    		// 화면에 전체 시각 출력
+    		entireTimeText.innerText = `\${entireMin} : \${entireSec}`;
+    		
+    		// 컨트롤러가 음원을 받아온 직후
+    		playAudio.addEventListener("loadeddata", function() {
+    			let audioDuration = playAudio.duration;
+    			
+    			let loadEntireMin = Math.floor(audioDuration/60);
+        		let loadEntireSec = Math.floor(audioDuration%60);
+        		if (loadEntireSec < 10) {
+        			loadEntireSec = `0\${loadEntireSec}`;    			
+        		}
+        		
+        		//화면에 재생 진행 시각 출력
+        		entireTimeText.innerText = `\${loadEntireMin} : \${loadEntireSec}`;
+    			
+    		});
+    		
+    		let currentMin = Math.floor(currentTime/60);
+    		let currentSec = Math.floor(currentTime%60);
+    		if (currentSec < 10) {
+    			currentSec = `0\${currentSec}`;    			
+    		}
+    		
+    		//화면에 재생 진행 시각 출력
+    		currentTimeText.innerText = `\${currentMin} : \${currentSec}`;
+    	});
+    	
+    	// 타이머 클릭시, 해당 시점을 재생하는 이벤트 구현
+    	gageBar.addEventListener("click", function(e){
+    		let gageBarWidth = gageBar.clientWidth;
+    		let timerOffsetX = e.offsetX;
+    		
+    		playAudio.currentTime = (timerOffsetX / gageBarWidth) * playAudio.duration;
+    		playMusic();
+    	});
+    	
+    	// PlayList 목록 출력하기
+    	for (let i=0; i<musicList.length; i++) {
+    		// 각 목록값이 들어갈 li 태그
+    		let li = `<li class="playList" data-index="\${i}">
+    			<div>
+    				<div>\${musicList[i].musicName}</div>
+    				<div>\${musicList[i].musicArtist}</div>
+    				<div>\${musicList[i].musicAlbum}</div>
+    			</div>
+    			</li>
+    		`;
+    		musicListPage.insertAdjacentHTML("beforeend",li);
+    	}    	
+
+    	// 재생/일시정지 버튼 클릭시
+    	playBtn.addEventListener("click",function (){
+    		// 일시정지 상태에서 재생버튼을 클릭시 재생
+    		if (playAudio.getAttribute("data-status") == "pause") {
+    			playMusic();
+    			    			
+    		} else if (playAudio.getAttribute("data-status") == "play") {
+    			pauseMusic();
+    		}
+    	});
+    	
+    	// 이전 버튼 클릭시
+    	playPrev.addEventListener("click", function(){
+    		prevMusic();
+    	});
+    	
+    	// 다음 버튼 클릭시
+    	playNext.addEventListener("click", function(){
+    		nextMusic();
+    	});
+    	
+    	// 노래가 끝나고 다음곡 자동재생
+    	playAudio.addEventListener("ended", function(){
+    		nextMusic();
+    	})
+    	
+    	
+    	// 컨트롤러 볼륨 조절
+    	volumeBar.addEventListener("change", function(){
+    		playAudio.volume = this.value/100;
+    	});
+    	volumeBar.addEventListener("mousemove", function(){
+    		playAudio.volume = this.value/100;
+    	});
+    	
+    	// 음소거 버튼 클릭시 음소거
+    	volumeMute.addEventListener("click", function(){
+    		if (playAudio.muted) {
+    			playAudio.muted = false;
+    			volumeMute.innerText = "volume_up";
+    		} else {
+    			playAudio.muted = true;
+    			volumeMute.innerText = "volume_off";
+    		}
+    	});
+    	
+    	// 목록 클릭시, 해당 노래가 재생 - 미구현
+    	let playList = document.querySelectorAll(".playList");
+    	for (let i=0; i<playList.length; i++) {
+    			console.log(playList);
+    			playList[i].addEventListener("click", function(){
+    			playIndex = this.getAttribute("data-index");
+    			loadMusic(playIndex);
+    			playMusic();
+    		});
+    	}
+    	
+    </script>
 </body>
 </html>

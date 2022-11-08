@@ -158,7 +158,7 @@ hr {
 	margin-left:200px;
 	overflow: hidden;
 	width: 1200px;
-	height: 500px;
+	height: 550px;
 }
 
 .container>div[class^="contents"] {

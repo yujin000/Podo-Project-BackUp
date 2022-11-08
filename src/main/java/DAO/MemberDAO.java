@@ -6,10 +6,14 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.Timestamp;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.naming.Context;
 import javax.naming.InitialContext;
 import javax.sql.DataSource;
+
+import DTO.MemberDTO;
 
 public class MemberDAO {
 
@@ -86,23 +90,65 @@ public class MemberDAO {
 		}
 	}
 
-	
-	 public String getNick(String email) throws Exception{ 
-		 String sql =
-	 "select * from member where email = ?"; 
-	 try (Connection con =
-	 this.getConnection(); PreparedStatement pstat = con.prepareStatement(sql); )
-	 {
-	 pstat.setString(1, email); 
-	 
-	 try(ResultSet rs =pstat.executeQuery();){ 
-		 rs.next();
-		 return rs.getString("nickname"); 
-		 } } }
-	 
+	public String getName(String email) throws Exception {
+		String sql = "select * from member where email = ?";
+		try (Connection con = this.getConnection(); PreparedStatement pstat = con.prepareStatement(sql);) {
+			pstat.setString(1, email);
 
+			try (ResultSet rs = pstat.executeQuery();) {
+				rs.next();
+				return rs.getString("name");
+			}
+		}
+	}
+
+	public String getNick(String email) throws Exception {
+		String sql = "select * from member where email = ?";
+		try (Connection con = this.getConnection(); PreparedStatement pstat = con.prepareStatement(sql);) {
+			pstat.setString(1, email);
+
+			try (ResultSet rs = pstat.executeQuery();) {
+				rs.next();
+				return rs.getString("nickname");
+			}
+		}
+	}
+	
 	public boolean emailCheck() {
 		return false;
+	}
+	
+	// Mypage 닉네임, 멤버십, 구독기간 정보 불러오기
+	public MemberDTO getMypage(String email) throws Exception {
+		String sql = "select * from member where email = ?";
+		try (Connection con = this.getConnection(); PreparedStatement pstat = con.prepareStatement(sql);) {
+			pstat.setString(1, email);
+
+			try (ResultSet rs = pstat.executeQuery();) {
+				rs.next();
+				MemberDTO dto = new MemberDTO();
+				dto.setNickname(rs.getString("nickname"));
+				dto.setMembership(rs.getString("membership"));
+				dto.setScribedate(rs.getTimestamp("scribedate"));
+				dto.setPhone(rs.getString("phone"));
+				return dto;
+			}
+		}
+	}
+	
+	
+	public int update(MemberDTO dto) throws Exception {
+		String sql = "update member set pw=?, profileimg=?, nickname=?, phone=? where email=? ";
+		try (Connection con = this.getConnection(); PreparedStatement pstat = con.prepareStatement(sql);) {
+			pstat.setString(1, getSHA512(dto.getPw()));
+			pstat.setString(2, dto.getProfileimg());
+			pstat.setString(3, dto.getNickname());
+			pstat.setString(4, dto.getPhone());
+			pstat.setString(5, dto.getEamil());
+			int result = pstat.executeUpdate();
+			con.commit();
+			return result;
+		}
 	}
 
 }
