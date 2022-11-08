@@ -361,7 +361,7 @@
     	// PlayList 목록 출력하기
     	for (let i=0; i<musicList.length; i++) {
     		// 각 목록값이 들어갈 li 태그
-    		let li = `<li class="playList" data-index="musicList\${i}">
+    		let li = `<li class="playList" data-index="\${i}">
     			<div>
     				<div>\${musicList[i].musicName}</div>
     				<div>\${musicList[i].musicArtist}</div>
@@ -419,6 +419,15 @@
     	});
     	
     	// 목록 클릭시, 해당 노래가 재생 - 미구현
+    	let playList = document.querySelectorAll(".playList");
+    	for (let i=0; i<playList.length; i++) {
+    			console.log(playList);
+    			playList[i].addEventListener("click", function(){
+    			playIndex = this.getAttribute("data-index");
+    			loadMusic(playIndex);
+    			playMusic();
+    		});
+    	}
     	
     </script>
 </body>
