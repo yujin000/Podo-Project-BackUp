@@ -13,7 +13,7 @@ import DAO.MemberDAO;
 import DTO.MemberDTO;
 
 @WebServlet("*.member")
-public class MemberController extends HttpServlet {
+public class Member extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
@@ -21,7 +21,7 @@ public class MemberController extends HttpServlet {
 		request.setCharacterEncoding("utf8");
 		// post 방식으로 보낼때, 한글 깨지는 것을 방지
 
-		String uri = request.getRequestURI();
+		String uri = request.getRequestURI();   
 		System.out.println(uri);
 
 		try {
@@ -44,26 +44,28 @@ public class MemberController extends HttpServlet {
 				System.out.println(result);
 
 				if (result) {
-
-					String nickname = dao.getNick(email);
-					String name = dao.getName(email);
-					request.getSession().setAttribute("loginEmail", email);
-					request.getSession().setAttribute("loginName", name);
-					request.getSession().setAttribute("loginNickname", nickname);
-					request.getSession().setAttribute("loginPw", pw);
+					MemberDTO dto = dao.getMypage(email);	
+					
+					request.getSession().setAttribute("loginEmail", dto.getEamil());
+					request.getSession().setAttribute("loginName", dto.getName());
+					request.getSession().setAttribute("loginNickname", dto.getNickname());
+					request.getSession().setAttribute("loginPw", dto.getPw());
 					response.sendRedirect("/index.jsp");
-				} else {
-
-					response.setContentType("text/html; charset=UTF-8");
-					PrintWriter out = response.getWriter();
-					out.println("<script language='javascript'>");
-					out.println("alert('회원정보가 존재하지 않습니다.')");
-					out.println("</script>");
-					out.flush();
-					response.sendRedirect("error.jsp");
-
+				} 
+					 else {
+					  
+					 response.setContentType("text/html; charset=UTF-8"); 
+					 PrintWriter out = response.getWriter(); 
+					 out.println("<script language='javascript'>");
+					 out.println("alert('회원정보가 존재하지 않습니다.')");
+					 out.println("location.href='loginForm.jsp'"); 
+					 out.println("</script>");
+					 out.flush(); 
+					 
+					 }
 				}
-			} else if (uri.equals("/logout.member")) {
+				
+			 else if (uri.equals("/logout.member")) {
 				request.getSession().invalidate();
 				response.sendRedirect("index.jsp");
 			} else if (uri.equals("/mypage.member")) {
@@ -83,10 +85,25 @@ public class MemberController extends HttpServlet {
 				}else {
 					pw = request.getParameter("pw");
 				}
-				MemberDTO dto = new MemberDTO(email,pw,null,null,null,profileimg,nickname,null,phone,null,true);
+				MemberDTO dto = new MemberDTO(email,pw,null,null,null,profileimg,nickname,null,phone);
 				dao.update(dto);
 				System.out.println(dto);
 				request.getRequestDispatcher("/mypage.member").forward(request, response);
+			}
+			else if(uri.equals("/emailDupleCheck.member")) {
+				String email = request.getParameter("email");
+				MemberDAO dao = new MemberDAO();
+				boolean result = dao.emailDupleCheck(email);
+				PrintWriter out = response.getWriter();
+				out.print(result);
+			}
+			else if(uri.equals("/naverMailSend.member")) {
+				String email = request.getParameter("email");
+				MemberDAO dao = new MemberDAO();
+				String result = dao.naverMailSend(email);
+				request.setAttribute("key", result);
+				System.out.println(result);
+				request.getRequestDispatcher("/emailCheck.jsp").forward(request, response);
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
