@@ -7,32 +7,32 @@ public class MemberDTO {
 	private String eamil;
 	private String pw;
 	private String membership;
-	private Timestamp scribedate;
-	private Timestamp joindate;
-	private String profileimg;
+	private Timestamp scribeDate;
+	private Timestamp joinDate;
+	private String profileImg;
 	private String nickname;
 	private String name;
 	private String phone;
-	private String emailHash;
-	private boolean emailChecked;
 	
 	public MemberDTO() {
 	}
-	public MemberDTO(String eamil, String pw, String membership, Timestamp scribedate, Timestamp joindate,
-			String profileimg, String nickname, String name, String phone, String emailHash, boolean emailChecked) {
+	
+	public MemberDTO(String eamil, String pw, String membership, Timestamp scribeDate, Timestamp joinDate,
+			String profileImg, String nickname, String name, String phone) {
 		super();
 		this.eamil = eamil;
 		this.pw = pw;
 		this.membership = membership;
-		this.scribedate = scribedate;
-		this.joindate = joindate;
-		this.profileimg = profileimg;
+		this.scribeDate = scribeDate;
+		this.joinDate = joinDate;
+		this.profileImg = profileImg;
 		this.nickname = nickname;
 		this.name = name;
 		this.phone = phone;
-		this.emailHash = emailHash;
-		this.emailChecked = emailChecked;
 	}
+
+
+	
 	public String getEamil() {
 		return eamil;
 	}
@@ -51,23 +51,23 @@ public class MemberDTO {
 	public void setMembership(String membership) {
 		this.membership = membership;
 	}
-	public Timestamp getScribedate() {
-		return scribedate;
+	public Timestamp getScribeDate() {
+		return scribeDate;
 	}
-	public void setScribedate(Timestamp scribedate) {
-		this.scribedate = scribedate;
+	public void setScribeDate(Timestamp scribeDate) {
+		this.scribeDate = scribeDate;
 	}
-	public Timestamp getJoindate() {
-		return joindate;
+	public Timestamp getJoinDate() {
+		return joinDate;
 	}
-	public void setJoindate(Timestamp joindate) {
-		this.joindate = joindate;
+	public void setJoinDate(Timestamp joinDate) {
+		this.joinDate = joinDate;
 	}
-	public String getProfileimg() {
-		return profileimg;
+	public String getProfileImg() {
+		return profileImg;
 	}
-	public void setProfileimg(String profileimg) {
-		this.profileimg = profileimg;
+	public void setProfileImg(String profileImg) {
+		this.profileImg = profileImg;
 	}
 	public String getNickname() {
 		return nickname;
@@ -87,18 +87,8 @@ public class MemberDTO {
 	public void setPhone(String phone) {
 		this.phone = phone;
 	}
-	public String getEmailHash() {
-		return emailHash;
-	}
-	public void setEmailHash(String emailHash) {
-		this.emailHash = emailHash;
-	}
-	public boolean isEmailChecked() {
-		return emailChecked;
-	}
-	public void setEmailChecked(boolean emailChecked) {
-		this.emailChecked = emailChecked;
-	}
+
+
 
 	
 	
