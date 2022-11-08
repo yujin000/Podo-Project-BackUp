@@ -8,23 +8,9 @@ public class MusicDTO {
 	String musicImg;
 	String musicMp3;
 	int musicChart;
-	String musicgenre;
+	String musicGenre;
 	String musicLylics;
 	
-	public MusicDTO() {}
-	public MusicDTO(int musicSeq, String musicName, String musicArtist, String musicAlbum, String musicImg,
-			String musicMp3, int musicChart, String musicgenre, String musicLylics) {
-		super();
-		this.musicSeq = musicSeq;
-		this.musicName = musicName;
-		this.musicArtist = musicArtist;
-		this.musicAlbum = musicAlbum;
-		this.musicImg = musicImg;
-		this.musicMp3 = musicMp3;
-		this.musicChart = musicChart;
-		this.musicgenre = musicgenre;
-		this.musicLylics = musicLylics;
-	}
 	public int getMusicSeq() {
 		return musicSeq;
 	}
@@ -67,16 +53,34 @@ public class MusicDTO {
 	public void setMusicChart(int musicChart) {
 		this.musicChart = musicChart;
 	}
-	public String getMusicgenre() {
-		return musicgenre;
+	public String getMusicGenre() {
+		return musicGenre;
 	}
-	public void setMusicgenre(String musicgenre) {
-		this.musicgenre = musicgenre;
+	public void setMusicGenre(String musicGenre) {
+		this.musicGenre = musicGenre;
 	}
 	public String getMusicLylics() {
 		return musicLylics;
 	}
 	public void setMusicLylics(String musicLylics) {
 		this.musicLylics = musicLylics;
-	}	
+	}
+	public MusicDTO(int musicSeq, String musicName, String musicArtist, String musicAlbum, String musicImg,
+			String musicMp3, int musicChart, String musicGenre, String musicLylics) {
+		super();
+		this.musicSeq = musicSeq;
+		this.musicName = musicName;
+		this.musicArtist = musicArtist;
+		this.musicAlbum = musicAlbum;
+		this.musicImg = musicImg;
+		this.musicMp3 = musicMp3;
+		this.musicChart = musicChart;
+		this.musicGenre = musicGenre;
+		this.musicLylics = musicLylics;
+	}
+	public MusicDTO() {
+		super();
+	}
+	
+	
 }

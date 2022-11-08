@@ -41,10 +41,9 @@ public class MemberController extends HttpServlet {
 				String pw = request.getParameter("pw");
 
 				boolean result = dao.login(email, pw);
-				System.out.println(result);
 
 				if (result) {
-
+					
 					String nickname = dao.getNick(email);
 					String name = dao.getName(email);
 					request.getSession().setAttribute("loginEmail", email);
@@ -85,7 +84,6 @@ public class MemberController extends HttpServlet {
 				}
 				MemberDTO dto = new MemberDTO(email,pw,null,null,null,profileimg,nickname,null,phone,null,true);
 				dao.update(dto);
-				System.out.println(dto);
 				request.getRequestDispatcher("/mypage.member").forward(request, response);
 			}
 		} catch (Exception e) {
