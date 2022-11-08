@@ -151,7 +151,7 @@ uri="http://java.sun.com/jsp/jstl/core"%>
 
     <div class="wrap">
       <h1 id="logo">
-        <a href="/chart.music"
+        <a href="../home.jsp"
           ><img src="../image/web/logo-f-5.png" alt=""
         /></a>
       </h1>

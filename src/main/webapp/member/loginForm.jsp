@@ -114,7 +114,7 @@
   <body>
     <div class="wrap">
       <h1 id="logo">
-        <a href="../index.jsp"><img src="../image/web/logo-f-5.png" alt="" /></a>
+        <a href="../home.jsp"><img src="../image/web/logo-f-5.png" alt="" /></a>
       </h1>
       <form action="/login.member" method="post">
         <input type="text" name="email" placeholder="email" />
