@@ -143,10 +143,10 @@ contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
   <body>
     <div class="wrap">
       <h1>이메일 인증</h1>
-      <p>이메일</p>
       <% String email = request.getParameter("email"); 
       %>
       <form action="">
+      <p>이메일</p>
         <input
           type="text"
           name="email"
@@ -166,6 +166,7 @@ contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
         <input type="text" name="password" id="number" placeholder="인증번호" />
         <button type="button" id="numberCheck">확인</button>
         <p id="msg"></p>
+        <input type="text" value="" id="sendBoolean">
       </form>
     </div>
 
@@ -174,7 +175,7 @@ contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
     window.onload = function () {
         var emailRegex =
             /^([\w-]+(?:\.[\w-]+)*)@((?:[\w-]+\.)*\w[\w-]{0,66})\.([a-z]{2,6}(?:\.[a-z]{2})?)$/;
-          var number = "0102";
+          var resultValue = false;
           $("#email").keyup(function () {
             let result = emailRegex.test($(this).val());
             if ($(this).val() == "") {
@@ -232,9 +233,15 @@ contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
                 .text("인증번호가 틀립니다.");
               $("#number").val("");
             } else {
-              let email = $("#email").val();
               alert("인증번호 일치!");
-              window.close();
+              $("#sendBoolean").val("true")
+ 				
+           		window.close(
+           				"inputForm.jsp?receiver=" + $("#sendBoolean").val(),
+           	            "",
+           	            ""
+           		)
+      
             }
           });
     }

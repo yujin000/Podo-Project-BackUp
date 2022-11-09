@@ -89,7 +89,6 @@ public class Member extends HttpServlet {
 				}
 				MemberDTO dto = new MemberDTO(email,pw,null,null,null,profileimg,nickname,null,phone);
 				dao.update(dto);
-				System.out.println(dto);
 				request.getRequestDispatcher("/mypage.member").forward(request, response);
 			}
 			else if(uri.equals("/emailDupleCheck.member")) {
@@ -107,6 +106,19 @@ public class Member extends HttpServlet {
 				Gson g = new Gson();
 		          String jsonString = g.toJson(result);
 		          response.getWriter().append(jsonString);
+			}
+			else if(uri.equals("/eamilResult.member")) {
+				Boolean emailResult = Boolean.parseBoolean(request.getParameter("resultValue"));
+				System.out.println(emailResult);
+				MemberDAO dao = new MemberDAO();
+				boolean result = dao.emailResult(emailResult);
+				String val = "true";
+				
+				System.out.println(result);
+				request.setAttribute("emailResult", result);
+				request.setAttribute("resultValue", val);
+				request.getRequestDispatcher("/member/inputForm.jsp").forward(request, response);
+				
 			}
 		} catch (Exception e) {
 			e.printStackTrace();

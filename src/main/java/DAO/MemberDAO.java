@@ -198,7 +198,11 @@ public class MemberDAO {
 		return authCode;
 	}
 
-	
+	public boolean emailResult(boolean emailResult) throws Exception{
+		boolean result = emailResult;
+		System.out.println(emailResult);
+		return result;
+	}
 
 	public boolean login(String email, String pw) throws Exception {
 		String sql = "select * from member where email=? and pw=?";

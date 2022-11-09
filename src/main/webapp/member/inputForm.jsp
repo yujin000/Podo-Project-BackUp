@@ -81,7 +81,7 @@ uri="http://java.sun.com/jsp/jstl/core"%>
         background-color: transparent;
       }
 
-      button#emailCheck {
+      button#emailSendBtn {
         width: 170px;
         height: 50px;
         background: var(--main-color);
@@ -96,6 +96,17 @@ uri="http://java.sun.com/jsp/jstl/core"%>
         width: 350px;
         height: 50px;
         margin-top: 10px;
+        background: var(--main-color);
+        border-radius: 4px;
+        border: none;
+        color: var(--font-color);
+        font-weight: bolder;
+        font-size: 1rem;
+      }
+
+      form button#numberCheck {
+        width: 350px;
+        height: 50px;
         background: var(--main-color);
         border-radius: 4px;
         border: none;
@@ -146,16 +157,11 @@ uri="http://java.sun.com/jsp/jstl/core"%>
     ></script>
   </head>
   <body>
-    <% String email = request.getParameter("email"); if(email == null){ /* email
-    = ""; */ } %>
-
     <div class="wrap">
       <h1 id="logo">
-        <a href="../home.jsp"
-          ><img src="../image/web/logo-f-5.png" alt=""
-        /></a>
+        <a href="../home.jsp"><img src="../image/web/logo-f-5.png" alt="" /></a>
       </h1>
-      <form action="/signup.member" method="post">
+      <form action="" method="post">
         <p>이메일</p>
         <input
           type="text"
@@ -163,12 +169,14 @@ uri="http://java.sun.com/jsp/jstl/core"%>
           id="email"
           placeholder="exam@gamil.com"
         />
-        <p id="result"></p>
-        <button type="button" id="DupleCheck" onclick="emailDupleCheck()">
-          중복확인
-        </button>
-        <button id="emailCheck" type="button">이메일 인증</button>
         <p id="msg"></p>
+        <button type="button" id="dupleCheck">중복확인</button>
+        <button id="emailSendBtn" type="button">인증번호 전송</button>
+        <p>인증번호 입력</p>
+        <input type="hidden" value="" id="message" name="message" />
+        <input type="text" name="password" id="number" placeholder="인증번호" />
+        <p id="msg"></p>
+        <button type="button" id="numberCheck">확인</button>
         <p>비밀번호</p>
         <input type="text" name="pw" id="pw" placeholder="최소 7자~최대20자" />
         <p id="msg"></p>
@@ -184,218 +192,276 @@ uri="http://java.sun.com/jsp/jstl/core"%>
         <p>전화번호</p>
         <input type="text" name="phone" id="phone" placeholder="01012345678" />
         <p id="msg"></p>
-        <button type="submit" id="inputSubmit">회원가입</button>
+        <button type="button" id="inputSubmit">회원가입</button>
       </form>
     </div>
 
     <footer>
       <p>개인정보처리방침 | PODO 이용약관 | 고객센터 | 결제/환불안내 | 상담</p>
       <br />
-      <img src="image/web/logo-footer.png" alt="" style="width: 60px" />
+      <img src="../image/web/logo-footer.png" alt="" style="width: 60px" />
       <p>© PODO Music Corp.</p>
     </footer>
     <!-- 유효성 검사 -->
     <script>
-      var emailRegex =
-        /^([\w-]+(?:\.[\w-]+)*)@((?:[\w-]+\.)*\w[\w-]{0,66})\.([a-z]{2,6}(?:\.[a-z]{2})?)$/;
-      var pwRegex = /^([A-Za-z\d\!|\@|\#|\$|\%]){7,20}$/;
-      var nameRegex = /^[가-힣]{1,5}$/;
-      var nicknameRegex = /^[가-힣a-zA-z\d]{1,10}$/;
-      var phoneRegex = /(\d{3}).*(\d{3}).*(\d{4})/;
-      
-      var result = false;
+      window.onload = function () {
+        var emailRegex =
+          /^([\w-]+(?:\.[\w-]+)*)@((?:[\w-]+\.)*\w[\w-]{0,66})\.([a-z]{2,6}(?:\.[a-z]{2})?)$/;
+        var pwRegex = /^([A-Za-z\d\!|\@|\#|\$|\%]){7,20}$/;
+        var nameRegex = /^[가-힣]{1,5}$/;
+        var nicknameRegex = /^[가-힣a-zA-z\d]{1,10}$/;
+        var phoneRegex = /(\d{3}).*(\d{3}).*(\d{4})/;
 
-      $("#emailCheck").click(function () {
-        if (
-          $("#result").text() == "사용가능한 ID입니다. " &&
-          $("#email").val() != "" && result == true
-        ) {
-          window.open(
-            "emailCheck.jsp?email=" + $("#email").val(),
-            "이메일인증",
-            "width=700px,height=700px"
-          );
-        } else {
-          $("#result")
-            .html("중복확인 을 먼저 수행해주세요!")
-            .css("color", "red");
-        }
-      });
+        var dupleResult = false;
+        var numberResult = false;
 
-      function emailDupleCheck() {
-        if ($("#email").val() == "") {
-          $("#result").html("작성란이 비어있습니다. ").css("color", "red");
-        } else {
-          $.ajax({
-            url: "/emailDupleCheck.member",
-            type: "post",
-            data: {
-              email: $("#email").val(),
-              // "email" : $("#Join_email").val()  -> 가독성이 더 좋음.
-            },
-            success: function (res) {
-              // res = response , req = request
-              // rs.next() -> true : 중복이 있다. / false : 중복이 없다.
-              // 기본적으로 out객체로 응답받는 데이터는 text/html 구조임.
-              // boolean false 로 받아온 객체는 String "false"로 받아짐.
-              if (res == "true") {
-                $("#email").val("");
-                $("#result").html("중복된 ID입니다. ").css("color", "red");
-              } else {
-                $("#result")
-                  .html("사용가능한 ID입니다. ")
-                  .css("color", "white");
-//                 $("#email").prop("readonly", true);
+        $("#inputSubmit").click(function () {
+          if (
+            numberResult == true &&
+            dupleResult == true &&
+            $('input[type="text"]').val() != ""
+          ) {
+            alert("회원가입을 축하드립니다.");
+            location.href = "/signup.member?email";
+          } else if (numberResult == false) {
+            alert("이메일 인증을 완료해주세요!");
+          } else if (dupleResult == false) {
+            alert("중복확인을 완료해주세요!");
+          } else {
+            alert("작성란에 빈 값이 존재합니다");
+          }
+        });
 
-					result = true;
-					
-					$("#email").keyup(function () {
-						 $("#result")
-		                  .html("값이 바뀌었습니다. 중복확인을 다시 진행주세요!")
-		                  .css("color", "red");
-						result = false;
-					})
-					
-              }
-            },
-            error: function () {
-              alert("요청실패");
-            },
-          });
-        }
-      }
+        $("#dupleCheck").click(function () {
+          if ($("#email").val() == "") {
+            $("#email")
+              .next("#msg")
+              .html("작성란이 비어있습니다. ")
+              .css("color", "red");
+          } else {
+            $.ajax({
+              url: "/emailDupleCheck.member",
+              type: "post",
+              data: {
+                email: $("#email").val(),
+              },
+              success: function (res) {
+                if (res == "true") {
+                  $("#email").val("");
+                  $("#result").html("중복된 ID입니다. ").css("color", "red");
+                } else {
+                  $("#email")
+                    .next("#msg")
+                    .html("사용가능한 ID입니다.")
+                    .css("color", "white");
+                  dupleResult = true;
+                  $("#email").keyup(function () {
+                    $("#email")
+                      .next("#msg")
+                      .html("값이 바뀌었습니다. 중복확인을 다시 진행주세요!")
+                      .css("color", "red");
 
-      $("#email").keyup(function () {
-        let result = emailRegex.test($(this).val());
-        if ($(this).val() == "") {
-          $(this).val("");
-        } else if (!result) {
-          $(this)
-            .next("#msg")
-            .css("color", "#888")
-            .text("올바른 이메일 형식을 입력해주세요 ");
-        } else {
-          $(this).next("#msg").text("");
-        }
-      });
+                    dupleResult = false;
+                  });
+                }
+              },
+              error: function () {
+                alert("요청실패");
+              },
+            });
+          }
+        });
+        $("#emailSendBtn").click(function () {
+          if (
+            $("#email").next("#msg").text() == "사용가능한 ID입니다." &&
+            $("#email").val() != "" &&
+            dupleResult == true
+          ) {
+            $("#email")
+              .next("#msg")
+              .css("color", "white")
+              .text("인증번호 전송중 ..");
+            $("#emailSendBtn").text("재전송");
+            $.ajax({
+              url: "/MailSender.member",
+              type: "post",
+              data: {
+                email: $("#email").val(),
+              },
+              success: function (res) {
+                if (res == null) {
+                  alert("요청 실패");
+                } else {
+                  $("#email")
+                    .next("#msg")
+                    .css("color", "white")
+                    .text("인증번호 전송완료!");
+                }
+              },
+            }).done(function (resp) {
+              let result = JSON.parse(resp);
+              $("#message").val(result);
+            });
+          } else {
+            $("#email")
+              .next("#msg")
+              .css("color", "red")
+              .text("중복확인 을 먼저 수행해주세요!");
+          }
+        });
 
-      $("#email").change(function () {
-        let result = emailRegex.test($(this).val());
-        if (!result) {
-          $(this).val("");
-        } else {
-        }
-      });
+        $("#numberCheck").click(function () {
+          let result = $("#number").val() == $("#message").val();
+          if ($("#number").val() == "") {
+            $("#number").val("");
+          } else if (!result) {
+            $("#number")
+              .next("#msg")
+              .css("color", "red")
+              .text("인증번호가 틀립니다.");
+            $("#number").val("");
+          } else {
+            $("#number")
+              .next("#msg")
+              .css("color", "white")
+              .text("인증번호가 일치합니다.");
 
-      $("#pw").keyup(function () {
-        let result = pwRegex.test($(this).val());
-        if ($(this).val() == "") {
-          $(this).val("");
-        } else if (!result) {
-          $(this)
-            .next("#msg")
-            .css("color", "#888")
-            .text("대문자, 소문자, 숫자, !@#$% 만 사용 가능합니다. ");
-        } else {
-          $(this).next("#msg").text("");
-        }
-      });
+            numberResult = true;
+            $("#number").prop("readonly", true);
+          }
+        });
 
-      $("#pw").change(function () {
-        let result = pwRegex.test($(this).val());
-        if (!result) {
-          $(this).val("");
-        } else {
-        }
-      });
+        $("#email").keyup(function () {
+          let result = emailRegex.test($(this).val());
+          if ($(this).val() == "") {
+            $(this).val("");
+          } else if (!result) {
+            $(this)
+              .next("#msg")
+              .css("color", "#888")
+              .text("올바른 이메일 형식을 입력해주세요 ");
+          } else {
+          }
+        });
 
-      $("#pwCheck").keyup(function () {
-        let result = $(this).val() === $("#pw").val();
-        if ($(this).val() == "") {
-          $(this).val("");
-        } else if (!result) {
-          $(this)
-            .next("#msg")
-            .css("color", "#888")
-            .text("비밀번호가 같지 않습니다!");
-        } else {
-          $(this).next("#msg").text("");
-        }
-      });
+        $("#email").change(function () {
+          let result = emailRegex.test($(this).val());
+          if (!result) {
+            $(this).val("");
+          } else {
+          }
+        });
 
-      $("#pwCheck").change(function () {
-        let result = $(this).val() === $("#pw").val();
-        if (!result) {
-          $(this).val("");
-        } else {
-        }
-      });
+        $("#pw").keyup(function () {
+          let result = pwRegex.test($(this).val());
+          if ($(this).val() == "") {
+            $(this).val("");
+          } else if (!result) {
+            $(this)
+              .next("#msg")
+              .css("color", "#888")
+              .text("대문자, 소문자, 숫자, !@#$% 만 사용 가능합니다. ");
+          } else {
+            $(this).next("#msg").text("");
+          }
+        });
 
-      $("#nickname").keyup(function () {
-        let result = nicknameRegex.test($(this).val());
-        if ($(this).val() == "") {
-          $(this).val("");
-        } else if (!result) {
-          $(this)
-            .next("#msg")
-            .css("color", "#888")
-            .text("한글,영문,숫자 10자 만 사용 가능 합니다 ");
-        } else {
-          $(this).next("#msg").text("");
-        }
-      });
+        $("#pw").change(function () {
+          let result = pwRegex.test($(this).val());
+          if (!result) {
+            $(this).val("");
+          } else {
+          }
+        });
 
-      $("#nickname").change(function () {
-        let result = nicknameRegex.test($(this).val());
-        if (!result) {
-          $(this).val("");
-        } else {
-        }
-      });
+        $("#pwCheck").keyup(function () {
+          let result = $(this).val() === $("#pw").val();
+          if ($(this).val() == "") {
+            $(this).val("");
+          } else if (!result) {
+            $(this)
+              .next("#msg")
+              .css("color", "#888")
+              .text("비밀번호가 같지 않습니다!");
+          } else {
+            $(this).next("#msg").text("");
+          }
+        });
 
-      $("#name").keyup(function () {
-        let result = nameRegex.test($(this).val());
-        if ($(this).val() == "") {
-          $(this).val("");
-        } else if (!result) {
-          $(this)
-            .next("#msg")
-            .css("color", "#888")
-            .text("한글 5자 만 사용 가능 합니다 ");
-        } else {
-          $(this).next("#msg").text("");
-        }
-      });
+        $("#pwCheck").change(function () {
+          let result = $(this).val() === $("#pw").val();
+          if (!result) {
+            $(this).val("");
+          } else {
+          }
+        });
 
-      $("#name").change(function () {
-        let result = nameRegex.test($(this).val());
-        if (!result) {
-          $(this).val("");
-        } else {
-        }
-      });
+        $("#nickname").keyup(function () {
+          let result = nicknameRegex.test($(this).val());
+          if ($(this).val() == "") {
+            $(this).val("");
+          } else if (!result) {
+            $(this)
+              .next("#msg")
+              .css("color", "#888")
+              .text("한글,영문,숫자 10자 만 사용 가능 합니다 ");
+          } else {
+            $(this).next("#msg").text("");
+          }
+        });
 
-      $("#phone").keyup(function () {
-        let result = phoneRegex.test($(this).val());
-        if ($(this).val() == "") {
-          $(this).val("");
-        } else if (!result) {
-          $(this)
-            .next("#msg")
-            .css("color", "#888")
-            .text("올바른 전화번호 형식을 입력해주세요");
-        } else {
-          $(this).next("#msg").text("");
-        }
-      });
+        $("#nickname").change(function () {
+          let result = nicknameRegex.test($(this).val());
+          if (!result) {
+            $(this).val("");
+          } else {
+          }
+        });
 
-      $("#phone").change(function () {
-        let result = phoneRegex.test($(this).val());
-        if (!result) {
-          $(this).val("");
-        } else {
-        }
-      });
+        $("#name").keyup(function () {
+          let result = nameRegex.test($(this).val());
+          if ($(this).val() == "") {
+            $(this).val("");
+          } else if (!result) {
+            $(this)
+              .next("#msg")
+              .css("color", "#888")
+              .text("한글 5자 만 사용 가능 합니다 ");
+          } else {
+            $(this).next("#msg").text("");
+          }
+        });
+
+        $("#name").change(function () {
+          let result = nameRegex.test($(this).val());
+          if (!result) {
+            $(this).val("");
+          } else {
+          }
+        });
+
+        $("#phone").keyup(function () {
+          let result = phoneRegex.test($(this).val());
+          if ($(this).val() == "") {
+            $(this).val("");
+          } else if (!result) {
+            $(this)
+              .next("#msg")
+              .css("color", "#888")
+              .text("올바른 전화번호 형식을 입력해주세요");
+          } else {
+            $(this).next("#msg").text("");
+          }
+        });
+
+        $("#phone").change(function () {
+          let result = phoneRegex.test($(this).val());
+          if (!result) {
+            $(this).val("");
+          } else {
+          }
+        });
+      };
     </script>
   </body>
 </html>
