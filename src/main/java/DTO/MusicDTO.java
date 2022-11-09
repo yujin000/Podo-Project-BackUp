@@ -1,15 +1,15 @@
 package DTO;
 
 public class MusicDTO {
-	int musicSeq;
-	String musicName;
-	String musicArtist;
-	String musicAlbum;
-	String musicImg;
-	String musicMp3;
-	int musicChart;
-	String musicGenre;
-	String musicLylics;
+	private int musicSeq;
+	private String musicName;
+	private String musicArtist;
+	private String musicAlbum;
+	private String musicImg;
+	private String musicMp3;
+	private int musicChart;
+	private String musicGenre;
+	private String musicLylics;
 	
 	public int getMusicSeq() {
 		return musicSeq;
