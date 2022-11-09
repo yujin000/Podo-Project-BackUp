@@ -161,7 +161,7 @@ uri="http://java.sun.com/jsp/jstl/core"%>
       <h1 id="logo">
         <a href="../home.jsp"><img src="../image/web/logo-f-5.png" alt="" /></a>
       </h1>
-      <form action="" method="post">
+      <form method="post" id="signUpForm" onsubmit="return false;">
         <p>이메일</p>
         <input
           type="text"
@@ -214,21 +214,33 @@ uri="http://java.sun.com/jsp/jstl/core"%>
 
         var dupleResult = false;
         var numberResult = false;
-
+        
+        var email = document.getElementById("email").value;
+        var pw = document.getElementById("pw").value;
+        var nickname = document.getElementById("nickname").value;
+        var name = document.getElementById("name").value;
+        var phone = document.getElementById("phone").value;
+        
         $("#inputSubmit").click(function () {
+        	
           if (
             numberResult == true &&
             dupleResult == true &&
             $('input[type="text"]').val() != ""
           ) {
+        	  signUpForm.action = "/signup.member";
+        	  signUpForm.method = "post"
+        		  signUpForm.submit();
             alert("회원가입을 축하드립니다.");
-            location.href = "/signup.member?email";
           } else if (numberResult == false) {
             alert("이메일 인증을 완료해주세요!");
+        	  return false;
           } else if (dupleResult == false) {
             alert("중복확인을 완료해주세요!");
+        	  return false;
           } else {
             alert("작성란에 빈 값이 존재합니다");
+            return false;
           }
         });
 
