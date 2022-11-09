@@ -77,51 +77,8 @@ public class MemberDAO {
 		}
 
 	}
-	
-	public String getUserEmail(String email) throws Exception {
-		 String sql =
-				 "select email from member where email = ?"; 
-				 try (Connection con =
-				 this.getConnection(); PreparedStatement pstat = con.prepareStatement(sql); )
-				 {
-				 pstat.setString(1, email); 
-				 
-				 try(ResultSet rs =pstat.executeQuery();){ 
-					 rs.next();
-					 return rs.getString("email"); 
-					 } } 
-    }
-	
-	   public boolean getUserEmailChecked(String email) throws Exception { 
-		   //사용자 이메일 검증, 검증 없이 사용하지 못하게 할것이기 때문에 이 함수가 필요
-		   String sql =
-					 "select emailchecked from member where email = ?"; 
-					 try (Connection con =
-					 this.getConnection(); PreparedStatement pstat = con.prepareStatement(sql); )
-					 {
-					 pstat.setString(1, email); 
-					 
-					ResultSet rs =pstat.executeQuery();
-						 rs.next();
-						 return rs.getBoolean(1); 
-						  } 
-          }
-	   
-	   public int setUserEmailChecked(String email) throws Exception{ //이메일 인증을 완료해주는 함수
-           String sql = "UPDATE member SET emailchecked = true WHERE email = ?";    
-           try (Connection con =
-					 this.getConnection(); PreparedStatement pstat = con.prepareStatement(sql); )
-					 {          
-               pstat.setString(1, email);
-               int result = pstat.executeUpdate();
-               
-               con.commit();
-               con.close();
-				 return result;
-           
-           }
       
-          }          
+              
 	public boolean emailDupleCheck(String email) throws Exception{
 		String sql = "select * from member where email =?";
 		
@@ -198,10 +155,39 @@ public class MemberDAO {
 		return authCode;
 	}
 
-	public boolean emailResult(boolean emailResult) throws Exception{
-		boolean result = emailResult;
-		System.out.println(emailResult);
-		return result;
+	
+	public void signupMail(String email, String nickname) throws Exception{
+		
+		Properties props = new Properties();
+		props.put("mail.smtp.host", "smtp.gmail.com");
+		props.put("mail.smtp.port", "587");
+		props.put("mail.smtp.auth", "true");
+		props.put("mail.smtp.starttls.enable", "true");
+		props.put("mail.smtp.ssl.trust", "smtp.gmail.com");
+		props.put("mail.smtp.ssl.protocols", "TLSv1.2");
+		
+		Session session = Session.getInstance(props, new Authenticator() {
+			@Override
+			protected PasswordAuthentication getPasswordAuthentication() {
+				return new PasswordAuthentication("dnfqh98@gmail.com", "edzofkldspdupiko");
+			}
+		});
+		String receiver = email; // 메일 받을 주소
+		String title = "podo music 가입을 축하드립니다!";
+		String content = "<h2 style='color:blue'>"+nickname+"님 회원가입을 축하합니다!"+"</h2>";
+		Message message = new MimeMessage(session);
+		try {
+			message.setFrom(new InternetAddress("dnfqh98@gmail.com", "관리자", "utf-8"));
+			message.addRecipient(Message.RecipientType.TO, new InternetAddress(receiver));
+			message.setSubject(title);
+			message.setContent(content, "text/html; charset=utf-8");
+
+			Transport.send(message);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+
+		
 	}
 
 	public boolean login(String email, String pw) throws Exception {
