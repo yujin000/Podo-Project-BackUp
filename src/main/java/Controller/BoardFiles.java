@@ -39,7 +39,6 @@ public class BoardFiles extends HttpServlet {
 					sos.flush();
 				}
 			}
-			// ↑클라이언트가 선택한 파일을 RAM으로 가져옴
 		} catch (Exception e) {
 			e.printStackTrace();
 			response.sendRedirect("error.jsp");

@@ -59,8 +59,13 @@ public class QnaBoard extends HttpServlet {
 				String qnaCategory = multi.getParameter("qnaCategory");
 				int qnaSeq = dao.getSeq();
 				int result = dao.insert(new QnaBoardDTO(qnaSeq, qnaWriter, qnaTitle, qnaContents, null, qnaCategory));
-				BoardFilesDAO.getInstance().insert(new BoardFilesDTO(0, oriName, sysName, qnaSeq , null));	
-				response.sendRedirect("/list.board?cpage=1");
+				if(oriName==null) {
+					response.sendRedirect("/list.board?cpage=1");
+				}else {
+					BoardFilesDAO.getInstance().insert(new BoardFilesDTO(0, oriName, sysName, qnaSeq , null));	
+					response.sendRedirect("/list.board?cpage=1");
+				}
+				
 			} else if (uri.equals("/detail.board")) {
 				QnaBoardDAO dao = QnaBoardDAO.getInstance();
 				int qnaSeq = Integer.parseInt(request.getParameter("qnaSeq"));
@@ -68,9 +73,7 @@ public class QnaBoard extends HttpServlet {
 				
 				BoardFilesDAO fileDao = BoardFilesDAO.getInstance();
 				BoardFilesDTO dto = fileDao.select(qnaSeq);
-				
-				System.out.println(fileDao);
-				System.out.println(qnaSeq);
+
 				request.setAttribute("fileDto",dto);
 				request.setAttribute("dtoDetail", dtoDetail);
 				request.getSession().setAttribute("qnaDetailSeq", qnaSeq);

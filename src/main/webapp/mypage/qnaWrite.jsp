@@ -134,7 +134,7 @@
 					<div id="category">
 						문의유형
 						<select id="categoryList">
-							<option>가입/결제/인증</option>
+							<option selected>가입/결제/인증</option>
 							<option>위시리스트/플레이리스트</option>
 							<option>정보 수정/음원/가사등록</option>
 							<option>장애/오류</option>
@@ -167,12 +167,13 @@
     })
     
     $(function() {
+    	let selectedText = $(":selected").text();
+    	$('#qnaCategory').val(selectedText);
+    	
             // 콤보박스가 변경될 때
             $('#categoryList').change(function () {
                 // 드롭다운리스트에서 선택된 값을 텍스트박스에 출력
                 let selectedText = $(":selected").text();
-                	// $("#lstFavorites option:selected").text();
-                    // $("option:selected").text();
                 $('#qnaCategory').val(selectedText);
             });
 

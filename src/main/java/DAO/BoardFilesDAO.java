@@ -43,20 +43,21 @@ public class BoardFilesDAO {
 		}
 	}
 	
-	public BoardFilesDTO select(int parentSeq ) throws Exception {
+	public BoardFilesDTO select(int parentSeq) throws Exception {
 		String sql = "select * from boardFiles where parentSeq = ?";
 		try (Connection con = this.getConnection(); PreparedStatement pstat = con.prepareStatement(sql);) {
 			pstat.setInt(1, parentSeq);
-
+			BoardFilesDTO dto =null;
 			try (ResultSet rs = pstat.executeQuery();) {
-				rs.next();
-				BoardFilesDTO dto = new BoardFilesDTO();
+				if(rs.next()) {
+				dto = new BoardFilesDTO();
 				dto.setFilesSeq(rs.getInt("filesSeq"));
 				dto.setOriName(rs.getString("oriName"));			
 				dto.setSysName(rs.getString("sysName"));
 				dto.setParentSeq(rs.getInt("parentSeq"));
-				return dto;
+				}
 			}
+			return dto;
 		}
 	}
 }
