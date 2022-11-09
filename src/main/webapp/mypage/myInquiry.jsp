@@ -39,9 +39,9 @@
             border: none;
         }
 
-         div { 
+         /* div { 
              border: 1px solid #fff; 
-         }
+         } */
 
         body {
             width: 100vw;
@@ -53,14 +53,14 @@
         .container {
             padding: 0 75px;
             height: 100%;
-			background-color: bisque; 
+         background-color: bisque; 
             overflow-y: scroll;
         }
-		
-		.main {
+      
+      .main {
             height: 100%;
             margin-top: 8vh;
-		    background-color: lightgray;
+          	/* background-color: lightgray; */
         }
         
         .titleText {
@@ -68,7 +68,7 @@
             font-weight: var(--font-weight);
             line-height: var(--line-height);
             margin-bottom: 2vw;
-			background-color: #00000d50;
+         	/* background-color: #00000d50; */
         }
         
         /*category css*/
@@ -81,29 +81,29 @@
         width:100%;
         height: 59px;
         font-size: 28px;
-        background-color:#00000d50;
+        /* background-color:#00000d50; */
         text-aline:center;
         }
         #home{
         float:left;
-   		width:4vw;
-   		line-height: var(--line-height);
+         width:4vw;
+         line-height: var(--line-height);
         color: var(--font-color);
-   		background-color: #00000d50;
+         /* background-color: #00000d50; */
         }
         #notice{
         float:left;
         width:10vw;
         line-height: var(--line-height);
         color: var(--font-color);
-        background-color: #00000d80;
+        /* background-color: #00000d80; */
         }
         #myInquiry{
         float:left;
         width:15vw;
         line-height: var(--line-height);
         color: var(--font-color);
-        background-color: #00000d90;
+        /* background-color: #00000d90; */
         }
         
         
@@ -111,6 +111,7 @@
         .division {
             width: 100%;
             font-size: 20px;
+            height: 35px;
             font-weight: var(--font-weight);
             line-height: var(--line-height);
         }
@@ -120,31 +121,52 @@
             border-width: 0 0 1px;
             border-bottom: var(--boder-silver);
         }
-
+		#qnaCategory{
+			float: left;
+            width: 30%;
+            border-width: 0 0 1px;
+            line-height: var(--line-height);
+		}
         #history {
             float: left;
             width: 55%;
             border-width: 0 0 1px;
             border-bottom: var(--boder-silver);
         }
-
-        #date {
+		#qnaTitle{
+			float: left;
+            width: 55%;
+            border-width: 0 0 1px;
+            line-height: var(--line-height);
+		}
+        #date{
             float: left;
             width: 15%;
             border-width: 0 0 1px;
             border-bottom: var(--boder-silver);
         }
-        
+        #qnaWriteDate{
+        	float: left;
+            width: 15%;
+            border-width: 0 0 1px;
+            line-height: var(--line-height);
+        }
         
         /*list css*/
         .list{
-		margin-top: 2vh;
-		width: 100%;
-		height: 55vh;
-		overflow-y: auto;
-		border: 1px solid black;
+      margin-top: 2vh;
+      width: 100%;
+      height: 48vh;
+      border: 1px solid black;
         }
         
+        .writelist{
+        width: 100%;
+		height: 46px;
+		font-size: 20px;
+		margin-top:2vh;
+		margin-bottom:2vh;
+        }
 
         #writeBtn {
             margin-top: 2vh;
@@ -189,27 +211,27 @@
                     <div id="history">문의 내역</div>
                     <div id="date">문의일</div>
                 </div>
-                
-            <div class="list">
-            	<c:choose>
-				<c:when test="${not empty qna}">
-					<!-- choose랑 when 문법 사이에는 아무것도 들어가면 안됨 들어가면 오류남 -->
-					<c:forEach var="q" items="${qna }">
-						<div class="writelist">
-							<div id="qnaCategory"> ${q.qnaCategory }</div>
-							<div id="title">
-								<a href="/detail.board?seq=${q.qnaSeq }">${q.qnaTitle }</a>
+
+			<div class="list">
+				<c:choose>
+					<c:when test="${not empty qna}">
+						<c:forEach var="q" items="${qna }">
+							<div class="writelist">
+								<div id="qnaCategory">${q.qnaCategory }</div>
+								<div id="qnaTitle">
+									<a href="/detail.board?qnaSeq=${q.qnaSeq }">${q.qnaTitle }</a>
+								</div>
+								<div id="qnaWriteDate">${q.qnaWriteDate }</div>
 							</div>
-							<div id="qnaWriteDate">${q.qnaWriteDate }</div>
-						</div>
-					</c:forEach>
-				</c:when>
-				<c:otherwise>
-			문의가 없습니다
-			</c:otherwise>
-			</c:choose>
-            </div>
-            <div>${navi }</div>
+						</c:forEach>
+					</c:when>
+					<c:otherwise>
+         문의가 없습니다
+         </c:otherwise>
+				</c:choose>
+			</div>
+
+			<div>${navi }</div>
             <div style="float:right;">
               <button type="button" id="writeBtn">문의하기</button>
             </div>
@@ -218,7 +240,7 @@
     
     <script>
     document.getElementById("writeBtn").addEventListener("click", function() {
-    	location.href = "/mypage/qnaWrite.jsp"
+       location.href = "/mypage/qnaWrite.jsp"
     })
     </script>
 </body>

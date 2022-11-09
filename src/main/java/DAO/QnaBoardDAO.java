@@ -62,43 +62,30 @@ public class QnaBoardDAO {
 		}
 		
 		public String getPageNavi(int currentPage) throws Exception {
-			int recoredTotalCount = this.getRecordCount(); // board 테이블에 총 144개의 글이 있다고 가정
-			int recordCountPerpage = 5; // 게시판 한 페이지당 10개의 글 씩 보여주기로 설정
-			int naviCountPerPage = 5; // 게시판 하단의 Page Navigator가 한번에 몇개씩 보여질지 설정
+			int recoredTotalCount = this.getRecordCount(); 
+			int recordCountPerpage = 5; 
+			int naviCountPerPage = 5; 
 
 			int pageTotalCount = 0;
 			if (recoredTotalCount % recordCountPerpage > 0) {
 				pageTotalCount = (recoredTotalCount / recordCountPerpage) + 1;
-				// 게시글의 개수 / 한 페이지당 보여줄 게시글 +1 = 전체 페이지의 개수
 			} else {
 				pageTotalCount = recoredTotalCount / recordCountPerpage;
 			}
-
-			// (recordTotalCount / recordCountPerPage) + 1; 게시글의 개수 / 한 페이지당 보여줄 게시글 +1 = 전체
-			// 페이지의 개수(하지만, 나머지가 0이 아닐 때는 +1되어선 안됨)
-			// (recordTotalCount+9)/recordCountPerPage;는 오류가 있음
-			// (recordTotalCount+(recordCountPerPage-1))/recordCountPerPage; 로도 사용할 수 있음
 
 			if (currentPage < 1) {
 				currentPage = 1;
 			} else if (currentPage > pageTotalCount) {
 				currentPage = pageTotalCount;
 			}
-			// ↑ get방식을 통해 음수값을 받았을 때 대처하기 위함
-			// 7 : 1~10;
-			// 15 : 11~20;
-			// 28 : 21~30페이지를 보게 되어야 함
 
 			int startNavi = (currentPage - 1) / naviCountPerPage * naviCountPerPage + 1;
-			// currentPage / 10 >> 결과값 : 1(int형이기 때문), int형이기 때문에 연산할 때 잘 해라
-			// currentPage-1 / 10 * 10 + 1 로 사용하게 되면 10의 배수일 때 위 공식은 성립하지 않음 >> -1 해주면 됨
+
 			int endNavi = startNavi + naviCountPerPage - 1;
 
 			if (endNavi > pageTotalCount) {
 				endNavi = pageTotalCount;
-			} // endpage가 15를 넘어가면 그냥 15가 돼라
-
-			// ↓ 네비게이터 화살표
+			} 
 			boolean needPrev = true;
 			boolean needNext = true;
 
@@ -108,7 +95,6 @@ public class QnaBoardDAO {
 			if (endNavi == pageTotalCount) {
 				needNext = false;
 			}
-			// ↑ 네비게이션 화살표가 필요없을 때
 
 			StringBuilder sb = new StringBuilder();
 
@@ -126,13 +112,12 @@ public class QnaBoardDAO {
 			return sb.toString();
 		}
 		
-		public List<QnaBoardDTO> selectByRange(int start, int end) throws Exception {
-			String sql = "select * from (select qnaBoard.*, row_number() over(order by qnaSeq desc) rn from qnaBoard) where rn between ? and ?";
-			// sql문 실행순서 기억해야함
-			// table.* = 이 테이블의 모든거와
+		public List<QnaBoardDTO> selectByRange(String qnaWriter, int start, int end) throws Exception {
+			String sql = "select * from (select qnaBoard.*, row_number() over(order by qnaSeq desc) rn from qnaBoard) where qnaWriter=? and rn between ? and ?";
 			try (Connection con = this.getConnection(); PreparedStatement pstat = con.prepareStatement(sql);) {
-				pstat.setInt(1, start);
-				pstat.setInt(2, end);
+				pstat.setString(1, qnaWriter);
+				pstat.setInt(2, start);
+				pstat.setInt(3, end);
 				try (ResultSet rs = pstat.executeQuery();) {
 					List<QnaBoardDTO> qna = new ArrayList<>();
 					while (rs.next()) {
@@ -146,6 +131,22 @@ public class QnaBoardDAO {
 						qna.add(dto);
 					}
 					return qna;
+				}
+			}
+		}
+		
+		public QnaBoardDTO isSelect(int qnaSeq) throws Exception {
+			String sql = "select * from qnaBoard where qnaSeq=?";
+			try (Connection con = this.getConnection(); PreparedStatement pstat = con.prepareStatement(sql);) {
+				pstat.setInt(1, qnaSeq);
+				try (ResultSet rs = pstat.executeQuery();) {
+					rs.next();
+					QnaBoardDTO dtoDetail = new QnaBoardDTO();
+					dtoDetail.setQnaTitle(rs.getString("qnaTitle"));
+					dtoDetail.setQnaContents(rs.getString("qnaContents"));
+					dtoDetail.setQnaWriteDate(rs.getTimestamp("qnaWriteDate"));
+					dtoDetail.setQnaCategory(rs.getString("qnaCategory"));
+					return dtoDetail;
 				}
 			}
 		}

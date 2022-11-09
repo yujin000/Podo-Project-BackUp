@@ -126,34 +126,28 @@
 
 <body>
     <div class="container">
-    <form action="/insert.board" id="insertForm" method="post" enctype="multipart/form-data">
+    <form action="/insert.board" id="insertForm" method="post">
         <div class="qna">
             <div class="titleText">1:1 문의</div>
             <div class="qnalist">
             
 					<div id="category">
 						문의유형
-						<select id="categoryList">
-							<option>가입/결제/인증</option>
-							<option>위시리스트/플레이리스트</option>
-							<option>정보 수정/음원/가사등록</option>
-							<option>장애/오류</option>
-							<option>기타</option>
-						</select>
-						<input type="hidden" id="qnaCategory" name="qnaCategory">
+						<input type="text" id="qnaCategory" name="qnaCategory" value="${dtoDetail.qnaCategory }" disabled>
 
 					</div>
 					<div id="title">제목
-                        <input type="text" placeholder="제목을 입력하세요" name="qnaTitle" id="qnaTitle">
+                        ${dtoDetail.qnaTitle }
                     </div>
                     <div id="contents">문의 내용
-                        <textarea placeholder="내용을 입력해주세요" name="qnaContents" 
-                        cols="120" rows="5" id="qnaContents"></textarea>
+                        ${dtoDetail.qnaContents }            
                     </div>
             </div>
+            
             <div>
-            <input type="file" name="file">
+                 첨부파일 : <a href="/download.file?sysname=${fileDto.sysName }&oriname=${fileDto.oriName}">${fileDto.oriName }</a> 
             </div>
+            
             <div style="float:right;">
               <button type="button" id="writeBtn">작성완료</button>
             </div>
@@ -165,18 +159,6 @@
     document.getElementById("writeBtn").addEventListener("click", function() {
     	document.getElementById("insertForm").submit();
     })
-    
-    $(function() {
-            // 콤보박스가 변경될 때
-            $('#categoryList').change(function () {
-                // 드롭다운리스트에서 선택된 값을 텍스트박스에 출력
-                let selectedText = $(":selected").text();
-                	// $("#lstFavorites option:selected").text();
-                    // $("option:selected").text();
-                $('#qnaCategory').val(selectedText);
-            });
-
-        });
     </script>
 </body>
 </html>

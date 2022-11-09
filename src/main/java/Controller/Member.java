@@ -31,6 +31,7 @@ public class Member extends HttpServlet {
 			if (uri.equals("/signup.member")) {
 				String email = request.getParameter("email");
 				String pw = request.getParameter("pw");
+				System.out.println(pw);
 				String nickname = request.getParameter("nickname");
 				String name = request.getParameter("name");
 				String phone = request.getParameter("phone");
@@ -81,13 +82,13 @@ public class Member extends HttpServlet {
 
 				int maxSize = 1024 * 1024 * 10;
 				String savePath = request.getServletContext().getRealPath("/files");
+				System.out.println(savePath);
 				File fileSavePath = new File(savePath);
 				if (!fileSavePath.exists()) {
 					fileSavePath.mkdir();
 				}
 				MultipartRequest multi = new MultipartRequest(request,savePath,maxSize,"UTF8",new DefaultFileRenamePolicy());	
 				
-				String oriName = multi.getOriginalFileName("file");
 				String sysName = multi.getFilesystemName("file");
 				
 				String email=request.getSession().getAttribute("loginEmail").toString();
