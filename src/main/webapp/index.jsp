@@ -425,7 +425,7 @@
     		}
     	});
     	
-    	// 목록 클릭시, 해당 노래가 재생 - 미구현
+    	// 목록 클릭시, 해당 노래가 재생
     	let playList = document.querySelectorAll(".playList");
     	for (let i=0; i<playList.length; i++) {
     			console.log(playList);

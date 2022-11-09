@@ -26,7 +26,6 @@ public class Member extends HttpServlet {
 		// post 방식으로 보낼때, 한글 깨지는 것을 방지
 
 		String uri = request.getRequestURI();   
-		System.out.println(uri);
 
 		try {
 			if (uri.equals("/signup.member")) {
@@ -45,7 +44,6 @@ public class Member extends HttpServlet {
 				String pw = request.getParameter("pw");
 
 				boolean result = dao.login(email, pw);
-				System.out.println(result);
 
 				if (result) {
 					MemberDTO dto = dao.getMypage(email);	

@@ -216,7 +216,6 @@ public class MemberDAO {
 			pstat.setString(1, email);
 			pstat.setString(2, getSHA512(pw));
 
-			System.out.println(email + pw);
 			ResultSet rs = pstat.executeQuery();
 			return rs.next();
 

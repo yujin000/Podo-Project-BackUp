@@ -12,14 +12,17 @@ public class PerformanceDTO {
 	private Timestamp startDate;
 	private Timestamp endDate;
 	private String performPrice;
-	private String rating; 
+	private String rating;
+	private String genre;
+	private String performPoster;
 	
 	public PerformanceDTO() {
 
 	}
-
+	
 	public PerformanceDTO(int performSeq, int theterSeq, String theaterName, String performTitle, String poster,
-			int showtime, Timestamp startDate, Timestamp endDate, String performPrice, String rating) {
+			int showtime, Timestamp startDate, Timestamp endDate, String performPrice, String rating, String genre,
+			String performPoster) {
 		super();
 		this.performSeq = performSeq;
 		this.theterSeq = theterSeq;
@@ -31,6 +34,8 @@ public class PerformanceDTO {
 		this.endDate = endDate;
 		this.performPrice = performPrice;
 		this.rating = rating;
+		this.genre = genre;
+		this.performPoster = performPoster;
 	}
 
 	public int getPerformSeq() {
@@ -112,4 +117,21 @@ public class PerformanceDTO {
 	public void setRating(String rating) {
 		this.rating = rating;
 	}
+
+	public String getGenre() {
+		return genre;
+	}
+
+	public void setGenre(String genre) {
+		this.genre = genre;
+	}
+
+	public String getPerformPoster() {
+		return performPoster;
+	}
+
+	public void setPerformPoster(String performPoster) {
+		this.performPoster = performPoster;
+	}
+
 }

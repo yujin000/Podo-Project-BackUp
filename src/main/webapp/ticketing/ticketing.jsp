@@ -28,14 +28,14 @@
 	font-style: normal;
 }
 
- :root {
-      --font-color: #fff;
-      --background-color: #000;
-      --sub-background-color: #222;
-      --boder-silver: 1px solid silver;
-      --main-color: #3e065f;
-      --point-color: #ff00d7;
-    }
+:root { -
+	-font-color: #fff; -
+	-background-color: #000; -
+	-sub-background-color: #222; -
+	-boder-silver: 1px solid silver; -
+	-main-color: #3e065f; -
+	-point-color: #ff00d7;
+}
 
 * {
 	color: white;
@@ -144,11 +144,17 @@ a {
 	border: 1px solid rgba(255, 0, 215);
 	/* color: #ff00d7; */
 }
+
+.container {
+	padding: 0 40px;
+	width: 100%;
+	height: 100%;
+}
 </style>
 </head>
 
 <body>
-	<div class="wrap">
+	<div class="container">
 		<div class="header">
 			<h1 class="logoName">
 				<p style="color: white;">
@@ -161,7 +167,8 @@ a {
 			<div class="contentsTitle">
 
 				<div class="imgTop">
-					<a href="" style="color: var(- -font-color);"> <img
+					<a href="/performDetail.perform?performSeq=${perform[3].performSeq }"
+						style="color: var(- -font-color);"> <img
 						src="image/perform/${perform[3].poster }"
 						style="width: 308px; height: 420px;">
 					</a>
@@ -170,7 +177,8 @@ a {
 				</div>
 
 				<div class="imgTop">
-					<a href="" style="color: var(- -font-color);"> <img
+					<a href="/performDetail.perform?performSeq=${perform[11].performSeq }"
+						style="color: var(- -font-color);"> <img
 						src="image/perform/${perform[11].poster }"
 						style="width: 308px; height: 420px;">
 					</a>
@@ -178,7 +186,8 @@ a {
 					<p style="color: lightgray;">진짜배기 록밴드 동이혼의 폭발!</p>
 				</div>
 				<div class="imgTop">
-					<a href="" style="color: var(- -font-color);"> <img
+					<a href="/performDetail.perform?performSeq=${perform[13].performSeq }"
+						style="color: var(- -font-color);"> <img
 						src="image/perform/${perform[13].poster }"
 						style="width: 308px; height: 420px;">
 					</a>
@@ -186,7 +195,8 @@ a {
 					<p style="color: lightgray;">새로운 의미를 담은 곡들 대방출!</p>
 				</div>
 				<div class="imgTop">
-					<a href="" style="color: var(- -font-color);"> <img
+					<a href="/performDetail.perform?performSeq=${perform[12].performSeq }"
+						style="color: var(- -font-color);"> <img
 						src="image/perform/${perform[12].poster }"
 						style="width: 308px; height: 420px;">
 					</a>
@@ -194,7 +204,8 @@ a {
 					<p style="color: lightgray;">PODO티켓 단독 NFT 증정</p>
 				</div>
 				<div class="imgTop">
-					<a href="" style="color: var(- -font-color);"> <img
+					<a href="/performDetail.perform?performSeq=${perform[1].performSeq }"
+						style="color: var(- -font-color);"> <img
 						src="image/perform/${perform[1].poster }"
 						style="width: 308px; height: 420px;">
 					</a>
@@ -215,19 +226,17 @@ a {
 				<div class="perform1">
 					<div class="perform">
 						<ul class="listimg">
-							<li><a href="" style="color: var(- -font-color);">
-							<img src="image/perform/${p.poster }"
-								style="width: 130px; height: 180px;" class="imgset">
-								</a></li>
+							<li><a href="/performDetail.perform?performSeq=${p.performSeq }" style="color: var(- -font-color);"> 
+							<img src="image/perform/${p.poster }" style="width: 130px; height: 180px;" class="imgset">
+							</a></li>
 
 							<li
 								style="margin: 20px 0 0 0; max-width: 820px; min-width: 820px;">
-								<div class="saleText">판매중</div> <br> <a href="" style="color: var(- -font-color);">${p.performTitle}
-							</a>
-							</li>
-							<li class="flexli" style="width: 350px;"><fmt:formatDate
-									value="${p.startDate }" pattern="yyyy-MM-dd" /> - <fmt:formatDate
-									value="${p.endDate }" pattern="yyyy-MM-dd" /></li>
+								<div class="saleText">판매중</div> <br> 
+								<a href="/performDetail.perform?performSeq=${p.performSeq }" style="color: var(- -font-color);">${p.performTitle} </a></li>
+							<li class="flexli" style="width: 350px;">
+							<fmt:formatDate value="${p.startDate }" pattern="yyyy-MM-dd" /> - 
+							<fmt:formatDate value="${p.endDate }" pattern="yyyy-MM-dd" /></li>
 							<li class="flexli">${p.theaterName}</li>
 						</ul>
 					</div>
