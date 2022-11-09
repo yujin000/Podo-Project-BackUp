@@ -13,11 +13,6 @@
     <link rel="stylesheet" href="/src/css/style.css" />
     <script src="https://code.jquery.com/jquery-3.6.1.min.js"
         integrity="sha256-o88AwQnZB+VDvE9tvIXrMQaPlFFSUTR+nldQm1LuPXQ=" crossorigin="anonymous"></script>
-<!--     <link href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-lite.min.css" rel="stylesheet"> -->
-<!--     <script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-lite.min.js"></script>     -->
-	<script src="/src/summerNote/summernote-lite.js"></script>
-	<script src="/src/summerNote/summernote-ko-KR.js"></script>
-	<link rel="stylesheet" href="/src/summerNote/summernote-lite.css" />
     <style>
         /* 관리자페이지 세팅 초기값 */
         @media(max-width:1500px) {
@@ -81,9 +76,10 @@
         .tog {
             top: 130px;
         }
-        .note-editable{
-        	background-color : write;
-        }
+        #noticeContents{
+        	width:1300px;
+        	height:500px;
+        }        
     </style>
 </head>
 
@@ -105,7 +101,7 @@
                 </ul>
                 <div id="GNB">
                     <ul>
-                        <li><a href="/admin/adminNotice/adminNotice.jsp">공지사항 관리</a></li>
+                        <li><a href="/list.notice">공지사항 관리</a></li>
                         <li><a id="chart" href="/allList.music?nickname=${loginNickname }">음원 관리</a></li>
                         <li><a id="chart">공연 관리</a></li>
                         <li><a href="#">회원 관리</a></li>
@@ -137,7 +133,7 @@
             <input type="hidden" id="noticeCategory" name="noticeCategory" value="서비스소식">
             </div>
             <div>
-            	<textarea id="noticeContents" name="noticeContents" class="summernote" name="editordata"></textarea>
+            	<textarea id="noticeContents" name="noticeContents" name="editordata"></textarea>
             </div>
             <div id="writeConfirm">글 작성하기</div>
             </form>
@@ -152,14 +148,6 @@
             $(this).next(".tog").fadeToggle();
         });
     </script>
-    
-    <script>
-    	//서머노트 API 적용 
-		$('.summernote').summernote({
-			height: 450,
-	  		lang: "ko-KR"
-		});
-	</script>
 	
 	<script>
 		// 글 작성 이벤트
