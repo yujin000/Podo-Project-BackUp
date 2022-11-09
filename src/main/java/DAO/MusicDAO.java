@@ -58,7 +58,7 @@ public class MusicDAO {
 		try (Connection con = this.getConnection();
 				PreparedStatement pstat = con.prepareStatement(sql);) {
 			ResultSet rs = pstat.executeQuery();
-			List <MusicDTO> musicChartList = new ArrayList<>();
+			List <MusicDTO> musicAllList = new ArrayList<>();
 			while (rs.next()) {
 				MusicDTO dto = new MusicDTO();
 				dto.setMusicSeq(rs.getInt("musicSeq"));
@@ -70,10 +70,10 @@ public class MusicDAO {
 				dto.setMusicChart(rs.getInt("musicChart"));
 				dto.setMusicGenre(rs.getString("musicGenre"));
 				dto.setMusicLylics(rs.getString("musicLylics"));
-				musicChartList.add(dto);
+				musicAllList.add(dto);
 			}
 
-			return musicChartList;
+			return musicAllList;
 		}
 	}
 	

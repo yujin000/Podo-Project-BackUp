@@ -260,7 +260,7 @@ hr {
 			</ul>
 			<div id="GNB">
 				<ul>
-					<li><a href="/admin/adminNotice/adminNotice.jsp">공지사항 관리</a></li>
+					<li><a href="/list.notice">공지사항 관리</a></li>
 					<li><a id="chart" href="/allList.music?nickname=${loginNickname }">음원 관리</a></li>
 					<li><a id="chart">공연 관리</a></li>
 					<li><a href="#">회원 관리</a></li>
