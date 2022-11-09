@@ -25,7 +25,7 @@ public class PayGoods extends HttpServlet {
 				PayGoodsDAO dao = PayGoodsDAO.getInstance();
 				List<PayGoodsDTO> goodsList = dao.selectAll();
 				request.setAttribute("goodsList", goodsList);
-				request.getRequestDispatcher("/admin/adminMemberShip.jsp").forward(request, response);
+				request.getRequestDispatcher("/admin/adminMembership.jsp").forward(request, response);
 			}
 		}catch(Exception e) {
 			e.printStackTrace();

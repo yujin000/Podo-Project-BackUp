@@ -1,6 +1,7 @@
 package Controller;
 
 import java.io.IOException;
+import java.util.List;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -30,6 +31,11 @@ public class NoticeBoard extends HttpServlet {
 				NoticeBoardDTO dto = new NoticeBoardDTO(0, noticeWriter, noticeTitle, noticeContents, null, noticeCategory);
 				int result = dao.writeNoticeBoard(dto);
 				response.sendRedirect("/admin/adminNotice/adminNotice.jsp");
+			} else if (uri.equals("/list.notice")) {
+				NoticeBoardDAO dao = NoticeBoardDAO.getInstance();
+				List<NoticeBoardDTO> noticeBoardList = dao.selectNotice();
+				request.setAttribute("noticeBoardList", noticeBoardList);
+				request.getRequestDispatcher("/admin/adminNotice/adminNotice.jsp").forward(request, response);
 			}
 		} catch (Exception e) {
 			
