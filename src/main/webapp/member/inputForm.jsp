@@ -214,19 +214,19 @@ uri="http://java.sun.com/jsp/jstl/core"%>
 
         var dupleResult = false;
         var numberResult = false;
-        
-        var email = document.getElementById("email").value;
-        var pw = document.getElementById("pw").value;
-        var nickname = document.getElementById("nickname").value;
-        var name = document.getElementById("name").value;
-        var phone = document.getElementById("phone").value;
+  
         
         $("#inputSubmit").click(function () {
         	
           if (
             numberResult == true &&
             dupleResult == true &&
-            $('input[type="text"]').val() != ""
+            $("#email").val() != "" &&
+            $("#pw").val() != "" &&
+            $("#nickname").val() != "" &&
+            $("#name").val() != "" &&
+            $("#phone").val() != "" 
+            
           ) {
         	  signUpForm.action = "/signup.member";
         	  signUpForm.method = "post"
@@ -353,6 +353,10 @@ uri="http://java.sun.com/jsp/jstl/core"%>
               .css("color", "#888")
               .text("올바른 이메일 형식을 입력해주세요 ");
           } else {
+        	  $(this)
+              .next("#msg")
+              .css("color", "#888")
+              .text("");
           }
         });
 
