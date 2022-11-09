@@ -19,7 +19,6 @@ public class PayGoods extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		request.setCharacterEncoding("utf8");
 		String uri = request.getRequestURI();
-		
 		try {
 			if(uri.equals("/goodsList.goods")) {
 				PayGoodsDAO dao = PayGoodsDAO.getInstance();

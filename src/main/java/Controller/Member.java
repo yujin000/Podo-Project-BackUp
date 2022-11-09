@@ -38,7 +38,6 @@ public class Member extends HttpServlet {
 				String pw = request.getParameter("pw");
 
 				boolean result = dao.login(email, pw);
-				System.out.println(result);
 
 				if (result) {
 					MemberDTO dto = dao.getMypage(email);	
