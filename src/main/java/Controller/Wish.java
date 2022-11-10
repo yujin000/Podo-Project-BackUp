@@ -8,6 +8,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.google.gson.Gson;
+
 import DAO.WishDAO;
 import DTO.WishDTO;
 
@@ -26,6 +28,13 @@ public class Wish extends HttpServlet {
 				WishDTO dto = new WishDTO(WishEmail, parentMusicSeq);
 				
 				int result = WishDAO.getInstance().addWish(dto);
+			} else if (uri.equals("/isExist.wish")) {
+				String WishEmail = request.getSession().getAttribute("loginEmail").toString();
+				String parentMusicSeq = request.getParameter("musicSeq"); // 위시리스트 음원 번호
+				WishDTO dto = new WishDTO(WishEmail, parentMusicSeq);
+				boolean isExist = WishDAO.getInstance().isExist(dto);
+				System.out.println(String.valueOf(isExist));
+				response.getWriter().append(String.valueOf(isExist));
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
