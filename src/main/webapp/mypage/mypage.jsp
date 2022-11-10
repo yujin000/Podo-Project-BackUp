@@ -255,7 +255,7 @@
             
             <!-- 프로필 이미지(이미지 출력 구현중) -->
             <div class="profileDiv">
-                <img src="/image/web/profile-default.jpg" class="profile">
+                <img src="/profile/${DTO.profileImg }" class="profile">
             </div>
             
             <!-- 닉네임 -->

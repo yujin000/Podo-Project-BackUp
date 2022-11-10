@@ -81,7 +81,7 @@ public class Member extends HttpServlet {
 			} else if(uri.equals("/informUpdate.member")) {
 
 				int maxSize = 1024 * 1024 * 10;
-				String savePath = request.getServletContext().getRealPath("/files");
+				String savePath = request.getServletContext().getRealPath("/profile");
 				System.out.println(savePath);
 				File fileSavePath = new File(savePath);
 				if (!fileSavePath.exists()) {
@@ -93,7 +93,6 @@ public class Member extends HttpServlet {
 				
 				String email=request.getSession().getAttribute("loginEmail").toString();
 				String pw =multi.getParameter("pw");
-				String profileimg =multi.getParameter("profileimg");
 				String nickname = multi.getParameter("nickname");
 				String phone = multi.getParameter("phone");
 				MemberDAO dao = MemberDAO.getInstance();

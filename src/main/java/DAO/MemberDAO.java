@@ -59,7 +59,7 @@ public class MemberDAO {
 	}
 
 	public int signup(String email, String pw, String nickname, String name, String phone) throws Exception {
-		String sql = "insert into member values(?,?,'basic',null,sysdate,null,?,?,?)";
+		String sql = "insert into member values(?,?,'basic',null,sysdate,'profile-default.jpg',?,?,?)";
 
 		try (Connection con = this.getConnection(); PreparedStatement pstat = con.prepareStatement(sql);) {
 

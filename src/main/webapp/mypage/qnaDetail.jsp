@@ -148,6 +148,9 @@
                  첨부파일 : <a href="/download.file?sysname=${fileDto.sysName }&oriname=${fileDto.oriName}">${fileDto.oriName }</a> 
             </div>
             
+            <div>
+            댓글 :
+            </div>
             <div style="float:right;">
               <button type="button" id="writeBtn">작성완료</button>
             </div>
