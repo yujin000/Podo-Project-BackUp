@@ -305,8 +305,8 @@ div {
 				$("#goodsInfo").after(warning);
 			}else{
 				warning.remove();
-				/*let target = $(this).attr("price");
-				location.href = "/payment.payGoods?price=" + target;*/
+				let target = $(this).attr("price");
+				location.href = "/payment.goods?price=" + target;
 			}
 		})
 

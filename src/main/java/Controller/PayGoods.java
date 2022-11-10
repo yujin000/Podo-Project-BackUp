@@ -60,6 +60,11 @@ public class PayGoods extends HttpServlet {
 				request.setAttribute("eventGoods", eventGoods);
 				request.setAttribute("promotionGoods", promotionGoods);
 				request.getRequestDispatcher("/membership/membershipIndex.jsp").forward(request, response);
+			}else if(uri.equals("/payment.goods")) {
+				System.out.println("도착");
+				int payPrice = Integer.parseInt(request.getParameter("price"));
+				System.out.println(payPrice);
+				response.sendRedirect("/index.goods");
 			}
 		}catch(Exception e) {
 			e.printStackTrace();
