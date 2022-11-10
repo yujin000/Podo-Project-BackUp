@@ -173,7 +173,7 @@
 
         #navUl>li:first-child,
         .listWrap>div:first-child {
-            margin-left: 4%;
+            margin-left: 2%;
         }
 
         .navLi {
