@@ -323,8 +323,8 @@
     				musicSeq : musicList[playIndex].musicSeq	
     			}
     		}).done(function(resp){    			
-    			console.log(resp);
-    			if (resp=="true") {
+    			let result = resp;
+    			if (result=="true") {
     				$("#wish").html("Heart Plus");
     			} else {
     				$("#wish").html("favorite");
