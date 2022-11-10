@@ -257,29 +257,33 @@ uri="http://java.sun.com/jsp/jstl/core"%>
               data: {
                 email: $("#email").val(),
               },
-              success: function (res) {
-                if (res == "true") {
-                  $("#email").val("");
-                  $("#result").html("중복된 ID입니다. ").css("color", "red");
-                } else {
-                  $("#email")
-                    .next("#msg")
-                    .html("사용가능한 ID입니다.")
-                    .css("color", "white");
-                  dupleResult = true;
-                  $("#email").keyup(function () {
-                    $("#email")
-                      .next("#msg")
-                      .html("값이 바뀌었습니다. 중복확인을 다시 진행주세요!")
-                      .css("color", "red");
-
-                    dupleResult = false;
-                  });
-                }
-              },
+              
               error: function () {
                 alert("요청실패");
-              },
+              }
+            }).done(function(resp){
+            	let result = resp;
+            	alert(result);
+            	 if (result =="true") { // 아이디가 존재함, 사용x
+            		 $("#email").val("");
+                     $("#email").next("#msg").html("중복된 ID입니다. ").css("color", "red");
+                 } else { // 아이디 존재x, 사용o
+                     $("#email")
+                     .next("#msg")
+                     .html("사용가능한 ID입니다.")
+                     .css("color", "white");
+                   
+                   dupleResult = true;
+                   $("#email").keyup(function () {
+                     $("#email")
+                       .next("#msg")
+                       .html("값이 바뀌었습니다. 중복확인을 다시 진행주세요!")
+                       .css("color", "red");
+
+                     dupleResult = false;
+                   });
+                 }
+            	
             });
           }
         });

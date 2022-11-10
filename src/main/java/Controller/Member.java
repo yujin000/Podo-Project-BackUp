@@ -24,7 +24,7 @@ public class Member extends HttpServlet {
 		// post 방식으로 보낼때, 한글 깨지는 것을 방지
 
 		String uri = request.getRequestURI();   
-
+		System.out.println(uri);
 		try {
 			if (uri.equals("/signup.member")) {
 				String email = request.getParameter("email");
@@ -32,9 +32,9 @@ public class Member extends HttpServlet {
 				String nickname = request.getParameter("nickname");
 				String name = request.getParameter("name");
 				String phone = request.getParameter("phone");
-				System.out.println(email + pw + nickname + name + phone);
 				MemberDAO dao = MemberDAO.getInstance();
 				int result = dao.signup(email, pw, nickname, name, phone);
+				dao.signupMail(email, nickname);
 				response.sendRedirect("/index.jsp");
 			} else if (uri.equals("/login.member")) {
 				MemberDAO dao = MemberDAO.getInstance();
@@ -50,7 +50,7 @@ public class Member extends HttpServlet {
 					request.getSession().setAttribute("loginName", dto.getName());
 					request.getSession().setAttribute("loginNickname", dto.getNickname());
 					request.getSession().setAttribute("loginPw", dto.getPw());
-					response.sendRedirect("/index.jsp");
+					response.sendRedirect("/chart.music");
 				} 
 					 else {
 					  
@@ -67,7 +67,7 @@ public class Member extends HttpServlet {
 				
 			 else if (uri.equals("/logout.member")) {
 				request.getSession().invalidate();
-				response.sendRedirect("index.jsp");
+				response.sendRedirect("/index.jsp");
 			} else if (uri.equals("/mypage.member")) {
 				MemberDAO dao = MemberDAO.getInstance();
 				MemberDTO dto = dao.getMypage(request.getSession().getAttribute("loginEmail").toString());
@@ -93,8 +93,8 @@ public class Member extends HttpServlet {
 				String email = request.getParameter("email");
 				MemberDAO dao = new MemberDAO();
 				boolean result = dao.emailDupleCheck(email);
-				PrintWriter out = response.getWriter();
-				out.print(result);
+				response.getWriter().append(String.valueOf(result));
+				System.out.println(result);
 			}
 			else if(uri.equals("/MailSender.member")) {
 				String email = request.getParameter("email");
@@ -105,19 +105,7 @@ public class Member extends HttpServlet {
 		          String jsonString = g.toJson(result);
 		          response.getWriter().append(jsonString);
 			}
-			else if(uri.equals("/eamilResult.member")) {
-				Boolean emailResult = Boolean.parseBoolean(request.getParameter("resultValue"));
-				System.out.println(emailResult);
-				MemberDAO dao = new MemberDAO();
-				boolean result = dao.emailResult(emailResult);
-				String val = "true";
-				
-				System.out.println(result);
-				request.setAttribute("emailResult", result);
-				request.setAttribute("resultValue", val);
-				request.getRequestDispatcher("/member/inputForm.jsp").forward(request, response);
-				
-			}
+			
 		} catch (Exception e) {
 			e.printStackTrace();
 			response.sendRedirect("error.jsp");
