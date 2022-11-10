@@ -138,7 +138,7 @@
 						<p>name</p></li>
 					<li>
 						<button>
-							<span class="material-symbols-rounded" id="wish"> favorite </span>
+							<span class="material-symbols-rounded" id="wish" data-wish="false"> favorite </span>
 						</button>
 					</li>
 					<li>
@@ -425,13 +425,24 @@
     	// 목록 클릭시, 해당 노래가 재생
     	let playList = document.querySelectorAll(".playList");
     	for (let i=0; i<playList.length; i++) {
-    			console.log(playList);
     			playList[i].addEventListener("click", function(){
     			playIndex = this.getAttribute("data-index");
     			loadMusic(playIndex);
     			playMusic();
     		});
-    	}
+    	};
+    	
+    	// 위시리스트 추가
+    	$("#wish").on("click",function(){
+    		$.ajax({
+    			url:"/add.wish",
+    			type:"get",
+    			data:{
+    				musicSeq : musicList[playIndex].musicSeq	
+    			}    				
+    		});
+    	});
+    	
     	
     </script>
 </body>
