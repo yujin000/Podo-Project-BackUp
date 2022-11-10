@@ -60,7 +60,7 @@ public class MemberDAO {
 	}
 
 	public int signup(String email, String pw, String nickname, String name, String phone) throws Exception {
-		String sql = "insert into member values(?,?,'basic',null,sysdate,null,?,?,?)";
+		String sql = "insert into member values(?,?,'basic',null,sysdate,'profile-default.jpg',?,?,?)";
 
 		try (Connection con = this.getConnection(); PreparedStatement pstat = con.prepareStatement(sql);) {
 
@@ -204,23 +204,26 @@ public class MemberDAO {
 
 	
 	// Mypage 닉네임, 멤버십, 구독기간 정보 불러오기
-	public MemberDTO getMypage(String email) throws Exception {
-		String sql = "select * from member where email = ?";
-		try (Connection con = this.getConnection(); PreparedStatement pstat = con.prepareStatement(sql);) {
-			pstat.setString(1, email);
+		public MemberDTO getMypage(String email) throws Exception {
+			String sql = "select * from member where email = ?";
+			try (Connection con = this.getConnection(); PreparedStatement pstat = con.prepareStatement(sql);) {
+				pstat.setString(1, email);
 
-			try (ResultSet rs = pstat.executeQuery();) {
-				rs.next();
-				MemberDTO dto = new MemberDTO();
-				dto.setEamil(rs.getString("email"));
-				dto.setNickname(rs.getString("nickname"));
-				dto.setMembership(rs.getString("membership"));
-				dto.setScribeDate(rs.getTimestamp("scribeDate"));
-				dto.setPhone(rs.getString("phone"));
-				return dto;
+				try (ResultSet rs = pstat.executeQuery();) {
+					rs.next();
+					MemberDTO dto = new MemberDTO();
+					dto.setEamil(rs.getString("email"));
+					dto.setPw(rs.getString("pw"));
+					dto.setMembership(rs.getString("membership"));
+					dto.setScribeDate(rs.getTimestamp("scribeDate"));
+					dto.setProfileImg(rs.getString("profileimg"));
+					dto.setNickname(rs.getString("nickname"));
+					dto.setName(rs.getString("name"));
+					dto.setPhone(rs.getString("phone"));
+					return dto;
+				}
 			}
 		}
-	}
 	
 	
 	public int update(MemberDTO dto) throws Exception {
@@ -231,6 +234,16 @@ public class MemberDAO {
 			pstat.setString(3, dto.getNickname());
 			pstat.setString(4, dto.getPhone());
 			pstat.setString(5, dto.getEamil());
+			int result = pstat.executeUpdate();
+			con.commit();
+			return result;
+		}
+	}
+	
+	public int delete(String email) throws Exception {
+		String sql = "delete from member where email=?";
+		try (Connection con = this.getConnection(); PreparedStatement pstat = con.prepareStatement(sql);) {
+			pstat.setString(1, email);
 			int result = pstat.executeUpdate();
 			con.commit();
 			return result;
