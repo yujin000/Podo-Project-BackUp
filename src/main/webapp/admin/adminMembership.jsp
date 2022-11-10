@@ -310,6 +310,9 @@
 		.updConfirmBtn:hover,.updCancelBtn:hover{
 			cursor:pointer;
 		}
+		#onSaleAddProducts input,#onSaleAddProducts textarea{
+			color:black;
+		}
     </style>
 </head>
 
