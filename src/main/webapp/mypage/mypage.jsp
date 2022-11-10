@@ -50,9 +50,8 @@
             font-family: "Noto Sans KR", sans-serif;
         }
 
-        .wrap {
+        .container {
             padding: 0 75px;
-            width: 100%;
             height: 100%;
 /*             background-color: bisque; */
             overflow-y: scroll;
@@ -100,7 +99,7 @@
 /*             background-color: #00000d50; */
         }
 
-        .profileBtn {
+        .Btn {
             margin-top: 2vh;
             width: 20vw;
             height: 50px;
@@ -116,7 +115,7 @@
 /*             background-color: #00000d50; */
         }
 
-        .profileBtn:hover {
+        .Btn:hover {
             border: 1px solid silver;
         }
 
@@ -217,6 +216,26 @@
 		color: var(--font-color);
 		font-size:20px;
 		}
+		
+		.Btn label {
+    	display: inline-block;
+    	padding: 10px 20px;
+    	color: #fff;
+    	vertical-align: middle;
+    	background-color: #3e065f;
+    	cursor: pointer;
+    	height: 40px;
+    	margin-left: 10px;
+		}
+
+		.Btn input[type="file"] {
+    	position: absolute;
+    	width: 0;
+    	height: 0;
+    	padding: 0;
+    	overflow: hidden;
+   		border: 0;
+		}
     </style>
         <script
       src="https://code.jquery.com/jquery-3.6.1.min.js"
@@ -226,30 +245,51 @@
 </head>
 
 <body>
-    <div class="wrap" id="wrap1">
+
+	<!-- 마이페이지 -->
+    <div class="container" id="wrap1">
         <div class="mypage">
+        
+        	<!-- titleText: 타이틀 제목 -->
             <div class="titleText">마이페이지</div>
+            
+            <!-- 프로필 이미지(이미지 출력 구현중) -->
             <div class="profileDiv">
-                <img src="/image/web/profile-default.jpg" class="profile">
+                <img src="/profile/${DTO.profileImg }" class="profile">
             </div>
+            
+            <!-- 닉네임 -->
             <span class="nameText">${DTO.nickname }</span>
+            
+            <!-- 팔로워 수 -->
             <span class="followerText">팔로워 27 </span>
+            
+            <!-- modifyBtn: 프로필 수정 버튼 -->
             <div>
-                <button class="profileBtn" id="modifyBtn">프로필 수정</button>
+                <button class="Btn" id="modifyBtn">프로필 수정</button>
             </div>
         </div>
-
+		
+		<!-- 멤버십 -->
         <div class="membership">
+        	<!-- titleText: 타이틀 제목 -->
             <div class="titleText">My 멤버십</div>
+            
+            <!-- 멤버십 -->
             <div>
                 <table>
                     <thead>
                         <tr>
+                        	<!--  table th의 첫번째 칸(멤버십명) -->
                             <th class="thName">멤버십명</th>
+                            <!--  table th의 두번째 칸(멤버십 혜택 기간) -->
                             <th class="thStartdate">멤버십 혜택 기간</th>
+                            <!--  table th의 세번째 칸(다음 결제일) -->
                             <th class="thEnddate">다음 결제일</th>
                         </tr>
                     </thead>
+                    
+                    <!-- 현재 회원의 멤버십 출력 -->
                     <tbody>
                         <tr class="List">
                             <th>
@@ -271,17 +311,24 @@
                 </table>
             </div>
         </div>
-
+		
+		
+		<!-- 예매내역 -->
         <div class="ticketingHistory">
             <div class="titleText">예매 내역</div>
             <table>
                 <thead>
                     <tr>
+                    	<!--  table th의 첫번째 칸(상품명) -->
                         <th class="ticketingName">상품명</th>
+                        <!--  table th의 두번째 칸(이용일/매수) -->
                         <th class="ticketingStartdate">이용일/매수</th>
+                        <!--  table th의 세번째 칸(상세보기 버튼을 위해 만들었음) -->
                         <th class="ticketingDetail"></th>
                     </tr>
                 </thead>
+                
+                <!-- 현재 회원의 예매내역 출력 -->
                 <tbody>
                     <tr class="List">
                         <th>
@@ -291,6 +338,7 @@
                             <div>2022.11.03 / 1매</div>
                         </td>
                         <td>
+                        	<!-- detailBtn: 예매내역 상세보기 버튼 -->
                             <div id="detailBtn">
                                 <a href="" style="color: var(--font-color)">상세보기</a>
                             </div>
@@ -299,63 +347,119 @@
                 </tbody>
             </table>
         </div>
+        
     </div>
     
     
-    <!-- 프로필 수정 -->
-    <div class="wrap" id="wrap2">
+    <!-- 프로필 수정(회원정보 변경) -->
+    <div class="container" id="wrap2">
+    <form action="/informUpdate.member" method="post" enctype="multipart/form-data" id="updateForm">
+        
         <div class="mypage">
+        	<!-- titleText: 타이틀 제목 -->
             <div class="titleText">프로필 수정</div>
+            
+            <!-- 프로필 이미지 -->
             <div class="profileDiv">
-                <img src="/image/web/profile-default.jpg" class="profile">
+                <img src="/image/web/profile-default.jpg" class="profile" id="preview">
             </div>
-            <div><a href="" style="color: var(--font-color)">프로필 이미지 업로드</a></div>
-            <div><a href="" style="color: var(--font-color)">프로필 이미지 삭제</a></div>
+            
+            <!-- 프로필 이미지 업로드 버튼 -->
+            <div class="Btn">
+            <label for="file">프로필 이미지 업로드</label> <input
+            type="file" id="file" name="file" onchange="readURL(this)">
+            </div>
+            
+            <!-- 프로필 이미지 삭제 버튼(구현중) -->
+            <div>
+            <a href="" style="color: var(--font-color)">프로필 이미지 삭제</a>
+            </div>
         </div>
 	
 		
         <div class="membership">
-        <form action="/informUpdate.member" method="post">
             <div>
                 <div>Email</div>
+                <!-- notInput : 수정 불가능한 칸 -->
                 <input type="text" value="${loginEmail }" class="notInput" disabled>
             </div>
+            
             <div>
                 <div>비밀번호</div>
                 <input type="text" name="pw" id="pw">
             </div>
+            
             <div>
                 <div>이름</div>
                 <input type="text" value="${loginName }" class="notInput" disabled>
             </div>
+            
             <div>
                 <div>닉네임</div>
                 <input type="text" value="${DTO.nickname }" name="nickname" id="nickname" class="inputAble">
             </div>
+            
             <div>
                 <div>전화번호</div>
                 <input type="text" value="${DTO.phone }" name="phone" id="phone">
             </div>
-
+		
+		
         <div>
-            <button type="submit" class="profileBtn">프로필 수정</button>
+        	<!-- profileBtn : 프로필 수정 완료(정보 변경 완료) 버튼 -->
+             <button type="button" id="completionBtn" class="Btn">수정 완료</button>
         </div>
-       </form>
-        <div id="profileBtn">
-            <a href="#" style="color: var(--font-color)">회원 탈퇴</a>  
+       
+        <div>
+        	<!-- deleteBtn : 회원 탈퇴 버튼 -->
+            <button type="button" style="color: var(--font-color)" id="deleteBtn" class="Btn">회원 탈퇴</button>  
         </div>
+        
         </div>
+        </form>
     </div>
 
     <script>
+    //시작하자마자 wrap2(프로필 수정 페이지) 꺼짐
     window.onload = function() {
     	$('#wrap2').css("display","none");
     }
     let modify = document.getElementById("modifyBtn");
-    $(modify).click(function () {
-  	  		$('#wrap1').fadeOut(450).css("display","none");
-			$('#wrap2').css("display","block");
-      });
+	let completion = document.getElementById("completionBtn");
+	let memberDelete = document.getElementById("deleteBtn");
+	
+	//프로필 수정 버튼을 누르면 wrap1(마이페이지) 꺼지고 wrap2(프로필 수정페이지) 켜짐
+	$(modify).click(function() {
+		$('#wrap1').fadeOut(450).css("display", "none");
+		$('#wrap2').css("display", "block");
+	});
+	
+	//프로필 수정 완료(정보 변경 완료) 
+	completion.addEventListener("click", function() {
+		document.getElementById("updateForm").submit();
+	});
+	
+	//회원 탈퇴
+	memberDelete.addEventListener("click", function() {
+		if (confirm("정말 회원 탈퇴를 하시겠습니까?")) {
+			location.href = "/delete.member"
+			alert("회원 탈퇴 완료");
+		} else {
+		}
+	});
+	
+	//이미지 업로드
+	function readURL(input) {
+		if (input.files && input.files[0]) {
+			var reader = new FileReader();
+			reader.onload = function(e) {
+				document.getElementById('preview').src = e.target.result;
+			};
+			reader.readAsDataURL(input.files[0]);
+		} else {
+			document.getElementById('preview').src = "";
+		}
+	}
     </script>
 </body>
 

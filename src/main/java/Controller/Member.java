@@ -1,5 +1,6 @@
 package Controller;
 
+import java.io.File;
 import java.io.IOException;
 import java.io.PrintWriter;
 
@@ -8,6 +9,9 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+
+import com.oreilly.servlet.MultipartRequest;
+import com.oreilly.servlet.multipart.DefaultFileRenamePolicy;
 
 import DAO.MemberDAO;
 import DTO.MemberDTO;
@@ -25,6 +29,7 @@ public class Member extends HttpServlet {
 			if (uri.equals("/signup.member")) {
 				String email = request.getParameter("email");
 				String pw = request.getParameter("pw");
+				System.out.println(pw);
 				String nickname = request.getParameter("nickname");
 				String name = request.getParameter("name");
 				String phone = request.getParameter("phone");
@@ -43,9 +48,11 @@ public class Member extends HttpServlet {
 					MemberDTO dto = dao.getMypage(email);	
 					
 					request.getSession().setAttribute("loginEmail", dto.getEamil());
-					request.getSession().setAttribute("loginName", dto.getName());
-					request.getSession().setAttribute("loginNickname", dto.getNickname());
 					request.getSession().setAttribute("loginPw", dto.getPw());
+					request.getSession().setAttribute("loginProfileimg", dto.getProfileImg());
+					request.getSession().setAttribute("loginNickname", dto.getNickname());
+					request.getSession().setAttribute("loginName", dto.getName());
+					request.getSession().setAttribute("loginPhone", dto.getPhone());
 					response.sendRedirect("/index.jsp");
 				} 
 					 else {
@@ -68,20 +75,41 @@ public class Member extends HttpServlet {
 				MemberDAO dao = MemberDAO.getInstance();
 				MemberDTO dto = dao.getMypage(request.getSession().getAttribute("loginEmail").toString());
 				request.setAttribute("DTO", dto);
-				request.getRequestDispatcher("mypage.jsp").forward(request, response);
+				request.getRequestDispatcher("/mypage/mypage.jsp").forward(request, response);
 			} else if(uri.equals("/informUpdate.member")) {
+
+				int maxSize = 1024 * 1024 * 10;
+				String savePath = request.getServletContext().getRealPath("/profile");
+				System.out.println(savePath);
+				File fileSavePath = new File(savePath);
+				if (!fileSavePath.exists()) {
+					fileSavePath.mkdir();
+				}
+				MultipartRequest multi = new MultipartRequest(request,savePath,maxSize,"UTF8",new DefaultFileRenamePolicy());	
+				
+				String sysName = multi.getFilesystemName("file");
+				
 				String email=request.getSession().getAttribute("loginEmail").toString();
-				String pw = request.getParameter("pw");
-				String profileimg = request.getParameter("profileimg");
-				String nickname = request.getParameter("nickname");
-				String phone = request.getParameter("phone");
+				String pw =multi.getParameter("pw");
+				String nickname = multi.getParameter("nickname");
+				String phone = multi.getParameter("phone");
 				MemberDAO dao = MemberDAO.getInstance();
-				if (pw=="") {
+				if (pw==null) {
 					pw=request.getSession().getAttribute("loginPw").toString();
 				}else {
-					pw = request.getParameter("pw");
+					pw = multi.getParameter("pw");
 				}
-				MemberDTO dto = new MemberDTO(email,pw,null,null,null,profileimg,nickname,null,phone);
+				if (nickname==null) {
+					nickname=request.getSession().getAttribute("loginNickname").toString();
+				}else {
+					nickname = multi.getParameter("nickname");
+				}
+				if (phone==null) {
+					phone=request.getSession().getAttribute("loginPhone").toString();
+				}else {
+					phone = multi.getParameter("phone");
+				}
+				MemberDTO dto = new MemberDTO(email,pw,null,null,null,sysName,nickname,null,phone);
 				dao.update(dto);
 				System.out.println(dto);
 				request.getRequestDispatcher("/mypage.member").forward(request, response);
@@ -101,6 +129,14 @@ public class Member extends HttpServlet {
 				System.out.println(result);
 				request.getRequestDispatcher("/emailCheck.jsp").forward(request, response);
 			}
+			//ifream 문제로 인해 창이 2개가 생김
+			else if(uri.equals("/delete.member")) {
+				MemberDAO dao = MemberDAO.getInstance();
+				int result = dao.delete(request.getSession().getAttribute("loginEmail").toString());
+				System.out.println(result);
+				request.getSession().invalidate();
+				response.sendRedirect("/index.jsp");
+			} 
 			else if(uri.equals("/adminMain.member")) {
 				String nickName = request.getParameter("nickname");
 				request.setAttribute("nickname", nickName);

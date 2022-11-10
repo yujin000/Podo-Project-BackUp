@@ -81,7 +81,7 @@
 							</c:choose>
 							<li><a href="#">공지사항</a></li>
 							<li><a href="#">계정설정</a></li>
-							<li><a id="modifyBtn">친구초대 </a></li>
+							<li><a href="#">친구초대 </a></li>
 							<li><a href="logout.member">로그아웃</a></li>
 						</ul>
 					</c:when>
@@ -101,7 +101,7 @@
 					<li><a href="#">보관함</a></li>
 					<li><a href="#">스테이션</a></li>
 					<li><a href="#">매거진</a></li>
-					<li><a href="">고객센터</a></li>
+					<li><a id="serviceBtn">고객센터</a></li>
 				</ul>
 			</div>
 			<div id="events">
@@ -213,6 +213,9 @@
 		});
 		$("#ticketing").click(function() {
 			$("#iframe").attr("src", "/list.perform");
+		});
+		$("#serviceBtn").click(function() {
+			$("#iframe").attr("src", "/mypage/serviceCenter.jsp");
 		});
 	</script>
 	<script>
