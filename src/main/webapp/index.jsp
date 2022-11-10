@@ -81,7 +81,7 @@
 							</c:choose>
 							<li><a href="#">공지사항</a></li>
 							<li><a href="#">계정설정</a></li>
-							<li><a id="modifyBtn">친구초대 </a></li>
+							<li><a href="#">친구초대 </a></li>
 							<li><a href="logout.member">로그아웃</a></li>
 						</ul>
 					</c:when>
@@ -101,7 +101,7 @@
 					<li><a href="#">보관함</a></li>
 					<li><a href="#">스테이션</a></li>
 					<li><a href="#">매거진</a></li>
-					<li><a href="">고객센터</a></li>
+					<li><a id="serviceBtn">고객센터</a></li>
 				</ul>
 			</div>
 			<div id="events">
@@ -138,7 +138,7 @@
 						<p>name</p></li>
 					<li>
 						<button>
-							<span class="material-symbols-rounded" id="wish"> favorite </span>
+							<span class="material-symbols-rounded" id="wish" data-wish="false"> favorite </span>
 						</button>
 					</li>
 					<li>
@@ -213,6 +213,9 @@
 		});
 		$("#ticketing").click(function() {
 			$("#iframe").attr("src", "/list.perform");
+		});
+		$("#serviceBtn").click(function() {
+			$("#iframe").attr("src", "/mypage/serviceCenter.jsp");
 		});
 	</script>
 	<script>
@@ -425,13 +428,24 @@
     	// 목록 클릭시, 해당 노래가 재생
     	let playList = document.querySelectorAll(".playList");
     	for (let i=0; i<playList.length; i++) {
-    			console.log(playList);
     			playList[i].addEventListener("click", function(){
     			playIndex = this.getAttribute("data-index");
     			loadMusic(playIndex);
     			playMusic();
     		});
-    	}
+    	};
+    	
+    	// 위시리스트 추가
+    	$("#wish").on("click",function(){
+    		$.ajax({
+    			url:"/add.wish",
+    			type:"get",
+    			data:{
+    				musicSeq : musicList[playIndex].musicSeq	
+    			}    				
+    		});
+    	});
+    	
     	
     </script>
 </body>
