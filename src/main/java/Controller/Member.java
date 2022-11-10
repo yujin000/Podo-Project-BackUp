@@ -147,14 +147,11 @@ public class Member extends HttpServlet {
 			else if(uri.equals("/find.member")) {
 				MemberDAO dao = MemberDAO.getInstance();
 				String email = request.getParameter("email");
-				System.out.println(email);
 				boolean result = dao.emailDupleCheck(email);
-				System.out.println(result);
 				
 				if(result) {
 					
 					String key = dao.MailSender(email);
-					System.out.println(key);
 					Gson g = new Gson();
 			          String jsonString = g.toJson(key);
 			          response.getWriter().append(jsonString);
@@ -164,11 +161,9 @@ public class Member extends HttpServlet {
 			}else if(uri.equals("/updatePw.member")) {
 				MemberDAO dao = MemberDAO.getInstance();
 				String email = request.getParameter("email");
-				System.out.println(email);
-				String pw = request.getParameter("pw");
-				System.out.println(pw);
+				String pw = dao.newPassword(email);				
 				dao.updatePw(email, pw);
-				response.sendRedirect("/index.jsp");
+				response.sendRedirect("/member/loginForm.jsp");
 				
 			}
 		} catch (Exception e) {

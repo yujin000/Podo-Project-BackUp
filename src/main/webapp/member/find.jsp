@@ -259,14 +259,13 @@ uri="http://java.sun.com/jsp/jstl/core"%>
                 type: "post",
                 data: {
                   email: $("#email").val(),
-                  pw: $("#message").val(),
                 },
               }).done(function (resp) {
             	  if (resp == null) {
                       alert("요청 실패");
                     } else {
                       alert("비밀번호가 임시비밀번호로 변경되었습니다!")
-                  	  window.close();
+                  	  location.href = "/member/loginForm.jsp"
                     }
               });
             
