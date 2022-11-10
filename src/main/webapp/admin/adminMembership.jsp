@@ -19,9 +19,9 @@
             display: block;
         }
 
-        @media(max-width:1600px) {
+        @media(max-width:1800px) {
             .html {
-                width: 1600px;
+                width: 1800px;
             }
         }
 
