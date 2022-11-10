@@ -78,6 +78,16 @@ public class QnaBoard extends HttpServlet {
 				request.setAttribute("dtoDetail", dtoDetail);
 				request.getSession().setAttribute("qnaDetailSeq", qnaSeq);
 				request.getRequestDispatcher("/mypage/qnaDetail.jsp").forward(request, response);
+			} else if (uri.equals("/adminList.board")) {
+				int cpage = Integer.parseInt(request.getParameter("cpage"));
+				String qnaWriter = request.getSession().getAttribute("loginEmail").toString();
+				QnaBoardDAO dao = QnaBoardDAO.getInstance();
+				List<QnaBoardDTO> qna = dao.selectAll(cpage * 5 - 4, cpage * 5);
+
+				String navi = dao.getPageNavi(cpage);
+				request.setAttribute("qna", qna);
+				request.setAttribute("navi", navi);
+				request.getRequestDispatcher("/admin/adminQna.jsp?cpage=1").forward(request, response);
 			}
 		} catch (
 
