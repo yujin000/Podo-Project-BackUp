@@ -81,7 +81,7 @@
          </ul>
          <div id="GNB">
             <ul>
-               <li><a id="a href=/admin/adminNotice/adminNotice.jsp">공지사항 관리</a></li>
+               <li><a href="/list.notice">공지사항 관리</a></li>
                <li><a id="chart" href="/allList.music?nickname=${loginNickname }">음원 관리</a></li>
                <li><a id="chart">공연 관리</a></li>
                <li><a href="#">회원 관리</a></li>
@@ -95,6 +95,19 @@
             <div class="mainText">공지사항 관리</div>
             <br>
             <hr>
+            <c:choose>
+            	<c:when test = "${not empty noticeBoardList }">
+            		<c:forEach var = "i" items = "${noticeBoardList }">
+            			<div class="NoticeList">            				
+            				<div class="noticeSeq">${i.noticeSeq }</div>
+            				<div class="noticeCategory">${i.noticeCategory }</div>
+            				<div class="noticeTitle">${i.noticeTitle }</div>
+            				<div class="noticeWriter">${i.noticeWriter }</div>
+            				<div class="noteceWriteDate">${i.noticeWriteDate }</div>
+            			</div>
+            		</c:forEach>
+            	</c:when>
+            </c:choose>
             <div id="writeBtn">공지사항 쓰기</div>
             
          </div>

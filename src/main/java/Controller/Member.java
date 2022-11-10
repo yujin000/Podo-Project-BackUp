@@ -23,10 +23,8 @@ public class Member extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		request.setCharacterEncoding("utf8");
-		// post 방식으로 보낼때, 한글 깨지는 것을 방지
 
 		String uri = request.getRequestURI();   
-
 		try {
 			if (uri.equals("/signup.member")) {
 				String email = request.getParameter("email");
@@ -139,6 +137,11 @@ public class Member extends HttpServlet {
 				request.getSession().invalidate();
 				response.sendRedirect("/index.jsp");
 			} 
+			else if(uri.equals("/adminMain.member")) {
+				String nickName = request.getParameter("nickname");
+				request.setAttribute("nickname", nickName);
+				request.getRequestDispatcher("/admin/adminIndex.jsp").forward(request, response);
+			}
 		} catch (Exception e) {
 			e.printStackTrace();
 			response.sendRedirect("error.jsp");
