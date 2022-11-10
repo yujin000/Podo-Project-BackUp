@@ -34,9 +34,9 @@ public class Member extends HttpServlet {
 				String nickname = request.getParameter("nickname");
 				String name = request.getParameter("name");
 				String phone = request.getParameter("phone");
-				System.out.println(email + pw + nickname + name + phone);
 				MemberDAO dao = MemberDAO.getInstance();
 				int result = dao.signup(email, pw, nickname, name, phone);
+				dao.signupMail(email, nickname);
 				response.sendRedirect("/index.jsp");
 			} else if (uri.equals("/login.member")) {
 				MemberDAO dao = MemberDAO.getInstance();
@@ -143,6 +143,33 @@ public class Member extends HttpServlet {
 				String nickName = request.getParameter("nickname");
 				request.setAttribute("nickname", nickName);
 				request.getRequestDispatcher("/admin/adminIndex.jsp").forward(request, response);
+			}
+			else if(uri.equals("/find.member")) {
+				MemberDAO dao = MemberDAO.getInstance();
+				String email = request.getParameter("email");
+				System.out.println(email);
+				boolean result = dao.emailDupleCheck(email);
+				System.out.println(result);
+				
+				if(result) {
+					
+					String key = dao.MailSender(email);
+					System.out.println(key);
+					Gson g = new Gson();
+			          String jsonString = g.toJson(key);
+			          response.getWriter().append(jsonString);
+				}else{
+					 
+				}
+			}else if(uri.equals("/updatePw.member")) {
+				MemberDAO dao = MemberDAO.getInstance();
+				String email = request.getParameter("email");
+				System.out.println(email);
+				String pw = request.getParameter("pw");
+				System.out.println(pw);
+				dao.updatePw(email, pw);
+				response.sendRedirect("/index.jsp");
+				
 			}
 		} catch (Exception e) {
 			e.printStackTrace();

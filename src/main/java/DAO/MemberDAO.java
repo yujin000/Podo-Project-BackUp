@@ -154,8 +154,40 @@ public class MemberDAO {
 		
 		return authCode;
 	}
+	public String newPassword(String email) throws Exception{
+		
+		Properties props = new Properties();
+		props.put("mail.smtp.host", "smtp.gmail.com");
+		props.put("mail.smtp.port", "587");
+		props.put("mail.smtp.auth", "true");
+		props.put("mail.smtp.starttls.enable", "true");
+		props.put("mail.smtp.ssl.trust", "smtp.gmail.com");
+		props.put("mail.smtp.ssl.protocols", "TLSv1.2");
+		
+		Session session = Session.getInstance(props, new Authenticator() {
+			@Override
+			protected PasswordAuthentication getPasswordAuthentication() {
+				return new PasswordAuthentication("dnfqh98@gmail.com", "edzofkldspdupiko");
+			}
+		});
+		String key = codeMaker();
+		String receiver = email; // 메일 받을 주소
+		String title = "podo music 임시비밀번호";
+		String content = "<h2 style='color:blue'>"+"임시비밀번호:"+key+"</h2>";
+		Message message = new MimeMessage(session);
+		try {
+			message.setFrom(new InternetAddress("dnfqh98@gmail.com", "관리자", "utf-8"));
+			message.addRecipient(Message.RecipientType.TO, new InternetAddress(receiver));
+			message.setSubject(title);
+			message.setContent(content, "text/html; charset=utf-8");
 
-	
+			Transport.send(message);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return key;
+	}
+
 	public void signupMail(String email, String nickname) throws Exception{
 		
 		Properties props = new Properties();
@@ -234,6 +266,17 @@ public class MemberDAO {
 			pstat.setString(3, dto.getNickname());
 			pstat.setString(4, dto.getPhone());
 			pstat.setString(5, dto.getEamil());
+			int result = pstat.executeUpdate();
+			con.commit();
+			return result;
+		}
+	}
+	
+	public int updatePw(String email, String pw) throws Exception {
+		String sql = "update member set pw=? where email=? ";
+		try (Connection con = this.getConnection(); PreparedStatement pstat = con.prepareStatement(sql);) {
+			pstat.setString(1, getSHA512(pw));
+			pstat.setString(2, email);
 			int result = pstat.executeUpdate();
 			con.commit();
 			return result;
