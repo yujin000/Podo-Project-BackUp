@@ -51,6 +51,11 @@ public class PayGoods extends HttpServlet {
 				PayGoodsDTO dto = new PayGoodsDTO(0,payGoodsName,payGoodsPrice,payGoodsExp,payGoodsType,payGoodsInfo);
 				dao.addProducts(dto);
 				response.sendRedirect("/goodsList.goods");
+			}else if(uri.equals("/index.goods")) {
+				PayGoodsDAO dao = PayGoodsDAO.getInstance();
+				List<PayGoodsDTO> goodsList = dao.selectAll();
+				request.setAttribute("goodsList", goodsList);
+				request.getRequestDispatcher("/membership/membershipIndex.jsp").forward(request, response);
 			}
 		}catch(Exception e) {
 			e.printStackTrace();
