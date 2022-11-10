@@ -285,7 +285,7 @@
             border: none;
             text-align: center;
         }
-
+		.inProductsSeq,
         .inProductsPrice,
         .inProductsExpire,
         .inProductsType {
@@ -307,7 +307,9 @@
             border:none;
             text-align: center;
         }
-
+		.updConfirmBtn:hover,.updCancelBtn:hover{
+			cursor:pointer;
+		}
     </style>
 </head>
 
@@ -361,29 +363,31 @@
                             </ul>
                         </div>
                         <div>
+                        	<form id="upForm">
                             <c:choose>
                                 <c:when test="${not empty goodsList }">
                                     <c:forEach var="list" items="${goodsList }">
                                         <div class="listWrap">
-                                            <div class="navi1">1001</div>
-                                            <div class="navi2"><input type="text" value="상품이름입니다상품이름입니다"
+                                            <div class="navi1"><input type="text" value="${list.payGoodsSeq }" class="inProductsSeq" readonly></div>
+                                            <div class="navi2"><input type="text" value="${list.payGoodsName }"
                                                     class="inProductsName" readonly></div>
-                                            <div class="navi3"><input type="text" value="3000원" class="inProductsPrice"
+                                            <div class="navi3"><input type="text" value="${list.payGoodsPrice }" class="inProductsPrice"
                                                     readonly></div>
-                                            <div class="navi4"><input type="text" value="1개월" class="inProductsExpire"
+                                            <div class="navi4"><input type="text" value="${list.payGoodsExp }" class="inProductsExpire"
                                                     readonly></div>
-                                            <div class="navi5"><input type="text" value="이벤트상품" class="inProductsType"
+                                            <div class="navi5"><input type="text" value="${list.payGoodsType }" class="inProductsType"
                                                     readonly></div>
                                             <div class="btnBox">
                                                 <button type="button" class="update">수정</button>
-                                                <button type="button" class="delete">삭제</button>
+                                                <button type="button" class="delete" seq="${list.payGoodsSeq }">삭제</button>
                                             </div>
-                                            <span><input type="text" value="상품서설명상품서설명상품서설명상품서설명상품서설명상품서설명상품서설명상품서설명" class="inProductsInfo" readonly></span>
+                                            <span><input type="text" value="${list.payGoodsInfo }" class="inProductsInfo" readonly></span>
                                             <hr id="listHr">
                                         </div>
                                     </c:forEach>
                                 </c:when>
                             </c:choose>
+                            </form>
                         </div>
                     </div>
                     <!-- 수정/추가/삭제 -->
@@ -394,15 +398,16 @@
                             </div>
                             <div>
                                 상품명
-                                <input type="text" name="" id="">
+                                <input type="text" id="add1" name="payGoodsName">
                                 상품가격
-                                <input type="text" name="" id="">
+                                <input type="text" id="add2" name="payGoodsPrice">
                                 이용기간
-                                <input type="text" name="" id="">
+                                <input type="text" id="add3" name="payGoodsExp">
                                 상품유형
-                                <input type="text" name="" id="">
+                                <input type="text" id="add4" name="payGoodsType">
                                 상품설명
-                                <textarea></textarea>
+                                <textarea id="add5" name="payGoodsInfo" style="width: 100%; height: 100px; resize: none;"></textarea>
+                                <button type="button" id="addProductsBtn">추가하기</button>
                             </div>
                         </div>
                     </form>
@@ -444,9 +449,102 @@
             $("#onSaleAddProducts").css({ "display": "block" })
         })
 
-        // 현재 판매중인 이용권 수정버튼
+        // 현재 판매중인 이용권 수정버튼 생성
+        let updCancelBtn = $("<button>");
+        	updCancelBtn.attr("type","button");
+        	updCancelBtn.addClass("updCancelBtn");
+        	updCancelBtn.css({
+        		"border": "none",
+            	"background-color": "transparent",
+            	"color": "silver",
+            	"margin-top": "25px",
+            	"margin-left":"10px"
+        	})
+        	updCancelBtn.text("수정취소");
+        	
+        let updConfirmBtn = $("<button>");
+	        updConfirmBtn.attr("type","button");
+	        updConfirmBtn.addClass("updConfirmBtn");
+	        updConfirmBtn.css({
+	    		"border": "none",
+	        	"background-color": "transparent",
+	        	"color": "silver",
+	        	"margin-top": "25px"
+	    	})
+	    	updConfirmBtn.text("저장");
+        
+        // 수정 버튼 클릭 시 readonly > false로 변경
         $(".update").on("click", function () {
-
+        	$(this).parent().find(".delete").css("display","none");
+        	$(this).parent().find(".update").css("display","none");
+        	$(this).parent().append(updConfirmBtn);
+        	$(this).parent().append(updCancelBtn);
+        	$(this).parent().parent().find("input").removeAttr("readonly");
+        	$(this).parent().parent().find(".inProductsSeq").attr("readonly","true");
+        	$(this).parent().parent().find("input").css("color","#ff00d7");
+        	$(this).parent().parent().find(".inProductsSeq").css("color","silver");
+        	$(this).parent().parent().find(".navi2").focus();
+        	$(this).parent().parent().find(".inProductsSeq").attr("name","payGoodsSeq");
+        	$(this).parent().parent().find(".inProductsName").attr("name","payGoodsName");
+        	$(this).parent().parent().find(".inProductsPrice").attr("name","payGoodsPrice");
+        	$(this).parent().parent().find(".inProductsExpire").attr("name","payGoodsExp");
+        	$(this).parent().parent().find(".inProductsType").attr("name","payGoodsType");
+        	$(this).parent().parent().find(".inProductsInfo").attr("name","payGoodsInfo");
+        })
+        
+        // 저장, 수정취소 버튼 호버이벤트 부여
+        updCancelBtn.on("mouseover", function() {
+			$(this).css("font-weight", "bold");
+		})
+		updCancelBtn.on("mouseout", function() {
+			$(this).css("font-weight", "normal");
+		})
+		updConfirmBtn.on("mouseover", function() {
+			$(this).css("font-weight", "bold");
+		})
+		updConfirmBtn.on("mouseout", function() {
+			$(this).css("font-weight", "normal");
+		})
+		
+        // 수정사항 저장 버튼
+        updConfirmBtn.on("click",function(){
+        	$("#upForm").attr("action","/update.goods");
+        	$("#upForm").attr("method","post");
+        	if(confirm("입력하신 내용으로 수정하시겠습니까?")){
+            	$("#upForm").submit();
+        	}
+        })
+        
+        // 취소버튼
+        updCancelBtn.on("click",function(){
+        	if (confirm("수정사항을 취소하시겠습니까?")) {
+				location.reload();
+			}
+        })
+        
+        // 삭제버튼
+		$(".delete").on("click", function() {
+			if (confirm("삭제하시겠습니까?")) {
+				let target = $(this).attr("seq");
+				location.href = "/delete.goods?seq=" + target;
+			}
+		})
+		
+		// 상품추가하기
+        $("#addProductsBtn").on("click", function () {
+            if ($("#add1").val() == ""
+                || $("#add2").val() == ""
+                || $("#add3").val() == ""
+                || $("#add4").val() == ""
+               	|| $("#add5").val() == "") {
+                alert("입력사항은 모두 입력되어야 합니다.");
+            } else {
+                if (confirm("추가하시겠습니까?")) {
+                    $("#addForm").attr("action", "/addProducts.goods");
+                    $("#addForm").attr("method", "post");
+                    $("#addForm").submit();
+                }
+            }
         })
     </script>
 </body>

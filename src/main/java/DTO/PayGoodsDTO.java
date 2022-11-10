@@ -1,17 +1,18 @@
 package DTO;
 
 public class PayGoodsDTO {
-	private int payGoodsNum;
+	private int payGoodsSeq;
 	private String payGoodsName;
 	private int payGoodsPrice;
 	private String payGoodsExp;
 	private String payGoodsType;
+	private String payGoodsInfo;
 	
-	public int getPayGoodsNum() {
-		return payGoodsNum;
+	public int getPayGoodsSeq() {
+		return payGoodsSeq;
 	}
-	public void setPayGoodsNum(int payGoodsNum) {
-		this.payGoodsNum = payGoodsNum;
+	public void setPayGoodsSeq(int payGoodsSeq) {
+		this.payGoodsSeq = payGoodsSeq;
 	}
 	public String getPayGoodsName() {
 		return payGoodsName;
@@ -37,17 +38,25 @@ public class PayGoodsDTO {
 	public void setPayGoodsType(String payGoodsType) {
 		this.payGoodsType = payGoodsType;
 	}
-	public PayGoodsDTO(int payGoodsNum, String payGoodsName, int payGoodsPrice, String payGoodsExp,
-			String payGoodsType) {
+	public String getPayGoodsInfo() {
+		return payGoodsInfo;
+	}
+	public void setPayGoodsInfo(String payGoodsInfo) {
+		this.payGoodsInfo = payGoodsInfo;
+	}
+	public PayGoodsDTO(int payGoodsSeq, String payGoodsName, int payGoodsPrice, String payGoodsExp, String payGoodsType,
+			String payGoodsInfo) {
 		super();
-		this.payGoodsNum = payGoodsNum;
+		this.payGoodsSeq = payGoodsSeq;
 		this.payGoodsName = payGoodsName;
 		this.payGoodsPrice = payGoodsPrice;
 		this.payGoodsExp = payGoodsExp;
 		this.payGoodsType = payGoodsType;
+		this.payGoodsInfo = payGoodsInfo;
 	}
 	public PayGoodsDTO() {
 		super();
 	}
+	
 	
 }
