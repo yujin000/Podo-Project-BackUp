@@ -148,6 +148,11 @@ div {
 	text-align: center;
 	height:500px;
 }
+
+/* 결제화면 */
+#payment{
+	text-aligh:center;
+}
 </style>
 </head>
 <body>
@@ -176,7 +181,7 @@ div {
 									<input type="text" value="${list.payGoodsName }" readonly>
 								</div>
 								<div class="navi2">
-									<input type="text" value="${list.payGoodsPrice }" readonly>
+									<input type="text" value="${list.payGoodsPrice }" class="promotionPrice" readonly>
 								</div>
 								<div class="navi3">
 									<input type="text" value="${list.payGoodsExp }" readonly>
@@ -214,8 +219,7 @@ div {
 			<hr>
 			<div id="goodsInfo">상품 설명</div>
 			<div id="payment">
-				결제창
-				<button type=button>결제하기</button>
+				<button type=button id="payBtn"style="width:100%" price="">결제하기</button>
 			</div>
 			<!-- 버튼누르면 (해당하는 상품의 가격)원 결제하기 -->
 			<div id="otherproduct">
@@ -253,7 +257,24 @@ div {
 			$("#subscribeArea").css("display", "none");
 		})
 
-		/* 이벤트 상품 클릭시 border color 설정*/
+		/* 이벤트 상품 클릭시 border color 설정 및 상품상세정보(info), 결제하기 버튼에 가격 출력 */
+		let price = 0;
+			/* 프로모션 상품 */
+		$("#promotion").on("click",function(){
+			$(this).css({
+				"background-image": "linear-gradient(#000, #000),linear-gradient(to right, #3e065f 0%, #ff00d7 100%)",
+				"border": "1px solid transparent",
+				"border-radius": "5px",
+				"background-origin": "border-box",
+				"background-clip": "content-box, border-box"
+			})
+			$(this).nextAll("div").css("border","1px solid silver");
+			price = $(this).find(".promotionPrice").val();
+			$("#payBtn").text(price + "원 결제하기");
+			$("#payBtn").attr("price",price);
+			warning.remove();
+		})
+			/* 이벤트 상품 */
 		$(".eventGoods").on("click",function(){
 			$(this).css({
 				"background-image": "linear-gradient(#000, #000),linear-gradient(to right, #3e065f 0%, #ff00d7 100%)",
@@ -265,17 +286,30 @@ div {
 			$(this).next("div").css("border","1px solid silver");
 			$(this).prev("div").css("border","1px solid silver");
 			$(this).prev("#promotion").css("border","1px solid silver");
+			price = $(this).find(".eventPrice").val();
+			$("#payBtn").text(price + "원 결제하기");
+			$("#payBtn").attr("price",price);
+			warning.remove();
 		})
-		$("#promotion").on("click",function(){
-			$(this).css({
-				"background-image": "linear-gradient(#000, #000),linear-gradient(to right, #3e065f 0%, #ff00d7 100%)",
-				"border": "1px solid transparent",
-				"border-radius": "5px",
-				"background-origin": "border-box",
-				"background-clip": "content-box, border-box"
+		
+		/* 결제하기 버튼 클릭시 결제하기 팝업 및 결제 */
+		let warning = $("<div>");
+			warning.css({
+				"color":"red",
+				"text-align":"center"
 			})
-			$(this).nextAll("div").css("border","1px solid silver");
+			warning.text("결제할 상품을 선택해주세요.")
+			
+		$("#payBtn").on("click",function(){
+			if(price == 0){
+				$("#goodsInfo").after(warning);
+			}else{
+				warning.remove();
+				/*let target = $(this).attr("price");
+				location.href = "/payment.payGoods?price=" + target;*/
+			}
 		})
+
 	</script>
 </body>
 </html>
