@@ -165,6 +165,12 @@ public class Member extends HttpServlet {
 				dao.updatePw(email, pw);
 				response.sendRedirect("/member/loginForm.jsp");
 				
+			}else if(uri.equals("/stratMembership.member")) {
+				MemberDAO dao = MemberDAO.getInstance();
+				String email = request.getParameter("email");
+				dao.startMemberShip(email);
+				request.getRequestDispatcher("/index.jsp").forward(request, response);
+				
 			}
 		} catch (Exception e) {
 			e.printStackTrace();

@@ -283,6 +283,17 @@ public class MemberDAO {
 		}
 	}
 	
+	public int startMemberShip(String email) throws Exception {
+		String sql = "update member set membership=? ,scribedate = sysdate where email=? ";
+		try (Connection con = this.getConnection(); PreparedStatement pstat = con.prepareStatement(sql);) {
+			pstat.setString(1, email);
+			int result = pstat.executeUpdate();
+			con.commit();
+			return result;
+		}
+		
+	}
+	
 	public int delete(String email) throws Exception {
 		String sql = "delete from member where email=?";
 		try (Connection con = this.getConnection(); PreparedStatement pstat = con.prepareStatement(sql);) {
