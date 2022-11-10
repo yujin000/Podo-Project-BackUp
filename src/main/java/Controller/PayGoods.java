@@ -53,8 +53,12 @@ public class PayGoods extends HttpServlet {
 				response.sendRedirect("/goodsList.goods");
 			}else if(uri.equals("/index.goods")) {
 				PayGoodsDAO dao = PayGoodsDAO.getInstance();
-				List<PayGoodsDTO> goodsList = dao.selectAll();
+				List<PayGoodsDTO> goodsList = dao.selectNormalGoods();
+				List<PayGoodsDTO> eventGoods = dao.selectEventGoods();
+				List<PayGoodsDTO> promotionGoods = dao.selectPromotionGoods();
 				request.setAttribute("goodsList", goodsList);
+				request.setAttribute("eventGoods", eventGoods);
+				request.setAttribute("promotionGoods", promotionGoods);
 				request.getRequestDispatcher("/membership/membershipIndex.jsp").forward(request, response);
 			}
 		}catch(Exception e) {
