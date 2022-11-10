@@ -10,6 +10,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.google.gson.Gson;
 import com.oreilly.servlet.MultipartRequest;
 import com.oreilly.servlet.multipart.DefaultFileRenamePolicy;
 
@@ -53,7 +54,7 @@ public class Member extends HttpServlet {
 					request.getSession().setAttribute("loginNickname", dto.getNickname());
 					request.getSession().setAttribute("loginName", dto.getName());
 					request.getSession().setAttribute("loginPhone", dto.getPhone());
-					response.sendRedirect("/index.jsp");
+					response.sendRedirect("/chart.music");
 				} 
 					 else {
 					  
@@ -121,13 +122,14 @@ public class Member extends HttpServlet {
 				PrintWriter out = response.getWriter();
 				out.print(result);
 			}
-			else if(uri.equals("/naverMailSend.member")) {
+			else if(uri.equals("/MailSender.member")) {
 				String email = request.getParameter("email");
 				MemberDAO dao = new MemberDAO();
-				String result = dao.naverMailSend(email);
-				request.setAttribute("key", result);
-				System.out.println(result);
-				request.getRequestDispatcher("/emailCheck.jsp").forward(request, response);
+				String result = dao.MailSender(email);
+				
+				Gson g = new Gson();
+		          String jsonString = g.toJson(result);
+		          response.getWriter().append(jsonString);
 			}
 			//ifream 문제로 인해 창이 2개가 생김
 			else if(uri.equals("/delete.member")) {

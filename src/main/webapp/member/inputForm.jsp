@@ -263,7 +263,6 @@ uri="http://java.sun.com/jsp/jstl/core"%>
               }
             }).done(function(resp){
             	let result = resp;
-            	alert(result);
             	 if (result =="true") { // 아이디가 존재함, 사용x
             		 $("#email").val("");
                      $("#email").next("#msg").html("중복된 ID입니다. ").css("color", "red");
