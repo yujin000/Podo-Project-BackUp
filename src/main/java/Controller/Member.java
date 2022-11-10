@@ -88,6 +88,10 @@ public class Member extends HttpServlet {
 				MultipartRequest multi = new MultipartRequest(request,savePath,maxSize,"UTF8",new DefaultFileRenamePolicy());	
 				
 				String sysName = multi.getFilesystemName("file");
+				System.out.println(sysName);
+				if(sysName==null) {
+					sysName = multi.getParameter("imgView");
+				}
 				
 				String email=request.getSession().getAttribute("loginEmail").toString();
 				String pw =multi.getParameter("pw");
@@ -109,7 +113,9 @@ public class Member extends HttpServlet {
 				}else {
 					phone = multi.getParameter("phone");
 				}
+				
 				MemberDTO dto = new MemberDTO(email,pw,null,null,null,sysName,nickname,null,phone);
+
 				dao.update(dto);
 				System.out.println(dto);
 				request.getRequestDispatcher("/mypage.member").forward(request, response);

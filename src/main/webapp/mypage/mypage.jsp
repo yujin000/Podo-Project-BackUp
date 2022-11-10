@@ -361,7 +361,8 @@
             
             <!-- 프로필 이미지 -->
             <div class="profileDiv">
-                <img src="/image/web/profile-default.jpg" class="profile" id="preview">
+                <img src="/profile/${DTO.profileImg }" class="profile" id="preview">
+                <input type="hidden" name="imgView" value="${DTO.profileImg }">
             </div>
             
             <!-- 프로필 이미지 업로드 버튼 -->
@@ -451,13 +452,13 @@
 	//이미지 업로드
 	function readURL(input) {
 		if (input.files && input.files[0]) {
-			var reader = new FileReader();
+			let reader = new FileReader();
 			reader.onload = function(e) {
 				document.getElementById('preview').src = e.target.result;
 			};
 			reader.readAsDataURL(input.files[0]);
 		} else {
-			document.getElementById('preview').src = "";
+			document.getElementById('preview').src = "/profile/${DTO.profileImg }";
 		}
 	}
     </script>
