@@ -451,7 +451,6 @@ hr {
 				.on(
 						"click",
 						function() {
-							console.log($("#file").val());
 							if ($("#file").val() == ""
 									|| $(".textArea").val() == ""
 									|| $("#imgFile").val() == ""
