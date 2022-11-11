@@ -70,6 +70,18 @@
 .qnaList>div{
 	float:left;
 }
+#qnaSeqHeader, #qnaStatusHeader, .qnaSeq, .qnaStatus {
+	width : 5%;
+}
+#qnaCategoryHeader, #qnaWriteDateHeader, .qnaCategory, .qnaWriteDate {
+	width : 10%;
+}
+#qnaTitleHeader, .qnaTitle {
+	width : 20%;
+}
+#qnaWriterHeader, .qnaWriter {
+	width : 15%;
+}
 
 </style>
 </head>
@@ -118,12 +130,12 @@
             	<c:when test="${not empty qna }">
             		<c:forEach var = "i" items = "${qna }">
             			<div class="qnaList">
-            				<div id="qnaSeq">${i.qnaSeq }</div>            				
-            				<div id="qnaCategory">${i.qnaCategory }</div>
-            				<div id="qnaTitle"><a href="/adminQnaDetail.board?qnaSeq=${i.qnaSeq }">${i.qnaTitle }</a></div>
-            				<div id="qnaWriter">${i.qnaWriter }</div>
-            				<div id="qnaWriteDate">${i.qnaWriteDate }</div>
-            				<div id="qnaStatus"></div>
+            				<div class="qnaSeq">${i.qnaSeq }</div>            				
+            				<div class="qnaCategory">${i.qnaCategory }</div>
+            				<div class="qnaTitle"><a href="/adminQnaDetail.board?qnaSeq=${i.qnaSeq }">${i.qnaTitle }</a></div>
+            				<div class="qnaWriter">${i.qnaWriter }</div>
+            				<div class="qnaWriteDate">${i.qnaWriteDate }</div>
+            				<div class="qnaStatus"></div>
             			</div>
             		</c:forEach>            		
             	</c:when>
@@ -138,10 +150,6 @@
       let adminBtn = document.getElementById("mypage");
       $(adminBtn).click(function() {
          $(this).next(".tog").fadeToggle();
-      });
-      
-      $("#writeBtn").on("click", function(){
-			location.href = "/admin/adminNotice/noticeWrite.jsp"; 
       });
       
    </script>

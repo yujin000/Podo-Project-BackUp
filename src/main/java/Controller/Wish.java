@@ -28,12 +28,12 @@ public class Wish extends HttpServlet {
 				WishDTO dto = new WishDTO(WishEmail, parentMusicSeq);
 				
 				int result = WishDAO.getInstance().addWish(dto);
-			} else if (uri.equals("/isExist.wish")) {
+			} else if (uri.equals("/exist.wish")) {
+				System.out.println(uri);
 				String WishEmail = request.getSession().getAttribute("loginEmail").toString();
 				String parentMusicSeq = request.getParameter("musicSeq"); // 위시리스트 음원 번호
 				WishDTO dto = new WishDTO(WishEmail, parentMusicSeq);
 				boolean isExist = WishDAO.getInstance().isExist(dto);
-				System.out.println(isExist);
 				Gson g = new Gson();
 				String jsonString = g.toJson(String.valueOf(isExist));
 				response.getWriter().append(jsonString);

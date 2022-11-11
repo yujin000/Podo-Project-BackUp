@@ -226,6 +226,9 @@
 		})
 	</script>
 	<script>
+		let membership = "${loginMembership}";
+		if (membership=="admin" || membership=="vip") {
+			
 		// Music Controller 부분
 		
     	// 목록페이지 전체 div값
@@ -324,7 +327,7 @@
     	// 위시리스트 여부에 따라 하트모양을 바꿔주는 함수
     	function wishIsExist(){
     		$.ajax({
-    			uri : "/isExist.wish",
+    			uri : "/exist.wish",
     			type : "get",
     			data:{
     				musicSeq : musicList[playIndex].musicSeq	
@@ -475,8 +478,8 @@
     		});
     		wishIsExist();
     	});
-    	
-    	
+    	    	
+		}
     	
     	
     </script>

@@ -60,6 +60,27 @@
 .tog {
    top: 130px;
 }
+.header, #header2{
+	height:20px;
+}
+.header>div, #header2>div{
+	float:left;
+}
+#qnaSeqHeader, #qnaSeq{
+	width : 5%;
+}
+#qnaCategoryHeader, #qnaWriteDateHeader, #qnaCategory, #qnaWriteDate {
+	width : 10%;
+}
+#qnaTitleHeader, #qnaTitle {
+	width : 20%;
+}
+#qnaWriterHeader, #qnaWriter {
+	width : 15%;
+}
+#contents{
+	width : 800px;
+}
 
 </style>
 </head>
@@ -94,26 +115,28 @@
          <div class="adminMainView">
             <div class="mainText">문의내역 확인</div>
             <br>
-            <hr>
-            <c:choose>
-            	<c:when test = "${not empty noticeBoardList }">
-            		<c:forEach var = "i" items = "${noticeBoardList }">
-            			<div class="noticeList">            				
-            				<div id="noticeSeq">${i.noticeSeq }</div>
-            				<div id="noticeCategory">${i.noticeCategory }</div>
-            				<div id="noticeTitle">${i.noticeTitle }</div>
-            				<div id="noticeWriter">${i.noticeWriter }</div>
-            				<div id="noteceWriteDate">${i.noticeWriteDate }</div>
-            			</div>
-            		</c:forEach>            		
-            	</c:when>
-            	<c:otherwise>
-            		<div>글이 없습니다.</div>
-            	</c:otherwise>
-            </c:choose>
-            <div id="writeBtn">공지사항 쓰기</div>
-            
+            <hr>   
          </div>
+         <div class="header">
+         			<div id="qnaSeqHeader">문의 번호</div>
+            		<div id="qnaCategoryHeader">문의 유형</div>
+            		<div id="qnaTitleHeader">제목</div>
+            		<div id="qnaWriterHeader">작성자</div>
+            		<div id="qnaWriteDateHeader">문의 날짜</div>
+            </div>
+            	<div id="header2">            				
+            		<div id="qnaSeq">${qnaBoard.qnaSeq }</div>
+            		<div id="qnaCategory">${qnaBoard.qnaCategory }</div>
+            		<div id="qnaTitle">${qnaBoard.qnaTitle }</div>
+            		<div id="qnaWriter">${qnaBoard.qnaWriter }</div>
+            		<div id="qnaWriteDate">${qnaBoard.qnaWriteDate }</div>
+            	</div>
+            	<div id="contents">
+            		${qnaBoard.qnaContents }
+            		<div>
+                 		첨부파일 : <a href="/download.file?sysname=${boardFile.sysName }&oriname=${boardFile.oriName}">${boardFile.oriName }</a> 
+            		</div>
+            	</div>
       </div>
    </div>
    <script>
@@ -121,10 +144,6 @@
       let adminBtn = document.getElementById("mypage");
       $(adminBtn).click(function() {
          $(this).next(".tog").fadeToggle();
-      });
-      
-      $("#writeBtn").on("click", function(){
-			location.href = "/admin/adminNotice/noticeWrite.jsp"; 
       });
       
    </script>
