@@ -75,7 +75,7 @@
 						<ul class="tog">
 							<li><a id="mypageBtn">마이페이지</a></li>
 							<c:choose>
-								<c:when test="${loginEmail eq 'podo@email.com'}">
+								<c:when test="${loginMembership eq 'admin'}">
 									<li><a href="/admin/adminIndex.jsp">관리자페이지</a></li>
 								</c:when>
 							</c:choose>
@@ -121,7 +121,8 @@
 
 		<iframe src="/main/main.jsp" width="100%" height="100%"
 			style="display: block; padding-left: 230px" id="iframe"></iframe>
-
+		<c:choose>
+		<c:when test="${loginMembership eq 'admin' || loginMembership eq 'vip'}">
 		<div id="MusicControl">
 			<div class="hidden">
 				<h1>hidden</h1>
@@ -139,6 +140,7 @@
 					<li>
 						<button>
 							<span class="material-symbols-rounded" id="wish" data-wish="false"> favorite </span>
+<!-- 								<img src="/image/web/favorite_fill0.png"> -->
 						</button>
 					</li>
 					<li>
@@ -175,6 +177,8 @@
 				</ul>
 			</div>
 		</div>
+		</c:when>
+		</c:choose>
 	</div>
 
 	<script>
@@ -323,11 +327,12 @@
     				musicSeq : musicList[playIndex].musicSeq	
     			}
     		}).done(function(resp){    			
-    			let result = resp;
-    			if (result=="true") {
-    				$("#wish").html("Heart Plus");
-    			} else {
+    			let result = JSON.parse(resp);
+    			console.log(result);
+    			if (result=="false") {
     				$("#wish").html("favorite");
+    			} else {
+    				$("#wish").html("Heart plus");
     			}
     		});
     	};

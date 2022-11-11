@@ -2,7 +2,6 @@ package Controller;
 
 import java.io.File;
 import java.io.IOException;
-import java.util.Enumeration;
 import java.util.List;
 
 import javax.servlet.ServletException;
@@ -87,7 +86,17 @@ public class QnaBoard extends HttpServlet {
 				String navi = dao.getPageNavi(cpage);
 				request.setAttribute("qna", qna);
 				request.setAttribute("navi", navi);
-				request.getRequestDispatcher("/admin/adminQna.jsp?cpage=1").forward(request, response);
+				request.getRequestDispatcher("/admin/adminQnaBoard/adminQna.jsp?cpage=1").forward(request, response);
+			} else if (uri.equals("adminQnaDetail.board")) {
+				QnaBoardDAO dao = QnaBoardDAO.getInstance();
+				int qnaSeq = Integer.parseInt(request.getParameter("qnaSeq"));
+				QnaBoardDTO qnaBoardDto = dao.isSelect(qnaSeq);
+				BoardFilesDAO boardFilesDao = BoardFilesDAO.getInstance();
+				BoardFilesDTO boardFilesDto = boardFilesDao.select(qnaSeq);
+				
+				request.setAttribute("boardFilesDto", boardFilesDto);
+				request.setAttribute("qnaBoardDto", qnaBoardDto);
+				request.getRequestDispatcher("/admin/adminQnaBoard/adminQnaDetail.jsp").forward(request, response);
 			}
 		} catch (
 

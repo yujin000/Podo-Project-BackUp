@@ -33,8 +33,10 @@ public class Wish extends HttpServlet {
 				String parentMusicSeq = request.getParameter("musicSeq"); // 위시리스트 음원 번호
 				WishDTO dto = new WishDTO(WishEmail, parentMusicSeq);
 				boolean isExist = WishDAO.getInstance().isExist(dto);
-				System.out.println(String.valueOf(isExist));
-				response.getWriter().append(String.valueOf(isExist));
+				System.out.println(isExist);
+				Gson g = new Gson();
+				String jsonString = g.toJson(String.valueOf(isExist));
+				response.getWriter().append(jsonString);
 			}
 		} catch (Exception e) {
 			e.printStackTrace();

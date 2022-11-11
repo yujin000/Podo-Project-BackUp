@@ -56,6 +56,7 @@ public class Member extends HttpServlet {
 					request.getSession().setAttribute("loginName", dto.getName());
 					request.getSession().setAttribute("loginPhone", dto.getPhone());
 					request.getSession().setAttribute("scribDate", dto.getScribeDate());
+					request.getSession().setAttribute("loginMembership", dto.getMembership());
 					
 					response.sendRedirect("/chart.music");
 				} 
@@ -74,7 +75,7 @@ public class Member extends HttpServlet {
 				
 			 else if (uri.equals("/logout.member")) {
 				request.getSession().invalidate();
-				response.sendRedirect("index.jsp");
+				response.sendRedirect("/index.jsp");
 			} else if (uri.equals("/mypage.member")) {
 				MemberDAO dao = MemberDAO.getInstance();
 				MemberDTO dto = dao.getMypage(request.getSession().getAttribute("loginEmail").toString());

@@ -169,7 +169,7 @@
 		</div>
 		<div class="adminContents">
 			<div class="adminMainHeader">
-				<span id="adminHeaderHello"> ${nickname }님 환영합니다. </span><br> <span
+				<span id="adminHeaderHello"> ${loginNickname }님 환영합니다. </span><br> <span
 					id="nowTime"> 2022년 11월 02일 / 11시 11분 </span>
 
 			</div>
