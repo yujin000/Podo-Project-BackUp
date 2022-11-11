@@ -61,6 +61,14 @@
    top: 130px;
 }
 
+.noticeList {
+	height : 30px;
+}
+
+.noticeList>div, .header>div{
+	float:left;
+}
+
 </style>
 </head>
 
@@ -95,6 +103,13 @@
             <div class="mainText">공지사항 관리</div>
             <br>
             <hr>
+            <div class="header">
+            	<div>번호</div>
+            	<div>유형</div>
+            	<div>제목</div>
+            	<div>작성자</div>
+            	<div>작성날짜</div>
+            </div>
             <c:choose>
             	<c:when test = "${not empty noticeBoardList }">
             		<c:forEach var = "i" items = "${noticeBoardList }">

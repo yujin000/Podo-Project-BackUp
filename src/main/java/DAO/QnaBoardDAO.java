@@ -165,6 +165,7 @@ public class QnaBoardDAO {
 					rs.next();
 					QnaBoardDTO dtoDetail = new QnaBoardDTO();
 					dtoDetail.setQnaSeq(qnaSeq);
+					dtoDetail.setQnaWriter(rs.getString("qnaWriter"));
 					dtoDetail.setQnaTitle(rs.getString("qnaTitle"));
 					dtoDetail.setQnaContents(rs.getString("qnaContents"));
 					dtoDetail.setQnaWriteDate(rs.getTimestamp("qnaWriteDate"));

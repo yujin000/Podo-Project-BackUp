@@ -56,7 +56,7 @@ public class NoticeBoardDAO {
 				dto.setNoticeSeq(rs.getInt("noticeSeq"));
 				dto.setNoticeWriter(rs.getString("noticeWriter"));
 				dto.setNoticeTitle(rs.getString("noticeTitle"));
-				dto.setNoticeContents(rs.getString("noticeCotents"));
+				dto.setNoticeContents(rs.getString("noticeContents"));
 				dto.setNoticeWriteDate(rs.getTimestamp("noticeWriteDate"));
 				dto.setNoticeCategory(rs.getString("noticeCategory"));
 				noticeBoardList.add(dto);				

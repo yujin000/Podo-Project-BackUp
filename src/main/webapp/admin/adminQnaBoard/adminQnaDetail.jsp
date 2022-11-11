@@ -61,7 +61,7 @@
    top: 130px;
 }
 .header, #header2{
-	height:20px;
+	height:30px;
 }
 .header>div, #header2>div{
 	float:left;
@@ -132,6 +132,7 @@
             		<div id="qnaWriteDate">${qnaBoard.qnaWriteDate }</div>
             	</div>
             	<div id="contents">
+            		<div>문의 내용</div>
             		${qnaBoard.qnaContents }
             		<div>
                  		첨부파일 : <a href="/download.file?sysname=${boardFile.sysName }&oriname=${boardFile.oriName}">${boardFile.oriName }</a> 

@@ -35,10 +35,11 @@ public class NoticeBoard extends HttpServlet {
 				NoticeBoardDAO dao = NoticeBoardDAO.getInstance();
 				List<NoticeBoardDTO> noticeBoardList = dao.selectNotice();
 				request.setAttribute("noticeBoardList", noticeBoardList);
-				request.getRequestDispatcher("/admin/adminNotice/adminNotice.jsp");				
+				request.getRequestDispatcher("/admin/adminNotice/adminNotice.jsp").forward(request, response);				
 			}
 		} catch (Exception e) {
-			
+			e.printStackTrace();
+			response.sendRedirect("/error.jsp");
 		}
 	}
 
