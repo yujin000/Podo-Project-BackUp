@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"  %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -144,7 +145,17 @@ div {
 	background-origin: border-box;
 	background-clip: content-box, border-box;
 }
-
+.proText{
+	margin-top:40px;
+	font-size:25px;
+	font-weight:bold;
+	color:white;
+}
+.proPriceText{
+	color:#FF0050;
+	font-size:20px;
+	margin-top:80px;
+}
 #mainGoods>a:nth-child(3)>div, #mainGoods>a:nth-child(4)>div {
 	margin-left: 50px;
 	background-color: transparent;
@@ -179,6 +190,16 @@ div {
 	width:80%;
 	margin:auto;
 	height:500px;
+}
+#selectInfo{
+	width:100%;
+	margin:auto;
+	height:200px;
+	border:1px solid #FF0050;
+	overflow:none;
+	border-radius: 5px;
+	line-height:200px;
+	margin-top:100px;
 }
 
 /* 결제화면 */
@@ -216,14 +237,15 @@ div {
 				<c:choose>
 					<c:when test="${not empty promotionGoods }">
 						<c:forEach var="list" items="${promotionGoods }">
-						<a href="#goodsInfo" class="promotion">
+						<a href="#goodsInfo" class="promotion" info="${list.payGoodsInfo }">
 							<div class="listWrap" id="promotion">
-								<input type="hidden" value="${list.payGoodsSeq }"
-									id="promotionSeq">
-									<input type="text" value="${list.payGoodsName }" readonly>
-									<input type="text" value="${list.payGoodsPrice }" class="promotionPrice" readonly>
-									<input type="text" value="${list.payGoodsExp }" readonly>
-									<input type="text" value="${list.payGoodsType }" readonly>
+							<br>
+							<ul>
+								<li class="proText">${list.payGoodsName }</li>
+								<li class="proPriceText">월 <fmt:formatNumber value="${list.payGoodsPrice }" pattern="#,###"/>원 부터</li>
+							</ul>
+								<input type="hidden" value="${list.payGoodsPrice }" class="promotionPrice" readonly>
+								<input type="hidden" value="${list.payGoodsSeq }" id="promotionSeq">
 							</div>
 						</a>
 						</c:forEach>
@@ -232,14 +254,15 @@ div {
 				<c:choose>
 					<c:when test="${not empty eventGoods }">
 						<c:forEach var="list" items="${eventGoods }">
-						<a href="#goodsInfo" class="eventGoods">
+						<a href="#goodsInfo" class="eventGoods" info="${list.payGoodsInfo }">
 							<div class="listWrap">
+							<br>
+							<ul>
+								<li class="proText">${list.payGoodsName }</li>
+								<li class="proPriceText">월 <fmt:formatNumber value="${list.payGoodsPrice }" pattern="#,###"/>원 부터</li>
+							</ul>
 								<input type="hidden" value="${list.payGoodsSeq }" readonly>
-									<input type="text" value="${list.payGoodsName }" readonly>
-									<input type="text" value="${list.payGoodsPrice }"
-										class="eventPrice" readonly>
-									<input type="text" value="${list.payGoodsExp }" readonly>
-									<input type="text" value="${list.payGoodsType }" readonly>
+								<input type="hidden" value="${list.payGoodsPrice }" class="eventPrice" readonly>
 							</div>
 							</a>
 						</c:forEach>
@@ -248,7 +271,10 @@ div {
 			</div>
 			<hr id="hr">
 			<div id="goodsInfo">
-				<br><small style="font-size:25px; font-weight:bold;">멤버십 혜택을 확인하세요</small>
+				<br><span style="font-size:25px; font-weight:bold;">멤버십 혜택을 확인하세요</span>
+				<div id="selectInfo">
+					
+				</div>
 				
 			</div>
 			<div id="payment">
@@ -322,6 +348,7 @@ div {
 		
 		/* 이벤트 상품 클릭시 border color 설정 및 상품상세정보(info), 결제하기 버튼에 가격 출력 */
 		let price = 0;
+		
 		let userEmail = user.value;
 		
 			/* 프로모션 상품 */
@@ -343,9 +370,13 @@ div {
 				"color":"white",
 				"border":"1px solid #FF0050"
 			});
-			$("#payBtn").text(price + "원 결제하기");
+			$("#payBtn").text(price.replace(/\B(?=(\d{3})+(?!\d))/g, ",") + "원 결제하기");
 			$("#payBtn").attr("price",price);
 			warning.remove();
+			
+			$("#selectInfo").text("");
+			let info = $(this).attr("info");
+			$("#selectInfo").append(info);
 		})
 
 			/* 이벤트 상품 */
@@ -369,9 +400,13 @@ div {
 				"color":"white",
 				"border":"1px solid #FF0050"
 			});
-			$("#payBtn").text(price + "원 결제하기");
+			$("#payBtn").text(price.replace(/\B(?=(\d{3})+(?!\d))/g, ",") + "원 결제하기");
 			$("#payBtn").attr("price",price);
 			warning.remove();
+			
+			$("#selectInfo").text("");
+			let info = $(this).attr("info");
+			$("#selectInfo").append(info);
 		})
 		
 		/* 결제하기 버튼 클릭시 결제하기 팝업 및 결제(로그인 여부 확인) */
