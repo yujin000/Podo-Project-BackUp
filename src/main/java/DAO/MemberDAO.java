@@ -150,7 +150,6 @@ public class MemberDAO {
 		}
 		
 		authCode = temp.toString();
-		System.out.println(authCode);
 		
 		return authCode;
 	}
@@ -284,7 +283,7 @@ public class MemberDAO {
 	}
 	
 	public int startMemberShip(String email) throws Exception {
-		String sql = "update member set membership=? ,scribedate = sysdate where email=? ";
+		String sql = "update member set membership=vip ,scribedate = sysdate where email=? ";
 		try (Connection con = this.getConnection(); PreparedStatement pstat = con.prepareStatement(sql);) {
 			pstat.setString(1, email);
 			int result = pstat.executeUpdate();

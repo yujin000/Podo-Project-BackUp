@@ -3,6 +3,7 @@ package Controller;
 import java.io.File;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.sql.Timestamp;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -54,6 +55,8 @@ public class Member extends HttpServlet {
 					request.getSession().setAttribute("loginNickname", dto.getNickname());
 					request.getSession().setAttribute("loginName", dto.getName());
 					request.getSession().setAttribute("loginPhone", dto.getPhone());
+					request.getSession().setAttribute("scribDate", dto.getScribeDate());
+					
 					response.sendRedirect("/chart.music");
 				} 
 					 else {

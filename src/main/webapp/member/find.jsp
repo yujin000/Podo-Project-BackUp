@@ -8,6 +8,11 @@ uri="http://java.sun.com/jsp/jstl/core"%>
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Document</title>
+     <script
+      src="https://code.jquery.com/jquery-3.6.1.min.js"
+      integrity="sha256-o88AwQnZB+VDvE9tvIXrMQaPlFFSUTR+nldQm1LuPXQ="
+      crossorigin="anonymous"
+    ></script>
     <style>
       /* 기본 Reset css 셋팅입니다 지우지 마세요 */
       @import url(../src/css/reset.css);
@@ -130,11 +135,7 @@ uri="http://java.sun.com/jsp/jstl/core"%>
         display: none; /* Chrome, Safari, Opera*/
       }
     </style>
-    <script
-      src="https://code.jquery.com/jquery-3.6.1.min.js"
-      integrity="sha256-o88AwQnZB+VDvE9tvIXrMQaPlFFSUTR+nldQm1LuPXQ="
-      crossorigin="anonymous"
-    ></script>
+   
   </head>
   <body>
     <div class="wrap">
@@ -242,7 +243,10 @@ uri="http://java.sun.com/jsp/jstl/core"%>
         $("#numberCheck").click(function () {
           let result = $("#number").val() == $("#message").val();
           if ($("#number").val() == "") {
-            $("#number").val("");
+        	  $("#number")
+              .next("#msg")
+              .css("color", "red")
+              .text("인증번호를 입력해주세요.");
           } else if (!result) {
             $("#number")
               .next("#msg")
