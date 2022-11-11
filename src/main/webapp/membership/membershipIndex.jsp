@@ -10,6 +10,8 @@
 	integrity="sha256-o88AwQnZB+VDvE9tvIXrMQaPlFFSUTR+nldQm1LuPXQ="
 	crossorigin="anonymous"></script>
 	<link href="https://hangeul.pstatic.net/hangeul_static/css/nanum-square-neo.css" rel="stylesheet">
+	<script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+	<script type="text/javascript" src="https://cdn.iamport.kr/js/iamport.payment-1.1.5.js"></script>
 <style>
 @import url(src/css/reset.css);
 /* system font */
@@ -30,11 +32,12 @@ body::-webkit-scrollbar {
 }
 
 div {
-	border: 1px solid lightblue;
+	/*border: 1px solid lightblue;*/
 }
 
 .container {
 	width: 100vw;
+	margin-bottom:200px;
 }
 
 @media ( max-width :1500px) {
@@ -47,14 +50,41 @@ div {
 	height: 60px;
 	width: 100%;
 	overflow: hidden;
+	text-align:center;
 }
 
 #Header>div:first-child, #Header>div:nth-child(2) {
-	float: left;
 	height: 100%;
 	margin: auto;
+	display: inline-block;
+	line-height:50px;
+	position:relative;
 }
 
+#Header>div:nth-child(2) {
+	margin-left:20px;
+}
+
+#Header>div:first-child:hover, #Header>div:nth-child(2):hover {
+	cursor:pointer;
+}
+
+#subscribe::after,#myMembership::after {
+    content: "";
+    position: absolute;
+    bottom: 18px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 0%;
+    height: 3px;
+    background: #ff00d7;
+    transition: all .1s ease-out;
+    border-radius: 5px;
+}
+
+#subscribe:hover::after, #myMembership:hover::after {
+    width: 100%;
+}
 /* 멤버십 구독 영역 */
 
 /* 멤버십 - 이벤트 라벨 */
@@ -104,22 +134,20 @@ div {
 	float: left;
 	width: 280px;
 	height: 260px;
-	margin: 50px 0px 50px 0px;
+	margin: 100px 0px 150px 0px;
 	border-radius: 5px;
 }
 
 #promotion {
-	background-image: linear-gradient(#000, #000),
-		linear-gradient(to right, #3e065f 0%, #ff00d7 100%);
-	border: 1px solid transparent;
+	border: 2px solid #FF0050;
 	border-radius: 5px;
 	background-origin: border-box;
 	background-clip: content-box, border-box;
 }
 
-#mainGoods>div:nth-child(3), #mainGoods>div:nth-child(4) {
+#mainGoods>a:nth-child(3)>div, #mainGoods>a:nth-child(4)>div {
 	margin-left: 50px;
-	background-color: #000;
+	background-color: transparent;
 	border: 1px solid silver;
 }
 
@@ -134,31 +162,45 @@ div {
 #eventSticker {
 	position: absolute;
 	border-radius: 30px;
-	top: 40px;
+	top: 90px;
 	left: 110px;
-	background-color: #ff00d7;
+	background-color: #FF0050;
 	z-index: 999;
 	width: 60px;
 	text-align: center;
 	border:none;
 }
 /* 상품 설명 */
+#hr{
+	width:80%;
+	margin:auto;
+}
 #goodsInfo {
-	margin-top: 50px;
-	text-align: center;
+	width:80%;
+	margin:auto;
 	height:500px;
 }
 
 /* 결제화면 */
 #payment{
-	text-aligh:center;
+	text-align:center;
 }
+#payBtn{
+	border:1px solid silver;
+	background-color:#111;
+	height:50px;
+	color:silver;
+	width:80%;
+	border-radius: 5px;
+	font-size:20px;
+}
+
 </style>
 </head>
 <body>
 	<div class="container" id="wrap1">
 		<div id="Header">
-			<a id="subscribe">멤버십 구독</a> <a id="myMembership">My멤버십</a>
+			<div id="subscribe">멤버쉽 구독</div> <div id="myMembership">My멤버십</div>
 		</div>
 		<!-- 멤버십 구독 -->
 		<div id="subscribeArea">
@@ -174,54 +216,45 @@ div {
 				<c:choose>
 					<c:when test="${not empty promotionGoods }">
 						<c:forEach var="list" items="${promotionGoods }">
+						<a href="#goodsInfo" class="promotion">
 							<div class="listWrap" id="promotion">
 								<input type="hidden" value="${list.payGoodsSeq }"
-									id="promotionSeq" readonly>
-								<div class="navi1">
+									id="promotionSeq">
 									<input type="text" value="${list.payGoodsName }" readonly>
-								</div>
-								<div class="navi2">
 									<input type="text" value="${list.payGoodsPrice }" class="promotionPrice" readonly>
-								</div>
-								<div class="navi3">
 									<input type="text" value="${list.payGoodsExp }" readonly>
-								</div>
-								<div class="navi4">
 									<input type="text" value="${list.payGoodsType }" readonly>
-								</div>
 							</div>
+						</a>
 						</c:forEach>
 					</c:when>
 				</c:choose>
 				<c:choose>
 					<c:when test="${not empty eventGoods }">
 						<c:forEach var="list" items="${eventGoods }">
-							<div class="listWrap eventGoods">
+						<a href="#goodsInfo" class="eventGoods">
+							<div class="listWrap">
 								<input type="hidden" value="${list.payGoodsSeq }" readonly>
-								<div class="navi1">
 									<input type="text" value="${list.payGoodsName }" readonly>
-								</div>
-								<div class="navi2">
 									<input type="text" value="${list.payGoodsPrice }"
 										class="eventPrice" readonly>
-								</div>
-								<div class="navi3">
 									<input type="text" value="${list.payGoodsExp }" readonly>
-								</div>
-								<div class="navi4">
 									<input type="text" value="${list.payGoodsType }" readonly>
-								</div>
 							</div>
+							</a>
 						</c:forEach>
 					</c:when>
 				</c:choose>
 			</div>
-			<hr>
-			<div id="goodsInfo">상품 설명</div>
-			<div id="payment">
-				<button type=button id="payBtn"style="width:100%" price="">결제하기</button>
+			<hr id="hr">
+			<div id="goodsInfo">
+				<br><small style="font-size:25px; font-weight:bold;">멤버십 혜택을 확인하세요</small>
+				
 			</div>
-			<!-- 버튼누르면 (해당하는 상품의 가격)원 결제하기 -->
+			<div id="payment">
+				<button type=button id="payBtn" price="">결제하기</button>
+			</div>
+			<!-- 버튼누르면 (해당하는 상품의 가격)원 결제하기 
 			<div id="otherproduct">
 				다른 상품들
 				<c:choose>
@@ -240,73 +273,176 @@ div {
 						</c:forEach>
 					</c:when>
 				</c:choose>
-			</div>
+			</div>-->
 		</div>
 		<!-- My 멤버십 -->
 		<div id="myMembershipArea">My멤버십</div>
+		<input type="hidden" value="${loginEmail }" id="user">
 	</div>
 	<script>
-		/* 헤더 네비게이션 이벤트(해당 메뉴 선택시 display속성 변동) */
+		/* 헤더 네비게이션 이벤트( 페이지 전환 : 해당 메뉴 선택시 display속성 변동, 아래 바 추가 ) */
+		let bar = $("<div>");
+			bar.css({
+			    "position": "absolute",
+			    "bottom": "18px",
+			    "left": "50%",
+			    "transform": "translateX(-50%)",
+			    "width": "100%",
+			    "height": "3px",
+			    "background": "#ff00d7",
+			    "border-radius": "5px"
+			});
+			
+		$(function(){
+			$("#subscribe").append(bar);
+		})
+		
 		$("#subscribe").on("click", function() {
+			$(this).remove(bar);
+			$(this).append(bar);
 			$("#myMembershipArea").css("display", "none");
 			$("#subscribeArea").css("display", "block");
 		})
-
+		
+		/*$("#subscribe").on("mouseover",function(){
+			$("#myMembershipArea").remove(bar);
+		})*/
+		
 		$("#myMembership").on("click", function() {
+			$(this).remove(bar);
+			$(this).append(bar);
 			$("#myMembershipArea").css("display", "block");
 			$("#subscribeArea").css("display", "none");
 		})
 
+		/* 결제하기 버튼 호버 이벤트 */
+		$("#payBtn").on("mouseover",function(){
+			$(this).css("cursor","pointer");
+		})
+		
 		/* 이벤트 상품 클릭시 border color 설정 및 상품상세정보(info), 결제하기 버튼에 가격 출력 */
 		let price = 0;
+		let userEmail = user.value;
+		
 			/* 프로모션 상품 */
-		$("#promotion").on("click",function(){
-			$(this).css({
-				"background-image": "linear-gradient(#000, #000),linear-gradient(to right, #3e065f 0%, #ff00d7 100%)",
-				"border": "1px solid transparent",
+		$(".promotion").on("click",function(){
+			event.preventDefault();
+            $('html,body').animate({scrollTop:$(this.hash).offset().top}, 800);
+			$(this).find("#promotion").css({
+				"border": "2px solid #FF0050",
 				"border-radius": "5px",
 				"background-origin": "border-box",
 				"background-clip": "content-box, border-box"
 			})
-			$(this).nextAll("div").css("border","1px solid silver");
+			$(this).nextAll("a").find("div").css("border","1px solid silver");
+			
 			price = $(this).find(".promotionPrice").val();
+			
+			$("#payBtn").css({
+				"background-color":"#FF0050",
+				"color":"white",
+				"border":"1px solid #FF0050"
+			});
 			$("#payBtn").text(price + "원 결제하기");
 			$("#payBtn").attr("price",price);
 			warning.remove();
 		})
+
 			/* 이벤트 상품 */
 		$(".eventGoods").on("click",function(){
-			$(this).css({
-				"background-image": "linear-gradient(#000, #000),linear-gradient(to right, #3e065f 0%, #ff00d7 100%)",
-				"border": "1px solid transparent",
+			event.preventDefault();
+            $('html,body').animate({scrollTop:$(this.hash).offset().top}, 800);
+			$(this).find(".listWrap").css({
+				"border": "2px solid #FF0050",
 				"border-radius": "5px",
 				"background-origin": "border-box",
 				"background-clip": "content-box, border-box"
 			})
-			$(this).next("div").css("border","1px solid silver");
-			$(this).prev("div").css("border","1px solid silver");
-			$(this).prev("#promotion").css("border","1px solid silver");
+			$(this).next("a").find("div").css("border","1px solid silver");
+			$(this).prev("a").find("div").css("border","1px solid silver");
+			$(this).prev("a").prev("a").find("div").css("border","1px solid silver");
+			
 			price = $(this).find(".eventPrice").val();
+			
+			$("#payBtn").css({
+				"background-color":"#FF0050",
+				"color":"white",
+				"border":"1px solid #FF0050"
+			});
 			$("#payBtn").text(price + "원 결제하기");
 			$("#payBtn").attr("price",price);
 			warning.remove();
 		})
 		
-		/* 결제하기 버튼 클릭시 결제하기 팝업 및 결제 */
+		/* 결제하기 버튼 클릭시 결제하기 팝업 및 결제(로그인 여부 확인) */
 		let warning = $("<div>");
 			warning.css({
 				"color":"red",
 				"text-align":"center"
 			})
 			warning.text("결제할 상품을 선택해주세요.")
-			
+			/* 비회원이 결제하기 접근 시 로그인 팝업창(현재 사용 X)*/
+		function signIn() {
+			var url = "/member/loginForm.jsp";
+            var name = "popup";
+            var option = "width = 500, height = 700, top = 100, left = 200, location = no"
+            var popup = window.open(url, name, option);
+		    popup.onbeforeunload=function (){
+		        window.parent.location.reload();
+		    }
+		}	
+			/* 결제하기 */
 		$("#payBtn").on("click",function(){
-			if(price == 0){
-				$("#goodsInfo").after(warning);
+			if(userEmail == ""){
+				alert("로그인 후 이용할 수 있습니다.");
+				/*signIn();
+				location.href = "/member/loginForm.jsp";
+				setTimeout(function(){
+					 if(userEmail != ""){
+							window.parent.location.reload();
+						}
+                 },10000);*/
+				
+				
 			}else{
-				warning.remove();
-				let target = $(this).attr("price");
-				location.href = "/payment.goods?price=" + target;
+				if(price == 0){
+					$("#goodsInfo").after(warning);
+				}else{
+					warning.remove();
+					let price = $(this).attr("price");
+					
+					var IMP = window.IMP;
+		            IMP.init('imp66837815');
+		            IMP.request_pay({
+		                pg: "kakaopay",
+		                pay_method: 'card',
+		                merchant_uid: 'merchant_' + new Date().getTime(),
+		                name: '결제',
+		                amount: price,
+		                buyer_email: userEmail,
+		                buyer_name: '구매자 이름',
+		                m_redirect_url: 'redirect url'
+		            }, function (rsp) {
+		                if (rsp.success) {
+		                    var msg = '결제가 완료되었습니다.';
+		                    Swal.fire({
+		                    	  position: 'center',
+		                    	  icon: 'success',
+		                    	  title: '결제가 완료되었습니다.',
+		                    	  showConfirmButton: false,
+		                    	  timer: 2000
+		                    })
+		                    setTimeout(function(){
+		                    	location.href = "/mypage.member";
+		                    },2100);
+		                } else {
+		                    var msg = '결제에 실패하였습니다.';
+		                    rsp.error_msg;
+		                }
+		            });
+
+					/*location.href = "/payment.goods?price=" + target;*/
+				}
 			}
 		})
 
