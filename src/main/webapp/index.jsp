@@ -314,6 +314,27 @@
     		loadMusic(playIndex);    		
     		playMusic();
     	}
+    	
+    	// 위시리스트 여부에 따라 하트모양을 바꿔주는 함수
+    	function wishIsExist(){
+    		$.ajax({
+    			uri : "/isExist.wish",
+    			type : "get",
+    			data:{
+    				musicSeq : musicList[playIndex].musicSeq	
+    			}
+    		}).done(function(resp){    			
+    			let result = resp;
+    			if (result=="true") {
+    				$("#wish").html("Heart Plus");
+    			} else {
+    				$("#wish").html("favorite");
+    			}
+    		});
+    	};
+    	
+    	// 처음 페이지에서 위시리스트 여부를 판별해준다.
+    	wishIsExist();
     	    	
     	// 컨트롤러 타이머 구현
     	playAudio.addEventListener("timeupdate", e=>{
@@ -445,7 +466,10 @@
     				musicSeq : musicList[playIndex].musicSeq	
     			}    				
     		});
+    		wishIsExist();
     	});
+    	
+    	
     	
     	
     </script>

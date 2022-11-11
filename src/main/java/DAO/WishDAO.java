@@ -2,6 +2,7 @@ package DAO;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 
 import javax.naming.Context;
 import javax.naming.InitialContext;
@@ -29,13 +30,26 @@ public class WishDAO {
 		String sql = "insert into wishList values(?, ?)";
 		
 		try (Connection con = this.getConnection();
-				PreparedStatement pstat = con.prepareCall(sql);) {
+				PreparedStatement pstat = con.prepareStatement(sql);) {
 			pstat.setString(1, dto.getWishEmail());
 			pstat.setString(2, dto.getParentMusicSeq());
 						
 			int result = pstat.executeUpdate();
 			con.commit();
 			return result;
+		}
+	}
+	
+	public boolean isExist(WishDTO dto) throws Exception {
+		String sql = "selet * from wishList where wishEmail = ? and parentSeq = ?";
+		
+		try (Connection con = this.getConnection();
+				PreparedStatement pstat = con.prepareStatement(sql);) {
+			pstat.setString(1, dto.getWishEmail());
+			pstat.setString(2, dto.getParentMusicSeq());
+			
+			ResultSet rs = pstat.executeQuery();
+			return rs.next();
 		}
 	}
 }

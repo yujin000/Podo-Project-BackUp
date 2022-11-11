@@ -61,6 +61,16 @@
    top: 130px;
 }
 
+.header>div{
+	float: left;
+}
+.header{
+	height:10%;
+}
+.qnaList>div{
+	float:left;
+}
+
 </style>
 </head>
 
@@ -86,24 +96,34 @@
                <li><a id="chart">공연 관리</a></li>
                <li><a href="#">회원 관리</a></li>
                <li><a href="/adminMemship.admin">멤버십 관리</a></li>
-               <li><a href="#">문의내역 확인</a></li>
+               <li><a href="/adminList.board?cpage=1">문의내역 확인</a></li>
             </ul>
          </div>
       </div>
       <div class="adminContents">
          <div class="adminMainView">
-            <div class="mainText">공지사항 관리</div>
+            <div class="mainText">문의내역 확인</div>
             <br>
-            <hr>
-            <c:choose>
-            	<c:when test = "${not empty noticeBoardList }">
-            		<c:forEach var = "i" items = "${noticeBoardList }">
-            			<div class="noticeList">            				
-            				<div id="noticeSeq">${i.noticeSeq }</div>
-            				<div id="noticeCategory">${i.noticeCategory }</div>
-            				<div id="noticeTitle">${i.noticeTitle }</div>
-            				<div id="noticeWriter">${i.noticeWriter }</div>
-            				<div id="noteceWriteDate">${i.noticeWriteDate }</div>
+            <hr>                        
+         </div>
+         <div class="header">
+         			<div id="qnaSeqHeader">문의 번호</div>
+            		<div id="qnaCategoryHeader">문의 유형</div>
+            		<div id="qnaTitleHeader">제목</div>
+            		<div id="qnaWriterHeader">작성자</div>
+            		<div id="qnaWriteDateHeader">문의 날짜</div>
+            		<div id="qnaStatusHeader">답변 상태</div>
+            	</div>
+            <c:choose>            	
+            	<c:when test="${not empty qna }">
+            		<c:forEach var = "i" items = "${qna }">
+            			<div class="qnaList">
+            				<div id="qnaSeq">${i.qnaSeq }</div>            				
+            				<div id="qnaCategory">${i.qnaCategory }</div>
+            				<div id="qnaTitle">${i.qnaTitle }</div>
+            				<div id="qnaWriter">${i.qnaWriter }</div>
+            				<div id="qnaWriteDate">${i.qnaWriteDate }</div>
+            				<div id="qnaStatus"></div>
             			</div>
             		</c:forEach>            		
             	</c:when>
@@ -111,9 +131,6 @@
             		<div>글이 없습니다.</div>
             	</c:otherwise>
             </c:choose>
-            <div id="writeBtn">공지사항 쓰기</div>
-            
-         </div>
       </div>
    </div>
    <script>

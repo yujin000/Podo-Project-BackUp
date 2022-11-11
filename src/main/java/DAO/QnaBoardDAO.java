@@ -136,6 +136,28 @@ public class QnaBoardDAO {
 			}
 		}
 		
+		public List<QnaBoardDTO> selectAll(int start, int end) throws Exception {
+			String sql = "select * from (select qnaBoard.*, row_number() over(order by qnaSeq desc) rn from qnaBoard) where rn between ? and ?";
+			try (Connection con = this.getConnection(); PreparedStatement pstat = con.prepareStatement(sql);) {
+				pstat.setInt(1, start);
+				pstat.setInt(2, end);
+				try (ResultSet rs = pstat.executeQuery();) {
+					List<QnaBoardDTO> qna = new ArrayList<>();
+					while (rs.next()) {
+						QnaBoardDTO dto = new QnaBoardDTO();
+						dto.setQnaSeq(rs.getInt("qnaSeq"));
+						dto.setQnaWriter(rs.getString("qnaWriter"));
+						dto.setQnaTitle(rs.getString("qnaTitle"));
+						dto.setQnaContents(rs.getString("qnaContents"));
+						dto.setQnaWriteDate(rs.getTimestamp("qnaWriteDate"));
+						dto.setQnaCategory(rs.getString("qnaCategory"));
+						qna.add(dto);
+					}
+					return qna;
+				}
+			}
+		}
+		
 		public QnaBoardDTO isSelect(int qnaSeq) throws Exception {
 			String sql = "select * from qnaBoard where qnaSeq=?";
 			try (Connection con = this.getConnection(); PreparedStatement pstat = con.prepareStatement(sql);) {
