@@ -48,6 +48,64 @@ public class PayGoodsDAO {
 		}
 	}
 	
+	public List<PayGoodsDTO> selectNormalGoods()throws Exception{
+		String sql = "select * from paygoods where paygoodstype='이용권' order by payGoodsSeq";
+		try(Connection con = this.getConnection(); PreparedStatement pstat = con.prepareStatement(sql);
+				ResultSet rs = pstat.executeQuery()){
+			List <PayGoodsDTO> payGoodsList = new ArrayList<>(); 
+			while(rs.next()) {
+				PayGoodsDTO dto = new PayGoodsDTO();
+				dto.setPayGoodsSeq(rs.getInt("payGoodsSeq"));
+				dto.setPayGoodsName(rs.getString("payGoodsName"));
+				dto.setPayGoodsPrice(rs.getInt("payGoodsPrice"));
+				dto.setPayGoodsExp(rs.getString("payGoodsExp"));
+				dto.setPayGoodsType(rs.getString("payGoodsType"));
+				dto.setPayGoodsInfo(rs.getString("payGoodsInfo"));
+				payGoodsList.add(dto);
+			}
+			return payGoodsList;
+		}
+	}
+	
+	public List<PayGoodsDTO> selectEventGoods()throws Exception{
+		String sql = "select * from paygoods where paygoodstype='이벤트' order by payGoodsSeq";
+		try(Connection con = this.getConnection(); PreparedStatement pstat = con.prepareStatement(sql);
+				ResultSet rs = pstat.executeQuery()){
+			List <PayGoodsDTO> payGoodsList = new ArrayList<>(); 
+			while(rs.next()) {
+				PayGoodsDTO dto = new PayGoodsDTO();
+				dto.setPayGoodsSeq(rs.getInt("payGoodsSeq"));
+				dto.setPayGoodsName(rs.getString("payGoodsName"));
+				dto.setPayGoodsPrice(rs.getInt("payGoodsPrice"));
+				dto.setPayGoodsExp(rs.getString("payGoodsExp"));
+				dto.setPayGoodsType(rs.getString("payGoodsType"));
+				dto.setPayGoodsInfo(rs.getString("payGoodsInfo"));
+				payGoodsList.add(dto);
+			}
+			return payGoodsList;
+		}
+	}
+	
+	public List<PayGoodsDTO> selectPromotionGoods()throws Exception{
+		String sql = "select * from paygoods where paygoodstype='프로모션' order by payGoodsSeq";
+		try(Connection con = this.getConnection(); PreparedStatement pstat = con.prepareStatement(sql);
+				ResultSet rs = pstat.executeQuery()){
+			List <PayGoodsDTO> payGoodsList = new ArrayList<>(); 
+			while(rs.next()) {
+				PayGoodsDTO dto = new PayGoodsDTO();
+				dto.setPayGoodsSeq(rs.getInt("payGoodsSeq"));
+				dto.setPayGoodsName(rs.getString("payGoodsName"));
+				dto.setPayGoodsPrice(rs.getInt("payGoodsPrice"));
+				dto.setPayGoodsExp(rs.getString("payGoodsExp"));
+				dto.setPayGoodsType(rs.getString("payGoodsType"));
+				dto.setPayGoodsInfo(rs.getString("payGoodsInfo"));
+				payGoodsList.add(dto);
+			}
+			return payGoodsList;
+		}
+	}
+	
+	
 	public int update(String payGoodsName, int payGoodsPrice, String payGoodsExp, String payGoodsType, String payGoodsInfo, int payGoodsSeq)throws Exception{
 		String sql = "update paygoods set payGoodsName = ?, payGoodsPrice = ?, payGoodsExp = ?, payGoodsType = ?, payGoodsInfo = ? where payGoodsSeq = ?";
 		try(Connection con = this.getConnection(); PreparedStatement pstat = con.prepareStatement(sql);) {
