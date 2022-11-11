@@ -19,9 +19,9 @@
             display: block;
         }
 
-        @media(max-width:1600px) {
+        @media(max-width:1800px) {
             .html {
-                width: 1600px;
+                width: 1800px;
             }
         }
 
@@ -173,7 +173,7 @@
 
         #navUl>li:first-child,
         .listWrap>div:first-child {
-            margin-left: 4%;
+            margin-left: 2%;
         }
 
         .navLi {
@@ -309,6 +309,9 @@
         }
 		.updConfirmBtn:hover,.updCancelBtn:hover{
 			cursor:pointer;
+		}
+		#onSaleAddProducts input,#onSaleAddProducts textarea{
+			color:black;
 		}
     </style>
 </head>

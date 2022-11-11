@@ -113,7 +113,7 @@
 			</div>
 
 			<div id="FloatArea">
-				<a href="">멤버쉽 구독</a> 
+				<a id="membership">멤버쉽 구독</a> 
 				<a id="ticketing">포도 티켓</a>
 			</div>
 			<a href="" class="service">서비스 소개</a>
@@ -217,6 +217,9 @@
 		$("#serviceBtn").click(function() {
 			$("#iframe").attr("src", "/mypage/serviceCenter.jsp");
 		});
+		$("#membership").click(function(){
+			$("#iframe").attr("src","/index.goods");
+		})
 	</script>
 	<script>
 		// Music Controller 부분
