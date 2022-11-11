@@ -122,7 +122,7 @@
         <button type="submit" id="loginBtn">로그인</button>
       </form>
       <a href="inputForm.jsp">회원가입</a>
-      <a href="find.jsp">아이디/비밀번호 찾기</a>
+      <a href="find.jsp">&nbsp;| &nbsp;비밀번호 찾기</a>
     </div>
     <!-- <footer>
       포도뮤직(주) 대표이사 : 조성태 사업자등록번호 : 220-81-99999

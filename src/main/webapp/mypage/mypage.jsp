@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
     <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+     <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <!DOCTYPE html>
 <html>
 
@@ -296,12 +297,12 @@
                                 <div style="padding-left: 1vw;">${DTO.membership }</div>
                             </th>
                             <td>
-                                <div>${DTO.scribeDate }</div>
+                                <div><fmt:formatDate value="${DTO.scribeDate}" pattern="yyyy-MM-dd" /></div>
                             </td>
                             <td>
                             	<div>
                             	<c:choose>
-                            	<c:when test= "${!DTO.scribeDate}">${DTO.scribeDate }</c:when>
+                            	<c:when test= "${DTO.scribeDate != null}"><fmt:formatDate value="${DTO.scribeDate}" pattern="yyyy-MM-dd" /></c:when>
                             		<c:otherwise>${DTO.scribeDate}</c:otherwise>
                             		</c:choose>
                             	</div>
