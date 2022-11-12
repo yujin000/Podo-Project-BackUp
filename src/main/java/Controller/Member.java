@@ -3,7 +3,6 @@ package Controller;
 import java.io.File;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.sql.Timestamp;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -16,6 +15,7 @@ import com.oreilly.servlet.MultipartRequest;
 import com.oreilly.servlet.multipart.DefaultFileRenamePolicy;
 
 import DAO.MemberDAO;
+import DAO.PayMemberDAO;
 import DTO.MemberDTO;
 
 @WebServlet("*.member")
@@ -78,8 +78,13 @@ public class Member extends HttpServlet {
 				response.sendRedirect("/index.jsp");
 			} else if (uri.equals("/mypage.member")) {
 				MemberDAO dao = MemberDAO.getInstance();
+				PayMemberDAO pdao = PayMemberDAO.getInstance();
+				String userEmail = request.getSession().getAttribute("loginEmail").toString();
+				String passName = pdao.myPass(userEmail);
+
 				MemberDTO dto = dao.getMypage(request.getSession().getAttribute("loginEmail").toString());
 				request.setAttribute("DTO", dto);
+				request.setAttribute("passName", passName);
 				request.getRequestDispatcher("/mypage/mypage.jsp").forward(request, response);
 			} else if(uri.equals("/informUpdate.member")) {
 

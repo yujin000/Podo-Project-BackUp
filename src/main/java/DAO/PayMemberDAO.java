@@ -3,7 +3,6 @@ package DAO;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
-import java.sql.Timestamp;
 
 import javax.naming.Context;
 import javax.naming.InitialContext;
@@ -57,6 +56,18 @@ public class PayMemberDAO {
 			
 			ResultSet rs = pstat.executeQuery();
 			return rs.next();
+		}
+	}
+	
+	// 마이페이지 이용중인 이용권
+	public String myPass(String email)throws Exception{
+		String sql = "select paygoodsname from paygoods where paygoodsseq = (select paygoodsseq from paymember where paymemberemail = ?)";
+		try(Connection con = this.getConnection(); PreparedStatement pstat = con.prepareStatement(sql);) {
+			pstat.setString(1, email);
+			ResultSet rs = pstat.executeQuery();
+			rs.next();
+			String result = rs.getString("payGoodsName");
+			return result;
 		}
 	}
 	
