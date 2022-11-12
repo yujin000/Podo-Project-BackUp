@@ -245,7 +245,8 @@ div {
 								<li class="proPriceText">월 <fmt:formatNumber value="${list.payGoodsPrice }" pattern="#,###"/>원 부터</li>
 							</ul>
 								<input type="hidden" value="${list.payGoodsPrice }" class="promotionPrice" readonly>
-								<input type="hidden" value="${list.payGoodsSeq }" id="promotionSeq">
+								<input type="hidden" value="${list.payGoodsSeq }" class="promotionSeq" readonly>
+								<input type="hidden" value="${list.payGoodsName }" class="promotionName" readonly>
 							</div>
 						</a>
 						</c:forEach>
@@ -261,8 +262,9 @@ div {
 								<li class="proText">${list.payGoodsName }</li>
 								<li class="proPriceText">월 <fmt:formatNumber value="${list.payGoodsPrice }" pattern="#,###"/>원 부터</li>
 							</ul>
-								<input type="hidden" value="${list.payGoodsSeq }" readonly>
 								<input type="hidden" value="${list.payGoodsPrice }" class="eventPrice" readonly>
+								<input type="hidden" value="${list.payGoodsSeq }" class="eventSeq" readonly>
+								<input type="hidden" value="${list.payGoodsName }" class="eventName" readonly>
 							</div>
 							</a>
 						</c:forEach>
@@ -280,26 +282,6 @@ div {
 			<div id="payment">
 				<button type=button id="payBtn" price="">결제하기</button>
 			</div>
-			<!-- 버튼누르면 (해당하는 상품의 가격)원 결제하기 
-			<div id="otherproduct">
-				다른 상품들
-				<c:choose>
-					<c:when test="${not empty goodsList }">
-						<c:forEach var="list" items="${goodsList }">
-							<div class="listWrap">
-								<input type="hidden" value="${list.payGoodsSeq }"
-									class="inProductsSeq" readonly> <input type="text"
-									value="${list.payGoodsName }" class="inProductsName" readonly>
-								<input type="text" value="${list.payGoodsPrice }"
-									class="inProductsPrice" readonly> <input type="text"
-									value="${list.payGoodsExp }" class="inProductsExpire" readonly>
-								<input type="text" value="${list.payGoodsType }"
-									class="inProductsType" readonly>
-							</div>
-						</c:forEach>
-					</c:when>
-				</c:choose>
-			</div>-->
 		</div>
 		<!-- My 멤버십 -->
 		<div id="myMembershipArea">My멤버십</div>
@@ -348,8 +330,9 @@ div {
 		
 		/* 이벤트 상품 클릭시 border color 설정 및 상품상세정보(info), 결제하기 버튼에 가격 출력 */
 		let price = 0;
-		
 		let userEmail = user.value;
+		let goodsSeq;
+		let goodsName;
 		
 			/* 프로모션 상품 */
 		$(".promotion").on("click",function(){
@@ -364,6 +347,8 @@ div {
 			$(this).nextAll("a").find("div").css("border","1px solid silver");
 			
 			price = $(this).find(".promotionPrice").val();
+			goodsSeq = $(this).find(".promotionSeq").val();
+			goodsName = $(this).find(".promotionName").val();
 			
 			$("#payBtn").css({
 				"background-color":"#FF0050",
@@ -394,6 +379,8 @@ div {
 			$(this).prev("a").prev("a").find("div").css("border","1px solid silver");
 			
 			price = $(this).find(".eventPrice").val();
+			goodsSeq = $(this).find(".eventSeq").val();
+			goodsName = $(this).find(".eventName").val();
 			
 			$("#payBtn").css({
 				"background-color":"#FF0050",
@@ -408,7 +395,7 @@ div {
 			let info = $(this).attr("info");
 			$("#selectInfo").append(info);
 		})
-		
+
 		/* 결제하기 버튼 클릭시 결제하기 팝업 및 결제(로그인 여부 확인) */
 		let warning = $("<div>");
 			warning.css({
@@ -426,19 +413,12 @@ div {
 		        window.parent.location.reload();
 		    }
 		}	
+
 			/* 결제하기 */
 		$("#payBtn").on("click",function(){
 			if(userEmail == ""){
 				alert("로그인 후 이용할 수 있습니다.");
-				/*signIn();
-				location.href = "/member/loginForm.jsp";
-				setTimeout(function(){
-					 if(userEmail != ""){
-							window.parent.location.reload();
-						}
-                 },10000);*/
-				
-				
+				window.parent.location.href = "/member/loginForm.jsp";
 			}else{
 				if(price == 0){
 					$("#goodsInfo").after(warning);
@@ -455,8 +435,7 @@ div {
 		                name: '결제',
 		                amount: price,
 		                buyer_email: userEmail,
-		                buyer_name: '구매자 이름',
-		                m_redirect_url: 'redirect url'
+		                buyer_name: '구매자 이름'
 		            }, function (rsp) {
 		                if (rsp.success) {
 		                    var msg = '결제가 완료되었습니다.';
@@ -468,15 +447,13 @@ div {
 		                    	  timer: 2000
 		                    })
 		                    setTimeout(function(){
-		                    	location.href = "/mypage.member";
+		                    	window.parent.location.href = "/payComplete.paymem?payGoodsSeq="+goodsSeq+"&payMemberEmail="+userEmail;
 		                    },2100);
 		                } else {
 		                    var msg = '결제에 실패하였습니다.';
 		                    rsp.error_msg;
 		                }
 		            });
-
-					/*location.href = "/payment.goods?price=" + target;*/
 				}
 			}
 		})
