@@ -6,108 +6,177 @@
 <html lang="en">
 
 <head>
-<meta charset="UTF-8" />
-<meta http-equiv="X-UA-Compatible" content="IE=edge" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>공지사항 작성</title>
-<link rel="stylesheet" href="/src/css/style.css" />
-<script src="https://code.jquery.com/jquery-3.6.1.min.js"
-   integrity="sha256-o88AwQnZB+VDvE9tvIXrMQaPlFFSUTR+nldQm1LuPXQ="
-   crossorigin="anonymous"></script>
-<style>
-/* 공통 css와 겹쳐서 초기화 */
-.loginBtn {
-   border-top: 0px;
-   border-bottom: 0px;
-   margin-bottom: 0px;
-}
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>공지사항 작성</title>
+    <link rel="stylesheet" href="/src/css/style.css" />
+    <script src="https://code.jquery.com/jquery-3.6.1.min.js"
+        integrity="sha256-o88AwQnZB+VDvE9tvIXrMQaPlFFSUTR+nldQm1LuPXQ=" crossorigin="anonymous"></script>
+    <style>
+        /* 관리자페이지 세팅 초기값 */
+        @media(max-width:1500px) {
+            .html {
+                width: 1500px;
+            }
+        }
 
-#Header {
-   position: fixed !important;
-}
+        .loginBtn {
+            border-top: 0px;
+            border-bottom: 0px;
+            margin-bottom: 0px;
+        }
 
-.adminContents {
-   position: absolute;
-   left: 230px;
-   background: var(- -background-color);
-   width: 100%;
-   height: 100vh;
-   margin: 50px 0px 0px 140px;
-   overflow-y: scroll;
-}
+        .html {
+            overflow: hidden;
+        }
 
-.adminMainHeader {
-   width: 85vw;
-   height: 13vh;
-   background-color: lightgray;
-   margin: 0px 10px 0px 10px;
-   position: relative;
-}
+        .wrap {
+            width: 230px;
+            height: 100vh;
+            float: left;
+        }
 
-.mainText {
-   font-size: 36px;
-}
+        #Header {
+            position: fixed !important;
+        }
 
-.adminMainHeader span {
-   margin-left: 30px;
-}
+        .adminContents {
+            background: var(- -background-color);
+            width: 80%;
+            height: 100vh;
+            overflow-y: scroll;
+            float: left;
+            padding-left: 7%;
+        }
 
-.adminMainView {
-   color: white;
-   width: 1200px;
-}
+        .adminMainHeader {
+            width: 85vw;
+            height: 13vh;
+            background-color: lightgray;
+            margin: 0px 10px 0px 10px;
+            position: relative;
+        }
 
-.tog {
-   top: 130px;
-}
+        .mainText {
+            font-size: 36px;
+            margin-top: 50px;
+        }
 
-</style>
+        .adminMainHeader span {
+            margin-left: 30px;
+        }
+
+        .adminMainView {
+            color: white;
+            width: 100%;
+            margin: auto;
+        }
+
+        .tog {
+            top: 130px;
+        }
+        #noticeContents{
+        	width:1300px;
+        	height:500px;
+        }        
+    </style>
 </head>
 
 <body>
-   <div class="wrap">
-      <div id="Header">
-         <h1 id="logo">
-            <a href="/adminMain.admin?nickname=${loginNickname }"><img
-               src="/image/web/logo-f-5.png" alt="" /></a>
-         </h1>
-         <div id="mypage">
-            <a class="loginBtn">${nickname }</a>
-         </div>
-         <ul class="tog">
-            <li><a href="/index.jsp">메인페이지로</a></li>
-            <li><a href="#">계정설정</a></li>
-            <li><a href="/logout.member">로그아웃</a></li>
-         </ul>
-         <div id="GNB">
-            <ul>
-               <li><a id="a href=/admin/adminNotice/adminNotice.jsp">공지사항 관리</a></li>
-               <li><a id="chart" href="/allList.music?nickname=${loginNickname }">음원 관리</a></li>
-               <li><a id="chart">공연 관리</a></li>
-               <li><a href="#">회원 관리</a></li>
-               <li><a href="/adminMemship.admin">멤버십 관리</a></li>
-               <li><a href="#">문의내역 확인</a></li>
-            </ul>
-         </div>
-      </div>
-      <div class="adminContents">
-         <div class="adminMainView">
-            <div class="mainText">공지사항 쓰기</div>
+    <div class="html">
+        <div class="wrap">
+            <div id="Header">
+                <h1 id="logo">
+                    <a href="/adminMain.member?nickname=${loginNickname }"><img src="/image/web/logo-f-5.png"
+                            alt="" /></a>
+                </h1>
+                <div id="mypage">
+                    <a class="loginBtn">${nickname }</a>
+                </div>
+                <ul class="tog">
+                    <li><a href="/index.jsp">메인페이지로</a></li>
+                    <li><a href="#">계정설정</a></li>
+                    <li><a href="/logout.member">로그아웃</a></li>
+                </ul>
+                <div id="GNB">
+                    <ul>
+                        <li><a href="/list.notice">공지사항 관리</a></li>
+                        <li><a id="chart" href="/allList.music?nickname=${loginNickname }">음원 관리</a></li>
+                        <li><a id="chart">공연 관리</a></li>
+                        <li><a href="#">회원 관리</a></li>
+                        <li><a href="/goodsList.goods">멤버십 관리</a></li>
+                        <li><a href="#">문의내역 확인</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="adminContents">
+            <div class="adminMainView">
+                <div class="mainText">공지사항 쓰기</div>
             <br>
             <hr>
-            <div>글쓰기화면</div>
-            
+            <form action="/write.notice" id="form" method="post">
+            <div>
+            	제목
+            	<input type="text" id="noticeTitle" name="noticeTitle" placeholder="제목을 입력하세요.">
+            </div>
+            <div>카테고리
+            	<select id="noticeCategoryList">
+                	<option>서비스소식</option>
+                    <option>서비스오픈</option>
+                    <option>서비스점검</option>
+                    <option>서비스종료</option>
+                    <option>안내</option>
+                    <option>기타</option>
+               	</select>
+            <input type="hidden" id="noticeCategory" name="noticeCategory" value="서비스소식">
+            </div>
+            <div>
+            	<textarea id="noticeContents" name="noticeContents" name="editordata"></textarea>
+            </div>
+            <div id="writeConfirm">글 작성하기</div>
+            </form>
          </div>
-      </div>
-   </div>
-   <script>
-      // 관리자 버튼 토글
-      let adminBtn = document.getElementById("mypage");
-      $(adminBtn).click(function() {
-         $(this).next(".tog").fadeToggle();
-      });
-      
-   </script>
+        </div>
+    </div>
+
+    <script>
+        // 관리자 버튼 토글
+        let adminBtn = document.getElementById("mypage");
+        $(adminBtn).click(function () {
+            $(this).next(".tog").fadeToggle();
+        });
+    </script>
+	
+	<script>
+		// 글 작성 이벤트
+		
+		// 글작성버튼
+		let writeConfirm = document.querySelector("#writeConfirm");
+		// 카테고리값이 들어갈 input태그
+		let noticeCategory = document.querySelector("#noticeCategory");
+		// 카테고리 선택하는 콤보박스
+		let noticeCategoryList = document.querySelector("#noticeCategoryList");
+		
+		// 콤보박스 목록을 선택하여 바꾼경우
+		noticeCategoryList.addEventListener("change", function(){
+			noticeCategory.value = this.value;
+			console.log(noticeCategory);
+		});
+		
+		writeConfirm.addEventListener("click", function(){
+					
+			if (noticeTitle.value.length!=0 && noticeContents.value.length!=0) {
+				let form = document.getElementById("form");
+				form.submit();
+			} else if (noticeTitle.value.length==0) {
+				alert("글 제목을 입력하세요.");
+			} else if (noticeContents.value.length==0) {
+				alert("글 내용을 입력하세요.");
+			}
+		});
+	</script>
 </body>
 
 </html>

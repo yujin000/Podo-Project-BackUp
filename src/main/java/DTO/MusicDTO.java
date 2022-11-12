@@ -1,6 +1,7 @@
 package DTO;
 
 public class MusicDTO {
+
 	public int musicSeq;
 	public String musicName;
 	public String musicArtist;

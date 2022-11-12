@@ -75,13 +75,13 @@
 						<ul class="tog">
 							<li><a id="mypageBtn">마이페이지</a></li>
 							<c:choose>
-								<c:when test="${loginEmail eq 'podo@email.com'}">
+								<c:when test="${loginMembership eq 'admin'}">
 									<li><a href="/admin/adminIndex.jsp">관리자페이지</a></li>
 								</c:when>
 							</c:choose>
 							<li><a href="#">공지사항</a></li>
 							<li><a href="#">계정설정</a></li>
-							<li><a id="modifyBtn">친구초대 </a></li>
+							<li><a href="#">친구초대 </a></li>
 							<li><a href="logout.member">로그아웃</a></li>
 						</ul>
 					</c:when>
@@ -101,7 +101,7 @@
 					<li><a href="#">보관함</a></li>
 					<li><a href="#">스테이션</a></li>
 					<li><a href="#">매거진</a></li>
-					<li><a href="">고객센터</a></li>
+					<li><a id="serviceBtn">고객센터</a></li>
 				</ul>
 			</div>
 			<div id="events">
@@ -113,7 +113,7 @@
 			</div>
 
 			<div id="FloatArea">
-				<a href="">멤버쉽 구독</a> 
+				<a id="membership">멤버쉽 구독</a> 
 				<a id="ticketing">포도 티켓</a>
 			</div>
 			<a href="" class="service">서비스 소개</a>
@@ -121,7 +121,8 @@
 
 		<iframe src="/main/main.jsp" width="100%" height="100%"
 			style="display: block; padding-left: 230px" id="iframe"></iframe>
-
+		<c:choose>
+		<c:when test="${loginMembership eq 'admin' || loginMembership eq 'vip'}">
 		<div id="MusicControl">
 			<div class="hidden">
 				<h1>hidden</h1>
@@ -138,7 +139,8 @@
 						<p>name</p></li>
 					<li>
 						<button>
-							<span class="material-symbols-rounded" id="wish"> favorite </span>
+							<span class="material-symbols-rounded" id="wish" data-wish="false"> favorite </span>
+<!-- 								<img src="/image/web/favorite_fill0.png"> -->
 						</button>
 					</li>
 					<li>
@@ -175,6 +177,8 @@
 				</ul>
 			</div>
 		</div>
+		</c:when>
+		</c:choose>
 	</div>
 
 	<script>
@@ -214,8 +218,17 @@
 		$("#ticketing").click(function() {
 			$("#iframe").attr("src", "/list.perform");
 		});
+		$("#serviceBtn").click(function() {
+			$("#iframe").attr("src", "/mypage/serviceCenter.jsp");
+		});
+		$("#membership").click(function(){
+			$("#iframe").attr("src","/index.goods");
+		})
 	</script>
 	<script>
+		let membership = "${loginMembership}";
+		if (membership=="admin" || membership=="vip") {
+			
 		// Music Controller 부분
 		
     	// 목록페이지 전체 div값
@@ -310,6 +323,28 @@
     		loadMusic(playIndex);    		
     		playMusic();
     	}
+    	
+    	// 위시리스트 여부에 따라 하트모양을 바꿔주는 함수
+    	function wishIsExist(){
+    		$.ajax({
+    			uri : "/exist.wish",
+    			type : "get",
+    			data:{
+    				musicSeq : musicList[playIndex].musicSeq	
+    			}
+    		}).done(function(resp){    			
+    			let result = JSON.parse(resp);
+    			console.log(result);
+    			if (result=="false") {
+    				$("#wish").html("favorite");
+    			} else {
+    				$("#wish").html("Heart plus");
+    			}
+    		});
+    	};
+    	
+    	// 처음 페이지에서 위시리스트 여부를 판별해준다.
+    	wishIsExist();
     	    	
     	// 컨트롤러 타이머 구현
     	playAudio.addEventListener("timeupdate", e=>{
@@ -425,13 +460,27 @@
     	// 목록 클릭시, 해당 노래가 재생
     	let playList = document.querySelectorAll(".playList");
     	for (let i=0; i<playList.length; i++) {
-    			console.log(playList);
     			playList[i].addEventListener("click", function(){
     			playIndex = this.getAttribute("data-index");
     			loadMusic(playIndex);
     			playMusic();
     		});
-    	}
+    	};
+    	
+    	// 위시리스트 추가
+    	$("#wish").on("click",function(){
+    		$.ajax({
+    			url:"/add.wish",
+    			type:"get",
+    			data:{
+    				musicSeq : musicList[playIndex].musicSeq	
+    			}    				
+    		});
+    		wishIsExist();
+    	});
+    	    	
+		}
+    	
     	
     </script>
 </body>

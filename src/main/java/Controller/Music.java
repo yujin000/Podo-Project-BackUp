@@ -47,7 +47,7 @@ public class Music extends HttpServlet {
 			}else if(uri.equals("/addMusic.music")) {
 				// 파일등록
 				int maxSize = 1024*1024*10;
-				String savePath = request.getServletContext().getRealPath("/image/albumImg");
+				String savePath = request.getServletContext().getRealPath("/audio");
 				File fileSavePath = new File(savePath);
 
 				if(!fileSavePath.exists()){

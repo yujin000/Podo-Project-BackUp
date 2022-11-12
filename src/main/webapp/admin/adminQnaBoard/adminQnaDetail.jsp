@@ -9,7 +9,7 @@
 <meta charset="UTF-8" />
 <meta http-equiv="X-UA-Compatible" content="IE=edge" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>공지사항 관리</title>
+<title>문의내역 관리</title>
 <link rel="stylesheet" href="/src/css/style.css" />
 <script src="https://code.jquery.com/jquery-3.6.1.min.js"
    integrity="sha256-o88AwQnZB+VDvE9tvIXrMQaPlFFSUTR+nldQm1LuPXQ="
@@ -60,13 +60,26 @@
 .tog {
    top: 130px;
 }
-
-.noticeList {
-	height : 30px;
+.header, #header2{
+	height:30px;
 }
-
-.noticeList>div, .header>div{
+.header>div, #header2>div{
 	float:left;
+}
+#qnaSeqHeader, #qnaSeq{
+	width : 5%;
+}
+#qnaCategoryHeader, #qnaWriteDateHeader, #qnaCategory, #qnaWriteDate {
+	width : 10%;
+}
+#qnaTitleHeader, #qnaTitle {
+	width : 20%;
+}
+#qnaWriterHeader, #qnaWriter {
+	width : 15%;
+}
+#contents{
+	width : 800px;
 }
 
 </style>
@@ -94,41 +107,37 @@
                <li><a id="chart">공연 관리</a></li>
                <li><a href="#">회원 관리</a></li>
                <li><a href="/adminMemship.admin">멤버십 관리</a></li>
-               <li><a href="#">문의내역 확인</a></li>
+               <li><a href="/adminList.board?cpage=1">문의내역 확인</a></li>
             </ul>
          </div>
       </div>
       <div class="adminContents">
          <div class="adminMainView">
-            <div class="mainText">공지사항 관리</div>
+            <div class="mainText">문의내역 확인</div>
             <br>
-            <hr>
-            <div class="header">
-            	<div>번호</div>
-            	<div>유형</div>
-            	<div>제목</div>
-            	<div>작성자</div>
-            	<div>작성날짜</div>
-            </div>
-            <c:choose>
-            	<c:when test = "${not empty noticeBoardList }">
-            		<c:forEach var = "i" items = "${noticeBoardList }">
-            			<div class="noticeList">            				
-            				<div id="noticeSeq">${i.noticeSeq }</div>
-            				<div id="noticeCategory">${i.noticeCategory }</div>
-            				<div id="noticeTitle">${i.noticeTitle }</div>
-            				<div id="noticeWriter">${i.noticeWriter }</div>
-            				<div id="noteceWriteDate">${i.noticeWriteDate }</div>
-            			</div>
-            		</c:forEach>            		
-            	</c:when>
-            	<c:otherwise>
-            		<div>글이 없습니다.</div>
-            	</c:otherwise>
-            </c:choose>
-            <div id="writeBtn">공지사항 쓰기</div>
-            
+            <hr>   
          </div>
+         <div class="header">
+         			<div id="qnaSeqHeader">문의 번호</div>
+            		<div id="qnaCategoryHeader">문의 유형</div>
+            		<div id="qnaTitleHeader">제목</div>
+            		<div id="qnaWriterHeader">작성자</div>
+            		<div id="qnaWriteDateHeader">문의 날짜</div>
+            </div>
+            	<div id="header2">            				
+            		<div id="qnaSeq">${qnaBoard.qnaSeq }</div>
+            		<div id="qnaCategory">${qnaBoard.qnaCategory }</div>
+            		<div id="qnaTitle">${qnaBoard.qnaTitle }</div>
+            		<div id="qnaWriter">${qnaBoard.qnaWriter }</div>
+            		<div id="qnaWriteDate">${qnaBoard.qnaWriteDate }</div>
+            	</div>
+            	<div id="contents">
+            		<div>문의 내용</div>
+            		${qnaBoard.qnaContents }
+            		<div>
+                 		첨부파일 : <a href="/download.file?sysname=${boardFile.sysName }&oriname=${boardFile.oriName}">${boardFile.oriName }</a> 
+            		</div>
+            	</div>
       </div>
    </div>
    <script>
@@ -136,10 +145,6 @@
       let adminBtn = document.getElementById("mypage");
       $(adminBtn).click(function() {
          $(this).next(".tog").fadeToggle();
-      });
-      
-      $("#writeBtn").on("click", function(){
-			location.href = "/admin/adminNotice/noticeWrite.jsp"; 
       });
       
    </script>

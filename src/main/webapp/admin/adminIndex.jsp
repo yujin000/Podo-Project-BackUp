@@ -145,7 +145,7 @@
 	<div class="wrap">
 		<div id="Header">
 			<h1 id="logo">
-				<a href="/adminMain.admin?nickname=${loginNickname }"><img src="/image/web/logo-f-5.png" alt="" /></a>
+				<a href="/adminMain.member?nickname=${loginNickname }"><img src="/image/web/logo-f-5.png" alt="" /></a>
 			</h1>
 			<div id="mypage">
 				<a class="loginBtn">${nickname }</a>
@@ -157,19 +157,19 @@
 			</ul>
 			<div id="GNB">
 				<ul>
-					<li><a href="/admin/adminNotice/adminNotice.jsp">공지사항 관리</a></li>
+					<li><a href="/list.notice">공지사항 관리</a></li>
 					<li><a id="chart"
 						href="/allList.music?nickname=${loginNickname }">음원 관리</a></li>
 					<li><a id="chart">공연 관리</a></li>
 					<li><a href="#">회원 관리</a></li>
-					<li><a href="/adminMemship.admin">멤버십 관리</a></li>
-					<li><a href="#">문의내역 확인</a></li>
+					<li><a href="/goodsList.goods">멤버십 관리</a></li>
+					<li><a href="/adminList.board?cpage=1">문의내역 확인</a></li>
 				</ul>
 			</div>
 		</div>
 		<div class="adminContents">
 			<div class="adminMainHeader">
-				<span id="adminHeaderHello"> ${nickname }님 환영합니다. </span><br> <span
+				<span id="adminHeaderHello"> ${loginNickname }님 환영합니다. </span><br> <span
 					id="nowTime"> 2022년 11월 02일 / 11시 11분 </span>
 
 			</div>
