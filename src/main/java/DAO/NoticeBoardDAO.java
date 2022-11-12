@@ -45,9 +45,13 @@ public class NoticeBoardDAO {
 		}
 	}
 	
-	public List<NoticeBoardDTO> selectNotice() throws Exception {
-		String sql = "select * from noticeBoard";
+	public List<NoticeBoardDTO> selectNotice(int start, int end) throws Exception {
+		String sql = "select * from (select noticeBoard.*, row_number() over(order by noticeSeq desc) rn from noticeBoard) where rn between ? and ?";
 		try (Connection con = this.getConnection(); PreparedStatement pstat = con.prepareStatement(sql);) {
+			
+			
+			pstat.setInt(1, start);
+			pstat.setInt(2, end);
 			
 			ResultSet rs = pstat.executeQuery();
 			List <NoticeBoardDTO> noticeBoardList = new ArrayList<>();
@@ -93,6 +97,69 @@ public class NoticeBoardDAO {
 			rs.next();
 			return rs.getInt(1);
 		}
+	}
+	
+	public int getRecordCount() throws Exception {
+		String sql = "select count(*) from noticeBoard";
+		try (Connection con = this.getConnection();
+				PreparedStatement pstat = con.prepareStatement(sql);) {
+			ResultSet rs = pstat.executeQuery();
+			rs.next();
+			return rs.getInt(1);
+		}				
+	}
+	
+	public String getPageNavi(int currentPage, int rcpp, int ncpp) throws Exception {
+		int recordTotalCount = this.getRecordCount();
+		int recordCountPerPage = rcpp;
+		int naviCountPerPage = ncpp;
+		
+		int pageTotalCount = 0;
+		if (recordTotalCount % recordCountPerPage > 0) {
+			pageTotalCount = (recordCountPerPage / recordCountPerPage) + 1;			
+		} else {
+			pageTotalCount = recordCountPerPage / recordCountPerPage;
+		}
+		
+		if (currentPage < 1) {
+			currentPage = 1;
+		} else if (currentPage > pageTotalCount) {
+			currentPage = pageTotalCount;
+		}
+		
+		int startNavi = (currentPage - 1) / naviCountPerPage * naviCountPerPage + 1;
+		
+		int endNavi = startNavi + naviCountPerPage - 1;
+		
+		if(endNavi > pageTotalCount) {
+			endNavi = pageTotalCount;
+		}
+		
+		boolean needPrev = true;
+		boolean needNext = true;
+		
+		if(startNavi == 1) {
+			needPrev = false;
+		}
+		if(endNavi == pageTotalCount) {
+			needNext = false;
+		}
+		
+		StringBuilder sb = new StringBuilder();
+		
+		if (needPrev) {
+			sb.append("<a href='/list.notice?cpage="+(startNavi-1)+"'> < </a> ");
+		}
+		
+		for (int i=startNavi; i<=endNavi; i++) {
+			sb.append("<a href='/list.notice?cpage=" + i + "'>" + i + "</a> ");
+		}
+		
+		if (needNext) {
+			sb.append("<a href='/list.notice?cpage=" + (endNavi+1) + "'> > </a>");
+		}
+		
+		return sb.toString();
 	}
 	
 }

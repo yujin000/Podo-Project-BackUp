@@ -66,16 +66,16 @@
 .header>div, #header2>div{
 	float:left;
 }
-#qnaSeqHeader, #qnaSeq{
+#noticeSeqHeader, #noticeSeq{
 	width : 5%;
 }
-#qnaCategoryHeader, #qnaWriteDateHeader, #qnaCategory, #qnaWriteDate {
+#noticeCategoryHeader, #noticeWriteDateHeader, #noticeCategory, #noticeWriteDate {
 	width : 10%;
 }
-#qnaTitleHeader, #qnaTitle {
+#noticeTitleHeader, #noticeTitle {
 	width : 20%;
 }
-#qnaWriterHeader, #qnaWriter {
+#noticeWriterHeader, #noticeWriter {
 	width : 15%;
 }
 #contents{
@@ -118,23 +118,24 @@
             <hr>   
          </div>
          <div class="header">
-         			<div id="qnaSeqHeader">공지사항 번호</div>
-            		<div id="qnaCategoryHeader">공지사항 유형</div>
-            		<div id="qnaTitleHeader">제목</div>
-            		<div id="qnaWriterHeader">작성자</div>
-            		<div id="qnaWriteDateHeader">작성 날짜</div>
+         			<div id="noticeSeqHeader">공지사항 번호</div>
+            		<div id="noticeCategoryHeader">공지사항 유형</div>
+            		<div id="noticeTitleHeader">제목</div>
+            		<div id="noticeWriterHeader">작성자</div>
+            		<div id="noticeWriteDateHeader">작성 날짜</div>
             </div>
             	<div id="header2">            				
-            		<div id="qnaSeq">${noticeDetail.noticeSeq }</div>
-            		<div id="qnaCategory">${noticeDetail.noticeCategory }</div>
-            		<div id="qnaTitle">${noticeDetail.noticeTitle }</div>
-            		<div id="qnaWriter">${noticeDetail.noticeWriter }</div>
-            		<div id="qnaWriteDate">${noticeDetail.noticeWriteDate }</div>
+            		<div id="noticeSeq">${noticeDetail.noticeSeq }</div>
+            		<div id="noticeCategory">${noticeDetail.noticeCategory }</div>
+            		<div id="noticeTitle">${noticeDetail.noticeTitle }</div>
+            		<div id="noticeWriter">${noticeDetail.noticeWriter }</div>
+            		<div id="noticeWriteDate">${noticeDetail.noticeWriteDate }</div>
             	</div>
             	<div id="contents">
             		<div>본문</div>
             		${noticeDetail.noticeContents }
             	</div>
+            	<div>첨부파일 : <a href="/download.file?sysname=${noticeDetailFile.sysName }&oriname=${noticeDetailFile.oriName}">${noticeDetailFile.oriName }</a></div>
       </div>
    </div>
    <script>

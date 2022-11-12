@@ -143,6 +143,8 @@
             		<div>글이 없습니다.</div>
             	</c:otherwise>
             </c:choose>
+            
+            <div>${navi }</div>
             <div id="writeBtn">공지사항 쓰기</div>
             
          </div>

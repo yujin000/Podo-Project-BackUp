@@ -51,31 +51,36 @@ public class NoticeBoard extends HttpServlet {
 				int result = dao.writeNoticeBoard(dto);
 				
 				if (oriName==null) {
-					response.sendRedirect("/list.notice");
+					response.sendRedirect("/list.notice?cpage=1");
 				} else {
 					BoardFilesDAO.getInstance().insert(new BoardFilesDTO(0, oriName, sysName, noticeSeq, null));
-					response.sendRedirect("/list.notice");
+					response.sendRedirect("/list.notice?cpage=1");
 				}
 				
 				
 				
 			} else if (uri.equals("/list.notice")) {
 				
+				int cpage = Integer.parseInt(request.getParameter("cpage"));
+				int rcpp = 10;
+				int ncpp = 10;
 				NoticeBoardDAO dao = NoticeBoardDAO.getInstance();
-				List<NoticeBoardDTO> noticeBoardList = dao.selectNotice();
+				List<NoticeBoardDTO> noticeBoardList = dao.selectNotice(cpage * rcpp - (rcpp-1), cpage * rcpp);
+				String navi = dao.getPageNavi(cpage, rcpp, ncpp);
+				
+				request.setAttribute("navi", navi);
 				request.setAttribute("noticeBoardList", noticeBoardList);
 				request.getRequestDispatcher("/admin/adminNotice/adminNotice.jsp").forward(request, response);		
 				
 			} else if (uri.equals("/detail.notice")) {
 				
 				int noticeSeq = Integer.parseInt(request.getParameter("noticeSeq"));
-				NoticeBoardDTO dto = NoticeBoardDAO.getInstance().noticeDetail(noticeSeq);
-				request.setAttribute("noticeDetail", dto);
+				NoticeBoardDTO noticeDto = NoticeBoardDAO.getInstance().noticeDetail(noticeSeq);
+				BoardFilesDTO filesDto = BoardFilesDAO.getInstance().selectNotice(noticeSeq);
+				
+				request.setAttribute("noticeDetail", noticeDto);
+				request.setAttribute("noticeDetailFile", filesDto);
 				request.getRequestDispatcher("/admin/adminNotice/noticeDetail.jsp").forward(request, response);
-				
-			} else if (uri.equals("/files.notice")) {
-				
-				
 				
 			}
 		} catch (Exception e) {
