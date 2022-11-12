@@ -230,7 +230,7 @@ div {
 					<small style="font-weight: normal; font-size: 20px; font-family: 'NanumSquareNeoBold';">최고 음질로
 						디바이스 제한없이</small><br> 월 3,850원에 누리는 가장 완벽한<br>오디오 경험
 				</div>
-				<img src="/web/eventimg.png" id="eventImg">
+				<img src="/image/web/eventimg.png" id="eventImg">
 			</div>
 			<div id="mainGoods">
 				<div id="eventSticker">event</div>
