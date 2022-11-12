@@ -116,7 +116,7 @@
                 <div class="mainText">공지사항 쓰기</div>
             <br>
             <hr>
-            <form action="/write.notice" id="form" method="post">
+            <form action="/write.notice" id="form" method="post" enctype="multipart/form-data">
             <div>
             	제목
             	<input type="text" id="noticeTitle" name="noticeTitle" placeholder="제목을 입력하세요.">
@@ -135,6 +135,7 @@
             <div>
             	<textarea id="noticeContents" name="noticeContents" name="editordata"></textarea>
             </div>
+            <div><input type="file" name="file"></div>
             <div id="writeConfirm">글 작성하기</div>
             </form>
          </div>
@@ -167,13 +168,17 @@
 		
 		writeConfirm.addEventListener("click", function(){
 					
-			if (noticeTitle.value.length!=0 && noticeContents.value.length!=0) {
+			if (noticeTitle.value.length==0) {
+				alert("제목을 입력하세요.");
+			} else if (noticeContents.value.length==0) {
+				alert("내용을 입력하세요.");
+			} else if (noticeTitle.value.length>30) {
+				alert("제목은 30자 이하로 작성해주세요.")
+			} else if (noticeContents.value.length>200) {
+				alert("내용은 200자 이하로 작성해주세요.")	
+			} else {
 				let form = document.getElementById("form");
 				form.submit();
-			} else if (noticeTitle.value.length==0) {
-				alert("글 제목을 입력하세요.");
-			} else if (noticeContents.value.length==0) {
-				alert("글 내용을 입력하세요.");
 			}
 		});
 	</script>

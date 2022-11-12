@@ -139,7 +139,7 @@
 						<p>name</p></li>
 					<li>
 						<button>
-							<span class="material-symbols-rounded" id="wish" data-wish="false"> favorite </span>
+							<span class="material-symbols-rounded" id="wish" data-wish="false" title="위시리스트 추가"> favorite </span>
 <!-- 								<img src="/image/web/favorite_fill0.png"> -->
 						</button>
 					</li>
@@ -325,26 +325,30 @@
     	}
     	
     	// 위시리스트 여부에 따라 하트모양을 바꿔주는 함수
-    	function wishIsExist(){
+    	function wishExist(){
     		$.ajax({
-    			uri : "/exist.wish",
+    			url : "/exist.wish",
     			type : "get",
     			data:{
-    				musicSeq : musicList[playIndex].musicSeq	
-    			}
+    				"musicSeq" : musicList[playIndex].musicSeq	
+    			},
+    			dataType:"json"
     		}).done(function(resp){    			
     			let result = JSON.parse(resp);
-    			console.log(result);
-    			if (result=="false") {
+    			if (result==false) {
     				$("#wish").html("favorite");
+    				$("#wish").attr("title","위시리스트 추가");
+    				$("#wish").attr("data-wish","false");
     			} else {
-    				$("#wish").html("Heart plus");
+    				$("#wish").html("heart_plus");
+    				$("#wish").attr("title","위시리스트 제거");
+    				$("#wish").attr("data-wish","true");
     			}
     		});
     	};
     	
     	// 처음 페이지에서 위시리스트 여부를 판별해준다.
-    	wishIsExist();
+    	wishExist();
     	    	
     	// 컨트롤러 타이머 구현
     	playAudio.addEventListener("timeupdate", e=>{
@@ -469,14 +473,28 @@
     	
     	// 위시리스트 추가
     	$("#wish").on("click",function(){
-    		$.ajax({
-    			url:"/add.wish",
-    			type:"get",
-    			data:{
-    				musicSeq : musicList[playIndex].musicSeq	
-    			}    				
-    		});
-    		wishIsExist();
+    		if ($("#wish").attr("data-wish")=="false") {
+    			$.ajax({
+        			url:"/add.wish",
+        			type:"get",
+        			data:{
+        				"musicSeq" : musicList[playIndex].musicSeq	
+        			}    				
+        		}).done(function(){
+        			wishExist();	
+        		});
+    		} else {
+    			$.ajax({
+        			url:"/del.wish",
+        			type:"get",
+        			data:{
+        				"musicSeq" : musicList[playIndex].musicSeq	
+        			}    				
+        		}).done(function(){
+        			wishExist();	
+        		});
+    		}
+    		    		
     	});
     	    	
 		}

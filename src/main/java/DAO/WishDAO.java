@@ -32,7 +32,7 @@ public class WishDAO {
 		try (Connection con = this.getConnection();
 				PreparedStatement pstat = con.prepareStatement(sql);) {
 			pstat.setString(1, dto.getWishEmail());
-			pstat.setString(2, dto.getParentMusicSeq());
+			pstat.setInt(2, dto.getParentMusicSeq());
 						
 			int result = pstat.executeUpdate();
 			con.commit();
@@ -41,15 +41,29 @@ public class WishDAO {
 	}
 	
 	public boolean isExist(WishDTO dto) throws Exception {
-		String sql = "selet * from wishList where wishEmail = ? and parentSeq = ?";
+		String sql = "select * from wishList where wishEmail = ? and parentMusicSeq = ?";
 		
 		try (Connection con = this.getConnection();
 				PreparedStatement pstat = con.prepareStatement(sql);) {
 			pstat.setString(1, dto.getWishEmail());
-			pstat.setString(2, dto.getParentMusicSeq());
+			pstat.setInt(2, dto.getParentMusicSeq());
 			
 			ResultSet rs = pstat.executeQuery();
 			return rs.next();
+		}
+	}
+	
+	public int delWish(WishDTO dto) throws Exception {
+		String sql = "delete from wishList where wishEmail = ? and parentMusicSeq = ?";
+		
+		try (Connection con = this.getConnection();
+				PreparedStatement pstat = con.prepareStatement(sql);) {
+			pstat.setString(1, dto.getWishEmail());
+			pstat.setInt(2, dto.getParentMusicSeq());
+			
+			int result = pstat.executeUpdate();
+			con.commit();
+			return result;
 		}
 	}
 }
