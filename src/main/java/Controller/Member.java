@@ -50,7 +50,6 @@ public class Member extends HttpServlet {
 					MemberDTO dto = dao.getMypage(email);	
 					
 					request.getSession().setAttribute("loginEmail", dto.getEamil());
-					request.getSession().setAttribute("loginPw", dto.getPw());
 					request.getSession().setAttribute("loginProfileimg", dto.getProfileImg());
 					request.getSession().setAttribute("loginNickname", dto.getNickname());
 					request.getSession().setAttribute("loginName", dto.getName());
@@ -81,7 +80,10 @@ public class Member extends HttpServlet {
 				MemberDTO dto = dao.getMypage(request.getSession().getAttribute("loginEmail").toString());
 				request.setAttribute("DTO", dto);
 				request.getRequestDispatcher("/mypage/mypage.jsp").forward(request, response);
-			} else if(uri.equals("/informUpdate.member")) {
+			} 
+			
+			//회원 정보 수정
+			else if(uri.equals("/informUpdate.member")) {
 
 				int maxSize = 1024 * 1024 * 10;
 				String savePath = request.getServletContext().getRealPath("/profile");
@@ -99,31 +101,59 @@ public class Member extends HttpServlet {
 				}
 				
 				String email=request.getSession().getAttribute("loginEmail").toString();
-				String pw =multi.getParameter("pw");
 				String nickname = multi.getParameter("nickname");
 				String phone = multi.getParameter("phone");
-				MemberDAO dao = MemberDAO.getInstance();
-				if (pw==null) {
-					pw=request.getSession().getAttribute("loginPw").toString();
-				}else {
-					pw = multi.getParameter("pw");
-				}
-				if (nickname==null) {
-					nickname=request.getSession().getAttribute("loginNickname").toString();
-				}else {
-					nickname = multi.getParameter("nickname");
-				}
-				if (phone==null) {
-					phone=request.getSession().getAttribute("loginPhone").toString();
-				}else {
-					phone = multi.getParameter("phone");
-				}
+				String delResult = multi.getParameter("delResult");
+				MemberDAO dao = MemberDAO.getInstance();	
+			
 				
-				MemberDTO dto = new MemberDTO(email,pw,null,null,null,sysName,nickname,null,phone);
-
-				dao.update(dto);
-				System.out.println(dto);
+				if(delResult.equals("true")) {
+					sysName="profile-default.jpg";
+					MemberDTO dto = new MemberDTO(email,null,null,null,null,sysName,nickname,null,phone);
+					dao.delUpdate(dto);
+				}else {
+					MemberDTO dto = new MemberDTO(email,null,null,null,null,sysName,nickname,null,phone);
+					dao.update(dto);
+				}
 				request.getRequestDispatcher("/mypage.member").forward(request, response);
+			}
+			
+			//현재 비밀번호 일치하는지
+			else if(uri.equals("/pwSelect.member")){
+				MemberDAO dao = MemberDAO.getInstance();
+				String email =request.getSession().getAttribute("loginEmail").toString();
+				String pw = request.getParameter("pw");
+				
+				boolean result = dao.selectPw(email, pw);
+				PrintWriter out = response.getWriter();
+				out.print(result);
+			}
+			
+			//닉네임 중복 확인
+			else if(uri.equals("/nicknameSelect.member")){
+				MemberDAO dao = MemberDAO.getInstance();
+				String email =request.getSession().getAttribute("loginEmail").toString();
+				String nickname = request.getParameter("nickname");
+				
+				boolean result = dao.selectNickname(email, nickname);
+				PrintWriter out = response.getWriter();
+				out.print(result);
+			}
+			
+			else if(uri.equals("/nicknameSelectAll.member")){
+				MemberDAO dao = MemberDAO.getInstance();
+				String nickname = request.getParameter("nickname");
+				boolean result = dao.selectAllNickname(nickname);
+				PrintWriter out = response.getWriter();
+				out.print(result);
+			}
+			//비밀번호 수정
+			else if(uri.equals("/modifyPw.member")) {
+				MemberDAO dao = MemberDAO.getInstance();
+				String email = request.getSession().getAttribute("loginEmail").toString();
+				String pw = request.getParameter("pwChang");				
+				dao.modifyPw(email, pw);
+				response.sendRedirect("/mypage.member");
 			}
 			else if(uri.equals("/emailDupleCheck.member")) {
 				String email = request.getParameter("email");
@@ -141,7 +171,8 @@ public class Member extends HttpServlet {
 		          String jsonString = g.toJson(result);
 		          response.getWriter().append(jsonString);
 			}
-			//ifream 문제로 인해 창이 2개가 생김
+			
+			//회원 탈퇴
 			else if(uri.equals("/delete.member")) {
 				MemberDAO dao = MemberDAO.getInstance();
 				int result = dao.delete(request.getSession().getAttribute("loginEmail").toString());
