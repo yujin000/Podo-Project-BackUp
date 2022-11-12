@@ -2,7 +2,6 @@ package Controller;
 
 import java.io.File;
 import java.io.IOException;
-import java.util.Enumeration;
 import java.util.List;
 
 import javax.servlet.ServletException;
@@ -75,7 +74,7 @@ public class QnaBoard extends HttpServlet {
 
 				request.setAttribute("fileDto",dto);
 				request.setAttribute("dtoDetail", dtoDetail);
-				request.getSession().setAttribute("qnaDetailSeq", qnaSeq);
+				// request.getSession().setAttribute("qnaDetailSeq", qnaSeq);
 				request.getRequestDispatcher("/mypage/qnaDetail.jsp").forward(request, response);
 			} else if (uri.equals("/adminList.board")) {
 				int cpage = Integer.parseInt(request.getParameter("cpage"));
@@ -86,11 +85,20 @@ public class QnaBoard extends HttpServlet {
 				String navi = dao.getPageNavi(cpage);
 				request.setAttribute("qna", qna);
 				request.setAttribute("navi", navi);
-				request.getRequestDispatcher("/admin/adminQna.jsp?cpage=1").forward(request, response);
+				request.getRequestDispatcher("/admin/adminQnaBoard/adminQna.jsp?cpage=1").forward(request, response);
+			} else if (uri.equals("/adminQnaDetail.board")) {
+				QnaBoardDAO dao = QnaBoardDAO.getInstance();
+				int qnaSeq = Integer.parseInt(request.getParameter("qnaSeq"));
+				QnaBoardDTO qnaBoardDto = dao.isSelect(qnaSeq);
+				BoardFilesDAO boardFilesDao = BoardFilesDAO.getInstance();
+				BoardFilesDTO boardFilesDto = boardFilesDao.select(qnaSeq);
+				qnaBoardDto.setQnaSeq(qnaSeq);
+				
+				request.setAttribute("boardFile", boardFilesDto);
+				request.setAttribute("qnaBoard", qnaBoardDto);
+				request.getRequestDispatcher("/admin/adminQnaBoard/adminQnaDetail.jsp?qnaSeq="+qnaSeq).forward(request, response);
 			}
-		} catch (
-
-		Exception e) {
+		} catch (Exception e) {
 			e.printStackTrace();
 			response.sendRedirect("/error.jsp");
 		}

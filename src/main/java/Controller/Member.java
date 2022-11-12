@@ -3,6 +3,7 @@ package Controller;
 import java.io.File;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.sql.Timestamp;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -10,6 +11,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.google.gson.Gson;
 import com.oreilly.servlet.MultipartRequest;
 import com.oreilly.servlet.multipart.DefaultFileRenamePolicy;
 
@@ -33,9 +35,9 @@ public class Member extends HttpServlet {
 				String nickname = request.getParameter("nickname");
 				String name = request.getParameter("name");
 				String phone = request.getParameter("phone");
-				System.out.println(email + pw + nickname + name + phone);
 				MemberDAO dao = MemberDAO.getInstance();
 				int result = dao.signup(email, pw, nickname, name, phone);
+				dao.signupMail(email, nickname);
 				response.sendRedirect("/index.jsp");
 			} else if (uri.equals("/login.member")) {
 				MemberDAO dao = MemberDAO.getInstance();
@@ -53,7 +55,10 @@ public class Member extends HttpServlet {
 					request.getSession().setAttribute("loginNickname", dto.getNickname());
 					request.getSession().setAttribute("loginName", dto.getName());
 					request.getSession().setAttribute("loginPhone", dto.getPhone());
-					response.sendRedirect("/index.jsp");
+					request.getSession().setAttribute("scribDate", dto.getScribeDate());
+					request.getSession().setAttribute("loginMembership", dto.getMembership());
+					
+					response.sendRedirect("/chart.music");
 				} 
 					 else {
 					  
@@ -70,7 +75,7 @@ public class Member extends HttpServlet {
 				
 			 else if (uri.equals("/logout.member")) {
 				request.getSession().invalidate();
-				response.sendRedirect("index.jsp");
+				response.sendRedirect("/index.jsp");
 			} else if (uri.equals("/mypage.member")) {
 				MemberDAO dao = MemberDAO.getInstance();
 				MemberDTO dto = dao.getMypage(request.getSession().getAttribute("loginEmail").toString());
@@ -127,13 +132,14 @@ public class Member extends HttpServlet {
 				PrintWriter out = response.getWriter();
 				out.print(result);
 			}
-			else if(uri.equals("/naverMailSend.member")) {
+			else if(uri.equals("/MailSender.member")) {
 				String email = request.getParameter("email");
 				MemberDAO dao = new MemberDAO();
-				String result = dao.naverMailSend(email);
-				request.setAttribute("key", result);
-				System.out.println(result);
-				request.getRequestDispatcher("/emailCheck.jsp").forward(request, response);
+				String result = dao.MailSender(email);
+				
+				Gson g = new Gson();
+		          String jsonString = g.toJson(result);
+		          response.getWriter().append(jsonString);
 			}
 			//ifream 문제로 인해 창이 2개가 생김
 			else if(uri.equals("/delete.member")) {
@@ -147,6 +153,34 @@ public class Member extends HttpServlet {
 				String nickName = request.getParameter("nickname");
 				request.setAttribute("nickname", nickName);
 				request.getRequestDispatcher("/admin/adminIndex.jsp").forward(request, response);
+			}
+			else if(uri.equals("/find.member")) {
+				MemberDAO dao = MemberDAO.getInstance();
+				String email = request.getParameter("email");
+				boolean result = dao.emailDupleCheck(email);
+				
+				if(result) {
+					
+					String key = dao.MailSender(email);
+					Gson g = new Gson();
+			          String jsonString = g.toJson(key);
+			          response.getWriter().append(jsonString);
+				}else{
+					 
+				}
+			}else if(uri.equals("/updatePw.member")) {
+				MemberDAO dao = MemberDAO.getInstance();
+				String email = request.getParameter("email");
+				String pw = dao.newPassword(email);				
+				dao.updatePw(email, pw);
+				response.sendRedirect("/member/loginForm.jsp");
+				
+			}else if(uri.equals("/stratMembership.member")) {
+				MemberDAO dao = MemberDAO.getInstance();
+				String email = request.getParameter("email");
+				dao.startMemberShip(email);
+				request.getRequestDispatcher("/index.jsp").forward(request, response);
+				
 			}
 		} catch (Exception e) {
 			e.printStackTrace();

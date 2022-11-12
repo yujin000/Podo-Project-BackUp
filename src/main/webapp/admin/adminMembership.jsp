@@ -19,9 +19,9 @@
             display: block;
         }
 
-        @media(max-width:1600px) {
+        @media(max-width:1800px) {
             .html {
-                width: 1600px;
+                width: 1800px;
             }
         }
 
@@ -101,7 +101,7 @@
             width: 100%;
         }
 
-        div[id^=products] {
+        div[id^=products], #memberManaging {
             float: left;
             width: 160px;
             color: silver;
@@ -173,7 +173,7 @@
 
         #navUl>li:first-child,
         .listWrap>div:first-child {
-            margin-left: 4%;
+            margin-left: 2%;
         }
 
         .navLi {
@@ -203,7 +203,8 @@
 
         /*d여기부터 작성중*/
         #productsUpdate:hover,
-        #products:hover {
+        #products:hover,
+        #memberManaging:hover {
             cursor: pointer;
         }
 
@@ -310,6 +311,9 @@
 		.updConfirmBtn:hover,.updCancelBtn:hover{
 			cursor:pointer;
 		}
+		#onSaleAddProducts input,#onSaleAddProducts textarea{
+			color:black;
+		}
     </style>
 </head>
 
@@ -351,6 +355,7 @@
                     <div id="onSaleNav">
                         <div id="products">현재 판매 중인 멤버십</div>
                         <div id="productsUpdate">상품 추가하기</div>
+                        <div id="memberManaging">회원 관리</div>
                     </div>
                     <div id="onSaleContents">
                         <div>
@@ -423,13 +428,17 @@
             $(this).next(".tog").fadeToggle();
         });
 
-        // 멤버십, 수정/추가/삭제 버튼 클릭 이벤트
+        // 멤버십, 수정/추가/삭제, 회원관리 버튼 클릭 이벤트
         $("#products").on("click", function () {
             $("#products").css({
                 "background-color": "silver",
                 "color": "black"
             })
             $("#productsUpdate").css({
+                "background-color": "black",
+                "color": "silver"
+            })
+            $("#memberManaging").css({
                 "background-color": "black",
                 "color": "silver"
             })
@@ -445,8 +454,28 @@
                 "background-color": "black",
                 "color": "silver"
             })
+            $("#memberManaging").css({
+                "background-color": "black",
+                "color": "silver"
+            })
             $("#onSaleContents").css({ "display": "none" })
             $("#onSaleAddProducts").css({ "display": "block" })
+        })
+        $("#memberManaging").on("click", function () {
+            $("#products").css({
+                "background-color": "black",
+                "color": "silver"
+            })
+            $("#productsUpdate").css({
+                "background-color": "black",
+                "color": "silver"
+            })
+            $("#memberManaging").css({
+                "background-color": "silver",
+                "color": "black"
+            })
+            $("#onSaleContents").css({ "display": "none" })
+            $("#onSaleAddProducts").css({ "display": "none" })
         })
 
         // 현재 판매중인 이용권 수정버튼 생성

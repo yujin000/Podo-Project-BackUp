@@ -76,7 +76,7 @@
 						<ul class="tog">
 							<li><a id="mypageBtn">마이페이지</a></li>
 							<c:choose>
-								<c:when test="${loginEmail eq 'podo@email.com'}">
+								<c:when test="${loginMembership eq 'admin'}">
 									<li><a href="/admin/adminIndex.jsp">관리자페이지</a></li>
 								</c:when>
 							</c:choose>
@@ -114,7 +114,7 @@
 			</div>
 
 			<div id="FloatArea">
-				<a href="">멤버쉽 구독</a> 
+				<a id="membership">멤버쉽 구독</a> 
 				<a id="ticketing">포도 티켓</a>
 			</div>
 			<a href="" class="service">서비스 소개</a>
@@ -122,7 +122,8 @@
 
 		<iframe src="/main/main.jsp" width="100%" height="100%"
 			style="display: block; padding-left: 230px" id="iframe"></iframe>
-
+		<c:choose>
+		<c:when test="${loginMembership eq 'admin' || loginMembership eq 'vip'}">
 		<div id="MusicControl">
 			<div class="hidden">
 				<h1>hidden</h1>
@@ -140,6 +141,7 @@
 					<li>
 						<button>
 							<span class="material-symbols-rounded" id="wish" data-wish="false"> favorite </span>
+<!-- 								<img src="/image/web/favorite_fill0.png"> -->
 						</button>
 					</li>
 					<li>
@@ -176,6 +178,8 @@
 				</ul>
 			</div>
 		</div>
+		</c:when>
+		</c:choose>
 	</div>
 
 	<script>
@@ -218,8 +222,14 @@
 		$("#serviceBtn").click(function() {
 			$("#iframe").attr("src", "/mypage/serviceCenter.jsp");
 		});
+		$("#membership").click(function(){
+			$("#iframe").attr("src","/index.goods");
+		})
 	</script>
 	<script>
+		let membership = "${loginMembership}";
+		if (membership=="admin" || membership=="vip") {
+			
 		// Music Controller 부분
 		
     	// 목록페이지 전체 div값
@@ -318,17 +328,18 @@
     	// 위시리스트 여부에 따라 하트모양을 바꿔주는 함수
     	function wishIsExist(){
     		$.ajax({
-    			uri : "/isExist.wish",
+    			uri : "/exist.wish",
     			type : "get",
     			data:{
     				musicSeq : musicList[playIndex].musicSeq	
     			}
     		}).done(function(resp){    			
-    			let result = resp;
-    			if (result=="true") {
-    				$("#wish").html("Heart Plus");
-    			} else {
+    			let result = JSON.parse(resp);
+    			console.log(result);
+    			if (result=="false") {
     				$("#wish").html("favorite");
+    			} else {
+    				$("#wish").html("Heart plus");
     			}
     		});
     	};
@@ -468,8 +479,8 @@
     		});
     		wishIsExist();
     	});
-    	
-    	
+    	    	
+		}
     	
     	
     </script>
