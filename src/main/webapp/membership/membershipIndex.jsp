@@ -332,6 +332,7 @@ div {
 		/* 이벤트 상품 클릭시 border color 설정 및 상품상세정보(info), 결제하기 버튼에 가격 출력 */
 		let price = 0;
 		let userEmail = user.value;
+		let nowMembership = logMemship.value;
 		let goodsSeq;
 		let goodsName;
 		
@@ -405,8 +406,6 @@ div {
 			})
 			warning.text("결제할 상품을 선택해주세요.");
 
-		let nowMembership = logMemship.value;
-		
 			/* 결제하기 */
 		$("#payBtn").on("click",function(){
 			if(userEmail == ""){
