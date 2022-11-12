@@ -9,7 +9,7 @@
 <meta charset="UTF-8" />
 <meta http-equiv="X-UA-Compatible" content="IE=edge" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>공지사항 관리</title>
+<title>공지사항 보기</title>
 <link rel="stylesheet" href="/src/css/style.css" />
 <script src="https://code.jquery.com/jquery-3.6.1.min.js"
    integrity="sha256-o88AwQnZB+VDvE9tvIXrMQaPlFFSUTR+nldQm1LuPXQ="
@@ -60,30 +60,26 @@
 .tog {
    top: 130px;
 }
-
-.noticeList {
-	height : 30px;
+.header, #header2{
+	height:30px;
 }
-
-.noticeList>div, .header>div{
+.header>div, #header2>div{
 	float:left;
 }
-
-.header, .noticeList {
-	height : 30px;
-}
-
-#noticeSeqHeader, .noticeSeq {
+#qnaSeqHeader, #qnaSeq{
 	width : 5%;
 }
-#noticeCategoryHeader, .noticeCategory {
-	width : 15%;
+#qnaCategoryHeader, #qnaWriteDateHeader, #qnaCategory, #qnaWriteDate {
+	width : 10%;
 }
-#noticeTitleHeader, .noticeTitle, #noticeWriteDateHeader, .noticeWriteDate {
+#qnaTitleHeader, #qnaTitle {
 	width : 20%;
 }
-#noticeWriterHeader, .noticeWriter {
+#qnaWriterHeader, #qnaWriter {
 	width : 15%;
+}
+#contents{
+	width : 800px;
 }
 
 </style>
@@ -97,7 +93,7 @@
                src="/image/web/logo-f-5.png" alt="" /></a>
          </h1>
          <div id="mypage">
-            <a class="loginBtn">${loginNickname }</a>
+            <a class="loginBtn">${nickname }</a>
          </div>
          <ul class="tog">
             <li><a href="/index.jsp">메인페이지로</a></li>
@@ -111,41 +107,34 @@
                <li><a id="chart">공연 관리</a></li>
                <li><a href="#">회원 관리</a></li>
                <li><a href="/adminMemship.admin">멤버십 관리</a></li>
-               <li><a href="#">문의내역 확인</a></li>
+               <li><a href="/adminList.board?cpage=1">문의내역 확인</a></li>
             </ul>
          </div>
       </div>
       <div class="adminContents">
          <div class="adminMainView">
-            <div class="mainText">공지사항 관리</div>
+            <div class="mainText">공지사항 보기</div>
             <br>
-            <hr>
-            <div class="header">
-            	<div id="noticeSeqHeader">번호</div>
-            	<div id="noticeCategoryHeader">유형</div>
-            	<div id="noticeTitleHeader">제목</div>
-            	<div id="noticeWriterHeader">작성자</div>
-            	<div id="noticeWriteDateHeader">작성날짜</div>
-            </div>
-            <c:choose>
-            	<c:when test = "${not empty noticeBoardList }">
-            		<c:forEach var = "i" items = "${noticeBoardList }">
-            			<div class="noticeList">            				
-            				<div class="noticeSeq">${i.noticeSeq }</div>
-            				<div class="noticeCategory">${i.noticeCategory }</div>
-            				<div class="noticeTitle"><a href="/detail.notice?noticeSeq=${i.noticeSeq }">${i.noticeTitle }</a></div>
-            				<div class="noticeWriter">${i.noticeWriter }</div>
-            				<div class="noticeWriteDate">${i.noticeWriteDate }</div>
-            			</div>
-            		</c:forEach>            		
-            	</c:when>
-            	<c:otherwise>
-            		<div>글이 없습니다.</div>
-            	</c:otherwise>
-            </c:choose>
-            <div id="writeBtn">공지사항 쓰기</div>
-            
+            <hr>   
          </div>
+         <div class="header">
+         			<div id="qnaSeqHeader">공지사항 번호</div>
+            		<div id="qnaCategoryHeader">공지사항 유형</div>
+            		<div id="qnaTitleHeader">제목</div>
+            		<div id="qnaWriterHeader">작성자</div>
+            		<div id="qnaWriteDateHeader">작성 날짜</div>
+            </div>
+            	<div id="header2">            				
+            		<div id="qnaSeq">${noticeDetail.noticeSeq }</div>
+            		<div id="qnaCategory">${noticeDetail.noticeCategory }</div>
+            		<div id="qnaTitle">${noticeDetail.noticeTitle }</div>
+            		<div id="qnaWriter">${noticeDetail.noticeWriter }</div>
+            		<div id="qnaWriteDate">${noticeDetail.noticeWriteDate }</div>
+            	</div>
+            	<div id="contents">
+            		<div>본문</div>
+            		${noticeDetail.noticeContents }
+            	</div>
       </div>
    </div>
    <script>
@@ -153,10 +142,6 @@
       let adminBtn = document.getElementById("mypage");
       $(adminBtn).click(function() {
          $(this).next(".tog").fadeToggle();
-      });
-      
-      $("#writeBtn").on("click", function(){
-			location.href = "/admin/adminNotice/noticeWrite.jsp"; 
       });
       
    </script>

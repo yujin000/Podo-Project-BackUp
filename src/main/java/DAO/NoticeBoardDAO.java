@@ -29,14 +29,15 @@ public class NoticeBoardDAO {
 	}
 	
 	public int writeNoticeBoard(NoticeBoardDTO dto) throws Exception {
-		String sql = "insert into NoticeBoard values(noticeSeq.nextVal, ?, ?, ?, sysdate, ?)";
+		String sql = "insert into NoticeBoard values(?, ?, ?, ?, sysdate, ?)";
 		try (Connection con = this.getConnection();
 				PreparedStatement pstat = con.prepareStatement(sql);) {
 			
-			pstat.setString(1, dto.getNoticeWriter());
-			pstat.setString(2, dto.getNoticeTitle());
-			pstat.setString(3, dto.getNoticeContents());
-			pstat.setString(4, dto.getNoticeCategory());
+			pstat.setInt(1, dto.getNoticeSeq());
+			pstat.setString(2, dto.getNoticeWriter());
+			pstat.setString(3, dto.getNoticeTitle());
+			pstat.setString(4, dto.getNoticeContents());
+			pstat.setString(5, dto.getNoticeCategory());
 						
 			int result = pstat.executeUpdate();
 			con.commit();
@@ -64,4 +65,34 @@ public class NoticeBoardDAO {
 			return noticeBoardList;
 		}
 	}
+	
+	public NoticeBoardDTO noticeDetail(int noticeSeq) throws Exception {
+		String sql = "select * from noticeBoard where noticeSeq = ?";
+		
+		try (Connection con = this.getConnection();
+				PreparedStatement pstat = con.prepareStatement(sql);) {
+			
+			pstat.setInt(1, noticeSeq);
+			ResultSet rs = pstat.executeQuery();
+			rs.next();
+			NoticeBoardDTO dto = new NoticeBoardDTO();
+			dto.setNoticeSeq(noticeSeq);
+			dto.setNoticeWriter(rs.getString("noticeWriter"));
+			dto.setNoticeTitle(rs.getString("noticeTitle"));
+			dto.setNoticeContents(rs.getString("noticeContents"));
+			dto.setNoticeWriteDate(rs.getTimestamp("noticeWriteDate"));
+			dto.setNoticeCategory(rs.getString("noticeCategory"));
+			return dto;
+		}
+	}
+	
+	public int getSeq() throws Exception {
+		String sql = "select noticeSeq.nextval from dual";
+		try (Connection con = this.getConnection(); PreparedStatement pstat = con.prepareStatement(sql);) {
+			ResultSet rs = pstat.executeQuery();
+			rs.next();
+			return rs.getInt(1);
+		}
+	}
+	
 }
