@@ -306,7 +306,16 @@
                                 <div style="padding-left: 1vw;">${DTO.membership }</div>
                             </th>
                             <td>
-                                <div>${passName }</div> 
+                                <div>
+									<c:choose>
+										<c:when test="${passName != null}">
+											${passName }
+										</c:when>
+										<c:otherwise>
+											이용중인 이용권이 없습니다.
+										</c:otherwise>
+									</c:choose>        
+                                </div> 
                             </td>
                             <td>
                                 <div><fmt:formatDate value="${DTO.scribeDate}" pattern="yyyy-MM-dd" /></div>

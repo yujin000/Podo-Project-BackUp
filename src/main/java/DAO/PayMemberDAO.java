@@ -3,6 +3,7 @@ package DAO;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.util.Collections;
 
 import javax.naming.Context;
 import javax.naming.InitialContext;
@@ -65,8 +66,12 @@ public class PayMemberDAO {
 		try(Connection con = this.getConnection(); PreparedStatement pstat = con.prepareStatement(sql);) {
 			pstat.setString(1, email);
 			ResultSet rs = pstat.executeQuery();
-			rs.next();
-			String result = rs.getString("payGoodsName");
+			String result = null;
+			if(rs.next()) {
+				result = rs.getString("payGoodsName");
+			}else{
+				result = null;
+			};
 			return result;
 		}
 	}
