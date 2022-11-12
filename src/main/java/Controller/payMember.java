@@ -1,6 +1,9 @@
 package Controller;
 
 import java.io.IOException;
+import java.sql.Timestamp;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -28,6 +31,7 @@ public class payMember extends HttpServlet {
 				PayMemberDTO dto = new PayMemberDTO(payGoodsSeq,payMemberEmail,null);
 				dao.insertPayStatus(dto);
 				response.sendRedirect("/updMembership.paymem");
+				
 			}else if(uri.equals("/updMembership.paymem")) {
 				String userEmail = request.getSession().getAttribute("loginEmail").toString();
 				PayMemberDAO dao = PayMemberDAO.getInstance();

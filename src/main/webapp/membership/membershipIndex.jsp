@@ -286,6 +286,7 @@ div {
 		<!-- My 멤버십 -->
 		<div id="myMembershipArea">My멤버십</div>
 		<input type="hidden" value="${loginEmail }" id="user">
+		<input type="hidden" value="${loginMembership }" id="logMemship">
 	</div>
 	<script>
 		/* 헤더 네비게이션 이벤트( 페이지 전환 : 해당 메뉴 선택시 display속성 변동, 아래 바 추가 ) */
@@ -402,23 +403,23 @@ div {
 				"color":"red",
 				"text-align":"center"
 			})
-			warning.text("결제할 상품을 선택해주세요.")
-			/* 비회원이 결제하기 접근 시 로그인 팝업창(현재 사용 X)*/
-		function signIn() {
-			var url = "/member/loginForm.jsp";
-            var name = "popup";
-            var option = "width = 500, height = 700, top = 100, left = 200, location = no"
-            var popup = window.open(url, name, option);
-		    popup.onbeforeunload=function (){
-		        window.parent.location.reload();
-		    }
-		}	
+			warning.text("결제할 상품을 선택해주세요.");
 
+		let nowMembership = logMemship.value;
+		
 			/* 결제하기 */
 		$("#payBtn").on("click",function(){
 			if(userEmail == ""){
 				alert("로그인 후 이용할 수 있습니다.");
 				window.parent.location.href = "/member/loginForm.jsp";
+			}else if(nowMembership == "vip"){
+				Swal.fire({
+					  icon: 'warning',
+					  iconColor:'#FF0050',
+					  title: '현재 사용중인 이용권이 있습니다',
+					  text: '이용권 기간이 끝난 후 구매해주세요.',
+					  footer: '<a href="/mypage.member" style="text-decoration:none;color:#3e065f;">마이페이지에서 남은 기간 확인하기</a>'
+					})
 			}else{
 				if(price == 0){
 					$("#goodsInfo").after(warning);
@@ -442,6 +443,7 @@ div {
 		                    Swal.fire({
 		                    	  position: 'center',
 		                    	  icon: 'success',
+		                    	  iconColor:'#FF0050',
 		                    	  title: '결제가 완료되었습니다.',
 		                    	  showConfirmButton: false,
 		                    	  timer: 2000
