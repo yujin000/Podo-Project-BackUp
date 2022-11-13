@@ -160,7 +160,7 @@
 					<li><a href="/list.notice?cpage=1">공지사항 관리</a></li>
 					<li><a id="chart"
 						href="/allList.music?nickname=${loginNickname }">음원 관리</a></li>
-					<li><a id="chart">공연 관리</a></li>
+					<li><a href="/adminPerform.perform">공연 관리</a></li>
 					<li><a href="#">회원 관리</a></li>
 					<li><a href="/goodsList.goods">멤버십 관리</a></li>
 					<li><a href="/adminList.board?cpage=1">문의내역 확인</a></li>
