@@ -124,18 +124,27 @@
             		<div id="noticeWriterHeader">작성자</div>
             		<div id="noticeWriteDateHeader">작성 날짜</div>
             </div>
+            	<form action="/del.notice" id="form">
             	<div id="header2">            				
             		<div id="noticeSeq">${noticeDetail.noticeSeq }</div>
             		<div id="noticeCategory">${noticeDetail.noticeCategory }</div>
             		<div id="noticeTitle">${noticeDetail.noticeTitle }</div>
             		<div id="noticeWriter">${noticeDetail.noticeWriter }</div>
             		<div id="noticeWriteDate">${noticeDetail.noticeWriteDate }</div>
+            		<input type="hidden" name="noticeSeq" value="${noticeDetail.noticeSeq }">
+            		<input type="hidden" name="sysName" value="${noticeDetailFile.sysName }">            		
             	</div>
+            	</form>
             	<div id="contents">
             		<div>본문</div>
             		${noticeDetail.noticeContents }
             	</div>
             	<div>첨부파일 : <a href="/download.file?sysname=${noticeDetailFile.sysName }&oriname=${noticeDetailFile.oriName}">${noticeDetailFile.oriName }</a></div>
+            	<c:choose>
+            	<c:when test="${loginMembership eq 'admin' }">
+            	<div id="del">삭제</div>
+            	</c:when>
+            	</c:choose>
       </div>
    </div>
    <script>
@@ -143,6 +152,13 @@
       let adminBtn = document.getElementById("mypage");
       $(adminBtn).click(function() {
          $(this).next(".tog").fadeToggle();
+      });
+      
+      $("#del").on("click", function(){
+    	 if (confirm("정말 삭제하시겠습니까?")) {
+    		 $("#form").css("action","/del.notice");
+    		 $("#form").submit();
+    	 } 
       });
       
    </script>

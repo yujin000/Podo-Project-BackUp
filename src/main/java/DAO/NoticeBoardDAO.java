@@ -113,12 +113,12 @@ public class NoticeBoardDAO {
 		int recordTotalCount = this.getRecordCount();
 		int recordCountPerPage = rcpp;
 		int naviCountPerPage = ncpp;
-		
+				
 		int pageTotalCount = 0;
 		if (recordTotalCount % recordCountPerPage > 0) {
-			pageTotalCount = (recordCountPerPage / recordCountPerPage) + 1;			
+			pageTotalCount = (recordTotalCount / recordCountPerPage) + 1;			
 		} else {
-			pageTotalCount = recordCountPerPage / recordCountPerPage;
+			pageTotalCount = recordTotalCount / recordCountPerPage;
 		}
 		
 		if (currentPage < 1) {
@@ -131,10 +131,11 @@ public class NoticeBoardDAO {
 		
 		int endNavi = startNavi + naviCountPerPage - 1;
 		
+		
 		if(endNavi > pageTotalCount) {
 			endNavi = pageTotalCount;
 		}
-		
+				
 		boolean needPrev = true;
 		boolean needNext = true;
 		
@@ -144,7 +145,7 @@ public class NoticeBoardDAO {
 		if(endNavi == pageTotalCount) {
 			needNext = false;
 		}
-		
+			
 		StringBuilder sb = new StringBuilder();
 		
 		if (needPrev) {
@@ -160,6 +161,17 @@ public class NoticeBoardDAO {
 		}
 		
 		return sb.toString();
+	}
+	
+	public int delNotice(int noticeSeq) throws Exception {
+		String sql = "delete from noticeBoard where noticeSeq = ?";
+		try (Connection con = this.getConnection();
+				PreparedStatement pstat = con.prepareStatement(sql);) {
+			pstat.setInt(1, noticeSeq);
+			int result = pstat.executeUpdate();
+			con.commit();
+			return result;
+		}
 	}
 	
 }

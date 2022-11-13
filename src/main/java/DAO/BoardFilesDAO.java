@@ -1,5 +1,6 @@
 package DAO;
 
+import java.io.File;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -89,5 +90,28 @@ public class BoardFilesDAO {
 			}
 			return dto;
 		}
+	}
+	
+	// 파일삭제 매소드, boardType은 QnA인지, 공지사항인지를 확인.
+	public int deleteFileDb(int parentSeq, String boardType) throws Exception {
+		String sql = "delete from boardFiles where parentSeq=? and boardCategory=?";
+		try (Connection con = this.getConnection();
+				PreparedStatement pstat = con.prepareStatement(sql);) {
+			pstat.setInt(1, parentSeq);
+			pstat.setString(2, boardType);
+			int result = pstat.executeUpdate();
+			con.commit();
+			return result;
+		}
+	}
+	
+	//파일삭제 매소드. 구글링으로 찾아봐서 추가 테스트 필요함.
+	public void deleteFile(String savePath, String sysName) {
+		File file = new File(savePath + sysName);
+		
+		if (file.exists()) {
+			file.delete();
+		}
+		return;
 	}
 }

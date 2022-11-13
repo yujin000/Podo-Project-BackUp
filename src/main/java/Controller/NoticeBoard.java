@@ -53,7 +53,7 @@ public class NoticeBoard extends HttpServlet {
 				if (oriName==null) {
 					response.sendRedirect("/list.notice?cpage=1");
 				} else {
-					BoardFilesDAO.getInstance().insert(new BoardFilesDTO(0, oriName, sysName, noticeSeq, null));
+					BoardFilesDAO.getInstance().insertNotice(new BoardFilesDTO(0, oriName, sysName, noticeSeq, "notice"));
 					response.sendRedirect("/list.notice?cpage=1");
 				}
 				
@@ -82,6 +82,18 @@ public class NoticeBoard extends HttpServlet {
 				request.setAttribute("noticeDetailFile", filesDto);
 				request.getRequestDispatcher("/admin/adminNotice/noticeDetail.jsp").forward(request, response);
 				
+			} else if (uri.equals("/del.notice")) {
+				
+				int noticeSeq = Integer.parseInt(request.getParameter("noticeSeq"));
+				int result1 = NoticeBoardDAO.getInstance().delNotice(noticeSeq);
+								
+				if (request.getParameter("sysName")!=null) {
+					String sysName = request.getParameter("sysName");
+					String savePath = request.getServletContext().getRealPath("/files");
+					BoardFilesDAO.getInstance().deleteFile(savePath, sysName);
+					int result2 = BoardFilesDAO.getInstance().deleteFileDb(noticeSeq, "notice");
+				}
+				response.sendRedirect("/list.notice?cpage=1");
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
