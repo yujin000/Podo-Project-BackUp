@@ -80,6 +80,7 @@ public class MemberDAO {
       
               
 	public boolean emailDupleCheck(String email) throws Exception{
+		// 이메일 중복체크
 		String sql = "select * from member where email =?";
 		
 		try (Connection con = this.getConnection();
@@ -95,21 +96,23 @@ public class MemberDAO {
 	
 	public String MailSender(String email) throws Exception{
 	
+		// gmail smtp 설정
 		Properties props = new Properties();
-		props.put("mail.smtp.host", "smtp.gmail.com");
-		props.put("mail.smtp.port", "587");
+		props.put("mail.smtp.host", "smtp.gmail.com"); // g메일 연결
+		props.put("mail.smtp.port", "587"); // port 번호
 		props.put("mail.smtp.auth", "true");
 		props.put("mail.smtp.starttls.enable", "true");
 		props.put("mail.smtp.ssl.trust", "smtp.gmail.com");
-		props.put("mail.smtp.ssl.protocols", "TLSv1.2");
+		props.put("mail.smtp.ssl.protocols", "TLSv1.2"); // protocols 없을시 오류
 		
 		Session session = Session.getInstance(props, new Authenticator() {
 			@Override
 			protected PasswordAuthentication getPasswordAuthentication() {
 				return new PasswordAuthentication("dnfqh98@gmail.com", "edzofkldspdupiko");
-			}
+				// gmail id , gmail app password 
+			} 
 		});
-		String key = codeMaker();
+		String key = codeMaker(); // 인증번호 생성
 		String receiver = email; // 메일 받을 주소
 		String title = "podo music 인증번호";
 		String content = "<h2 style='color:blue'>"+"인증번호:"+key+"</h2>";
@@ -124,9 +127,10 @@ public class MemberDAO {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		return key;
+		return key; // 인증번호 호출
 	}
 	public String codeMaker() {
+		// 인증번호 생성 코드
 		String authCode = null;
 		
 		StringBuffer temp = new StringBuffer();
@@ -153,8 +157,8 @@ public class MemberDAO {
 		
 		return authCode;
 	}
+	// 비밀번호 찾기 시 임시비밀번호 전송 
 	public String newPassword(String email) throws Exception{
-		
 		Properties props = new Properties();
 		props.put("mail.smtp.host", "smtp.gmail.com");
 		props.put("mail.smtp.port", "587");
@@ -187,8 +191,8 @@ public class MemberDAO {
 		return key;
 	}
 
+	// 이메일 인증 메일 전송
 	public void signupMail(String email, String nickname) throws Exception{
-		
 		Properties props = new Properties();
 		props.put("mail.smtp.host", "smtp.gmail.com");
 		props.put("mail.smtp.port", "587");
