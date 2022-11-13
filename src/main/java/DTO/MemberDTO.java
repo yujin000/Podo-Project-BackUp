@@ -4,7 +4,7 @@ import java.sql.Timestamp;
 
 public class MemberDTO {
 	
-	private String eamil;
+	private String email;
 	private String pw;
 	private String membership;
 	private Timestamp scribeDate;
@@ -17,10 +17,10 @@ public class MemberDTO {
 	public MemberDTO() {
 	}
 	
-	public MemberDTO(String eamil, String pw, String membership, Timestamp scribeDate, Timestamp joinDate,
+	public MemberDTO(String email, String pw, String membership, Timestamp scribeDate, Timestamp joinDate,
 			String profileImg, String nickname, String name, String phone) {
 		super();
-		this.eamil = eamil;
+		this.email = email;
 		this.pw = pw;
 		this.membership = membership;
 		this.scribeDate = scribeDate;
@@ -33,11 +33,11 @@ public class MemberDTO {
 
 
 	
-	public String getEamil() {
-		return eamil;
+	public String getEmail() {
+		return email;
 	}
-	public void setEamil(String eamil) {
-		this.eamil = eamil;
+	public void setEmail(String email) {
+		this.email = email;
 	}
 	public String getPw() {
 		return pw;

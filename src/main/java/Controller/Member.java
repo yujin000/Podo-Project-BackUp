@@ -3,6 +3,7 @@ package Controller;
 import java.io.File;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.List;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -49,7 +50,7 @@ public class Member extends HttpServlet {
 				if (result) {
 					MemberDTO dto = dao.getMypage(email);	
 					
-					request.getSession().setAttribute("loginEmail", dto.getEamil());
+					request.getSession().setAttribute("loginEmail", dto.getEmail());
 					request.getSession().setAttribute("loginPw", dto.getPw());
 					request.getSession().setAttribute("loginProfileimg", dto.getProfileImg());
 					request.getSession().setAttribute("loginNickname", dto.getNickname());
@@ -180,6 +181,15 @@ public class Member extends HttpServlet {
 				dao.startMemberShip(email);
 				request.getRequestDispatcher("/index.jsp").forward(request, response);
 				
+			} else if(uri.equals("/listAjax.member")) {
+				request.setCharacterEncoding("utf8");
+				List <MemberDTO> memberList = MemberDAO.getInstance().selectAllMember();
+				Gson g = new Gson();
+				String jsonString = g.toJson(memberList);
+				response.getWriter().append(jsonString);
+			} else if (uri.equals("/delAjax.member")) {
+				String email = request.getParameter("email");
+				MemberDAO.getInstance().delete(email);				
 			}
 		} catch (Exception e) {
 			e.printStackTrace();

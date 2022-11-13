@@ -5,9 +5,6 @@ import java.security.MessageDigest;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Timestamp;
-
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Properties;
@@ -15,11 +12,9 @@ import java.util.Random;
 
 import javax.mail.Authenticator;
 import javax.mail.Message;
-import javax.mail.MessagingException;
 import javax.mail.PasswordAuthentication;
 import javax.mail.Session;
 import javax.mail.Transport;
-import javax.mail.internet.AddressException;
 import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
 import javax.naming.Context;
@@ -243,7 +238,7 @@ public class MemberDAO {
 				try (ResultSet rs = pstat.executeQuery();) {
 					rs.next();
 					MemberDTO dto = new MemberDTO();
-					dto.setEamil(rs.getString("email"));
+					dto.setEmail(rs.getString("email"));
 					dto.setPw(rs.getString("pw"));
 					dto.setMembership(rs.getString("membership"));
 					dto.setScribeDate(rs.getTimestamp("scribeDate"));
@@ -264,7 +259,7 @@ public class MemberDAO {
 			pstat.setString(2, dto.getProfileImg());
 			pstat.setString(3, dto.getNickname());
 			pstat.setString(4, dto.getPhone());
-			pstat.setString(5, dto.getEamil());
+			pstat.setString(5, dto.getEmail());
 			int result = pstat.executeUpdate();
 			con.commit();
 			return result;
@@ -302,5 +297,27 @@ public class MemberDAO {
 			return result;
 		}
 	}
-
+	
+	public List<MemberDTO> selectAllMember() throws Exception {
+		String sql = "select * from member";
+		try (Connection con = this.getConnection();
+				PreparedStatement pstat = con.prepareStatement(sql);) {
+			ResultSet rs = pstat.executeQuery();
+			List<MemberDTO> memberList = new ArrayList<>();
+			
+			while (rs.next()) {
+				MemberDTO dto = new MemberDTO();
+				dto.setEmail(rs.getString("email"));
+				dto.setName(rs.getString("name"));
+				dto.setPhone(rs.getString("phone"));
+				dto.setMembership(rs.getString("membership"));
+				dto.setNickname(rs.getString("nickname"));
+				dto.setScribeDate(rs.getTimestamp("scribeDate"));
+				dto.setJoinDate(rs.getTimestamp("joinDate"));
+				memberList.add(dto);
+			}
+			
+			return memberList;
+		}
+	}		
 }
