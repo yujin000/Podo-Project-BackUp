@@ -182,7 +182,6 @@ public class Member extends HttpServlet {
 				request.getRequestDispatcher("/index.jsp").forward(request, response);
 				
 			} else if(uri.equals("/listAjax.member")) {
-				request.setCharacterEncoding("utf8");
 				List <MemberDTO> memberList = MemberDAO.getInstance().selectAllMember();
 				Gson g = new Gson();
 				String jsonString = g.toJson(memberList);
@@ -190,6 +189,10 @@ public class Member extends HttpServlet {
 			} else if (uri.equals("/delAjax.member")) {
 				String email = request.getParameter("email");
 				MemberDAO.getInstance().delete(email);				
+			} else if(uri.equals("/list.member")) {
+				List <MemberDTO> memberList = MemberDAO.getInstance().selectAllMember();
+				request.setAttribute("memberList", memberList);
+				request.getRequestDispatcher("/admin/adminMember.jsp").forward(request, response);
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
