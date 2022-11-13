@@ -2,10 +2,10 @@ package DTO;
 
 public class WishDTO {
 	String wishEmail;
-	String parentMusicSeq;
+	int parentMusicSeq;
 	
 	public WishDTO() {}
-	public WishDTO(String wishEmail, String parentMusicSeq) {
+	public WishDTO(String wishEmail, int parentMusicSeq) {
 		this.wishEmail = wishEmail;
 		this.parentMusicSeq = parentMusicSeq;
 	}
@@ -15,10 +15,10 @@ public class WishDTO {
 	public void setWishEmail(String wishEmail) {
 		this.wishEmail = wishEmail;
 	}
-	public String getParentMusicSeq() {
+	public int getParentMusicSeq() {
 		return parentMusicSeq;
 	}
-	public void setParentMusicSeq(String parentMusicSeq) {
+	public void setParentMusicSeq(int parentMusicSeq) {
 		this.parentMusicSeq = parentMusicSeq;
 	}		
 }
