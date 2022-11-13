@@ -97,12 +97,12 @@
 			<!-- login 성공 시  -->
 			<div id="GNB">
 				<ul>
-					<li><a id="today">투데이</a></li>
-					<li><a id="chart" href="/chart.music">차트</a></li>
-					<li><a href="#">보관함</a></li>
-					<li><a href="#">스테이션</a></li>
-					<li><a href="#">매거진</a></li>
-					<li><a id="serviceBtn">고객센터</a></li>
+				<li><a id="today">투데이</a></li>
+            <li><a id="chart">차트</a></li>
+            <li><a href="#">보관함</a></li>
+            <li><a id="station">스테이션</a></li>
+            <li><a id="mag">매거진</a></li>
+            <li><a id="serviceBtn">고객센터</a></li>
 				</ul>
 			</div>
 			<div id="events">
@@ -120,7 +120,7 @@
 			<a href="" class="service">서비스 소개</a>
 		</div>
 
-		<iframe src="/main/main.jsp" width="100%" height="100%"
+		<iframe src="/view/main.jsp" width="100%" height="100%"
 			style="display: block; padding-left: 230px" id="iframe"></iframe>
 		<c:choose>
 		<c:when test="${loginMembership eq 'admin' || loginMembership eq 'vip'}">
@@ -205,26 +205,28 @@
 		});
 	</script>
 	<script>
-		$("#chart").click(function() {
-			$("#iframe").attr("src", "test.jsp");
-		});
-
-		$("#today").click(function() {
-			$("#iframe").attr("src", "/main/main.jsp");
-		});
-
-		$("#mypageBtn").click(function() {
-			$("#iframe").attr("src", "/mypage.member");
-		});
-		$("#ticketing").click(function() {
-			$("#iframe").attr("src", "/list.perform");
-		});
-		$("#serviceBtn").click(function() {
-			$("#iframe").attr("src", "/mypage/serviceCenter.jsp");
-		});
-		$("#membership").click(function(){
-			$("#iframe").attr("src","/index.goods");
-		})
+	 // list page move action
+    $("#today").click(function () {
+      $("#iframe").attr("src", "/mainList.music");
+    });
+    $("#chart").click(function () {
+      $("#iframe").attr("src", "/lank.music");
+    });
+    $("#mag").click(function () {
+      $("#iframe").attr("src", "/view/mag.jsp");
+    });
+    $("#station").click(function () {
+      $("#iframe").attr("src", "/view/station.jsp");
+    });
+    $("#mypageBtn").click(function () {
+      $("#iframe").attr("src", "/mypage.member");
+    });
+    $("#ticketing").click(function () {
+      $("#iframe").attr("src", "/list.perform");
+    });
+    $("#serviceBtn").click(function () {
+      $("#iframe").attr("src", "/mypage/serviceCenter.jsp");
+    });
 	</script>
 	<script>
 		let membership = "${loginMembership}";

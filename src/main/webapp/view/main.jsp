@@ -373,10 +373,12 @@ uri="http://java.sun.com/jsp/jstl/core"%>
         </ul>
       </div>
       <div class="contents">
-        <h3>차트</h3>
-        <ul id="chart-list">
+   
+  
           <c:choose>
             <c:when test="${not empty mainList}">
+                 <h3>차트</h3>
+                  <ul id="chart-list">
               <c:forEach var="i" items="${mainList}">
                 <li>
                   <a href="" id="selectChart">
@@ -390,10 +392,11 @@ uri="http://java.sun.com/jsp/jstl/core"%>
                   </div>
                 </li>
               </c:forEach>
+                    </ul>
             </c:when>
-            <c:otherwise> error! </c:otherwise>
+            <c:otherwise>  </c:otherwise>
           </c:choose>
-        </ul>
+  
       </div>
     </div>
 
