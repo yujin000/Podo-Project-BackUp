@@ -31,8 +31,7 @@ public class QnaBoard extends HttpServlet {
 				String qnaWriter = request.getSession().getAttribute("loginEmail").toString();
 				QnaBoardDAO dao = QnaBoardDAO.getInstance();
 				List<QnaBoardDTO> qna = dao.selectByRange(qnaWriter, cpage * 5 - 4, cpage * 5);
-
-				String navi = dao.getPageNavi(cpage);
+				String navi = dao.getPageNavi(cpage,qnaWriter);
 				request.setAttribute("qna", qna);
 				request.setAttribute("navi", navi);
 				request.getRequestDispatcher("/mypage/myInquiry.jsp").forward(request, response);
@@ -40,7 +39,7 @@ public class QnaBoard extends HttpServlet {
 
 				int maxSize = 1024 * 1024 * 10;
 				String savePath = request.getServletContext().getRealPath("/files");
-				System.out.println(savePath);
+				// System.out.println(savePath);
 				File fileSavePath = new File(savePath);
 				if (!fileSavePath.exists()) {
 					fileSavePath.mkdir();

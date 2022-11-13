@@ -102,7 +102,7 @@
         }
         
         
-        #writeBtn {
+        #writeBtn, #listBtn {
             margin-top: 2vh;
             width: 6vw;
             height: 40px;
@@ -118,7 +118,7 @@
 /*             background-color: #00000d50; */
         }
 
-        #writeBtn:hover {
+        #writeBtn,#listBtn:hover {
             border: 1px solid silver;
         }
     </style>
@@ -155,6 +155,7 @@
             <input type="file" name="file">
             </div>
             <div style="float:right;">
+              <button type="button" id="listBtn">목록으로</button>
               <button type="button" id="writeBtn">작성완료</button>
             </div>
             
@@ -165,7 +166,9 @@
     document.getElementById("writeBtn").addEventListener("click", function() {
     	document.getElementById("insertForm").submit();
     })
-    
+    document.getElementById("listBtn").addEventListener("click",function(){
+    	history.back();
+    })
     $(function() {
     	let selectedText = $(":selected").text();
     	$('#qnaCategory').val(selectedText);
