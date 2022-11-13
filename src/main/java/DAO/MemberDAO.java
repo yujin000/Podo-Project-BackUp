@@ -359,6 +359,72 @@ public class MemberDAO {
 			
 			return memberList;
 		}
-	}		
+	}
+	
+	public int getMemberCount() throws Exception {
+		String sql = "select count(*) from member";
+		try (Connection con = this.getConnection();
+				PreparedStatement pstat = con.prepareStatement(sql);) {
+			ResultSet rs = pstat.executeQuery();
+			rs.next();
+			return rs.getInt(1);
+		}
+	}
+	
+	public String getPageNavi(int currentPage, int rcpp, int ncpp) throws Exception {
+		int recordTotalCount = this.getMemberCount();
+		int recordCountPerPage = rcpp;
+		int naviCountPerPage = ncpp;
+				
+		int pageTotalCount = 0;
+		if (recordTotalCount % recordCountPerPage > 0) {
+			pageTotalCount = (recordTotalCount / recordCountPerPage) + 1;			
+		} else {
+			pageTotalCount = recordTotalCount / recordCountPerPage;
+		}
+		
+		if (currentPage < 1) {
+			currentPage = 1;
+		} else if (currentPage > pageTotalCount) {
+			currentPage = pageTotalCount;
+		}
+		
+		int startNavi = (currentPage - 1) / naviCountPerPage * naviCountPerPage + 1;
+		
+		int endNavi = startNavi + naviCountPerPage - 1;
+		
+		
+		if(endNavi > pageTotalCount) {
+			endNavi = pageTotalCount;
+		}
+				
+		boolean needPrev = true;
+		boolean needNext = true;
+		
+		if(startNavi == 1) {
+			needPrev = false;
+		}
+		if(endNavi == pageTotalCount) {
+			needNext = false;
+		}
+			
+		StringBuilder sb = new StringBuilder();
+		
+		if (needPrev) {
+			sb.append("<a href='/list.member?cpage="+(startNavi-1)+"'> < </a> ");
+		}
+		
+		for (int i=startNavi; i<=endNavi; i++) {
+			sb.append("<a href='/list.member?cpage=" + i + "'>" + i + "</a> ");
+		}
+		
+		if (needNext) {
+			sb.append("<a href='/list.member?cpage=" + (endNavi+1) + "'> > </a>");
+		}
+		
+		return sb.toString();
+	}
+	
+	
 
 }

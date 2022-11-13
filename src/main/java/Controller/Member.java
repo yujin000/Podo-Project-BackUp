@@ -93,7 +93,7 @@ public class Member extends HttpServlet {
 
 				int maxSize = 1024 * 1024 * 10;
 				String savePath = request.getServletContext().getRealPath("/profile");
-				System.out.println(savePath);
+				// System.out.println(savePath);
 				File fileSavePath = new File(savePath);
 				if (!fileSavePath.exists()) {
 					fileSavePath.mkdir();
@@ -202,18 +202,24 @@ public class Member extends HttpServlet {
 				dao.startMemberShip(email);
 				request.getRequestDispatcher("/index.jsp").forward(request, response);
 				
-			} else if(uri.equals("/listAjax.member")) {
-				List <MemberDTO> memberList = MemberDAO.getInstance().selectAllMember();
-				Gson g = new Gson();
-				String jsonString = g.toJson(memberList);
-				response.getWriter().append(jsonString);
-			} else if (uri.equals("/delAjax.member")) {
+			} else if (uri.equals("/adminDel.member")) {
 				String email = request.getParameter("email");
-				MemberDAO.getInstance().delete(email);				
+				MemberDAO.getInstance().delete(email);
+				response.sendRedirect("/list.member?cpage=1");
 			} else if(uri.equals("/list.member")) {
-				List <MemberDTO> memberList = MemberDAO.getInstance().selectAllMember();
+				
+				int cpage = Integer.parseInt(request.getParameter("cpage"));
+				int rcpp = 10;
+				int ncpp = 10;
+				MemberDAO dao = MemberDAO.getInstance();
+				List <MemberDTO> memberList = dao.selectAllMember();
+				
+				String navi = dao.getPageNavi(cpage, rcpp, ncpp);				
 				request.setAttribute("memberList", memberList);
+				request.setAttribute("navi", navi);
 				request.getRequestDispatcher("/admin/adminMember.jsp").forward(request, response);
+				
+				
 			}
 		} catch (Exception e) {
 			e.printStackTrace();

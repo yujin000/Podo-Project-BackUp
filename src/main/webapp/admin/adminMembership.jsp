@@ -354,7 +354,6 @@
                     <div id="onSaleNav">
                         <div id="products">현재 판매 중인 멤버십</div>
                         <div id="productsUpdate">상품 추가하기</div>
-                        <div id="memberManaging" data-select="false">회원 관리</div>
                     </div>
                     <div id="onSaleContents">
                         <div>
