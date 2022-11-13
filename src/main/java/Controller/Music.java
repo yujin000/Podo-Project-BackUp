@@ -24,6 +24,7 @@ public class Music extends HttpServlet {
 		request.setCharacterEncoding("utf8"); // post의 한글깨짐현상을 처리하기 위한 로직
 
 		String uri = request.getRequestURI();
+		System.out.println(uri);
 		try {
 			if (uri.equals("/chart.music")) {
 				MusicDAO dao = MusicDAO.getInstance();
@@ -31,7 +32,23 @@ public class Music extends HttpServlet {
 				request.setAttribute("musicChartList", musicChartList);
 				request.getRequestDispatcher("/index.jsp").forward(request, response);
 				
-			} else if (uri.equals("/allList.music")) {
+			}
+			// chart 목록 출력
+			else if (uri.equals("/lank.music")) {
+				MusicDAO dao = MusicDAO.getInstance();
+				List<MusicDTO> list = dao.musicChartList();
+				request.setAttribute("list", list);
+				request.getRequestDispatcher("/view/chart.jsp").forward(request, response);
+			}
+			// main chart list 출력
+			else if (uri.equals("/mainList.music")) {
+				MusicDAO dao = MusicDAO.getInstance();
+				List<MusicDTO> list = dao.musicChartList();
+				request.setAttribute("mainList", list);
+				request.getRequestDispatcher("/view/main.jsp").forward(request, response);
+			}
+			
+			else if (uri.equals("/allList.music")) {
 				MusicDAO dao = MusicDAO.getInstance();
 				List<MusicDTO> musicList = dao.musicAllList();
 				String nickName = request.getParameter("nickname");
