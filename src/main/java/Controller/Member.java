@@ -51,7 +51,6 @@ public class Member extends HttpServlet {
 					MemberDTO dto = dao.getMypage(email);	
 					
 					request.getSession().setAttribute("loginEmail", dto.getEmail());
-					request.getSession().setAttribute("loginPw", dto.getPw());
 					request.getSession().setAttribute("loginProfileimg", dto.getProfileImg());
 					request.getSession().setAttribute("loginNickname", dto.getNickname());
 					request.getSession().setAttribute("loginName", dto.getName());
@@ -87,11 +86,14 @@ public class Member extends HttpServlet {
 				request.setAttribute("DTO", dto);
 				request.setAttribute("passName", passName);
 				request.getRequestDispatcher("/mypage/mypage.jsp").forward(request, response);
-			} else if(uri.equals("/informUpdate.member")) {
+			} 
+			
+			//회원 정보 수정
+			else if(uri.equals("/informUpdate.member")) {
 
 				int maxSize = 1024 * 1024 * 10;
 				String savePath = request.getServletContext().getRealPath("/profile");
-				System.out.println(savePath);
+				// System.out.println(savePath);
 				File fileSavePath = new File(savePath);
 				if (!fileSavePath.exists()) {
 					fileSavePath.mkdir();
@@ -99,31 +101,49 @@ public class Member extends HttpServlet {
 				MultipartRequest multi = new MultipartRequest(request,savePath,maxSize,"UTF8",new DefaultFileRenamePolicy());	
 				
 				String sysName = multi.getFilesystemName("file");
+				System.out.println(sysName);
+				if(sysName==null) {
+					sysName = multi.getParameter("imgView");
+				}
 				
 				String email=request.getSession().getAttribute("loginEmail").toString();
-				String pw =multi.getParameter("pw");
 				String nickname = multi.getParameter("nickname");
 				String phone = multi.getParameter("phone");
-				MemberDAO dao = MemberDAO.getInstance();
-				if (pw==null) {
-					pw=request.getSession().getAttribute("loginPw").toString();
+				String delResult = multi.getParameter("delResult");
+				MemberDAO dao = MemberDAO.getInstance();	
+			
+				
+				if(delResult.equals("true")) {
+					sysName="profile-default.jpg";
+					MemberDTO dto = new MemberDTO(email,null,null,null,null,sysName,nickname,null,phone);
+					dao.delUpdate(dto);
+					request.getSession().setAttribute("loginNickname", dto.getNickname());
 				}else {
-					pw = multi.getParameter("pw");
+					MemberDTO dto = new MemberDTO(email,null,null,null,null,sysName,nickname,null,phone);
+					dao.update(dto);
+					request.getSession().setAttribute("loginNickname", dto.getNickname());
 				}
-				if (nickname==null) {
-					nickname=request.getSession().getAttribute("loginNickname").toString();
-				}else {
-					nickname = multi.getParameter("nickname");
-				}
-				if (phone==null) {
-					phone=request.getSession().getAttribute("loginPhone").toString();
-				}else {
-					phone = multi.getParameter("phone");
-				}
-				MemberDTO dto = new MemberDTO(email,pw,null,null,null,sysName,nickname,null,phone);
-				dao.update(dto);
-				System.out.println(dto);
 				request.getRequestDispatcher("/mypage.member").forward(request, response);
+			}
+			
+			//현재 비밀번호 일치하는지
+			else if(uri.equals("/pwSelect.member")){
+				MemberDAO dao = MemberDAO.getInstance();
+				String email =request.getSession().getAttribute("loginEmail").toString();
+				String pw = request.getParameter("pw");
+				
+				boolean result = dao.selectPw(email, pw);
+				PrintWriter out = response.getWriter();
+				out.print(result);
+			}
+			
+			//비밀번호 수정
+			else if(uri.equals("/modifyPw.member")) {
+				MemberDAO dao = MemberDAO.getInstance();
+				String email = request.getSession().getAttribute("loginEmail").toString();
+				String pw = request.getParameter("pwChang");				
+				dao.modifyPw(email, pw);
+				response.sendRedirect("/mypage.member");
 			}
 			else if(uri.equals("/emailDupleCheck.member")) {
 				String email = request.getParameter("email");
@@ -141,7 +161,8 @@ public class Member extends HttpServlet {
 		          String jsonString = g.toJson(result);
 		          response.getWriter().append(jsonString);
 			}
-			//ifream 문제로 인해 창이 2개가 생김
+			
+			//회원 탈퇴
 			else if(uri.equals("/delete.member")) {
 				MemberDAO dao = MemberDAO.getInstance();
 				int result = dao.delete(request.getSession().getAttribute("loginEmail").toString());
@@ -181,15 +202,24 @@ public class Member extends HttpServlet {
 				dao.startMemberShip(email);
 				request.getRequestDispatcher("/index.jsp").forward(request, response);
 				
-			} else if(uri.equals("/listAjax.member")) {
-				request.setCharacterEncoding("utf8");
-				List <MemberDTO> memberList = MemberDAO.getInstance().selectAllMember();
-				Gson g = new Gson();
-				String jsonString = g.toJson(memberList);
-				response.getWriter().append(jsonString);
-			} else if (uri.equals("/delAjax.member")) {
+			} else if (uri.equals("/adminDel.member")) {
 				String email = request.getParameter("email");
-				MemberDAO.getInstance().delete(email);				
+				MemberDAO.getInstance().delete(email);
+				response.sendRedirect("/list.member?cpage=1");
+			} else if(uri.equals("/list.member")) {
+				
+				int cpage = Integer.parseInt(request.getParameter("cpage"));
+				int rcpp = 10;
+				int ncpp = 10;
+				MemberDAO dao = MemberDAO.getInstance();
+				List <MemberDTO> memberList = dao.selectAllMember();
+				
+				String navi = dao.getPageNavi(cpage, rcpp, ncpp);				
+				request.setAttribute("memberList", memberList);
+				request.setAttribute("navi", navi);
+				request.getRequestDispatcher("/admin/adminMember.jsp").forward(request, response);
+				
+				
 			}
 		} catch (Exception e) {
 			e.printStackTrace();

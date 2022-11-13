@@ -101,7 +101,7 @@
             width: 100%;
         }
 
-        div[id^=products], #memberManaging {
+        div[id^=products] {
             float: left;
             width: 160px;
             color: silver;
@@ -203,8 +203,7 @@
 
         /*d여기부터 작성중*/
         #productsUpdate:hover,
-        #products:hover,
-        #memberManaging:hover {
+        #products:hover {
             cursor: pointer;
         }
 
@@ -313,40 +312,7 @@
 		}
 		#onSaleAddProducts input,#onSaleAddProducts textarea{
 			color:black;
-		}
-		#memberList {
-			display : none;
-		}
-		#memberHeader>div {
-			float : left;
-		}
-		#memberHeader{
-			height:30px;
-		}
-		#emailHeader, .memberEmail {
-			width : 15%;
-		}
-		#nameHeader, .memberName {
-			width : 5%;
-		}
-		#phoneHeader, .memberPhone {
-			width : 10%;
-		}
-		#membershipHeader, .memberMembership {
-			width : 10%;
-		}
-		#nicknameHeader, .memberNickname {
-			width : 10%;
-		}
-		#scribeDateHeader, .memberScribeDate {
-			width : 15%;
-		}
-		#joinDateHeader, .memberJoinDate {
-			width : 15%;
-		}
-		#members>div {
-			float : left;
-		}
+		}		
     </style>
 </head>
 
@@ -388,7 +354,6 @@
                     <div id="onSaleNav">
                         <div id="products">현재 판매 중인 멤버십</div>
                         <div id="productsUpdate">상품 추가하기</div>
-                        <div id="memberManaging" data-select="false">회원 관리</div>
                     </div>
                     <div id="onSaleContents">
                         <div>
@@ -448,20 +413,7 @@
                                 <button type="button" id="addProductsBtn">추가하기</button>
                             </div>
                         </div>
-                    </form>
-                    	<div id="memberList">
-                    	<div>회원 목록</div>
-                    	<div id="memberHeader">
-                    		<div id="emailHeader">Email</div>
-                    		<div id="nameHeader">이름</div>
-                    		<div id="phoneHeader">전화번호</div>
-                    		<div id="membershipHeader">멤버십 등급</div>
-                    		<div id="nicknameHeader">닉네임</div>
-                    		<div id="scribeDateHeader">구독 만료일</div>
-                    		<div id="joinDateHeader">가입일</div>                    		
-                    	</div>
-                    	<div id="members"></div>
-                    	</div>
+                    </form>                    	
                 </div>
             </div>
         </div>
@@ -474,7 +426,7 @@
             $(this).next(".tog").fadeToggle();
         });
 
-        // 멤버십, 수정/추가/삭제, 회원관리 버튼 클릭 이벤트
+        // 멤버십, 수정/추가/삭제 버튼 클릭 이벤트
         $("#products").on("click", function () {
             $("#products").css({
                 "background-color": "silver",
@@ -484,13 +436,9 @@
                 "background-color": "black",
                 "color": "silver"
             })
-            $("#memberManaging").css({
-                "background-color": "black",
-                "color": "silver"
-            });
+            
             $("#onSaleContents").css({ "display": "block" });
             $("#onSaleAddProducts").css({ "display": "none" });
-            $("#memberList").css({ "display" : "none"});
         })
         $("#productsUpdate").on("click", function () {
             $("#productsUpdate").css({
@@ -501,79 +449,11 @@
                 "background-color": "black",
                 "color": "silver"
             })
-            $("#memberManaging").css({
-                "background-color": "black",
-                "color": "silver"
-            })
+            
             $("#onSaleContents").css({ "display": "none" })
             $("#onSaleAddProducts").css({ "display": "block" })
-            $("#memberList").css({ "display" : "none"})
         })
         
-        // 회원목록 출력 함수
-        function memberList() { 
-        $.ajax({
-            	url : "/listAjax.member",
-            	type : "get",
-            	contentType: "application/json; charset=UTF-8"
-            }).done(function(resp){
-            	let memberList = JSON.parse(resp);
-            	$("#members").html("");
-            	for (let i=0; i<memberList.length; i++) {
-            		$("#members").append(`<div class="memberEmail" id="email\${i}">\${memberList[i].email}</div>`);
-            		$("#members").append(`<div class="memberName" id="name\${i}">\${memberList[i].name}</div>`);
-            		$("#members").append(`<div class="memberPhone" id="phone\${i}">\${memberList[i].phone}</div>`);
-            		$("#members").append(`<div class="memberMembership" id="membership\${i}">\${memberList[i].membership}</div>`);
-            		$("#members").append(`<div class="memberNickname" id="nickname\${i}">\${memberList[i].nickname}</div>`);            		
-            		$("#members").append(`<div class="memberScribeDate" id="scribeDate\${i}">\${memberList[i].scribeDate}</div>`);
-            		$("#members").append(`<div class="memberJoinDate" id="joinDate\${i}">\${memberList[i].joinDate}</div>`);
-            		$("#members").append(`<button type=button class="delMember" data-index="\${i}">회원 탈퇴</button>`);
-            		$("#members").append("<br>");
-            	};            	
-            });
-        	$(".delMember").on("click", function(){
-        		if (confirm("정말 회원탈퇴를 진행하겠습니까?")) {
-        			if (memberList[this.attr("data-index")].membership=="admin") {
-        				alert("관리자는 강제탈퇴시킬 수 없습니다!");
-        			} else {
-        				$.ajax({
-        					url : "/delAjax.member",
-        					type : "get",
-        					data : {
-        						"email" : memberList[this.attr("data-index")].email
-        					}
-        				}).done(function(resp){
-        					alert("회원 탈퇴 성공!");
-        					memberList();
-        				})
-        			}
-        		}
-        	});
-        }
-        
-        // 회원관리 클릭 이벤트
-        $("#memberManaging").on("click", function () {
-            $("#products").css({
-                "background-color": "black",
-                "color": "silver"
-            })
-            $("#productsUpdate").css({
-                "background-color": "black",
-                "color": "silver"
-            })
-            $("#memberManaging").css({
-                "background-color": "silver",
-                "color": "black"
-            })
-            $("#onSaleContents").css({ "display": "none" })
-            $("#onSaleAddProducts").css({ "display": "none" })
-            $("#memberList").css({ "display" : "block"})
-            
-            memberList();
-        });
-        
-        
-
         // 현재 판매중인 이용권 수정버튼 생성
         let updCancelBtn = $("<button>");
         	updCancelBtn.attr("type","button");
