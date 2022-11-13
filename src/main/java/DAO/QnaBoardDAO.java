@@ -51,26 +51,27 @@ public class QnaBoardDAO {
 			}
 		}
 		
-		public int getRecordCount() throws Exception {
-			String sql = "select count(*) from qnaBoard";
-			try (Connection con = this.getConnection();
-					PreparedStatement pstat = con.prepareStatement(sql);
-					ResultSet rs = pstat.executeQuery()) {
-				rs.next();
-				return rs.getInt(1);
+		public int getRecordCount(String qnaWriter) throws Exception {
+			String sql = "select count(*) from qnaBoard where qnaWriter=?";
+			try (Connection con = this.getConnection(); PreparedStatement pstat = con.prepareStatement(sql);) {
+				pstat.setString(1, qnaWriter);
+				try (ResultSet rs = pstat.executeQuery();) {
+					rs.next();
+					return rs.getInt(1);
+				}
 			}
 		}
 		
-		public String getPageNavi(int currentPage) throws Exception {
-			int recoredTotalCount = this.getRecordCount(); 
+		public String getPageNavi(int currentPage, String qnaWriter) throws Exception {
+			int recordTotalCount = this.getRecordCount(qnaWriter); 
 			int recordCountPerpage = 5; 
 			int naviCountPerPage = 5; 
 
 			int pageTotalCount = 0;
-			if (recoredTotalCount % recordCountPerpage > 0) {
-				pageTotalCount = (recoredTotalCount / recordCountPerpage) + 1;
+			if (recordTotalCount % recordCountPerpage > 0) {
+				pageTotalCount = (recordTotalCount / recordCountPerpage) + 1;
 			} else {
-				pageTotalCount = recoredTotalCount / recordCountPerpage;
+				pageTotalCount = recordTotalCount / recordCountPerpage;
 			}
 
 			if (currentPage < 1) {
