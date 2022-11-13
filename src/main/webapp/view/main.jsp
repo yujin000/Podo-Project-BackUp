@@ -75,7 +75,7 @@ uri="http://java.sun.com/jsp/jstl/core"%>
         width: 100%;
         padding: 0 80px;
         height: 100%;
-        margin-top: 50px;
+        margin-top: 70px;
       }
 
       .banner {
