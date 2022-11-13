@@ -389,7 +389,7 @@ div {
 				"color":"white",
 				"border":"1px solid #FF0050"
 			});
-			$("#payBtn").text(price.replace(/\B(?=(\d{3})+(?!\d))/g, ",") + "원 결제하기");
+			$("#payBtn").text(price.replace(/\B(?=(\d{3})+(?!\d))/g, ",") + "원 카카오페이 결제하기");
 			$("#payBtn").attr("price",price);
 			warning.remove();
 			
