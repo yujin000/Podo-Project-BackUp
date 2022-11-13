@@ -212,7 +212,7 @@ public class Member extends HttpServlet {
 				int rcpp = 10;
 				int ncpp = 10;
 				MemberDAO dao = MemberDAO.getInstance();
-				List <MemberDTO> memberList = dao.selectAllMember();
+				List <MemberDTO> memberList = dao.selectAllMember(cpage * rcpp - (rcpp-1), cpage * rcpp);
 				
 				String navi = dao.getPageNavi(cpage, rcpp, ncpp);				
 				request.setAttribute("memberList", memberList);

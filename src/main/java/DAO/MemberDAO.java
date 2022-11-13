@@ -338,10 +338,14 @@ public class MemberDAO {
 		}
 	}
 	
-	public List<MemberDTO> selectAllMember() throws Exception {
-		String sql = "select * from member";
+	public List<MemberDTO> selectAllMember(int start, int end) throws Exception {
+		String sql = "select * from (select member.*, row_number() over(order by joinDate desc) rn from member) where rn between ? and ?";
 		try (Connection con = this.getConnection();
 				PreparedStatement pstat = con.prepareStatement(sql);) {
+			
+			pstat.setInt(1, start);
+			pstat.setInt(2, end);
+			
 			ResultSet rs = pstat.executeQuery();
 			List<MemberDTO> memberList = new ArrayList<>();
 			
