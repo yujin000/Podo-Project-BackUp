@@ -24,22 +24,31 @@ public class Wish extends HttpServlet {
 			if (uri.equals("/add.wish")) {
 				
 				String WishEmail = request.getSession().getAttribute("loginEmail").toString();
-				String parentMusicSeq = request.getParameter("musicSeq"); // 위시리스트에 추가할 음원 번호
-				WishDTO dto = new WishDTO(WishEmail, parentMusicSeq);
-				
+				int parentMusicSeq = Integer.parseInt(request.getParameter("musicSeq")); // 위시리스트 음원 번호
+				WishDTO dto = new WishDTO(WishEmail, parentMusicSeq);				
 				int result = WishDAO.getInstance().addWish(dto);
+				
 			} else if (uri.equals("/exist.wish")) {
-				System.out.println(uri);
-				String WishEmail = request.getSession().getAttribute("loginEmail").toString();
-				String parentMusicSeq = request.getParameter("musicSeq"); // 위시리스트 음원 번호
-				WishDTO dto = new WishDTO(WishEmail, parentMusicSeq);
+				
+				String wishEmail = request.getSession().getAttribute("loginEmail").toString();
+				int parentMusicSeq = Integer.parseInt(request.getParameter("musicSeq")); // 위시리스트 음원 번호
+				WishDTO dto = new WishDTO(wishEmail, parentMusicSeq);
 				boolean isExist = WishDAO.getInstance().isExist(dto);
 				Gson g = new Gson();
 				String jsonString = g.toJson(String.valueOf(isExist));
 				response.getWriter().append(jsonString);
+				
+			} else if (uri.equals("/del.wish")) {
+				
+				String WishEmail = request.getSession().getAttribute("loginEmail").toString();
+				int parentMusicSeq = Integer.parseInt(request.getParameter("musicSeq")); // 위시리스트 음원 번호
+				WishDTO dto = new WishDTO(WishEmail, parentMusicSeq);
+				int result = WishDAO.getInstance().delWish(dto);
+				
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
+			response.sendRedirect("/error.jsp");
 		}
 	}
 

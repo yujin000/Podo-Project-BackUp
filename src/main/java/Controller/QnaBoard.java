@@ -39,7 +39,7 @@ public class QnaBoard extends HttpServlet {
 
 				int maxSize = 1024 * 1024 * 10;
 				String savePath = request.getServletContext().getRealPath("/files");
-				System.out.println(savePath);
+				// System.out.println(savePath);
 				File fileSavePath = new File(savePath);
 				if (!fileSavePath.exists()) {
 					fileSavePath.mkdir();

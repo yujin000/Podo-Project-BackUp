@@ -63,15 +63,15 @@ public class QnaBoardDAO {
 		}
 		
 		public String getPageNavi(int currentPage, String qnaWriter) throws Exception {
-			int recoredTotalCount = this.getRecordCount(qnaWriter); 
+			int recordTotalCount = this.getRecordCount(qnaWriter); 
 			int recordCountPerpage = 5; 
 			int naviCountPerPage = 5; 
 
 			int pageTotalCount = 0;
-			if (recoredTotalCount % recordCountPerpage > 0) {
-				pageTotalCount = (recoredTotalCount / recordCountPerpage) + 1;
+			if (recordTotalCount % recordCountPerpage > 0) {
+				pageTotalCount = (recordTotalCount / recordCountPerpage) + 1;
 			} else {
-				pageTotalCount = recoredTotalCount / recordCountPerpage;
+				pageTotalCount = recordTotalCount / recordCountPerpage;
 			}
 
 			if (currentPage < 1) {

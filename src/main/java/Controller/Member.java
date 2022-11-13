@@ -3,7 +3,7 @@ package Controller;
 import java.io.File;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.sql.Timestamp;
+import java.util.List;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -16,6 +16,7 @@ import com.oreilly.servlet.MultipartRequest;
 import com.oreilly.servlet.multipart.DefaultFileRenamePolicy;
 
 import DAO.MemberDAO;
+import DAO.PayMemberDAO;
 import DTO.MemberDTO;
 
 @WebServlet("*.member")
@@ -49,7 +50,7 @@ public class Member extends HttpServlet {
 				if (result) {
 					MemberDTO dto = dao.getMypage(email);	
 					
-					request.getSession().setAttribute("loginEmail", dto.getEamil());
+					request.getSession().setAttribute("loginEmail", dto.getEmail());
 					request.getSession().setAttribute("loginProfileimg", dto.getProfileImg());
 					request.getSession().setAttribute("loginNickname", dto.getNickname());
 					request.getSession().setAttribute("loginName", dto.getName());
@@ -77,8 +78,13 @@ public class Member extends HttpServlet {
 				response.sendRedirect("/index.jsp");
 			} else if (uri.equals("/mypage.member")) {
 				MemberDAO dao = MemberDAO.getInstance();
+				PayMemberDAO pdao = PayMemberDAO.getInstance();
+				String userEmail = request.getSession().getAttribute("loginEmail").toString();
+				String passName = pdao.myPass(userEmail);
+
 				MemberDTO dto = dao.getMypage(request.getSession().getAttribute("loginEmail").toString());
 				request.setAttribute("DTO", dto);
+				request.setAttribute("passName", passName);
 				request.getRequestDispatcher("/mypage/mypage.jsp").forward(request, response);
 			} 
 			
@@ -196,6 +202,15 @@ public class Member extends HttpServlet {
 				dao.startMemberShip(email);
 				request.getRequestDispatcher("/index.jsp").forward(request, response);
 				
+			} else if(uri.equals("/listAjax.member")) {
+				request.setCharacterEncoding("utf8");
+				List <MemberDTO> memberList = MemberDAO.getInstance().selectAllMember();
+				Gson g = new Gson();
+				String jsonString = g.toJson(memberList);
+				response.getWriter().append(jsonString);
+			} else if (uri.equals("/delAjax.member")) {
+				String email = request.getParameter("email");
+				MemberDAO.getInstance().delete(email);				
 			}
 		} catch (Exception e) {
 			e.printStackTrace();

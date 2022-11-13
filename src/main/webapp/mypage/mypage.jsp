@@ -160,6 +160,13 @@
         .List div {
             text-align: left;
         }
+        .thName {
+            padding-left: 1vw;
+            width: 17vw;
+        }
+        .thVoucher{
+            width: 25vw;
+        }
 
 
         /*예매 내역 css */
@@ -280,7 +287,7 @@
                 <table>
                     <thead>
                         <tr>
-                        	<!--  table th의 첫번째 칸(등급) -->
+                            <!--  table th의 첫번째 칸(등급) -->
                             <th class="thName">등급</th>
                             <!--  table th의 두번째 칸(이용권) -->
                             <th class="thVoucher">이용중인 이용권</th>
@@ -298,7 +305,16 @@
                                 <div style="padding-left: 1vw;">${DTO.membership }</div>
                             </th>
                             <td>
-                                <div></div> <!-- 이용권 집어넣으면 돼 -->
+                                <div>
+									<c:choose>
+										<c:when test="${passName != null}">
+											${passName }
+										</c:when>
+										<c:otherwise>
+											이용중인 이용권이 없습니다.
+										</c:otherwise>
+									</c:choose>        
+                                </div> 
                             </td>
                             <td>
                                 <div><fmt:formatDate value="${DTO.scribeDate}" pattern="yyyy-MM-dd" /></div>
@@ -452,8 +468,9 @@
     <script>
     let pwOk = false; //현재 비밀번호 일치할 시
 	let pwResult = false; //비밀번호 유효성검사 등등 다 통과 시
+	let pwCheckResult = false; //비밀번호 확인
 	let nickNameResult = false; //닉네임 유효성검사 등등 다 통과 시
-	let phoneResult = false; //핸드폰번호 유효성검사 등등 다 통과 시
+	let phoneResult = false; //전화번호 유효성검사 등등 다 통과 시
 	
     //시작하자마자 wrap2(프로필 수정 페이지) 꺼짐
     window.onload = function() {
@@ -502,8 +519,10 @@
         let result = pwRegex.test($(this).val());
         if ($(this).val() !== "" && !result) {
         	$(this).next("#msg").css("color", "#888").text("대문자, 소문자, 숫자, !@#$% 만 사용 가능합니다. ");
+        	$("#pwCheck").next("#msg").text("");
         	pwResult = false;
         } else{
+        	$("#pwChang").next("#msg").text("");
         	$("#pwCheck").next("#msg").text("");
         	if($(this).val()=== $("#pwCheck").val() && $(this).val()!=="" 
         		&& $("#pwCheck").val()!=="" ) {
@@ -521,21 +540,22 @@
       //비밀번호 재설정 확인
       $("#pwCheck").keyup(function () {
         let result = $(this).val() === $("#pwChang").val();
+        let result2 = pwRegex.test($(this).val());
         
         if(!result){
         	$(this).next("#msg").css("color", "#888").text("비밀번호가 일치하지 않습니다!");
-        	pwResult = false;
+        	pwCheckResult = false;
         }else{
         	$("#pwCheck").next("#msg").text("");
         	if($(this).val()=== $("#pwChang").val() && $(this).val()!=="" 
-        		&& $("#pwChang").val()!=="" ) {
+        		&& $("#pwChang").val()!=="") {
         	$(this).next("#msg").text("비밀번호가 일치합니다");
-        	pwResult = true;
+        	pwCheckResult = true;
         } else if($(this).val()==""||$("#pwChang").val()=="") {
           $(this).next("#msg").text("");
         } else {
         	$("#pwCheck").next("#msg").text("비밀번호가 일치하지 않습니다.");
-        	pwResult = false;
+        	pwCheckResult = false;
 		}
         	
         }
@@ -559,7 +579,7 @@
           }
         });
 		
-      //핸드폰 번호
+      //전화번호
       $("#phone").keyup(function () {
           let result = phoneRegex.test($(this).val());
           if ($(this).val() == "") {
@@ -611,7 +631,7 @@
 			return false;
 		}
 		if(!phoneResult){
-			alert("핸드폰번호를 확인해주세요.")
+			alert("전화번호를 확인해주세요.")
 			return false;
 		}
 		document.getElementById("updateForm").submit();
@@ -626,6 +646,10 @@
 		}
 		if(pwOk){
 			if(!pwResult){
+				alert("변경하실 비밀번호를 확인해주세요");
+				return false;
+			}
+			if(!pwCheckResult){
 				alert("변경하실 비밀번호를 확인해주세요");
 				return false;
 			}
