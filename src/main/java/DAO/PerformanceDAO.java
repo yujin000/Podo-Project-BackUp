@@ -97,10 +97,8 @@ public class PerformanceDAO {
 			pstat.setString(7, rating);
 			pstat.setString(8, genre);
 			pstat.setInt(9, seq);
-			System.out.println("dao : "+theaterName+performTitle+showtime+startDate+endDate+performPrice+rating+genre+seq);
 			int result = pstat.executeUpdate();
 			con.commit();
-			System.out.println(result);
 			return result;
 		
 		}
