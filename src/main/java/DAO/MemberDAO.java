@@ -238,8 +238,8 @@ public class MemberDAO {
 				try (ResultSet rs = pstat.executeQuery();) {
 					rs.next();
 					MemberDTO dto = new MemberDTO();
+
 					dto.setEmail(rs.getString("email"));
-					dto.setPw(rs.getString("pw"));
 					dto.setMembership(rs.getString("membership"));
 					dto.setScribeDate(rs.getTimestamp("scribeDate"));
 					dto.setProfileImg(rs.getString("profileimg"));
@@ -251,15 +251,29 @@ public class MemberDAO {
 			}
 		}
 	
-	
+	//회원 정보 수정 sql
 	public int update(MemberDTO dto) throws Exception {
-		String sql = "update member set pw=?, profileimg=?, nickname=?, phone=? where email=? ";
+		String sql = "update member set profileimg=?, nickname=?, phone=? where email=? ";
 		try (Connection con = this.getConnection(); PreparedStatement pstat = con.prepareStatement(sql);) {
-			pstat.setString(1, getSHA512(dto.getPw()));
-			pstat.setString(2, dto.getProfileImg());
-			pstat.setString(3, dto.getNickname());
-			pstat.setString(4, dto.getPhone());
-			pstat.setString(5, dto.getEmail());
+			
+			pstat.setString(1, dto.getProfileImg());
+			pstat.setString(2, dto.getNickname());
+			pstat.setString(3, dto.getPhone());
+			pstat.setString(4, dto.getEmail());
+			int result = pstat.executeUpdate();
+			con.commit();
+			return result;
+		}
+	}
+	
+	//프로필 이미지 삭제 시 회원 정보 수정 sql
+	public int delUpdate(MemberDTO dto) throws Exception {
+		String sql = "update member set profileimg=?, nickname=?, phone=? where email=? ";
+		try (Connection con = this.getConnection(); PreparedStatement pstat = con.prepareStatement(sql);) {
+			pstat.setString(1, dto.getProfileImg());
+			pstat.setString(2, dto.getNickname());
+			pstat.setString(3, dto.getPhone());
+			pstat.setString(4, dto.getEmail());
 			int result = pstat.executeUpdate();
 			con.commit();
 			return result;
@@ -288,10 +302,36 @@ public class MemberDAO {
 		
 	}
 	
+	//회원 탈퇴
 	public int delete(String email) throws Exception {
 		String sql = "delete from member where email=?";
 		try (Connection con = this.getConnection(); PreparedStatement pstat = con.prepareStatement(sql);) {
 			pstat.setString(1, email);
+			int result = pstat.executeUpdate();
+			con.commit();
+			return result;
+		}
+	}
+	
+
+	//현재 비밀번호 일치하는지 찾는 sql
+	public boolean selectPw(String email, String pw) throws Exception{
+	      String sql="select * from member where email=? and pw=?";
+	      try (Connection con = this.getConnection(); PreparedStatement pstat = con.prepareStatement(sql);) {
+	         pstat.setString(1, email);
+	         pstat.setString(2, getSHA512(pw));
+
+			 ResultSet rs = pstat.executeQuery();
+			 return rs.next();
+	      }
+	   }
+	
+	//비밀번호 수정 sql
+	public int modifyPw(String email, String pw) throws Exception {
+		String sql = "update member set pw=? where email=? ";
+		try (Connection con = this.getConnection(); PreparedStatement pstat = con.prepareStatement(sql);) {
+			pstat.setString(1, getSHA512(pw));
+			pstat.setString(2, email);
 			int result = pstat.executeUpdate();
 			con.commit();
 			return result;
@@ -320,4 +360,5 @@ public class MemberDAO {
 			return memberList;
 		}
 	}		
+
 }
