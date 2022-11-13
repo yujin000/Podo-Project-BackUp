@@ -65,7 +65,7 @@ public class PerformanceDAO {
 				dto.setStartDate(rs.getTimestamp("startDate"));
 				dto.setEndDate(rs.getTimestamp("endDate"));
 				dto.setShowtime(rs.getInt("showtime"));
-				dto.setPoster(rs.getString("poster"));
+				dto.setPerformPrice(rs.getString("performPrice"));
 				dto.setRating(rs.getString("rating"));
 				dto.setGenre(rs.getString("genre"));
 				dto.setPerformPoster(rs.getString("performPoster"));

@@ -306,7 +306,7 @@
                             </li>
                             <li>
                                 <img src="image/perform/gray2.png" alt=""width="20px" height="20px">
-                                <a style="margin-left: 5px;">25석 / 40000원</a>
+                                <a style="margin-left: 5px;">25석 / ${list.performPrice }</a>
                             </li>
                         </ul>
                     </div>
@@ -316,13 +316,12 @@
 
             <div class="MidContents2">
                 <div class="BtnCss">
-                    <a class="payment">결제하기</a>
+                    <a href="/payment.perform?performSeq=${list.performSeq }&?performTitle=${list.performTitle }" class="payment">결제하기</a>
                 </div>
             </div>
         </div>
     </div>
 </body>
-
 <script>
 
 	let performList = new Array();
@@ -385,7 +384,7 @@
             
             $(".payment").on("click", function () {
                 if (input.classList.contains("clicked")) {
-                    input.classList.add("soldout")
+                    input.classList.add("soldout");
                     input.disabled = true;
                     clicked = document.querySelectorAll(".clicked");
                     clicked.forEach((data) => {
