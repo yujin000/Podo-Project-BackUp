@@ -80,7 +80,6 @@ public class MusicDTO {
 		this.musicLylics = musicLylics;
 	}
 	public MusicDTO() {
-		super();
 	}
 	
 	
