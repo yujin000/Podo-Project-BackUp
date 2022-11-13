@@ -148,20 +148,20 @@
 				<a href="/adminMain.member?nickname=${loginNickname }"><img src="/image/web/logo-f-5.png" alt="" /></a>
 			</h1>
 			<div id="mypage">
-				<a class="loginBtn">${nickname }</a>
+				<a class="loginBtn">${loginNickname }</a>
 			</div>
 			<ul class="tog">
-				<li><a href="/index.jsp">메인페이지로</a></li>
+				<li><a href="/chart.music">메인페이지로</a></li>
 				<li><a href="#">계정설정</a></li>
 				<li><a href="/logout.member">로그아웃</a></li>
 			</ul>
 			<div id="GNB">
 				<ul>
-					<li><a href="/list.notice">공지사항 관리</a></li>
+					<li><a href="/list.notice?cpage=1">공지사항 관리</a></li>
 					<li><a id="chart"
 						href="/allList.music?nickname=${loginNickname }">음원 관리</a></li>
-					<li><a id="chart">공연 관리</a></li>
-					<li><a href="#">회원 관리</a></li>
+					<li><a href="/adminPerform.perform">공연 관리</a></li>
+					<li><a href="/list.member?cpage=1">회원 관리</a></li>
 					<li><a href="/goodsList.goods">멤버십 관리</a></li>
 					<li><a href="/adminList.board?cpage=1">문의내역 확인</a></li>
 				</ul>
@@ -169,7 +169,7 @@
 		</div>
 		<div class="adminContents">
 			<div class="adminMainHeader">
-				<span id="adminHeaderHello"> ${nickname }님 환영합니다. </span><br> <span
+				<span id="adminHeaderHello"> ${loginNickname }님 환영합니다. </span><br> <span
 					id="nowTime"> 2022년 11월 02일 / 11시 11분 </span>
 
 			</div>

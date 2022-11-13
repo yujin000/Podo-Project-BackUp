@@ -9,7 +9,7 @@
 <meta charset="UTF-8" />
 <meta http-equiv="X-UA-Compatible" content="IE=edge" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>공지사항 관리</title>
+<title>공지사항 보기</title>
 <link rel="stylesheet" href="/src/css/style.css" />
 <script src="https://code.jquery.com/jquery-3.6.1.min.js"
    integrity="sha256-o88AwQnZB+VDvE9tvIXrMQaPlFFSUTR+nldQm1LuPXQ="
@@ -60,15 +60,26 @@
 .tog {
    top: 130px;
 }
-
-.header>div{
-	float: left;
+.header, #header2{
+	height:30px;
 }
-.header{
-	height:10%;
-}
-.qnaList>div{
+.header>div, #header2>div{
 	float:left;
+}
+#noticeSeqHeader, #noticeSeq{
+	width : 5%;
+}
+#noticeCategoryHeader, #noticeWriteDateHeader, #noticeCategory, #noticeWriteDate {
+	width : 10%;
+}
+#noticeTitleHeader, #noticeTitle {
+	width : 20%;
+}
+#noticeWriterHeader, #noticeWriter {
+	width : 15%;
+}
+#contents{
+	width : 800px;
 }
 
 </style>
@@ -102,35 +113,38 @@
       </div>
       <div class="adminContents">
          <div class="adminMainView">
-            <div class="mainText">문의내역 확인</div>
+            <div class="mainText">공지사항 보기</div>
             <br>
-            <hr>                        
+            <hr>   
          </div>
          <div class="header">
-         			<div id="qnaSeqHeader">문의 번호</div>
-            		<div id="qnaCategoryHeader">문의 유형</div>
-            		<div id="qnaTitleHeader">제목</div>
-            		<div id="qnaWriterHeader">작성자</div>
-            		<div id="qnaWriteDateHeader">문의 날짜</div>
-            		<div id="qnaStatusHeader">답변 상태</div>
+         			<div id="noticeSeqHeader">공지사항 번호</div>
+            		<div id="noticeCategoryHeader">공지사항 유형</div>
+            		<div id="noticeTitleHeader">제목</div>
+            		<div id="noticeWriterHeader">작성자</div>
+            		<div id="noticeWriteDateHeader">작성 날짜</div>
+            </div>
+            	<form action="/del.notice" id="form">
+            	<div id="header2">            				
+            		<div id="noticeSeq">${noticeDetail.noticeSeq }</div>
+            		<div id="noticeCategory">${noticeDetail.noticeCategory }</div>
+            		<div id="noticeTitle">${noticeDetail.noticeTitle }</div>
+            		<div id="noticeWriter">${noticeDetail.noticeWriter }</div>
+            		<div id="noticeWriteDate">${noticeDetail.noticeWriteDate }</div>
+            		<input type="hidden" name="noticeSeq" value="${noticeDetail.noticeSeq }">
+            		<input type="hidden" name="sysName" value="${noticeDetailFile.sysName }">            		
             	</div>
-            <c:choose>            	
-            	<c:when test="${not empty qna }">
-            		<c:forEach var = "i" items = "${qna }">
-            			<div class="qnaList">
-            				<div id="qnaSeq">${i.qnaSeq }</div>            				
-            				<div id="qnaCategory">${i.qnaCategory }</div>
-            				<div id="qnaTitle">${i.qnaTitle }</div>
-            				<div id="qnaWriter">${i.qnaWriter }</div>
-            				<div id="qnaWriteDate">${i.qnaWriteDate }</div>
-            				<div id="qnaStatus"></div>
-            			</div>
-            		</c:forEach>            		
+            	</form>
+            	<div id="contents">
+            		<div>본문</div>
+            		${noticeDetail.noticeContents }
+            	</div>
+            	<div>첨부파일 : <a href="/download.file?sysname=${noticeDetailFile.sysName }&oriname=${noticeDetailFile.oriName}">${noticeDetailFile.oriName }</a></div>
+            	<c:choose>
+            	<c:when test="${loginMembership eq 'admin' }">
+            	<div id="del">삭제</div>
             	</c:when>
-            	<c:otherwise>
-            		<div>글이 없습니다.</div>
-            	</c:otherwise>
-            </c:choose>
+            	</c:choose>
       </div>
    </div>
    <script>
@@ -140,8 +154,11 @@
          $(this).next(".tog").fadeToggle();
       });
       
-      $("#writeBtn").on("click", function(){
-			location.href = "/admin/adminNotice/noticeWrite.jsp"; 
+      $("#del").on("click", function(){
+    	 if (confirm("정말 삭제하시겠습니까?")) {
+    		 $("#form").css("action","/del.notice");
+    		 $("#form").submit();
+    	 } 
       });
       
    </script>

@@ -19,9 +19,9 @@
             display: block;
         }
 
-        @media(max-width:1600px) {
+        @media(max-width:1800px) {
             .html {
-                width: 1600px;
+                width: 1800px;
             }
         }
 
@@ -173,7 +173,7 @@
 
         #navUl>li:first-child,
         .listWrap>div:first-child {
-            margin-left: 4%;
+            margin-left: 2%;
         }
 
         .navLi {
@@ -310,6 +310,9 @@
 		.updConfirmBtn:hover,.updCancelBtn:hover{
 			cursor:pointer;
 		}
+		#onSaleAddProducts input,#onSaleAddProducts textarea{
+			color:black;
+		}		
     </style>
 </head>
 
@@ -410,7 +413,7 @@
                                 <button type="button" id="addProductsBtn">추가하기</button>
                             </div>
                         </div>
-                    </form>
+                    </form>                    	
                 </div>
             </div>
         </div>
@@ -433,8 +436,9 @@
                 "background-color": "black",
                 "color": "silver"
             })
-            $("#onSaleContents").css({ "display": "block" })
-            $("#onSaleAddProducts").css({ "display": "none" })
+            
+            $("#onSaleContents").css({ "display": "block" });
+            $("#onSaleAddProducts").css({ "display": "none" });
         })
         $("#productsUpdate").on("click", function () {
             $("#productsUpdate").css({
@@ -445,10 +449,11 @@
                 "background-color": "black",
                 "color": "silver"
             })
+            
             $("#onSaleContents").css({ "display": "none" })
             $("#onSaleAddProducts").css({ "display": "block" })
         })
-
+        
         // 현재 판매중인 이용권 수정버튼 생성
         let updCancelBtn = $("<button>");
         	updCancelBtn.attr("type","button");

@@ -2,7 +2,6 @@ package Controller;
 
 import java.io.File;
 import java.io.IOException;
-import java.util.Enumeration;
 import java.util.List;
 
 import javax.servlet.ServletException;
@@ -32,8 +31,7 @@ public class QnaBoard extends HttpServlet {
 				String qnaWriter = request.getSession().getAttribute("loginEmail").toString();
 				QnaBoardDAO dao = QnaBoardDAO.getInstance();
 				List<QnaBoardDTO> qna = dao.selectByRange(qnaWriter, cpage * 5 - 4, cpage * 5);
-
-				String navi = dao.getPageNavi(cpage);
+				String navi = dao.getPageNavi(cpage,qnaWriter);
 				request.setAttribute("qna", qna);
 				request.setAttribute("navi", navi);
 				request.getRequestDispatcher("/mypage/myInquiry.jsp").forward(request, response);
@@ -41,7 +39,7 @@ public class QnaBoard extends HttpServlet {
 
 				int maxSize = 1024 * 1024 * 10;
 				String savePath = request.getServletContext().getRealPath("/files");
-				System.out.println(savePath);
+				// System.out.println(savePath);
 				File fileSavePath = new File(savePath);
 				if (!fileSavePath.exists()) {
 					fileSavePath.mkdir();
@@ -76,22 +74,33 @@ public class QnaBoard extends HttpServlet {
 
 				request.setAttribute("fileDto",dto);
 				request.setAttribute("dtoDetail", dtoDetail);
-				request.getSession().setAttribute("qnaDetailSeq", qnaSeq);
+				// request.getSession().setAttribute("qnaDetailSeq", qnaSeq);
 				request.getRequestDispatcher("/mypage/qnaDetail.jsp").forward(request, response);
 			} else if (uri.equals("/adminList.board")) {
 				int cpage = Integer.parseInt(request.getParameter("cpage"));
-				String qnaWriter = request.getSession().getAttribute("loginEmail").toString();
 				QnaBoardDAO dao = QnaBoardDAO.getInstance();
-				List<QnaBoardDTO> qna = dao.selectAll(cpage * 5 - 4, cpage * 5);
+				int rcpp = 10;
+				int ncpp = 10;
+				
+				List<QnaBoardDTO> qna = dao.selectAll(cpage * rcpp - (rcpp-1), cpage * rcpp);
 
-				String navi = dao.getPageNavi(cpage);
+				String navi = dao.getPageNaviAll(cpage, rcpp, ncpp);
 				request.setAttribute("qna", qna);
 				request.setAttribute("navi", navi);
-				request.getRequestDispatcher("/admin/adminQna.jsp?cpage=1").forward(request, response);
+				request.getRequestDispatcher("/admin/adminQnaBoard/adminQna.jsp?cpage=1").forward(request, response);
+			} else if (uri.equals("/adminQnaDetail.board")) {
+				QnaBoardDAO dao = QnaBoardDAO.getInstance();
+				int qnaSeq = Integer.parseInt(request.getParameter("qnaSeq"));
+				QnaBoardDTO qnaBoardDto = dao.isSelect(qnaSeq);
+				BoardFilesDAO boardFilesDao = BoardFilesDAO.getInstance();
+				BoardFilesDTO boardFilesDto = boardFilesDao.select(qnaSeq);
+				qnaBoardDto.setQnaSeq(qnaSeq);
+				
+				request.setAttribute("boardFile", boardFilesDto);
+				request.setAttribute("qnaBoard", qnaBoardDto);
+				request.getRequestDispatcher("/admin/adminQnaBoard/adminQnaDetail.jsp?qnaSeq="+qnaSeq).forward(request, response);
 			}
-		} catch (
-
-		Exception e) {
+		} catch (Exception e) {
 			e.printStackTrace();
 			response.sendRedirect("/error.jsp");
 		}

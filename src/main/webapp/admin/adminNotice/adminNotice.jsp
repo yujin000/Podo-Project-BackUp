@@ -61,6 +61,31 @@
    top: 130px;
 }
 
+.noticeList {
+	height : 30px;
+}
+
+.noticeList>div, .header>div{
+	float:left;
+}
+
+.header, .noticeList {
+	height : 30px;
+}
+
+#noticeSeqHeader, .noticeSeq {
+	width : 5%;
+}
+#noticeCategoryHeader, .noticeCategory {
+	width : 15%;
+}
+#noticeTitleHeader, .noticeTitle, #noticeWriteDateHeader, .noticeWriteDate {
+	width : 20%;
+}
+#noticeWriterHeader, .noticeWriter {
+	width : 15%;
+}
+
 </style>
 </head>
 
@@ -72,7 +97,7 @@
                src="/image/web/logo-f-5.png" alt="" /></a>
          </h1>
          <div id="mypage">
-            <a class="loginBtn">${nickname }</a>
+            <a class="loginBtn">${loginNickname }</a>
          </div>
          <ul class="tog">
             <li><a href="/index.jsp">메인페이지로</a></li>
@@ -95,15 +120,22 @@
             <div class="mainText">공지사항 관리</div>
             <br>
             <hr>
+            <div class="header">
+            	<div id="noticeSeqHeader">번호</div>
+            	<div id="noticeCategoryHeader">유형</div>
+            	<div id="noticeTitleHeader">제목</div>
+            	<div id="noticeWriterHeader">작성자</div>
+            	<div id="noticeWriteDateHeader">작성날짜</div>
+            </div>
             <c:choose>
             	<c:when test = "${not empty noticeBoardList }">
             		<c:forEach var = "i" items = "${noticeBoardList }">
             			<div class="noticeList">            				
-            				<div id="noticeSeq">${i.noticeSeq }</div>
-            				<div id="noticeCategory">${i.noticeCategory }</div>
-            				<div id="noticeTitle">${i.noticeTitle }</div>
-            				<div id="noticeWriter">${i.noticeWriter }</div>
-            				<div id="noteceWriteDate">${i.noticeWriteDate }</div>
+            				<div class="noticeSeq">${i.noticeSeq }</div>
+            				<div class="noticeCategory">${i.noticeCategory }</div>
+            				<div class="noticeTitle"><a href="/detail.notice?noticeSeq=${i.noticeSeq }">${i.noticeTitle }</a></div>
+            				<div class="noticeWriter">${i.noticeWriter }</div>
+            				<div class="noticeWriteDate">${i.noticeWriteDate }</div>
             			</div>
             		</c:forEach>            		
             	</c:when>
@@ -111,6 +143,8 @@
             		<div>글이 없습니다.</div>
             	</c:otherwise>
             </c:choose>
+            
+            <div>${navi }</div>
             <div id="writeBtn">공지사항 쓰기</div>
             
          </div>

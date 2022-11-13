@@ -5,9 +5,6 @@ import java.security.MessageDigest;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Timestamp;
-
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Properties;
@@ -15,11 +12,9 @@ import java.util.Random;
 
 import javax.mail.Authenticator;
 import javax.mail.Message;
-import javax.mail.MessagingException;
 import javax.mail.PasswordAuthentication;
 import javax.mail.Session;
 import javax.mail.Transport;
-import javax.mail.internet.AddressException;
 import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
 import javax.naming.Context;
@@ -247,8 +242,8 @@ public class MemberDAO {
 				try (ResultSet rs = pstat.executeQuery();) {
 					rs.next();
 					MemberDTO dto = new MemberDTO();
-					dto.setEamil(rs.getString("email"));
-					dto.setPw(rs.getString("pw"));
+
+					dto.setEmail(rs.getString("email"));
 					dto.setMembership(rs.getString("membership"));
 					dto.setScribeDate(rs.getTimestamp("scribeDate"));
 					dto.setProfileImg(rs.getString("profileimg"));
@@ -260,15 +255,29 @@ public class MemberDAO {
 			}
 		}
 	
-	
+	//회원 정보 수정 sql
 	public int update(MemberDTO dto) throws Exception {
-		String sql = "update member set pw=?, profileimg=?, nickname=?, phone=? where email=? ";
+		String sql = "update member set profileimg=?, nickname=?, phone=? where email=? ";
 		try (Connection con = this.getConnection(); PreparedStatement pstat = con.prepareStatement(sql);) {
-			pstat.setString(1, getSHA512(dto.getPw()));
-			pstat.setString(2, dto.getProfileImg());
-			pstat.setString(3, dto.getNickname());
-			pstat.setString(4, dto.getPhone());
-			pstat.setString(5, dto.getEamil());
+			
+			pstat.setString(1, dto.getProfileImg());
+			pstat.setString(2, dto.getNickname());
+			pstat.setString(3, dto.getPhone());
+			pstat.setString(4, dto.getEmail());
+			int result = pstat.executeUpdate();
+			con.commit();
+			return result;
+		}
+	}
+	
+	//프로필 이미지 삭제 시 회원 정보 수정 sql
+	public int delUpdate(MemberDTO dto) throws Exception {
+		String sql = "update member set profileimg=?, nickname=?, phone=? where email=? ";
+		try (Connection con = this.getConnection(); PreparedStatement pstat = con.prepareStatement(sql);) {
+			pstat.setString(1, dto.getProfileImg());
+			pstat.setString(2, dto.getNickname());
+			pstat.setString(3, dto.getPhone());
+			pstat.setString(4, dto.getEmail());
 			int result = pstat.executeUpdate();
 			con.commit();
 			return result;
@@ -297,6 +306,7 @@ public class MemberDAO {
 		
 	}
 	
+	//회원 탈퇴
 	public int delete(String email) throws Exception {
 		String sql = "delete from member where email=?";
 		try (Connection con = this.getConnection(); PreparedStatement pstat = con.prepareStatement(sql);) {
@@ -306,5 +316,123 @@ public class MemberDAO {
 			return result;
 		}
 	}
+	
+
+	//현재 비밀번호 일치하는지 찾는 sql
+	public boolean selectPw(String email, String pw) throws Exception{
+	      String sql="select * from member where email=? and pw=?";
+	      try (Connection con = this.getConnection(); PreparedStatement pstat = con.prepareStatement(sql);) {
+	         pstat.setString(1, email);
+	         pstat.setString(2, getSHA512(pw));
+
+			 ResultSet rs = pstat.executeQuery();
+			 return rs.next();
+	      }
+	   }
+	
+	//비밀번호 수정 sql
+	public int modifyPw(String email, String pw) throws Exception {
+		String sql = "update member set pw=? where email=? ";
+		try (Connection con = this.getConnection(); PreparedStatement pstat = con.prepareStatement(sql);) {
+			pstat.setString(1, getSHA512(pw));
+			pstat.setString(2, email);
+			int result = pstat.executeUpdate();
+			con.commit();
+			return result;
+		}
+	}
+	
+	public List<MemberDTO> selectAllMember(int start, int end) throws Exception {
+		String sql = "select * from (select member.*, row_number() over(order by joinDate desc) rn from member) where rn between ? and ?";
+		try (Connection con = this.getConnection();
+				PreparedStatement pstat = con.prepareStatement(sql);) {
+			
+			pstat.setInt(1, start);
+			pstat.setInt(2, end);
+			
+			ResultSet rs = pstat.executeQuery();
+			List<MemberDTO> memberList = new ArrayList<>();
+			
+			while (rs.next()) {
+				MemberDTO dto = new MemberDTO();
+				dto.setEmail(rs.getString("email"));
+				dto.setName(rs.getString("name"));
+				dto.setPhone(rs.getString("phone"));
+				dto.setMembership(rs.getString("membership"));
+				dto.setNickname(rs.getString("nickname"));
+				dto.setScribeDate(rs.getTimestamp("scribeDate"));
+				dto.setJoinDate(rs.getTimestamp("joinDate"));
+				memberList.add(dto);
+			}
+			
+			return memberList;
+		}
+	}
+	
+	public int getMemberCount() throws Exception {
+		String sql = "select count(*) from member";
+		try (Connection con = this.getConnection();
+				PreparedStatement pstat = con.prepareStatement(sql);) {
+			ResultSet rs = pstat.executeQuery();
+			rs.next();
+			return rs.getInt(1);
+		}
+	}
+	
+	public String getPageNavi(int currentPage, int rcpp, int ncpp) throws Exception {
+		int recordTotalCount = this.getMemberCount();
+		int recordCountPerPage = rcpp;
+		int naviCountPerPage = ncpp;
+				
+		int pageTotalCount = 0;
+		if (recordTotalCount % recordCountPerPage > 0) {
+			pageTotalCount = (recordTotalCount / recordCountPerPage) + 1;			
+		} else {
+			pageTotalCount = recordTotalCount / recordCountPerPage;
+		}
+		
+		if (currentPage < 1) {
+			currentPage = 1;
+		} else if (currentPage > pageTotalCount) {
+			currentPage = pageTotalCount;
+		}
+		
+		int startNavi = (currentPage - 1) / naviCountPerPage * naviCountPerPage + 1;
+		
+		int endNavi = startNavi + naviCountPerPage - 1;
+		
+		
+		if(endNavi > pageTotalCount) {
+			endNavi = pageTotalCount;
+		}
+				
+		boolean needPrev = true;
+		boolean needNext = true;
+		
+		if(startNavi == 1) {
+			needPrev = false;
+		}
+		if(endNavi == pageTotalCount) {
+			needNext = false;
+		}
+			
+		StringBuilder sb = new StringBuilder();
+		
+		if (needPrev) {
+			sb.append("<a href='/list.member?cpage="+(startNavi-1)+"'> < </a> ");
+		}
+		
+		for (int i=startNavi; i<=endNavi; i++) {
+			sb.append("<a href='/list.member?cpage=" + i + "'>" + i + "</a> ");
+		}
+		
+		if (needNext) {
+			sb.append("<a href='/list.member?cpage=" + (endNavi+1) + "'> > </a>");
+		}
+		
+		return sb.toString();
+	}
+	
+	
 
 }

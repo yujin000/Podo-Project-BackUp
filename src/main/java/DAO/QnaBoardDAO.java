@@ -51,26 +51,37 @@ public class QnaBoardDAO {
 			}
 		}
 		
-		public int getRecordCount() throws Exception {
-			String sql = "select count(*) from qnaBoard";
-			try (Connection con = this.getConnection();
-					PreparedStatement pstat = con.prepareStatement(sql);
-					ResultSet rs = pstat.executeQuery()) {
-				rs.next();
-				return rs.getInt(1);
+		public int getRecordCount(String qnaWriter) throws Exception {
+			String sql = "select count(*) from qnaBoard where qnaWriter=?";
+			try (Connection con = this.getConnection(); PreparedStatement pstat = con.prepareStatement(sql);) {
+				pstat.setString(1, qnaWriter);
+				try (ResultSet rs = pstat.executeQuery();) {
+					rs.next();
+					return rs.getInt(1);
+				}
 			}
 		}
 		
-		public String getPageNavi(int currentPage) throws Exception {
-			int recoredTotalCount = this.getRecordCount(); 
+		public int getRecordCountAll() throws Exception {
+			String sql = "select count(*) from qnaBoard";
+			try (Connection con = this.getConnection(); PreparedStatement pstat = con.prepareStatement(sql);) {
+				try (ResultSet rs = pstat.executeQuery();) {
+					rs.next();
+					return rs.getInt(1);
+				}
+			}
+		}
+		
+		public String getPageNavi(int currentPage, String qnaWriter) throws Exception {
+			int recordTotalCount = this.getRecordCount(qnaWriter); 
 			int recordCountPerpage = 5; 
 			int naviCountPerPage = 5; 
 
 			int pageTotalCount = 0;
-			if (recoredTotalCount % recordCountPerpage > 0) {
-				pageTotalCount = (recoredTotalCount / recordCountPerpage) + 1;
+			if (recordTotalCount % recordCountPerpage > 0) {
+				pageTotalCount = (recordTotalCount / recordCountPerpage) + 1;
 			} else {
-				pageTotalCount = recoredTotalCount / recordCountPerpage;
+				pageTotalCount = recordTotalCount / recordCountPerpage;
 			}
 
 			if (currentPage < 1) {
@@ -109,6 +120,60 @@ public class QnaBoardDAO {
 			if (needNext) {
 				sb.append("<a href='/list.board?cpage=" + (endNavi + 1) + "'>></a>");
 			}
+			return sb.toString();
+		}
+		
+		public String getPageNaviAll(int currentPage, int rcpp, int ncpp) throws Exception {
+			int recordTotalCount = this.getRecordCountAll();
+			int recordCountPerPage = rcpp;
+			int naviCountPerPage = ncpp;
+					
+			int pageTotalCount = 0;
+			if (recordTotalCount % recordCountPerPage > 0) {
+				pageTotalCount = (recordTotalCount / recordCountPerPage) + 1;			
+			} else {
+				pageTotalCount = recordTotalCount / recordCountPerPage;
+			}
+			
+			if (currentPage < 1) {
+				currentPage = 1;
+			} else if (currentPage > pageTotalCount) {
+				currentPage = pageTotalCount;
+			}
+			
+			int startNavi = (currentPage - 1) / naviCountPerPage * naviCountPerPage + 1;
+			
+			int endNavi = startNavi + naviCountPerPage - 1;
+			
+			
+			if(endNavi > pageTotalCount) {
+				endNavi = pageTotalCount;
+			}
+					
+			boolean needPrev = true;
+			boolean needNext = true;
+			
+			if(startNavi == 1) {
+				needPrev = false;
+			}
+			if(endNavi == pageTotalCount) {
+				needNext = false;
+			}
+				
+			StringBuilder sb = new StringBuilder();
+			
+			if (needPrev) {
+				sb.append("<a href='/adminList.board?cpage="+(startNavi-1)+"'> < </a> ");
+			}
+			
+			for (int i=startNavi; i<=endNavi; i++) {
+				sb.append("<a href='/adminList.board?cpage=" + i + "'>" + i + "</a> ");
+			}
+			
+			if (needNext) {
+				sb.append("<a href='/adminList.board?cpage=" + (endNavi+1) + "'> > </a>");
+			}
+			
 			return sb.toString();
 		}
 		
@@ -164,6 +229,8 @@ public class QnaBoardDAO {
 				try (ResultSet rs = pstat.executeQuery();) {
 					rs.next();
 					QnaBoardDTO dtoDetail = new QnaBoardDTO();
+					dtoDetail.setQnaSeq(qnaSeq);
+					dtoDetail.setQnaWriter(rs.getString("qnaWriter"));
 					dtoDetail.setQnaTitle(rs.getString("qnaTitle"));
 					dtoDetail.setQnaContents(rs.getString("qnaContents"));
 					dtoDetail.setQnaWriteDate(rs.getTimestamp("qnaWriteDate"));
@@ -172,4 +239,5 @@ public class QnaBoardDAO {
 				}
 			}
 		}
+		
 }

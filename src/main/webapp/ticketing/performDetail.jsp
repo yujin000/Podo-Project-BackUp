@@ -9,66 +9,69 @@
 <meta charset="UTF-8" />
 <meta http-equiv="X-UA-Compatible" content="IE=edge" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>Document</title>
-<style>
-/* 기본 Reset css 셋팅입니다 지우지 마세요 */
-@import url(src/css/reset.css);
-/* system font */
-@import
-	url("https://fonts.googleapis.com/css2?family=Nanum+Gothic:wght@700&family=Noto+Sans+KR&display=swap")
-	;
+<title>PODO</title>
+<link rel="stylesheet"
+	href="//code.jquery.com/ui/1.13.2/themes/base/jquery-ui.css">
+<link rel="stylesheet" href="src/css/jquery-ui.css">
+<script src="https://code.jquery.com/jquery-3.6.1.min.js"
+	integrity="sha256-o88AwQnZB+VDvE9tvIXrMQaPlFFSUTR+nldQm1LuPXQ="
+	crossorigin="anonymous"></script>
+<script src="https://code.jquery.com/ui/1.13.2/jquery-ui.js"></script>
+ <style>
+        /* 기본 Reset css 셋팅입니다 지우지 마세요 */
+        @import url(src/css/reset.css);
+        /* system font */
+        @import url("https://fonts.googleapis.com/css2?family=Nanum+Gothic:wght@700&family=Noto+Sans+KR&display=swap");
 
-/* event font */
-@font-face {
-	font-family: "EliceDigitalBaeum-Bd";
-	src:
-		url("https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_elice@1.0/EliceDigitalBaeum-Bd.woff2")
-		format("woff2");
-	font-weight: normal;
-	font-style: normal;
-}
+        /* event font */
+        @font-face {
+            font-family: "EliceDigitalBaeum-Bd";
+            src: url("https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_elice@1.0/EliceDigitalBaeum-Bd.woff2") format("woff2");
+            font-weight: normal;
+            font-style: normal;
+        }
 
-:root { -
-	-font-color: #fff; -
-	-background-color: #000; -
-	-sub-background-color: #222; -
-	-boder-silver: 1px solid silver; -
-	-main-color: #3e065f; -
-	-point-color: #ff00d7;
-}
+        :root {
+            --font-color: #fff;
+            --background-color: #000;
+            --sub-background-color: #222;
+            --boder-silver: 1px solid silver;
+            --main-color: #3e065f;
+            --point-color: #ff00d7;
+        }
 
-* {
-	color: white;
-	margin: 0;
-	padding: 0;
-}
+        * {
+            margin: 0;
+            padding: 0;
+        }
 
-body {
-	width: 100vw;
-	background: var(- -sub-background-color);
-	color: var(- -font-color);
-}
+        body {
+            width: 100vw;
+            background: var(--sub-background-color);
+            color: var(--font-color);
+            font-family: "Noto Sans KR", sans-serif;
+        }
 
-.wrap {
-	padding: 0 40px;
-	width: 100%;
-	height: 100%;
-}
+        .wrap {
+            padding: 0 40px;
+            width: 100%;
+            height: 100%;
+        }
 
-footer {
-	width: 100%;
-	height: 100px;
-	border: var(- -boder-silver);
-	position: absolute;
-	text-align: center;
-	color: var(- -font-color);
-}
+        footer {
+            width: 100%;
+            height: 100px;
+            border: var(--boder-silver);
+            position: absolute;
+            text-align: center;
+            color: var(--font-color);
+        }
 
-/* delete scroll bar */
-::-webkit-scrollbar {
-	display: none;
-	/* Chrome, Safari, Opera*/
-}
+        /* delete scroll bar */
+        ::-webkit-scrollbar {
+            display: none;
+            /* Chrome, Safari, Opera*/
+        }
 
 .logoName {
 	font-weight: bold;
@@ -203,13 +206,13 @@ a {
 
 .BtnCss {
 	width: 200px;
-	margin-left:250px;
+	margin-left: 250px;
 }
 
 .MidContents {
 	display: flex;
 	justify-content: start;
-	width: 800px;
+	width: 100%;
 	font-size: 18px;
 	margin: 5px 0 0 0;
 }
@@ -217,6 +220,12 @@ a {
 .dbInput {
 	display: flex;
 	width: 250px;
+	margin-left: 30px;
+}
+
+.dbInput1 {
+	display: flex;
+	width: 400px;
 	margin-left: 30px;
 }
 
@@ -297,7 +306,110 @@ a {
 .cast {
 	text-align: center;
 }
+
+.datepicker {
+	width:	647px ;
+	margin: 0 0 0 115px;
+}
+
+#ticketMenu {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	margin: 0 0 0 180px;
+	color: white;
+	margin: 0 0 0 180px;
+	border: 1px solid white;
+	width: 200px;
+	height: 60px
+}
+
+#performTime {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	margin: 0 0 0 180px;
+	border: 1px solid black;
+	margin: 0 0 0 180px;
+	color: black;
+	background-color: white;
+	width: 200px;
+	height: 200px;
+}
 </style>
+<script>
+        $(() => {
+            initCalendar();
+            $(".datepicker").datepicker();
+            $("#ticketMenu").text($.datepicker.formatDate("mm월 dd일", $(".datepicker").datepicker("getDate")));
+        });
+
+        function initCalendar() {
+            $.datepicker.setDefaults({
+                onSelect: onSelect,
+                dateFormat: 'yy-mm-dd',
+                prevText: '이전 달',
+                nextText: '다음 달',
+                monthNames: ['1', '2', '3', '4', '5', '6', '7', '8', '9', '10', '11', '12'],
+                monthNamesShort: ['1', '2', '3', '4', '5', '6', '7', '8', '9', '10', '11', '12'],
+                dayNames: ['일', '월', '화', '수', '목', '금', '토'],
+                dayNamesShort: ['일', '월', '화', '수', '목', '금', '토'],
+                dayNamesMin: ['일', '월', '화', '수', '목', '금', '토'],
+                showMonthAfterYear: true,
+                yearSuffix: '.'
+            });
+        }
+
+        function onSelect() {
+        	let sysdate = $.datepicker.formatDate("mm월dd일", $(".datepicker").datepicker("getDate"));
+            $("#ticketMenu").text(sysdate);
+            
+            let date = $.datepicker.formatDate("yy.mm.dd", $(".datepicker").datepicker("getDate"));
+            console.log(date);
+            
+               
+             	if(date == scheduleList[0].scheDate){
+            			console.log("같습니다");
+            			$("#performTime").text(scheduleList[0].scheTime);	
+            			
+              } else if(date == scheduleList[1].scheDate){
+          				console.log("같습니다");
+        				$("#performTime").text(scheduleList[1].scheTime);	 
+        				
+              } else if(date == scheduleList[2].scheDate){
+            			console.log("같습니다");
+            			$("#performTime").text(scheduleList[2].scheTime);	 
+            			
+			  } else if(!(date == scheduleList[0].scheDate)){
+        		 		console.log("틀렸습니다");
+        				$(function(){
+        		        $('#performTime').empty();
+        		 		});
+        				
+        	  } else if(!(date == scheduleList[1].scheDate)){
+  		 				console.log("틀렸습니다");
+						$(function(){
+		        		$('#performTime').empty();
+						});
+						
+	  	 	  } else if(!(date == scheduleList[2].scheDate)){
+  		 				console.log("틀렸습니다");
+						$(function(){
+		        		$('#performTime').empty();
+						});
+	  		  }
+            	
+          }
+        
+        let scheduleList = new Array();
+		<c:forEach items="${schedule }" var="s">
+		scheduleList.push({
+				scheDate : "${s.scheDate}",
+				scheTime : "${s.scheTime}"
+			})
+			
+		</c:forEach>
+    </script>
 </head>
 
 <body>
@@ -315,7 +427,6 @@ a {
 				</div>
 
 				<div class="performance">
-
 					<div class="saleText">판매중</div>
 
 					<div class="TopContents">
@@ -333,7 +444,7 @@ a {
 							<fmt:formatDate value="${list.endDate }" pattern="yyyy-MM-dd" />
 						</div>
 						<div class="div2">공연장</div>
-						<div class="dbInput">
+						<div class="dbInput1">
 							<a href="" style="color: white;">${list.theaterName } > </a>
 						</div>
 					</div>
@@ -359,15 +470,20 @@ a {
 			</div>
 			<div class="perform">
 				<ul class="listimg">
-					<li><img src="image/perform/cal.PNG"
-						style="width: 350px; height: 200px; margin-left: 80px;"
-						class="imgset"></li>
+					<li>
+						<div class="datepicker" id="calendar"></div>
+					</li>
+
+					<li>
+						<div id="ticketMenu"></div>
+						<div id="performTime"></div>
+					</li>
 				</ul>
 			</div>
 
 			<div class="MidContents2">
 				<div class="BtnCss">
-					<a href="" class="performTicketing">예매하기</a>
+					<a href="/seatSelect.perform" class="performTicketing">예매하기</a>
 				</div>
 			</div>
 
@@ -375,11 +491,15 @@ a {
 			<div class="profileTop">출연진</div>
 
 			<div class="profile">
-				<c:forEach items="${cast }" var="c">
-					<div class="cast">
-						<img src="image/cast/${c.castSrc }" alt="" class="circle"><br>${c.castName }
-					</div>
-				</c:forEach>
+				<c:choose>
+					<c:when test="${not empty cast }">
+						<c:forEach items="${cast }" var="c">
+							<div class="cast">
+								<img src="image/cast/${c.castSrc }" alt="" class="circle"><br>${c.castName }
+							</div>
+						</c:forEach>
+					</c:when>
+				</c:choose>
 			</div>
 			<div class="explanation">
 				<div style="margin-bottom: 50px;">작품설명</div>
@@ -391,5 +511,4 @@ a {
 	</div>
 	<footer>footer</footer>
 </body>
-
 </html>
