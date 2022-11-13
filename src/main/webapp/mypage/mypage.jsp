@@ -158,6 +158,13 @@
         .List div {
             text-align: left;
         }
+        .thName {
+            padding-left: 1vw;
+            width: 17vw;
+        }
+        .thVoucher{
+            width: 25vw;
+        }
 
 
         /*예매 내역 css */
@@ -281,11 +288,13 @@
                 <table>
                     <thead>
                         <tr>
-                        	<!--  table th의 첫번째 칸(멤버십명) -->
-                            <th class="thName">멤버십명</th>
-                            <!--  table th의 두번째 칸(멤버십 혜택 기간) -->
+                            <!--  table th의 첫번째 칸(등급) -->
+                            <th class="thName">등급</th>
+                            <!--  table th의 두번째 칸(이용권) -->
+                            <th class="thVoucher">이용중인 이용권</th>
+                            <!--  table th의 세번째 칸(멤버십 혜택 기간) -->
                             <th class="thStartdate">멤버십 혜택 기간</th>
-                            <!--  table th의 세번째 칸(다음 결제일) -->
+                            <!--  table th의 네번째 칸(다음 결제일) -->
                             <th class="thEnddate">다음 결제일</th>
                         </tr>
                     </thead>
@@ -296,6 +305,18 @@
                             <th>
                                 <div style="padding-left: 1vw;">${DTO.membership }</div>
                             </th>
+                            <td>
+                                <div>
+									<c:choose>
+										<c:when test="${passName != null}">
+											${passName }
+										</c:when>
+										<c:otherwise>
+											이용중인 이용권이 없습니다.
+										</c:otherwise>
+									</c:choose>        
+                                </div> 
+                            </td>
                             <td>
                                 <div><fmt:formatDate value="${DTO.scribeDate}" pattern="yyyy-MM-dd" /></div>
                             </td>
