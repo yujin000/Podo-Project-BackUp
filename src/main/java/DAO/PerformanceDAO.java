@@ -60,6 +60,7 @@ public class PerformanceDAO {
 				rs.next();
 				PerformanceDTO dto = new PerformanceDTO();
 				dto.setPerformTitle(rs.getString("performTitle"));
+				dto.setPoster(rs.getString("poster"));
 				dto.setTheaterName(rs.getString("TheaterName"));
 				dto.setStartDate(rs.getTimestamp("startDate"));
 				dto.setEndDate(rs.getTimestamp("endDate"));
