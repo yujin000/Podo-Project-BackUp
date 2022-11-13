@@ -111,9 +111,11 @@ public class Member extends HttpServlet {
 					sysName="profile-default.jpg";
 					MemberDTO dto = new MemberDTO(email,null,null,null,null,sysName,nickname,null,phone);
 					dao.delUpdate(dto);
+					request.getSession().setAttribute("loginNickname", dto.getNickname());
 				}else {
 					MemberDTO dto = new MemberDTO(email,null,null,null,null,sysName,nickname,null,phone);
 					dao.update(dto);
+					request.getSession().setAttribute("loginNickname", dto.getNickname());
 				}
 				request.getRequestDispatcher("/mypage.member").forward(request, response);
 			}
@@ -129,24 +131,6 @@ public class Member extends HttpServlet {
 				out.print(result);
 			}
 			
-			//닉네임 중복 확인
-			else if(uri.equals("/nicknameSelect.member")){
-				MemberDAO dao = MemberDAO.getInstance();
-				String email =request.getSession().getAttribute("loginEmail").toString();
-				String nickname = request.getParameter("nickname");
-				
-				boolean result = dao.selectNickname(email, nickname);
-				PrintWriter out = response.getWriter();
-				out.print(result);
-			}
-			
-			else if(uri.equals("/nicknameSelectAll.member")){
-				MemberDAO dao = MemberDAO.getInstance();
-				String nickname = request.getParameter("nickname");
-				boolean result = dao.selectAllNickname(nickname);
-				PrintWriter out = response.getWriter();
-				out.print(result);
-			}
 			//비밀번호 수정
 			else if(uri.equals("/modifyPw.member")) {
 				MemberDAO dao = MemberDAO.getInstance();

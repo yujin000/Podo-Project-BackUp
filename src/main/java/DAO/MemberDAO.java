@@ -271,13 +271,12 @@ public class MemberDAO {
 	
 	//프로필 이미지 삭제 시 회원 정보 수정 sql
 	public int delUpdate(MemberDTO dto) throws Exception {
-		String sql = "update member set pw=?, profileimg=?, nickname=?, phone=? where email=? ";
+		String sql = "update member set profileimg=?, nickname=?, phone=? where email=? ";
 		try (Connection con = this.getConnection(); PreparedStatement pstat = con.prepareStatement(sql);) {
-			pstat.setString(1, getSHA512(dto.getPw()));
-			pstat.setString(2, dto.getProfileImg());
-			pstat.setString(3, dto.getNickname());
-			pstat.setString(4, dto.getPhone());
-			pstat.setString(5, dto.getEamil());
+			pstat.setString(1, dto.getProfileImg());
+			pstat.setString(2, dto.getNickname());
+			pstat.setString(3, dto.getPhone());
+			pstat.setString(4, dto.getEamil());
 			int result = pstat.executeUpdate();
 			con.commit();
 			return result;
@@ -323,28 +322,6 @@ public class MemberDAO {
 	      try (Connection con = this.getConnection(); PreparedStatement pstat = con.prepareStatement(sql);) {
 	         pstat.setString(1, email);
 	         pstat.setString(2, getSHA512(pw));
-
-			 ResultSet rs = pstat.executeQuery();
-			 return rs.next();
-	      }
-	   }
-	
-	//중복된 닉네임 있는지 검사하는 sql
-	public boolean selectNickname(String email, String nickname) throws Exception{
-	      String sql="select * from member where email=? and nickname=?";
-	      try (Connection con = this.getConnection(); PreparedStatement pstat = con.prepareStatement(sql);) {
-	         pstat.setString(1, email);
-	         pstat.setString(2, nickname);
-
-			 ResultSet rs = pstat.executeQuery();
-			 return rs.next();
-	      }
-	   }
-	
-	public boolean selectAllNickname(String nickname) throws Exception{
-	      String sql="select * from member where nickname=?";
-	      try (Connection con = this.getConnection(); PreparedStatement pstat = con.prepareStatement(sql);) {
-	         pstat.setString(1, nickname);
 
 			 ResultSet rs = pstat.executeQuery();
 			 return rs.next();

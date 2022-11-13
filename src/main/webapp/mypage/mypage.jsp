@@ -100,14 +100,6 @@
 /*             background-color: #00000d50; */
         }
 
-        .followerText {
-            margin-left: 2vw;
-            font-size: 20px;
-            font-weight: var(--font-weight);
-            line-height: var(--line-height);
-/*             background-color: #00000d50; */
-        }
-
         .Btn {
             margin-top: 2vh;
             width: 20vw;
@@ -271,9 +263,6 @@
             
             <!-- 닉네임 -->
             <span class="nameText">${DTO.nickname }</span>
-            
-            <!-- 팔로워 수 -->
-            <span class="followerText">팔로워 27 </span>
             
             <!-- modifyBtn: 프로필 수정 버튼 -->
             <div>
@@ -451,7 +440,9 @@
                 <p id="msg"></p>
                 
                 <div>
+                <!-- modifyPwBtn : 수정 완료 버튼 -->
         	    <button type="button" id="modifyPwBtn" class="Btn">수정 완료</button>
+        	    <!-- backBtn : 뒤로가기 버튼 -->
         	    <button type="button" id="backBtn" class="Btn">뒤로가기</button>
         		</div>
        </form>
@@ -459,10 +450,11 @@
     </div>
 
     <script>
-    let pwOk = false;
-	let pwResult = false;
-	let nickNameResult = false;
-	let phoneResult = false;
+    let pwOk = false; //현재 비밀번호 일치할 시
+	let pwResult = false; //비밀번호 유효성검사 등등 다 통과 시
+	let nickNameResult = false; //닉네임 유효성검사 등등 다 통과 시
+	let phoneResult = false; //핸드폰번호 유효성검사 등등 다 통과 시
+	
     //시작하자마자 wrap2(프로필 수정 페이지) 꺼짐
     window.onload = function() {
     	$('#wrap2').css("display","none");
@@ -548,41 +540,24 @@
         	
         }
       });
-
+      
       //닉네임
-      $("#nickname").on("input", function() {
-    	  let nickname = $("#nickname").val();
-    	  
-    	  if (nickname == "") {
-    		  	$("#nickname").next("#msg").html("");
-    		  	nickNameResult = false;
-    		  	console.log("==실행되냐?");
-			}
-    	  
-    	  $.ajax({
-				url : "/nicknameSelect.member",
-				data : {"nickname" : nickname}
-			}).done(function(resp) {
-				if (resp == true) {
-					$("#nickname").next("#msg").html("");
-					nickNameResult = true;
-					console.log("==true실행되냐?");
-				} else { //닉네임이 존재하지 않으므로 사용할 수 있는 경우
-					$.ajax({
-						url : "/nicknameSelectAll.member",
-						data : {"nickname" : nickname}
-					}).done(function(resp) {
-						if (resp == "true") { //닉네임이 이미 존재하므로 사용 못하는 경우
-							$("#nickname").next("#msg").html("이미 사용중인 닉네임 입니다.");
-							nickNameResult = false;
-						} else { //닉네임이 존재하지 않으므로 사용할 수 있는 경우
-							$("#nickname").next("#msg").html("사용 가능한 닉네임 입니다.");
-							nickNameResult = true;
-						}
-					});
-				}
-			});
-      });
+      $("#nickname").keyup(function () {
+          let result = nicknameRegex.test($(this).val());
+          if ($(this).val() == "") {
+            $(this).val("");
+            nickNameResult=false;
+          } else if (!result) {
+            $(this)
+              .next("#msg")
+              .css("color", "#888")
+              .text("한글,영문,숫자 10자 만 사용 가능 합니다 ");
+              nickNameResult=false;
+          } else {
+            $(this).next("#msg").text("");
+            nickNameResult=true;
+          }
+        });
 		
       //핸드폰 번호
       $("#phone").keyup(function () {
@@ -620,15 +595,27 @@
 		$('#pwDiv').css("display", "block");
 	});
 	
+	
 	//프로필 수정 완료(정보 변경 완료) 
-	completion.addEventListener("click", function() {
+	completion.addEventListener("click", function() { 
+		if($("#nickname").val()== "${DTO.nickname }"){
+			nickNameResult=true;
+		}
+		
+		if($("#phone").val()== "${DTO.phone }"){
+			phoneResult=true;
+		}
+		
 		if(!nickNameResult){
 			alert("닉네임을 확인해주세요.")
+			return false;
 		}
 		if(!phoneResult){
 			alert("핸드폰번호를 확인해주세요.")
+			return false;
 		}
 		document.getElementById("updateForm").submit();
+		
 	});
 	
 	//비밀번호 수정 완료
@@ -674,6 +661,11 @@
 		$("#preview").attr('src','/profile/profile-default.jpg');
   		$('input[name=delResult]').attr('value',"true");
 	});
+	
+	//뒤로가기
+	document.getElementById("backBtn").addEventListener("click",function(){
+		location.href = "/mypage.member"
+    })
     </script>
 </body>
 
