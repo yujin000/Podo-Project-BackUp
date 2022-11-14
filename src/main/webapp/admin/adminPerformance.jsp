@@ -16,9 +16,9 @@
         integrity="sha256-o88AwQnZB+VDvE9tvIXrMQaPlFFSUTR+nldQm1LuPXQ=" crossorigin="anonymous"></script>
     <style>
         /* 관리자페이지 세팅 초기값 */
-        @media(max-width:1900px) {
+        @media(max-width:1700px) {
             .html {
-                width: 1900px;
+                width: 1700px;
             }
         }
 
@@ -497,19 +497,15 @@ div[class^=inInfo],.btnBox{
     	updCancelBtn.attr("type","button");
     	updCancelBtn.addClass("updCancelBtn");
     	updCancelBtn.css({
-    		"border": "none",
-        	"margin-top": "25px",
         	"color":"black",
         	"margin-left":"10px"
     	})
-    	updCancelBtn.text("수정취소");
+    	updCancelBtn.text("취소");
     	
     let updConfirmBtn = $("<button>");
         updConfirmBtn.attr("type","button");
         updConfirmBtn.addClass("updConfirmBtn");
         updConfirmBtn.css({
-    		"border": "none",
-        	"margin-top": "25px",
         	"color":"black"
     	})
     	updConfirmBtn.text("저장");
@@ -524,8 +520,10 @@ div[class^=inInfo],.btnBox{
         	$(this).parent().append(updCancelBtn);
         	$(this).parent().parent().find("input").removeAttr("readonly");
         	$(this).parent().parent().find(".inProductsSeq").attr("readonly","true");
-        	$(this).parent().parent().find("input").css("color","#ff00d7");
-        	$(this).parent().parent().find(".inProductsSeq").css("color","silver");
+            $(this).parent().parent().find("input").css({
+            	"color": "#FF0050",
+            	"border":"1px solid black"
+            });
         	$(this).parent().parent().find(".navi2").focus();
         	
         	$(this).parent().parent().find(".intheaterName").attr("name","theaterName");

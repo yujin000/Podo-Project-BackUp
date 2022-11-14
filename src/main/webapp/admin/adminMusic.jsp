@@ -16,9 +16,9 @@
 	crossorigin="anonymous"></script>
 <style>
         /* 관리자페이지 세팅 초기값 */
-        @media(max-width:1900px) {
+        @media(max-width:1700px) {
             .html {
-                width: 1900px;
+                width: 1700px;
             }
         }
 
@@ -200,8 +200,8 @@ div[class^=navi]{
 }
 .navi6{
     top:10px;
-    right:180px;
-    width:40%;
+    left:550px;
+    width:300px;
     height:110px;
 }
 .navi6>textarea{

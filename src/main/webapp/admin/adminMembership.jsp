@@ -15,10 +15,10 @@
         integrity="sha256-o88AwQnZB+VDvE9tvIXrMQaPlFFSUTR+nldQm1LuPXQ=" crossorigin="anonymous"></script>
     <style>
         /* ---------- 관리자페이지 세팅 초기값 ---------- */
-       /* 관리자페이지 세팅 초기값 */
-       @media(max-width:1900px) {
+        /* 관리자페이지 세팅 초기값 */
+        @media(max-width:1700px) {
             .html {
-                width: 1900px;
+                width: 1700px;
             }
         }
 
@@ -36,7 +36,7 @@
         #listLi1{
         	background-color:#01B9FF;
         }
-
+        
         .listLi:hover {
             cursor: pointer;
             background-color: #01B9FF;
@@ -131,12 +131,150 @@
 			overflow-y: scroll;
 		}
         #mainConArea2 {
-            display: hidden;
+            display: none;
+            overflow-y: scroll;
         }
         
-        input{
+        input,textarea{
             color:black;
         }
+        button{
+            color:black;
+        }
+        b{
+            color:black;
+        }
+/* 기본 리스트 css */
+.listWrap{
+    position:relative;
+    height:150px;
+}
+b{
+    color:black;
+}
+.listWrap input{
+    border:none;
+}
+div[class^=navi]{
+    display:inline-block;
+    position:absolute;
+}
+#musicImg{
+    width:100px;
+    height:100px;
+    top:50%;
+    transform: translateY(-50%);
+    left:25px;
+}
+.navi1{
+    left:30px;
+    top:40%;
+    transform: translateY(-40%);
+    z-index: 99;
+}
+.navi2{
+    top:15px;
+    left:150px;
+}
+.navi3{
+    top:15px;
+    left:360px;
+}
+.navi4{
+    bottom:20px;
+    left:150px;
+}
+.navi5{
+    bottom:20px;
+    left:360px;
+}
+.navi6{
+    top:10px;
+    left:550px;
+    width:300px;
+    height:110px;
+}
+.navi6>textarea{
+    resize: none;
+    width:100%;
+    height:84%;
+}
+#btnBox2{
+    display:inline-block;
+    right:50px;
+    position: absolute;
+    top:50%;
+    transform: translateY(-50%);
+}
+#listHr{
+    position:absolute;
+    bottom:1px;
+    width:100%;
+}
+/* 기본 리스트 css 끝 */
+        /* 추가하기 */
+.mainConArea2{
+    position:relative;
+}
+#h1text{
+    position:absolute;
+    color:#515151;
+    left:30px;
+    top:10px;
+}
+div[class^=inInfo],.btnBox{
+    display:inline-block;
+    position:absolute;
+}
+.addImg>img{
+    width:100%;
+    height:100%;
+}
+.inInfo1{
+    left:380px;
+    top:90px;
+}
+.inInfo2{
+    left:380px;
+    top:140px;
+}
+.inInfo3{
+    left:380px;
+    top:190px;
+}
+.inInfo4{
+    left:380px;
+    top:240px;
+}
+.inInfo5{
+    left:380px;
+    top:290px;
+}
+
+.inInfo5 textarea{
+    width:380px;
+    height:200px;
+    resize: none;
+}
+
+.btnBox{
+    bottom:100px;
+    left:380px;
+}
+.btnBox>button:first-child{
+    background-color: #FF0050;
+    color:white;
+    width:100px;
+    height:30px;
+    border-radius: 5px;
+    border:none;
+}
+.btnBox>button:nth-child(2){
+    width:100px;
+    height:30px;
+    border-radius: 5px;
+    border:1px solid silver;
+}
     </style>
 </head>
 
@@ -185,51 +323,66 @@
                         <form id="upForm">
                             <c:choose>
                                 <c:when test="${not empty goodsList }">
-                                    <c:forEach var="list" items="${goodsList }">
+                                    <c:forEach var="list" items="${goodsList}">
+                                        <input type="hidden" class="seq" name="seq"
+                                            value="${list.payGoodsSeq }">
                                         <div class="listWrap">
-                                            <div class="navi1"><input type="text" value="${list.payGoodsSeq }"
-                                                    class="inProductsSeq" readonly></div>
-                                            <div class="navi2"><input type="text" value="${list.payGoodsName }"
-                                                    class="inProductsName" readonly></div>
-                                            <div class="navi3"><input type="text" value="${list.payGoodsPrice }"
-                                                    class="inProductsPrice" readonly></div>
-                                            <div class="navi4"><input type="text" value="${list.payGoodsExp }"
-                                                    class="inProductsExpire" readonly></div>
-                                            <div class="navi5"><input type="text" value="${list.payGoodsType }"
-                                                    class="inProductsType" readonly></div>
-                                            <div class="btnBox">
-                                                <button type="button" class="update">수정</button>
-                                                <button type="button" class="delete"
-                                                    seq="${list.payGoodsSeq }">삭제</button>
+                                            <div class="navi1"><b>· 상품코드</b><br><input type="text" value="${list.payGoodsSeq }" class="inProductsSeq" readonly></div>
+                                            <div class="navi2"><b>· 상품이름</b><br><input type="text" value="${list.payGoodsName }" class="inProductsName" readonly></div>
+                                            <div class="navi3"><b>· 상품가격</b><br><input type="text" value="${list.payGoodsPrice }" class="inProductsPrice" readonly></div>
+                                            <div class="navi4"><b>· 이용기간</b><br><input type="text" value="${list.payGoodsExp }" class="inProductsExpire" readonly></div>
+                                            <div class="navi5"><b>· 상품유형</b><br><input type="text" value="${list.payGoodsType }" class="inProductsType" readonly></div>
+                                            <div class="navi6"><b>· 상품설명</b><br><textarea class="inProductsInfo" style="color:black;"readonly>${list.payGoodsInfo } </textarea></div>
+                                            <div id="btnBox2">
+                                                <button type="button" class="update" seq="${list.payGoodsSeq }">수정</button>
+                                                <button type="button" class="delete" seq="${list.payGoodsSeq }">삭제</button>
                                             </div>
-                                            <span><input type="text" value="${list.payGoodsInfo }"
-                                                    class="inProductsInfo" readonly></span>
+                                            <input type="hidden" value="${list.payGoodsSeq }"
+                                                class="seqHidden">
+                                            <input type="hidden" class="addChk">
                                             <hr id="listHr">
                                         </div>
                                     </c:forEach>
                                 </c:when>
+                                <c:otherwise>
+                                    출력할 내용이 없습니다.
+                                </c:otherwise>
                             </c:choose>
                         </form>
                     </div>
+
                     <div id="mainConArea2">
+                        <h1 id="h1text">이용권 추가하기</h1>
                         <form id="addForm">
-                            <div id="onSaleAddProducts">
-                                <div id="addProductsText">
-                                    <h2>추가하실 상품 정보를 입력해주세요.</h2>
-                                </div>
-                                <div>
-                                    상품명
-                                    <input type="text" id="add1" name="payGoodsName">
-                                    상품가격
-                                    <input type="text" id="add2" name="payGoodsPrice">
-                                    이용기간
-                                    <input type="text" id="add3" name="payGoodsExp">
-                                    상품유형
-                                    <input type="text" id="add4" name="payGoodsType">
-                                    상품설명
-                                    <textarea id="add5" name="payGoodsInfo"
-                                        style="width: 100%; height: 100px; resize: none;"></textarea>
-                                    <button type="button" id="addProductsBtn">추가하기</button>
+                            <div class="addPerform" id="addPerform">
+                                <div class="container">
+                                    <div class="contentsInfo">
+                                        <div class="inInfo1">
+                                            <b>· 상품명</b><br />
+                                            <input type="text" name="payGoodsName" id="payGoodsName" class="textArea" maxlength="40"/><br />
+                                        </div>
+                                        <div class="inInfo2">
+                                            <b>· 상품가격</b><br />
+                                            <input type="text" name="payGoodsPrice" id="payGoodsPrice" class="textArea" maxlength="40"/><br />
+                                        </div>
+                                        <div class="inInfo3">
+                                            <b>· 이용기간</b><br />
+                                            <input type="text" name="payGoodsExp" id="payGoodsExp" class="textArea" value="1개월" readonly maxlength="40"/><br />
+                                        </div>
+                                        <div class="inInfo4">
+                                            <b>· 상품유형</b><br />
+                                            <input type="text" name="payGoodsType" id="payGoodsType" class="textArea" placeholder="프로모션 / 이용권" maxlength="20"/><br />
+                                        </div>
+                                        <div class="inInfo5">
+                                            <b>· 상품설명</b><br />
+                                            <textarea type="text" name="payGoodsInfo" id="payGoodsInfo" style="color: black" maxlength="50"></textarea>
+                                        </div>
+                                        <div class="btnBox">
+                                            <button type="button" id="addProductsBtn">저장하기</button>
+                                            <button type="button" id="cancelPerform">취소하기</button>
+                                        </div>
+    
+                                    </div>
                                 </div>
                             </div>
                         </form>
@@ -274,21 +427,15 @@
         updCancelBtn.attr("type", "button");
         updCancelBtn.addClass("updCancelBtn");
         updCancelBtn.css({
-            "border": "none",
-            "background-color": "transparent",
-            "color": "silver",
             "margin-top": "25px",
             "margin-left": "10px"
         })
-        updCancelBtn.text("수정취소");
+        updCancelBtn.text("취소");
 
         let updConfirmBtn = $("<button>");
         updConfirmBtn.attr("type", "button");
         updConfirmBtn.addClass("updConfirmBtn");
         updConfirmBtn.css({
-            "border": "none",
-            "background-color": "transparent",
-            "color": "silver",
             "margin-top": "25px"
         })
         updConfirmBtn.text("저장");
@@ -301,7 +448,12 @@
             $(this).parent().append(updCancelBtn);
             $(this).parent().parent().find("input").removeAttr("readonly");
             $(this).parent().parent().find(".inProductsSeq").attr("readonly", "true");
-            $(this).parent().parent().find("input").css("color", "#ff00d7");
+            $(this).parent().parent().find("textarea").removeAttr("readonly");
+            $(this).parent().parent().find("input").css({
+            	"color": "#FF0050",
+            	"border":"1px solid black"
+            });
+            $(this).parent().parent().find("textarea").css("color", "#FF0050");
             $(this).parent().parent().find(".inProductsSeq").css("color", "silver");
             $(this).parent().parent().find(".navi2").focus();
             $(this).parent().parent().find(".inProductsSeq").attr("name", "payGoodsSeq");
@@ -310,20 +462,6 @@
             $(this).parent().parent().find(".inProductsExpire").attr("name", "payGoodsExp");
             $(this).parent().parent().find(".inProductsType").attr("name", "payGoodsType");
             $(this).parent().parent().find(".inProductsInfo").attr("name", "payGoodsInfo");
-        })
-
-        // 저장, 수정취소 버튼 호버이벤트 부여
-        updCancelBtn.on("mouseover", function () {
-            $(this).css("font-weight", "bold");
-        })
-        updCancelBtn.on("mouseout", function () {
-            $(this).css("font-weight", "normal");
-        })
-        updConfirmBtn.on("mouseover", function () {
-            $(this).css("font-weight", "bold");
-        })
-        updConfirmBtn.on("mouseout", function () {
-            $(this).css("font-weight", "normal");
         })
 
         // 수정사항 저장 버튼
@@ -350,22 +488,52 @@
             }
         })
 
+        let priceChk = false;
+        let span = $("<span>");
+
+        //유효성검사(가격)
+        $("#payGoodsPrice").on("keyup",function(){
+              let regex = /^[0-9]{1,10}$/;
+              let result = regex.test($("#payGoodsPrice").val());
+
+              if(!result){
+                  $("#payGoodsPrice").after(span);
+                  span.text("숫자만 입력할 수 있습니다.");
+                  span.css("color","#FF0050");
+                  priceChk = false;
+              }else{
+                priceChk = true;
+                span.remove();
+              }
+        })
+
+        // 상품 최대 갯수 3개 제한
+		let chk = document.getElementsByClassName('addChk').length;
+        
         // 상품추가하기
         $("#addProductsBtn").on("click", function () {
-            if ($("#add1").val() == ""
-                || $("#add2").val() == ""
-                || $("#add3").val() == ""
-                || $("#add4").val() == ""
-                || $("#add5").val() == "") {
-                alert("입력사항은 모두 입력되어야 합니다.");
-            } else {
-                if (confirm("추가하시겠습니까?")) {
-                    $("#addForm").attr("action", "/addProducts.goods");
-                    $("#addForm").attr("method", "post");
-                    $("#addForm").submit();
+        	if(chk < 3){
+        		if ($("#payGoodsName").val() == ""
+                    || $("#payGoodsPrice").val() == ""
+                    || $("#payGoodsExp").val() == ""
+                    || $("#payGoodsType").val() == ""
+                    || $("#payGoodsInfo").val() == "") {
+                    alert("입력사항은 모두 입력되어야 합니다.");
+                }else if(priceChk == false){
+                      alert("양식을 다시 확인해주세요.");
+                } else {
+                    if (confirm("추가하시겠습니까?")) {
+                        $("#addForm").attr("action", "/addProducts.goods");
+                        $("#addForm").attr("method", "post");
+                        $("#addForm").submit();
+                    }
                 }
-            }
+        	}else{
+        		alert("상품은 최대 3개까지 등록할 수 있습니다.");
+        	}
+            
         })
+
     </script>
 </body>
 
