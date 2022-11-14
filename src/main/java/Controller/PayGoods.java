@@ -26,6 +26,8 @@ public class PayGoods extends HttpServlet {
 			if (uri.equals("/goodsList.goods")) {
 				PayGoodsDAO dao = PayGoodsDAO.getInstance();
 				List<PayGoodsDTO> goodsList = dao.selectAll();
+				String nickName = request.getSession().getAttribute("loginNickname").toString();
+				request.getSession().setAttribute("nickName", nickName);
 				request.setAttribute("goodsList", goodsList);
 				request.getRequestDispatcher("/admin/adminMembership.jsp").forward(request, response);
 			} else if (uri.equals("/update.goods")) {
