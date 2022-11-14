@@ -233,7 +233,7 @@
                         	<div id="phoneHeader">전화번호</div>
                         	<div id="nickHeader">닉네임</div>
                         	<div id="membershipHeader">멤버십등급</div>
-                        	<div id="scribeHeader">구독만료일</div>
+                        	<div id="scribeHeader">구독일</div>
                         	<div id="joinHeader">가입일</div>
                         </div>
                         <div id="memberList">
