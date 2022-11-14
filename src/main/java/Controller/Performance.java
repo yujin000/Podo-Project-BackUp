@@ -151,6 +151,13 @@ public class Performance extends HttpServlet {
 				List<TicketingDTO> ticket = dao.TicketingList(email);
 				request.setAttribute("ticket", ticket);
 				request.getRequestDispatcher("/ticketing/ticketList.jsp").forward(request, response);
+				
+			}else if(uri.equals("/delete.perform")) {
+				TicketingDAO dao = TicketingDAO.getInstance();
+				int ticketSeq = Integer.parseInt(request.getParameter("ticketSeq"));
+				int performSeq = Integer.parseInt(request.getParameter("performSeq"));
+				int result = dao.delete(ticketSeq,performSeq);
+				response.sendRedirect("/ticketList.perform");
 			}
 		} catch(Exception e) {
 			e.printStackTrace();

@@ -58,14 +58,16 @@
             height: 100%;
         }
 
-        footer {
-            width: 100%;
-            height: 100px;
-            border: var(--boder-silver);
-            position: absolute;
-            text-align: center;
-            color: var(--font-color);
-        }
+         footer {
+        width: 100%;
+        height: 200px;
+        margin-top: 40vh;
+        text-align: center;
+        color: silver;
+        font-size: 0.8rem;
+        background: transparent;
+        opacity: 0.5;
+      }
 
         /* delete scroll bar */
         ::-webkit-scrollbar {
@@ -299,7 +301,8 @@ a {
 }
 
 .container {
-	padding: 0 40px;
+	padding: 0 40px 200px 0;
+	width: 100%;
 	height: 100%;
 }
 
@@ -508,6 +511,11 @@ a {
 			</div>
 		</div>
 	</div>
-	<footer>footer</footer>
+	<footer>
+      <p>개인정보처리방침 | PODO 이용약관 | 고객센터 | 결제/환불안내 | 상담</p>
+      <br />
+      <img src="../image/web/logo-footer.png" alt="" style="width: 60px" />
+      <p>© PODO Music Corp.</p>
+    </footer>
 </body>
 </html>

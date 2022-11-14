@@ -51,14 +51,16 @@
             height: 100%;
         }
 
-        footer {
-            width: 100%;
-            height: 100px;
-            border: var(--boder-silver);
-            position: absolute;
-            text-align: center;
-            color: var(--font-color);
-        }
+         footer {
+        width: 100%;
+        height: 200px;
+        margin-top: 40vh;
+        text-align: center;
+        color: silver;
+        font-size: 0.8rem;
+        background: transparent;
+        opacity: 0.5;
+      }
 
         /* delete scroll bar */
         ::-webkit-scrollbar {
@@ -157,13 +159,13 @@ a {
 				<p style="color: white;">
 					<img src="image/perform/logo-f-b.png" alt="">티켓
 				</p>
+				<div><a href="/ticketList.perform">예매내역</a></div>
 			</h1>
 		</div>
 		<div class="contents">
 			<div class="contentsTitle">
 
 				<div class="imgTop">
-				<a href="/ticketList.perform">예매내역</a>
 					<a href="/performDetail.perform?performSeq=${perform[3].performSeq }"
 						style="color: var(- -font-color);"> <img
 						src="image/perform/${perform[3].poster }"
@@ -237,13 +239,16 @@ a {
 							<li class="flexli">${p.theaterName}</li>
 						</ul>
 					</div>
-
 				</div>
 			</c:forEach>
 		</div>
 	</div>
-
-	<footer>footer</footer>
+	<footer>
+      <p>개인정보처리방침 | PODO 이용약관 | 고객센터 | 결제/환불안내 | 상담</p>
+      <br />
+      <img src="../image/web/logo-footer.png" alt="" style="width: 60px" />
+      <p>© PODO Music Corp.</p>
+    </footer>
 </body>
 
 </html>

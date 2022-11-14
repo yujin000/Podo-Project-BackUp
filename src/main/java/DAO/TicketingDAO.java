@@ -69,13 +69,15 @@ public class TicketingDAO {
 			}
 		}
 	}
-
-	public int getSeq() throws Exception {
-		String sql = "select ticketing_seq.nextval from dual";
-		try (Connection con = this.getConnection(); PreparedStatement pstat = con.prepareStatement(sql);) {
-			ResultSet rs = pstat.executeQuery();
-			rs.next();
-			return rs.getInt(1);
+	public int delete(int ticketSeq,int performSeq) throws Exception {
+		String sql = "delete from ticketing where ticketSeq =? and performSeq =?";
+		try (Connection con = this.getConnection(); 
+			PreparedStatement pstat = con.prepareStatement(sql);) {
+			pstat.setInt(1, ticketSeq);
+			pstat.setInt(2, performSeq);
+			int result = pstat.executeUpdate();
+			con.commit();
+			return result;
 		}
 	}
 }
