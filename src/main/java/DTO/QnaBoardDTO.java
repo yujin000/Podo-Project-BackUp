@@ -3,12 +3,12 @@ package DTO;
 import java.sql.Timestamp;
 
 public class QnaBoardDTO {
-	int qnaSeq;
-	String qnaWriter;
-	String qnaTitle;
-	String qnaContents;
-	Timestamp qnaWriteDate;
-	String qnaCategory;
+	private int qnaSeq;
+	private String qnaWriter;
+	private String qnaTitle;
+	private String qnaContents;
+	private Timestamp qnaWriteDate;
+	private String qnaCategory;
 	
 	public QnaBoardDTO() {}
 	

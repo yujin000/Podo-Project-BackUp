@@ -292,6 +292,7 @@
 			playAudio.setAttribute("data-status", "play");    			
 			playAudio.play();
 			playBtn.innerText = "pause";
+			wishExist();
     	};
     	
     	// 일시정지 함수
