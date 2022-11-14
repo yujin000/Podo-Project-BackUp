@@ -42,14 +42,15 @@ uri="http://java.sun.com/jsp/jstl/core"%>
         padding: 0;
         /* border: 1px solid red; */
       }
-      body,html {
+      body,
+      html {
         width: 100%;
-        height : 100%;
+        height: 100vmax;
         background: var(--sub-background-color);
         color: var(--font-color);
       }
       .container {
-        padding: 0 80px;
+        padding: 0 50px;
         height: 100%;
       }
 
@@ -72,17 +73,17 @@ uri="http://java.sun.com/jsp/jstl/core"%>
         display: inline-block;
         font-size: 30px;
         margin-bottom: 20px;
-        
       }
       footer {
         width: 100%;
         height: 200px;
-        margin-top: 40vh;
+        margin-top: 70vh;
         text-align: center;
         color: silver;
         font-size: 0.8rem;
         background: transparent;
         opacity: 0.5;
+        display: block;
       }
 
       /* delete scroll bar */
@@ -95,12 +96,12 @@ uri="http://java.sun.com/jsp/jstl/core"%>
         padding: 0;
         display: flex;
         flex-wrap: wrap;
-        justify-content: center;
+        justify-content: start;
         gap: 0 20px;
       }
       li {
-        width: 200px;
-        height: 200px;
+        width: 210px;
+        height: 210px;
         padding: 15px 0;
         background: #3e065f;
         display: flex;
@@ -147,6 +148,88 @@ uri="http://java.sun.com/jsp/jstl/core"%>
       <header>
         <h1>스테이션</h1>
       </header>
+      <div class="contents">
+        <h3>장르 스테이션</h3>
+        <ul>
+          <li
+            style="
+              background-image: url('../image/web/genre_1.png');
+              background-repeat: no-repeat;
+              background-size: cover;
+            "
+          >
+            <a href="" class="playBtn">
+              <span class="material-symbols-outlined"> play_circle </span>
+            </a>
+          </li>
+          <li
+            style="
+              background-image: url('../image/web/genre_2.png');
+              background-repeat: no-repeat;
+              background-size: cover;
+            "
+          >
+            <a href="" class="playBtn">
+              <span class="material-symbols-outlined"> play_circle </span>
+            </a>
+          </li>
+          <li
+            style="
+              background-image: url('../image/web/genre_3.png');
+              background-repeat: no-repeat;
+              background-size: cover;
+            "
+          >
+            <a href="" class="playBtn">
+              <span class="material-symbols-outlined"> play_circle </span>
+            </a>
+          </li>
+          <li
+            style="
+              background-image: url('../image/web/genre_4.png');
+              background-repeat: no-repeat;
+              background-size: cover;
+            "
+          >
+            <a href="" class="playBtn">
+              <span class="material-symbols-outlined"> play_circle </span>
+            </a>
+          </li>
+          <li
+            style="
+              background-image: url('../image/web/genre_5.png');
+              background-repeat: no-repeat;
+              background-size: cover;
+            "
+          >
+            <a href="" class="playBtn">
+              <span class="material-symbols-outlined"> play_circle </span>
+            </a>
+          </li>
+          <li
+            style="
+              background-image: url('../image/web/genre_6.png');
+              background-repeat: no-repeat;
+              background-size: cover;
+            "
+          >
+            <a href="" class="playBtn">
+              <span class="material-symbols-outlined"> play_circle </span>
+            </a>
+          </li>
+          <li
+            style="
+              background-image: url('../image/web/genre_7.png');
+              background-repeat: no-repeat;
+              background-size: cover;
+            "
+          >
+            <a href="" class="playBtn">
+              <span class="material-symbols-outlined"> play_circle </span>
+            </a>
+          </li>
+        </ul>
+      </div>
       <div class="contents">
         <h3>무드 스테이션</h3>
         <ul>
@@ -304,131 +387,17 @@ uri="http://java.sun.com/jsp/jstl/core"%>
               <span class="material-symbols-outlined"> play_circle </span>
             </a>
           </li>
-          <!-- <li
-            style="
-              background-image: url('../image/web/mood_1.png');
-              background-repeat: no-repeat;
-              background-size: cover;
-            "
-          >
-            <a href="" class="playBtn">
-              <span class="material-symbols-outlined"> play_circle </span>
-            </a>
-          </li>
-          <li
-            style="
-              background-image: url('../image/web/mood_2.png');
-              background-repeat: no-repeat;
-              background-size: cover;
-            "
-          >
-            <a href="" class="playBtn">
-              <span class="material-symbols-outlined"> play_circle </span>
-            </a>
-          </li> -->
         </ul>
       </div>
-      <div class="contents">
-        <h3>장르 스테이션</h3>
-        <ul>
-          <li
-            style="
-              background-image: url('../image/web/genre_1.png');
-              background-repeat: no-repeat;
-              background-size: cover;
-            "
-          >
-            <a href="" class="playBtn">
-              <span class="material-symbols-outlined"> play_circle </span>
-            </a>
-          </li>
-          <li
-            style="
-              background-image: url('../image/web/genre_2.png');
-              background-repeat: no-repeat;
-              background-size: cover;
-            "
-          >
-            <a href="" class="playBtn">
-              <span class="material-symbols-outlined"> play_circle </span>
-            </a>
-          </li>
-          <li
-            style="
-              background-image: url('../image/web/genre_3.png');
-              background-repeat: no-repeat;
-              background-size: cover;
-            "
-          >
-            <a href="" class="playBtn">
-              <span class="material-symbols-outlined"> play_circle </span>
-            </a>
-          </li>
-          <li
-            style="
-              background-image: url('../image/web/genre_4.png');
-              background-repeat: no-repeat;
-              background-size: cover;
-            "
-          >
-            <a href="" class="playBtn">
-              <span class="material-symbols-outlined"> play_circle </span>
-            </a>
-          </li>
-          <li
-            style="
-              background-image: url('../image/web/genre_5.png');
-              background-repeat: no-repeat;
-              background-size: cover;
-            "
-          >
-            <a href="" class="playBtn">
-              <span class="material-symbols-outlined"> play_circle </span>
-            </a>
-          </li>
-          <li
-            style="
-              background-image: url('../image/web/genre_6.png');
-              background-repeat: no-repeat;
-              background-size: cover;
-            "
-          >
-            <a href="" class="playBtn">
-              <span class="material-symbols-outlined"> play_circle </span>
-            </a>
-          </li>
-          <li
-            style="
-              background-image: url('../image/web/genre_7.png');
-              background-repeat: no-repeat;
-              background-size: cover;
-            "
-          >
-            <a href="" class="playBtn">
-              <span class="material-symbols-outlined"> play_circle </span>
-            </a>
-          </li>
-          <!-- <li
-            style="
-              background-image: url('../image/web/genre_8.png');
-              background-repeat: no-repeat;
-              background-size: cover;
-            "
-          >
-            <a href="" class="playBtn">
-              <span class="material-symbols-outlined"> play_circle </span>
-            </a>
-          </li> -->
-        </ul>
-      </div>
-    </div>
-
-    <footer>
+         <footer>
       <p>개인정보처리방침 | PODO 이용약관 | 고객센터 | 결제/환불안내 | 상담</p>
       <br />
       <img src="../image/web/logo-footer.png" alt="" style="width: 60px" />
       <p>© PODO Music Corp.</p>
     </footer>
+    </div>
+
+ 
     <script type="text/javascript">
       let playBtn = document.getElementById("playBtn");
     </script>

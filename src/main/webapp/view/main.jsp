@@ -1,7 +1,6 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-pageEncoding="UTF-8"%> <%@ taglib prefix="c"
-uri="http://java.sun.com/jsp/jstl/core"%>
-
+<!-- <%@ page language="java" contentType="text/html; charset=UTF-8"
+pageEncoding="UTF-8"%><%@ taglib prefix="c"
+uri="http://java.sun.com/jsp/jstl/core"%> -->
 <!DOCTYPE html>
 <html lang="ko">
   <head>
@@ -45,6 +44,7 @@ uri="http://java.sun.com/jsp/jstl/core"%>
       }
       body,html {
         width: 100vw;
+        height: 100vmax;
         background: var(--sub-background-color);
         color: var(--font-color);
         
@@ -66,7 +66,7 @@ uri="http://java.sun.com/jsp/jstl/core"%>
       footer {
         width: 100%;
         height: 200px;
-        margin-top: 40vh;
+        margin-top: 50vh;
         text-align: center;
         color: silver;
         font-size: 0.8rem;
@@ -76,14 +76,18 @@ uri="http://java.sun.com/jsp/jstl/core"%>
 
       .container {
         width: 100%;
-        padding: 0 80px;
+        padding: 0 50px;
         height: 100%;
-        margin-top: 70px;
+        margin-top: 50px;
+      }
+
+      .contents {
+        width: 100%;
       }
 
       .banner {
-        width: 1526px;
-        height: 360px;
+        width:100%;
+        min-width: 800px;
         text-align: center;
         display: flex;
         justify-content: start;
@@ -99,15 +103,15 @@ uri="http://java.sun.com/jsp/jstl/core"%>
       }
 
       ul#mag-list {
-        width: 1525px;
+        width: 100%;
         padding: 0;
         display: flex;
         flex-wrap: wrap;
-        justify-content: space-evenly;
+        justify-content: start;
         gap: 0 20px;
       }
       #mag-list > li {
-        width: 200px;
+        width: 210px;
         margin-bottom: 20px;
         position: relative;
         align-items: center;
@@ -115,10 +119,11 @@ uri="http://java.sun.com/jsp/jstl/core"%>
 
       .playBtn {
         position: absolute;
-        width: 200px;
-        height: 200px;
-        left: 0;
-        opacity: 0;
+        width: 50px;
+        height: 50px;
+        left: 2.55%;
+        top: 30%;
+        opacity:0;
         transition: all 0.5s;
         /* 서서히 나타내는 효과 */
       }
@@ -137,25 +142,30 @@ uri="http://java.sun.com/jsp/jstl/core"%>
       #mag-list li p {
         display: block;
         color: #fff;
-        font-size: 1.8rem;
+        font-size: 1rem;
         margin: 0 auto;
+        font-weight: bold;
       }
-
+      #mag-list li strong{
+        font-size: 0.9rem;
+        color: var(--point-color);
+        font-weight: bold;
+      }
       #mag-list li div {
         width: 100%;
       }
       #station-list {
-        width: 1525px;
+        width: 100%;
         padding: 0;
         display: flex;
         flex-wrap: wrap;
-        justify-content: space-evenly;
+        justify-content: start;
         gap: 0 20px;
       }
 
       #station-list li {
-        width: 200px;
-        height: 200px;
+        width: 210px;
+        height: 210px;
         padding: 15px 0;
         display: flex;
         margin-bottom: 20px;
@@ -165,9 +175,10 @@ uri="http://java.sun.com/jsp/jstl/core"%>
       }
 
       #station-list > li .st-playBtn {
+        top: 32.5%;
+        left: 2.55%;
+        height: 4rem;
         position: absolute;
-        width: 200px;
-        height: 200px;
         opacity: 0;
         transition: all 0.5s;
       }
@@ -221,6 +232,8 @@ uri="http://java.sun.com/jsp/jstl/core"%>
       #chart-list > li div {
         width: 100%;
       }
+      
+ 
     </style>
   </head>
   <body>
@@ -239,66 +252,66 @@ uri="http://java.sun.com/jsp/jstl/core"%>
             <a href="" class="playBtn">
               <span class="material-symbols-outlined"> play_circle </span>
             </a>
-            <p>title</p>
-            <span>Lorem ipsum dolor ist amet consectetur </span>
+            <p>이주의 디깅# 146</p>
+            <strong>이찬혁</strong>
           </li>
           <li>
             <img src="../image/web/cover-2.png" alt="" />
             <a href="" class="playBtn">
               <span class="material-symbols-outlined"> play_circle </span>
             </a>
-            <p>title</p>
-            <span>Lorem ipsum dolor ist amet consectetur </span>
+            <p>그림 같은 한 해를 만들어낸</p>
+            <strong>박장현, 조연호, 이병찬 </strong>
           </li>
           <li>
             <img src="../image/web/cover-3.png" alt="" />
             <a href="" class="playBtn">
               <span class="material-symbols-outlined"> play_circle </span>
             </a>
-            <p>title</p>
-            <span>Lorem ipsum dolor ist amet consectetur </span>
+            <p>쇼미더머니 11</p>
+            <strong>화제의 참가자는? </strong>
           </li>
           <li>
             <img src="../image/web/cover-4.png" alt="" />
             <a href="" class="playBtn">
               <span class="material-symbols-outlined"> play_circle </span>
             </a>
-            <p>title</p>
-            <span>Lorem ipsum dolor ist amet consectetur </span>
+            <p>막을 수 없는 에너지</p>
+            <strong>르세라핌</strong>
           </li>
           <li>
             <img src="../image/web/cover-5.png" alt="" />
             <a href="" class="playBtn">
               <span class="material-symbols-outlined"> play_circle </span>
             </a>
-            <p>title</p>
-            <span>Lorem ipsum dolor ist amet consectetur </span>
+            <p>New Release #115 :</p>
+            <strong>테일러 스위프트, (여자) 아이들</strong>
           </li>
           <li>
             <img src="../image/web/cover-6.png" alt="" />
             <a href="" class="playBtn">
               <span class="material-symbols-outlined"> play_circle </span>
             </a>
-            <p>title</p>
-            <span>Lorem ipsum dolor ist amet consectetur </span>
+            <p>홀로 선</p>
+            <strong>백호</strong>
           </li>
           <li>
             <img src="../image/web/cover-7.png" alt="" />
             <a href="" class="playBtn">
               <span class="material-symbols-outlined"> play_circle </span>
             </a>
-            <p>title</p>
-            <span>Lorem ipsum dolor ist amet consectetur </span>
+            <p>이주의 디깅 #145</p>
+            <strong>(여자) 아이들</strong>
           </li>
         </ul>
       </div>
       <div class="contents">
         <h3>스테이션</h3>
-
+<!-- station -->
         <ul id="station-list">
           <li
             style="
-              background-image: url('../image/web/mood_1.png');
+              background-image: url('../image/web/genre_1.png');
               background-repeat: no-repeat;
               background-size: cover;
             "
@@ -309,7 +322,7 @@ uri="http://java.sun.com/jsp/jstl/core"%>
           </li>
           <li
             style="
-              background-image: url('../image/web/mood_2.png');
+              background-image: url('../image/web/genre_2.png');
               background-repeat: no-repeat;
               background-size: cover;
             "
@@ -320,7 +333,7 @@ uri="http://java.sun.com/jsp/jstl/core"%>
           </li>
           <li
             style="
-              background-image: url('../image/web/mood_3.png');
+              background-image: url('../image/web/genre_3.png');
               background-repeat: no-repeat;
               background-size: cover;
             "
@@ -331,7 +344,7 @@ uri="http://java.sun.com/jsp/jstl/core"%>
           </li>
           <li
             style="
-              background-image: url('../image/web/mood_4.png');
+              background-image: url('../image/web/genre_4.png');
               background-repeat: no-repeat;
               background-size: cover;
             "
@@ -342,7 +355,7 @@ uri="http://java.sun.com/jsp/jstl/core"%>
           </li>
           <li
             style="
-              background-image: url('../image/web/mood_5.png');
+              background-image: url('../image/web/genre_5.png');
               background-repeat: no-repeat;
               background-size: cover;
             "
@@ -353,7 +366,7 @@ uri="http://java.sun.com/jsp/jstl/core"%>
           </li>
           <li
             style="
-              background-image: url('../image/web/mood_6.png');
+              background-image: url('../image/web/genre_6.png');
               background-repeat: no-repeat;
               background-size: cover;
             "
@@ -364,7 +377,7 @@ uri="http://java.sun.com/jsp/jstl/core"%>
           </li>
           <li
             style="
-              background-image: url('../image/web/mood_7.png');
+              background-image: url('../image/web/genre_7.png');
               background-repeat: no-repeat;
               background-size: cover;
             "
@@ -386,8 +399,9 @@ uri="http://java.sun.com/jsp/jstl/core"%>
             
             <c:forEach var="i" items="${mainList}">
               
-                            <li> 
+                            <li>
                                 <a href="" id="selectChart"> 
+                                <img src="/image/music/${i.musicImg}.jpg" alt="" />
                               </a> 
                                <div>
             
@@ -397,23 +411,25 @@ uri="http://java.sun.com/jsp/jstl/core"%>
            &nbsp;&nbsp;&nbsp;&nbsp; ${i.musicArtist} 
                                 </p> 
                             </div> 
+                            </li> 
           
             </c:forEach>
            
-                               </ul> -
+                               </ul> 
             
           </c:when>
         <c:otherwise> </c:otherwise> 
    </c:choose>
       </div>
-    </div>
-
-    <footer>
+          <footer>
       <p>개인정보처리방침 | PODO 이용약관 | 고객센터 | 결제/환불안내 | 상담</p>
       <br />
       <img src="../image/web/logo-footer.png" alt="" style="width: 60px" />
       <p>© PODO Music Corp.</p>
     </footer>
+    </div>
+
+
     <script type="text/javascript">
       let playBtn = document.getElementById("playBtn");
     </script>

@@ -8,6 +8,7 @@ uri="http://java.sun.com/jsp/jstl/core"%>
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Document</title>
+    <script src="https://code.jquery.com/jquery-3.6.1.js"></script>
     <style>
       /* 기본 Reset css 셋팅입니다 지우지 마세요 */
       @import url(../src/css/reset.css);
@@ -134,7 +135,7 @@ uri="http://java.sun.com/jsp/jstl/core"%>
                     <img src="/image/music/${i.musicImg}.jpg" alt="" />
                   </a>
                   <div>
-                    <p>${i.musicSeq}&nbsp; ${i.musicName}</p>
+                    <p class="musicName" data-index="${i.musicChart }">${i.musicSeq}&nbsp; ${i.musicName}</p>
                     <p class="artist">
                       &nbsp;&nbsp;&nbsp;&nbsp; ${i.musicArtist}
                     </p>
@@ -169,6 +170,36 @@ uri="http://java.sun.com/jsp/jstl/core"%>
           },
         });
       };
+    </script>
+    
+    <script type="text/javascript">
+    	// 차트 목록을 받는 배열
+    	let musicChartList = new Array();
+    	<c:forEach items="${list }" var="i">
+		musicChartList.push({
+			musicSeq : "${i.musicSeq}",
+			musicName : "${i.musicName}",
+			musicArtist : "${i.musicArtist}",
+			musicAlbum : "${i.musicAlbum}",
+			musicImg : "${i.musicImg}",
+			musicMp3 : "${i.musicMp3}",
+			musicChart : "${i.musicChart}",
+			musicLylics : "${i.musicLylics}"
+			});
+		</c:forEach>
+		    			
+// 			노래 클릭시 차트 목록이 컨트롤러 목록에 뿌려지며, 해당 노래가 재생된다.		
+// 			let membership = "${loginMembership}";
+// 				if (membership=="admin" || membership=="vip") {
+// 				$(".musicName").on("click", function(){
+// 					parent.playList = musicChartList;
+// 					parent.playIndex = parseInt(this.getAttribute("data-index"))-1;
+// 					parent.listMusic();
+// 					parent.loadMusic(parent.playIndex);				
+// 					parent.playMusic();
+// 				});
+// 			};		
+		
     </script>
   </body>
 </html>

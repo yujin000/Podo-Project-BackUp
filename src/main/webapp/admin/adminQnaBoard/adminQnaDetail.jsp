@@ -94,27 +94,26 @@
    <div class="wrap">
       <div id="Header">
          <h1 id="logo">
-            <a href="/adminMain.admin?nickname=${loginNickname }"><img
-               src="/image/web/logo-f-5.png" alt="" /></a>
-         </h1>
+                    <a href="/adminMain.member?nickname=${loginNickname }"><img src="/image/web/logo-f-5.png"
+                            alt="" /></a>
+                </h1>
          <div id="mypage">
-            <a class="loginBtn">${nickname }</a>
+            <a class="loginBtn">${nickName }</a>
          </div>
-         <ul class="tog">
-            <li><a href="/index.jsp">메인페이지로</a></li>
-            <li><a href="#">계정설정</a></li>
-            <li><a href="/logout.member">로그아웃</a></li>
-         </ul>
-         <div id="GNB">
-            <ul>
-               <li><a href="/list.notice">공지사항 관리</a></li>
-               <li><a id="chart" href="/allList.music?nickname=${loginNickname }">음원 관리</a></li>
-               <li><a id="chart">공연 관리</a></li>
-               <li><a href="#">회원 관리</a></li>
-               <li><a href="/adminMemship.admin">멤버십 관리</a></li>
-               <li><a href="/adminList.board?cpage=1">문의내역 확인</a></li>
-            </ul>
-         </div>
+			<ul class="tog">
+				<li><a href="/start.music">메인페이지로</a></li>
+				<li><a href="/logout.member">로그아웃</a></li>
+			</ul>
+			<div id="GNB">
+				<ul>
+					<li><a href="/list.notice?cpage=1">공지사항 관리</a></li>
+					<li><a href="/allList.music">음원 관리</a></li>
+					<li><a href="/adminPerform.perform">공연 관리</a></li>
+					<li><a href="/list.member?cpage=1">회원 관리</a></li>
+					<li><a href="/goodsList.goods">멤버십 관리</a></li>
+					<li><a href="/adminList.board?cpage=1">문의내역 확인</a></li>
+				</ul>
+			</div>
       </div>
       <div class="adminContents">
          <div class="adminMainView">
@@ -143,13 +142,29 @@
                  		첨부파일 : <a href="/download.file?sysname=${boardFile.sysName }&oriname=${boardFile.oriName}">${boardFile.oriName }</a> 
             		</div>            		
             	</div>
-            	<form action="/write.qnaComment" id="form">
+            	
+            	<c:choose>
+            		<c:when test= "${not empty commentList }">
+            			<c:forEach var="i" items = "${commentList }">
+            				<div>답변 작성자 : ${i.qnaCommentWriter }</div>
+            				<div>답변 내용 : ${i.qnaCommentContents }</div>
+            				<div>답변작성 시간 : ${i.qnaCommentWriteDate }</div>            				
+            			</c:forEach>
+            		</c:when>
+            		<c:otherwise>
+            			<div>답변이 없습니다.</div>
+            		</c:otherwise>
+            	</c:choose>
+            	
+            	<form action="/write.qnaC" id="form">
+            	<c:if test="${count eq '0' }">
             	<div id="comments">
             		<div>답변 작성</div>
             		<textarea id="comment" name="comment"></textarea>
             		<button type="button" id="commentBtn">댓글쓰기</button>
             		<input type="hidden" value="${qnaBoard.qnaSeq }" name="qnaSeq">
             	</div>
+            	</c:if>
             	</form>            	
       </div>
    </div>
@@ -162,7 +177,7 @@
       
       // 댓글쓰기
       $("#commentBtn").on("click", function(){
-    	  if (("#comment").val.length>200) {
+    	  if ($("#comment").val().length>200) {
     		  alert("200자 이하로 작성해주세요.");
     	  } else {
     		  $("#form").submit();

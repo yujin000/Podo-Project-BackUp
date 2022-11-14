@@ -15,8 +15,10 @@ import com.oreilly.servlet.multipart.DefaultFileRenamePolicy;
 
 import DAO.BoardFilesDAO;
 import DAO.QnaBoardDAO;
+import DAO.QnaCommentDAO;
 import DTO.BoardFilesDTO;
 import DTO.QnaBoardDTO;
+import DTO.QnaCommentDTO;
 
 @WebServlet("*.board")
 public class QnaBoard extends HttpServlet {
@@ -32,6 +34,8 @@ public class QnaBoard extends HttpServlet {
 				QnaBoardDAO dao = QnaBoardDAO.getInstance();
 				List<QnaBoardDTO> qna = dao.selectByRange(qnaWriter, cpage * 5 - 4, cpage * 5);
 				String navi = dao.getPageNavi(cpage,qnaWriter);
+				String nickName = request.getSession().getAttribute("loginNickname").toString();
+				request.getSession().setAttribute("nickName", nickName);
 				request.setAttribute("qna", qna);
 				request.setAttribute("navi", navi);
 				request.getRequestDispatcher("/mypage/myInquiry.jsp").forward(request, response);
@@ -71,7 +75,8 @@ public class QnaBoard extends HttpServlet {
 				
 				BoardFilesDAO fileDao = BoardFilesDAO.getInstance();
 				BoardFilesDTO dto = fileDao.select(qnaSeq);
-
+				String nickName = request.getSession().getAttribute("loginNickname").toString();
+				request.getSession().setAttribute("nickName", nickName);
 				request.setAttribute("fileDto",dto);
 				request.setAttribute("dtoDetail", dtoDetail);
 				// request.getSession().setAttribute("qnaDetailSeq", qnaSeq);
@@ -96,6 +101,12 @@ public class QnaBoard extends HttpServlet {
 				BoardFilesDTO boardFilesDto = boardFilesDao.select(qnaSeq);
 				qnaBoardDto.setQnaSeq(qnaSeq);
 				
+				List<QnaCommentDTO> qnaCList = QnaCommentDAO.getInstance().selectC(qnaSeq);
+				// 댓글 수를 세서, 1개 이상 달려있으면 댓글 잠금 처리한다. (1질문 1답변 원칙)
+				int count = qnaCList.size();
+				
+				request.setAttribute("count", count);
+				request.setAttribute("commentList", qnaCList);
 				request.setAttribute("boardFile", boardFilesDto);
 				request.setAttribute("qnaBoard", qnaBoardDto);
 				request.getRequestDispatcher("/admin/adminQnaBoard/adminQnaDetail.jsp?qnaSeq="+qnaSeq).forward(request, response);

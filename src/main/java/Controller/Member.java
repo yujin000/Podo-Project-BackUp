@@ -38,7 +38,7 @@ public class Member extends HttpServlet {
 				MemberDAO dao = MemberDAO.getInstance();
 				int result = dao.signup(email, pw, nickname, name, phone);
 				dao.signupMail(email, nickname); // 회원가입 시 축하 메일 전송
-				response.sendRedirect("/index.jsp");
+				response.sendRedirect("/start.music");
 			} else if (uri.equals("/login.member")) {
 				MemberDAO dao = MemberDAO.getInstance();
 				String email = request.getParameter("email");
@@ -57,7 +57,7 @@ public class Member extends HttpServlet {
 					request.getSession().setAttribute("scribDate", dto.getScribeDate());
 					request.getSession().setAttribute("loginMembership", dto.getMembership());
 					
-					response.sendRedirect("/chart.music");
+					response.sendRedirect("/start.music");
 				} 
 					 else {
 					  
@@ -75,7 +75,7 @@ public class Member extends HttpServlet {
 			 else if (uri.equals("/logout.member")) {
 				 // 로그아웃
 				request.getSession().invalidate();
-				response.sendRedirect("/index.jsp");
+				response.sendRedirect("/start.music");
 			} else if (uri.equals("/mypage.member")) {
 				MemberDAO dao = MemberDAO.getInstance();
 				PayMemberDAO pdao = PayMemberDAO.getInstance();
@@ -217,7 +217,9 @@ public class Member extends HttpServlet {
 				MemberDAO dao = MemberDAO.getInstance();
 				List <MemberDTO> memberList = dao.selectAllMember(cpage * rcpp - (rcpp-1), cpage * rcpp);
 				
-				String navi = dao.getPageNavi(cpage, rcpp, ncpp);				
+				String navi = dao.getPageNavi(cpage, rcpp, ncpp);
+				String nickName = request.getSession().getAttribute("loginNickname").toString();
+				request.getSession().setAttribute("nickName", nickName);
 				request.setAttribute("memberList", memberList);
 				request.setAttribute("navi", navi);
 				request.getRequestDispatcher("/admin/adminMember.jsp").forward(request, response);
