@@ -50,14 +50,15 @@
         }
 
         footer {
-            width: 100%;
-            height: 100px;
-            border: var(--boder-silver);
-            position: absolute;
-            text-align: center;
-            color: var(--font-color);
-        }
-
+        width: 100%;
+        height: 200px;
+        margin-top: 40vh;
+        text-align: center;
+        color: silver;
+        font-size: 0.8rem;
+        background: transparent;
+        opacity: 0.5;
+      }
         /* delete scroll bar */
         ::-webkit-scrollbar {
             display: none;
@@ -270,6 +271,11 @@
             font-size: 20px;
             padding-top: 50px;
         }
+        .container {
+			padding: 0 40px 200px 0;
+			width:100%;
+			height: 100%;
+		}
     </style>
 </head>
 
@@ -280,7 +286,8 @@
 	<input type="hidden" value="${list.theaterName }" name="theaterName">
 	<input type="hidden" value="${list.performPrice }" name="performPrice">
 	<input type="hidden" value="${seat.seatNum }" name="seatNum">
-    <div class="wrap">
+	<input type="hidden" value="${list.rating }" name="rating">
+    <div class=".container">
         <div class="header">
             <h1 class="logoName"><img src="image/perform/logo-f-b.png" alt="">
                 티켓</h1>
@@ -328,6 +335,12 @@
         </div>
     </div>
     </form>
+    <footer>
+      <p>개인정보처리방침 | PODO 이용약관 | 고객센터 | 결제/환불안내 | 상담</p>
+      <br />
+      <img src="../image/web/logo-footer.png" alt="" style="width: 60px" />
+      <p>© PODO Music Corp.</p>
+    </footer>
 </body>
 <script>
 
@@ -356,7 +369,7 @@
             mapping(input, i, j);
             div.append(input);
             input.addEventListener('click', function (e) {
-                if (count < 2) {
+                if (count < 1) {
                     console.log(e.target.value);
                     //중복방지 함수
                     selectedSeats = selectedSeats.filter((element, index) => selectedSeats.indexOf(element) != index);
@@ -384,7 +397,7 @@
                     console.log(selectedSeats);
                 }
                 else {
-                    alert("최대 2매만 예약 가능합니다.");
+                    alert("최대 1매만 예약 가능합니다.");
                     location.reload();
                 }
             })

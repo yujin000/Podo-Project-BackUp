@@ -72,6 +72,7 @@ public class Performance extends HttpServlet {
 				PerformanceDTO dto = new PerformanceDTO(0,0,theaterName,performTitle,poster,showtime,startDate,endDate,performPrice,rating,genre,performPoster);
 				dao.addPerform(dto);
 				response.sendRedirect("/adminPerform.perform");
+				
 			}else if(uri.equals("/updPerform.perform")) {
 				PerformanceDAO dao = PerformanceDAO.getInstance();
 				
@@ -92,6 +93,7 @@ public class Performance extends HttpServlet {
 				//System.out.println("con : "+theaterName+performTitle+showtime+startDate+endDate+performPrice+rating+genre+seq);
 				dao.updatePerform(theaterName, performTitle, showtime, startDate, endDate, performPrice, rating, genre, seq);
 				response.sendRedirect("/adminPerform.perform");
+				
 			}else if(uri.equals("/performDetail.perform")){
 				int performSeq = Integer.parseInt(request.getParameter("performSeq"));
 				PerformanceDAO dao = PerformanceDAO.getInstance();
@@ -135,11 +137,27 @@ public class Performance extends HttpServlet {
 				String performTitle = request.getParameter("performTitle");
 				String theaterName = request.getParameter("theaterName");
 				String performPrice = request.getParameter("performPrice");
+				String rating = request.getParameter("rating");
 				
-				TicketingDTO dto = new TicketingDTO(0,email,performSeq,performTitle,theaterName, performPrice, seatNum, null);
+				TicketingDTO dto = new TicketingDTO(0, email,performSeq,performTitle,theaterName, performPrice, seatNum, null , rating);
 				dao.ticketing(dto);
-				request.getRequestDispatcher("/ticketing/payment.jsp").forward(request, response);
+				request.getRequestDispatcher("/list.perform").forward(request, response);
 
+			}else if(uri.equals("/ticketList.perform")) {
+				
+				TicketingDAO dao = TicketingDAO.getInstance();
+				
+				String email = request.getSession().getAttribute("loginEmail").toString();
+				List<TicketingDTO> ticket = dao.TicketingList(email);
+				request.setAttribute("ticket", ticket);
+				request.getRequestDispatcher("/ticketing/ticketList.jsp").forward(request, response);
+				
+			}else if(uri.equals("/delete.perform")) {
+				TicketingDAO dao = TicketingDAO.getInstance();
+				int ticketSeq = Integer.parseInt(request.getParameter("ticketSeq"));
+				int performSeq = Integer.parseInt(request.getParameter("performSeq"));
+				int result = dao.delete(ticketSeq,performSeq);
+				response.sendRedirect("/ticketList.perform");
 			}
 		} catch(Exception e) {
 			e.printStackTrace();

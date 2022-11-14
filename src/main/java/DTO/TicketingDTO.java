@@ -11,13 +11,14 @@ public class TicketingDTO {
 	private String performPrice;
 	private int seatNum;
 	private Timestamp ticketDate;
+	private String rating;
 	
 	public TicketingDTO() {
 		
 	}
 
 	public TicketingDTO(int ticketSeq, String email, int performSeq, String performTitle, String theaterName,
-			String performPrice, int seatNum, Timestamp ticketDate) {
+			String performPrice, int seatNum, Timestamp ticketDate, String rating) {
 		super();
 		this.ticketSeq = ticketSeq;
 		this.email = email;
@@ -27,6 +28,7 @@ public class TicketingDTO {
 		this.performPrice = performPrice;
 		this.seatNum = seatNum;
 		this.ticketDate = ticketDate;
+		this.rating = rating;
 	}
 
 	public int getTicketSeq() {
@@ -91,6 +93,14 @@ public class TicketingDTO {
 
 	public void setTicketDate(Timestamp ticketDate) {
 		this.ticketDate = ticketDate;
+	}
+
+	public String getRating() {
+		return rating;
+	}
+
+	public void setRating(String rating) {
+		this.rating = rating;
 	}
 	
 }
