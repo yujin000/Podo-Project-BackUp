@@ -29,7 +29,7 @@ public class MusicDAO {
 	}
 	
 	public List<MusicDTO> musicChartList() throws Exception { // TOP25 차트 재생목록을 불러오는 매소드
-		String sql = "select * from music where musicChart >= 1 and musicChart <= 25";
+		String sql = "select * from music where musicChart >= 1 and musicChart <= 30";
 		try (Connection con = this.getConnection();
 				PreparedStatement pstat = con.prepareStatement(sql);) {
 			ResultSet rs = pstat.executeQuery();
@@ -52,6 +52,9 @@ public class MusicDAO {
 			return musicChartList;
 		}
 	}
+	
+	
+
 	
 	public List<MusicDTO> musicAllList() throws Exception { 
 		String sql = "select * from music";
@@ -115,15 +118,16 @@ public class MusicDAO {
 		}
 	}
 
-	public int updateMusic(String musicName, String musicArtist, String musicAlbum, String musicGenre, int seq)
+	public int updateMusic(String musicName, String musicArtist, String musicAlbum, String musicGenre,String musicLylics, int seq)
 			throws Exception {
-		String sql = "update music set musicname = ?, musicartist = ?, musicalbum = ?, musicgenre = ? where musicseq = ?";
+		String sql = "update music set musicname = ?, musicartist = ?, musicalbum = ?, musicgenre = ?,musicLylics=? where musicseq = ?";
 		try (Connection con = this.getConnection(); PreparedStatement pstat = con.prepareStatement(sql);) {
 			pstat.setString(1, musicName);
 			pstat.setString(2, musicArtist);
 			pstat.setString(3, musicAlbum);
 			pstat.setString(4, musicGenre);
-			pstat.setInt(5, seq);
+			pstat.setString(5, musicLylics);
+			pstat.setInt(6, seq);
 			int result = pstat.executeUpdate();
 			con.commit();
 			return result;
