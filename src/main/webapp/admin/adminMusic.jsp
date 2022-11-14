@@ -16,9 +16,9 @@
 	crossorigin="anonymous"></script>
 <style>
         /* 관리자페이지 세팅 초기값 */
-        @media(max-width:1500px) {
+        @media(max-width:1900px) {
             .html {
-                width: 1500px;
+                width: 1900px;
             }
         }
 
@@ -322,7 +322,7 @@ div[class^=inInfo],.btnBox{
 					<a class="loginBtn">${nickname }</a>
 				</div>
 			<ul class="tog">
-				<li><a href="/chart.music">메인페이지로</a></li>
+				<li><a href="/start.music">메인페이지로</a></li>
 				<li><a href="/logout.member">로그아웃</a></li>
 			</ul>
 			<div id="GNB">
@@ -497,8 +497,7 @@ div[class^=inInfo],.btnBox{
 			}
 		}
 
-          let span = $("<span>");
-          let chartChk = false;
+          let span = $("<span>");           let chartChk = false;
           // 음원등록 유효성 검사
           $("#musicChart").on("keyup",function(){
               let regex = /^[0-9]{1,4}$/;
