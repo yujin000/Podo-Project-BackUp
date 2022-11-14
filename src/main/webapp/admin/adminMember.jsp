@@ -15,9 +15,9 @@
         integrity="sha256-o88AwQnZB+VDvE9tvIXrMQaPlFFSUTR+nldQm1LuPXQ=" crossorigin="anonymous"></script>
     <style>
         /* 관리자페이지 세팅 초기값 */
-        @media(max-width:1500px) {
+        @media(max-width:1900px) {
             .html {
-                width: 1500px;
+                width: 1900px;
             }
         }
 
@@ -112,9 +112,8 @@
             border: 1px solid silver;
             float: left;
             position: relative;
-            width: 95%;
+            width: 100%;
             height: 700px;
-            margin-left: 30px;
             margin-top: 30px;
             overflow: hidden;
         }
@@ -161,6 +160,15 @@
         .member, #listHeader {
         	height : 30px;
         }
+        #listHeader{
+        	height : 60px;
+            line-height:60px;
+        	font-size:20px;
+        	background-color:#01B9FF;
+        }
+        #listHeader>div{
+            color:white !important;
+       	}
         #navi {
         	height : 5%;
         	text-align : center;

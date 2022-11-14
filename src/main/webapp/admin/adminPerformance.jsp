@@ -16,9 +16,9 @@
         integrity="sha256-o88AwQnZB+VDvE9tvIXrMQaPlFFSUTR+nldQm1LuPXQ=" crossorigin="anonymous"></script>
     <style>
         /* 관리자페이지 세팅 초기값 */
-        @media(max-width:2000px) {
+        @media(max-width:1900px) {
             .html {
-                width: 2000px;
+                width: 1900px;
             }
         }
 
@@ -346,10 +346,10 @@ div[class^=inInfo],.btnBox{
                 <div class="mainList">
                     <ul id="list">
                         <li class="listLi" id="listLi1">
-                            &nbsp 현재 등록된 공연 목록<hr>
+                            &nbsp 현재 등록된 공연 목록
                         </li>
                         <li class="listLi" id="listLi2">
-                            &nbsp 공연 추가하기<hr>
+                            &nbsp 공연 추가하기
                         </li>
                     </ul>
                 </div>

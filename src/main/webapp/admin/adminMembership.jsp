@@ -16,9 +16,9 @@
     <style>
         /* ---------- 관리자페이지 세팅 초기값 ---------- */
        /* 관리자페이지 세팅 초기값 */
-       @media(max-width:2000px) {
+       @media(max-width:1900px) {
             .html {
-                width: 2000px;
+                width: 1900px;
             }
         }
 
