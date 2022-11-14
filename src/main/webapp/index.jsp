@@ -260,7 +260,7 @@ uri="http://java.sun.com/jsp/jstl/core"%>
         $("#iframe").attr("src", "/view/main.jsp");
       });
       $("#chart").click(function () {
-        $("#iframe").attr("src", "/lank.music");
+        $("#iframe").attr("src", "/chart.music");
       });
       $("#wishBtn").click(function () {
       	$("#iframe").attr("src", "/list.wish");
