@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
    pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -240,13 +241,14 @@
                         		<c:when test="${not empty memberList}">
                         			<c:forEach var="i" items="${memberList }">
                         				<div class="member">
+                        				<input type="hidden" value="${i.scribeDate }" id="dummyDate">
                         					<div class="email">${i.email }</div>
                         					<div class="name">${i.name }</div>
                         					<div class="phone">${i.phone }</div>
                         					<div class="nickname">${i.nickname }</div>
                         					<div class="membership">${i.membership }</div>
-                        					<div class="scribeDate">${i.scribeDate }</div>
-                        					<div class="joinDate">${i.joinDate }</div>
+                        					<div class="scribeDate"><fmt:formatDate value="${i.scribeDate }" pattern="yyyy-MM-dd"/></div>
+                        					<div class="joinDate"><fmt:formatDate value="${i.joinDate }" pattern="yyyy-MM-dd"/></div>
                         					<button class="delBtn" type="button" email="${i.email }" membership="${i.membership }">회원 탈퇴</button>
                         				</div>
                         				<hr id="listHr">
