@@ -49,13 +49,15 @@
             background: var(--background-color);
             color: var(--font-color);
             font-family: "Noto Sans KR", sans-serif;
+            
         }
 
         .container {
             padding: 0 75px;
             height: 100%;
 /*             background-color: bisque; */
-            overflow-y: scroll;
+            width: 100vw;
+            margin-bottom:200px;
         }
 
         .titleText {

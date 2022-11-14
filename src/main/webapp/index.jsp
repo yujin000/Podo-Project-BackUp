@@ -220,7 +220,7 @@
 			$("#iframe").attr("src", "/list.perform");
 		});
 		$("#serviceBtn").click(function() {
-			$("#iframe").attr("src", "/mypage/serviceCenter.jsp");
+			$("#iframe").attr("src", "/listLook.notice?cpage=1");
 		});
 		$("#membership").click(function(){
 			$("#iframe").attr("src","/index.goods");

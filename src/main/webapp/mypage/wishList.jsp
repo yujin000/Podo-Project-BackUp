@@ -91,48 +91,7 @@
         color: var(--font-color);
    		background-color: #00000d50;
         }
-        #notice{
-        float:left;
-        width:10vw;
-        line-height: var(--line-height);
-        color: var(--font-color);
-        background-color: #00000d80;
-        }
-        #myInquiry{
-        float:left;
-        width:15vw;
-        line-height: var(--line-height);
-        color: var(--font-color);
-        background-color: #00000d90;
-        }
         
-        /*division css*/
-        .division {
-            width: 100%;
-            font-size: 20px;
-            font-weight: var(--font-weight);
-            line-height: var(--line-height);
-        }
-        #category {
-            float: left;
-            width: 30%;
-            border-width: 0 0 1px;
-            border-bottom: var(--boder-silver);
-        }
-
-        #history {
-            float: left;
-            width: 55%;
-            border-width: 0 0 1px;
-            border-bottom: var(--boder-silver);
-        }
-
-        #date {
-            float: left;
-            width: 15%;
-            border-width: 0 0 1px;
-            border-bottom: var(--boder-silver);
-        }
         
         /*list css*/
         .list{
@@ -153,23 +112,33 @@
 <body>
     <div class="container">
         <div class="main">
-            <div class="titleText">고객센터</div>
+            <div class="titleText">위시리스트</div>
             <div class="category">
-                    <div id="home"><a href="/mypage/serviceCenter.jsp">홈</a>
+                    <div id="home"><a href="/mypage/wishList.jsp">노래</a>
                     <hr style="border: solid 5px #3e065f; width: 20%"></div>
-                    <div id="notice"><a href="/listLook.notice?cpage=1">공지사항</a></div>
-                    <div id="myInquiry"><a href="/list.board?cpage=1">내 문의 내역</a></div>
             </div>
             
-            <div class="division">
-                    <div id="category">category</div>
-                    <div id="history">title</div>
-                    <div id="date">date</div>
-            </div>
             
             <div class="list">
-            	
-            </div>
+				<c:choose>
+					<c:when test="${not empty noticeBoardList}">
+						<c:forEach var="n" items="${noticeBoardList }">
+							<div class="writelist">
+								<div id="qnaCategory">${n.noticeCategory }</div>
+								<div id="qnaTitle">
+									<a href="/detailLook.notice?noticeSeq=${n.noticeSeq }">${n.noticeTitle }</a>
+								</div>
+								<div id="noticeWriter">${n.noticeWriter }</div>
+								<div id="qnaWriteDate">${n.noticeWriteDate }</div>
+							</div>
+						</c:forEach>
+					</c:when>
+					<c:otherwise>
+         문의가 없습니다
+         </c:otherwise>
+				</c:choose>
+			</div>
+			
         </div>
     </div>
 </body>
