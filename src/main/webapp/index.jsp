@@ -351,9 +351,10 @@ uri="http://java.sun.com/jsp/jstl/core"%>
         	// 각 함수 구현
         	// 재생 함수
         	function playMusic() {
-      	playAudio.setAttribute("data-status", "play");
-      	playAudio.play();
-      	playBtn.innerText = "pause";
+      			playAudio.setAttribute("data-status", "play");
+      			playAudio.play();
+      			playBtn.innerText = "pause";
+      			wishExist();
         	};
 
         	// 일시정지 함수
