@@ -29,7 +29,7 @@ public class MusicDAO {
 	}
 	
 	public List<MusicDTO> musicChartList() throws Exception { // TOP25 차트 재생목록을 불러오는 매소드
-		String sql = "select * from music where musicChart >= 1 and musicChart <= 25";
+		String sql = "select * from music where musicChart >= 1 and musicChart <= 30";
 		try (Connection con = this.getConnection();
 				PreparedStatement pstat = con.prepareStatement(sql);) {
 			ResultSet rs = pstat.executeQuery();
@@ -52,6 +52,9 @@ public class MusicDAO {
 			return musicChartList;
 		}
 	}
+	
+	
+
 	
 	public List<MusicDTO> musicAllList() throws Exception { 
 		String sql = "select * from music";

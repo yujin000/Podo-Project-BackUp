@@ -81,6 +81,11 @@
 #contents{
 	width : 800px;
 }
+#comment {
+	resize:none;
+	width : 400px;
+	height : 100px;
+}
 
 </style>
 </head>
@@ -136,8 +141,16 @@
             		${qnaBoard.qnaContents }
             		<div>
                  		첨부파일 : <a href="/download.file?sysname=${boardFile.sysName }&oriname=${boardFile.oriName}">${boardFile.oriName }</a> 
-            		</div>
+            		</div>            		
             	</div>
+            	<form action="/write.qnaComment" id="form">
+            	<div id="comments">
+            		<div>답변 작성</div>
+            		<textarea id="comment" name="comment"></textarea>
+            		<button type="button" id="commentBtn">댓글쓰기</button>
+            		<input type="hidden" value="${qnaBoard.qnaSeq }" name="qnaSeq">
+            	</div>
+            	</form>            	
       </div>
    </div>
    <script>
@@ -145,6 +158,15 @@
       let adminBtn = document.getElementById("mypage");
       $(adminBtn).click(function() {
          $(this).next(".tog").fadeToggle();
+      });
+      
+      // 댓글쓰기
+      $("#commentBtn").on("click", function(){
+    	  if (("#comment").val.length>200) {
+    		  alert("200자 이하로 작성해주세요.");
+    	  } else {
+    		  $("#form").submit();
+    	  }
       });
       
    </script>

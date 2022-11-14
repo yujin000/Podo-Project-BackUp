@@ -65,10 +65,16 @@
 	float: left;
 }
 .header{
-	height:10%;
+	height:5%;
+}
+.qnaList{
+	height:30px;
 }
 .qnaList>div{
 	float:left;
+}
+.main {
+	height:70%;
 }
 #qnaSeqHeader, #qnaStatusHeader, .qnaSeq, .qnaStatus {
 	width : 5%;
@@ -126,6 +132,7 @@
             		<div id="qnaWriteDateHeader">문의 날짜</div>
             		<div id="qnaStatusHeader">답변 상태</div>
             	</div>
+         <div class="main">
             <c:choose>            	
             	<c:when test="${not empty qna }">
             		<c:forEach var = "i" items = "${qna }">
@@ -143,6 +150,8 @@
             		<div>글이 없습니다.</div>
             	</c:otherwise>
             </c:choose>
+           	</div>
+            <div id="navi">Page ${navi }</div>
       </div>
    </div>
    <script>
