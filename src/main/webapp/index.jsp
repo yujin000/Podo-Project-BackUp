@@ -156,8 +156,8 @@ uri="http://java.sun.com/jsp/jstl/core"%>
                   />
                 </li>
                 <li id="playInfo">
-                  <strong>title</strong>
-                  <p>name</p>
+                  <strong id="playTitle">title</strong>
+                  <p id="playArtist">name</p>
                 </li>
                 <li>
                   <button>
@@ -302,6 +302,9 @@ uri="http://java.sun.com/jsp/jstl/core"%>
         	// 좌측 하단에 뜨는 재생 정보
         	const playInfo = document.querySelector("#playInfo");
         	const musicImg = document.querySelector("#musicImg");
+        	
+        	const playTitle = document.querySelector("#playTitle");
+        	const playArtist = document.querySelector("#playArtist");
 
         	// 컨트롤러 볼륨 바
         	const volumeBar = document.querySelector("#volumeBar");
@@ -337,8 +340,8 @@ uri="http://java.sun.com/jsp/jstl/core"%>
         	playAudio.setAttribute("src","/audio/" + musicList[playIndex].musicMp3 + ".mp3");
 
         	// 좌측 하단에 재생대기중인 음원의 정보를 표시한다.
-        	playInfo.firstChild.innerHTML = musicList[playIndex].musicName;
-        	playInfo.lastChild.innerHTML = musicList[playIndex].musicArtist;
+        	playTitle.innerHTML = musicList[playIndex].musicName;
+        	playArtist.innerHTML = musicList[playIndex].musicArtist;
         	musicImg.src = `/image/music/\${musicList[playIndex].musicImg}.jpg`;
 
         	// 각 함수 구현
@@ -358,8 +361,8 @@ uri="http://java.sun.com/jsp/jstl/core"%>
 
         	// 음악 정보 가져오기 함수
         	function loadMusic(index) {
-            	playInfo.firstChild.innerText = musicList[index].musicName;
-            	playInfo.lastChild.innerText = musicList[index].musicArtist;
+            	playTitle.innerHTML = musicList[playIndex].musicName;
+            	playArtist.innerHTML = musicList[playIndex].musicArtist;
             	musicImg.src = `/image/music/\${musicList[index].musicImg}.jpg`;
             	playAudio.setAttribute("src","/audio/" + musicList[index].musicMp3 + ".mp3");
         	}
