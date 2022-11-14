@@ -121,20 +121,16 @@
             
             <div class="list">
 				<c:choose>
-					<c:when test="${not empty noticeBoardList}">
-						<c:forEach var="n" items="${noticeBoardList }">
+					<c:when test="${not empty wish}">
+						<c:forEach var="w" items="${wish }">
 							<div class="writelist">
-								<div id="qnaCategory">${n.noticeCategory }</div>
-								<div id="qnaTitle">
-									<a href="/detailLook.notice?noticeSeq=${n.noticeSeq }">${n.noticeTitle }</a>
-								</div>
-								<div id="noticeWriter">${n.noticeWriter }</div>
-								<div id="qnaWriteDate">${n.noticeWriteDate }</div>
+								<div id="qnaCategory">${w.wishEmail }</div>
+								<div id="noticeWriter">${w.parentMusicSeq }</div>				
 							</div>
 						</c:forEach>
 					</c:when>
 					<c:otherwise>
-         문의가 없습니다
+         위시리스트가 없습니다. 노래를 추가해주세요.
          </c:otherwise>
 				</c:choose>
 			</div>
