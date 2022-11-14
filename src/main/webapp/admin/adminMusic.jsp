@@ -131,35 +131,179 @@
 			overflow-y: scroll;
 		}
         #mainConArea2 {
-            display: hidden;
+            display: none;
             overflow-y: scroll;
         }
         
         input{
             color:black;
         }
-
+		button{
+            color:black;
+        }
         /*기본*/
 
-/* 파일첨부 css */
-.filebox label {
-	display: inline-block;
-	padding: 10px 20px;
-	color: #fff;
-	vertical-align: middle;
-	background-color: #3e065f;
-	cursor: pointer;
-	height: 40px;
-	margin-left: 10px;
+		/* 파일첨부 css */
+label{
+  padding: 6px 25px;
+  background-color:#01B9FF;
+  border-radius: 4px;
+  color: white;
+  cursor: pointer;
+}
+#file{
+    display: none;
 }
 
-.filebox input[type="file"] {
-	position: absolute;
-	width: 0;
-	height: 0;
-	padding: 0;
-	overflow: hidden;
-	border: 0;
+/* 기본 리스트 css */
+.listWrap{
+    position:relative;
+    height:150px;
+}
+b{
+    color:black;
+}
+.listWrap input{
+    border:none;
+}
+div[class^=navi]{
+    display:inline-block;
+    position:absolute;
+}
+#musicImg{
+    width:100px;
+    height:100px;
+    top:50%;
+    transform: translateY(-50%);
+    left:25px;
+}
+.navi1{
+    left:30px;
+    top:20px;
+    z-index: 99;
+}
+.navi2{
+    top:15px;
+    left:150px;
+}
+.navi3{
+    top:15px;
+    left:360px;
+}
+.navi4{
+    bottom:20px;
+    left:150px;
+}
+.navi5{
+    bottom:20px;
+    left:360px;
+}
+.navi6{
+    top:10px;
+    right:180px;
+    width:40%;
+    height:110px;
+}
+.navi6>textarea{
+    resize: none;
+    width:100%;
+    height:84%;
+}
+#btnBox2{
+    display:inline-block;
+    right:50px;
+    position: absolute;
+    top:50%;
+    transform: translateY(-50%);
+}
+#listHr{
+    position:absolute;
+    bottom:1px;
+    width:100%;
+}
+/* 기본 리스트 css 끝 */
+
+/* 추가하기 */
+.mainConArea2{
+    position:relative;
+}
+ #h1text{
+    position:absolute;
+    color:#515151;
+    left:30px;
+    top:10px;
+}
+div[class^=inInfo],.btnBox{
+    display:inline-block;
+    position:absolute;
+}
+.showimg{
+    position:absolute;
+    display:inline-block;
+    border:1px solid silver;
+    width:250px;
+    height:250px;
+    display:inline-block;
+    left:170px;
+    top:150px;
+}
+.addImg>img{
+    width:100%;
+    height:100%;
+}
+.inInfo1{
+    left:550px;
+    top:90px;
+}
+.inInfo2{
+    left:550px;
+    top:140px;
+}
+.inInfo3{
+    left:550px;
+    top:190px;
+}
+.inInfo4{
+    left:550px;
+    top:240px;
+}
+.inInfo5{
+    left:550px;
+    top:290px;
+}
+.inInfo6{
+    left:550px;
+    top:340px;
+    width:500px;
+}
+.inInfo6 textarea{
+    width:100%;
+}
+.inInfo7{
+    left:230px;
+    top:420px;
+}
+.inInfo8{
+    left:550px;
+    top:470px;
+}
+.btnBox{
+    bottom:100px;
+    left:550px;
+}
+.btnBox>button:first-child{
+    background-color: #FF0050;
+    color:white;
+    width:100px;
+    height:30px;
+    border-radius: 5px;
+    border:none;
+}
+.btnBox>button:nth-child(2){
+    width:100px;
+    height:30px;
+    border-radius: 5px;
+    border:1px solid silver;
 }
 
 
@@ -177,22 +321,20 @@
 				<div id="mypage">
 					<a class="loginBtn">${nickname }</a>
 				</div>
-				<ul class="tog">
-					<li><a href="/index.jsp">메인페이지로</a></li>
-					<li><a href="#">계정설정</a></li>
-					<li><a href="/logout.member">로그아웃</a></li>
+			<ul class="tog">
+				<li><a href="/chart.music">메인페이지로</a></li>
+				<li><a href="/logout.member">로그아웃</a></li>
+			</ul>
+			<div id="GNB">
+				<ul>
+					<li><a href="/list.notice?cpage=1">공지사항 관리</a></li>
+					<li><a href="/allList.music">음원 관리</a></li>
+					<li><a href="/adminPerform.perform">공연 관리</a></li>
+					<li><a href="/list.member?cpage=1">회원 관리</a></li>
+					<li><a href="/goodsList.goods">멤버십 관리</a></li>
+					<li><a href="/adminList.board?cpage=1">문의내역 확인</a></li>
 				</ul>
-				<div id="GNB">
-					<ul>
-						<li><a href="/admin/adminNotice/adminNotice.jsp">공지사항 관리</a></li>
-						<li><a id="chart"
-							href="/allList.music?nickname=${loginNickname }">음원 관리</a></li>
-						<li><a id="chart">공연 관리</a></li>    
-						<li><a href="#">회원 관리</a></li>
-						<li><a href="/goodsList.goods">멤버십 관리</a></li>
-						<li><a href="#">문의내역 확인</a></li>
-					</ul>
-				</div>
+			</div>
 			</div>
 		</div>
 		<div class="adminContents">
@@ -211,14 +353,6 @@
                 <div class="mainContents">
                     <div id="mainConArea1">
                         <form id="updateForm">
-                            <div class="listWrap" id="listWrap1">
-                                <div class="navibar1"></div>
-                                <div class="navibar">곡 이름</div>
-                                <div class="navibar">가수</div>
-                                <div class="navibar">앨범 이름</div>
-                                <div class="navibar">장르</div>
-                                <hr>
-                            </div>
                             <c:choose>
                                 <c:when test="${not empty list }">
                                     <c:forEach var="list" items="${list}">
@@ -226,13 +360,13 @@
                                             value="${list.musicSeq }">
                                         <div class="listWrap">
                                             <div class="navi1" id="musicImg">
-                                                <img src="/admin/${list.musicImg }.jpg" id="albumImg">
+                                                <img src="/admin/${list.musicImg }" id="albumImg">
                                             </div>
-                                            <div class="navi2"><input type="text" value="${list.musicName }" class="inMusicName" readonly></div>
-                                            <div class="navi3"><input type="text" value="${list.musicArtist }" class="inMusicArtist" readonly></div>
-                                            <div class="navi4"><input type="text" value="${list.musicAlbum }" class="inMusicAlbum" readonly></div>
-                                            <div class="navi5"><input type="text" value="${list.musicGenre }" class="inMusicGenre" readonly></div>
-                                            <div class="navi6"><textarea class="inMusicLylics" style="color:black;"readonly>${list.musicLylics } </textarea></div>
+                                            <div class="navi2"><b>· 곡제목</b><br><input type="text" value="${list.musicName }" class="inMusicName" readonly></div>
+                                            <div class="navi3"><b>· 아티스트</b><br><input type="text" value="${list.musicArtist }" class="inMusicArtist" readonly></div>
+                                            <div class="navi4"><b>· 앨범명</b><br><input type="text" value="${list.musicAlbum }" class="inMusicAlbum" readonly></div>
+                                            <div class="navi5"><b>· 장르</b><br><input type="text" value="${list.musicGenre }" class="inMusicGenre" readonly></div>
+                                            <div class="navi6"><b>· 가사</b><br><textarea class="inMusicLylics" style="color:black;"readonly>${list.musicLylics } </textarea></div>
                                             <div id="btnBox2">
                                                 <button type="button" class="update" seq="${list.musicSeq }">수정</button>
                                                 <button type="button" class="delete" seq="${list.musicSeq }">삭제</button>
@@ -250,67 +384,46 @@
                         </form>
                     </div>
                     <div id="mainConArea2">
+                        <h1 id="h1text">음원 추가하기</h1>
                         <form id="form">
                             <div class="addMusicArea" id="addMusicArea">
                                 <div class="container">
-                                    <div class="contentsImg">
-                                        <img id="preview">
-                                    </div>
                                     <div class="contentsInfo">
-                                        <div class="infoArea">
-										      노래이름<br />
-										      <input
-										        type="text"
-										        name="musicName"
-										        id="musicName"
-										        class="textArea"
-										      /><br />
-										      아티스트<br />
-										      <input
-										        type="text"
-										        name="musicArtist"
-										        id="musicArtist"
-										        class="textArea"
-										      /><br />
-										      앨범명<br />
-										      <input
-										        type="text"
-										        name="musicAlbum"
-										        id="musicAlbum"
-										        class="textArea"
-										      /><br />
-										      장르<br />
-										      <input
-										        type="text"
-										        name="musicGenre"
-										        id="musicGenre"
-										        class="textArea"
-										      /><br />
-										      차트<br />
-										      <input
-										        type="text"
-										        name="musicChart"
-										        id="musicChart"
-										        style="color: black"
-										      />
-										    </div>
-                                        <div class="lylics">
-                                            가사
+                                        <div class="showimg">
+                                            <img id="preview">
+                                        </div>
+                                        <div class="inInfo1">
+                                            <b>· 노래이름</b><br />
+                                            <input type="text" name="musicName" id="musicName" class="textArea" maxlength="40"/><br />
+                                        </div>
+                                        <div class="inInfo2">
+                                            <b>· 아티스트</b><br />
+                                            <input type="text" name="musicArtist" id="musicArtist" class="textArea" maxlength="40"/><br />
+                                        </div>
+                                        <div class="inInfo3">
+                                            <b>· 앨범명</b><br />
+                                            <input type="text" name="musicAlbum" id="musicAlbum" class="textArea" maxlength="40"/><br />
+                                        </div>
+                                        <div class="inInfo4">
+                                            <b>· 장르</b><br />
+                                            <input type="text" name="musicGenre" id="musicGenre" class="textArea" maxlength="20"/><br />
+                                        </div>
+                                        <div class="inInfo5">
+                                            <b>· 차트</b><br />
+                                            <input type="text" name="musicChart" id="musicChart" style="color: black" maxlength="4"/>
+                                        </div>
+                                        <div class="inInfo6">
+                                            <b>· 가사</b><br>
                                             <textarea name="musicLylics"
-                                                style="width: 100%; height: 100px; resize: none; color: black;"
-                                                id="lylics"></textarea>
+                                                style="width: 500; height: 100px; resize: none; color: black;"
+                                                id="lylics" maxlength="1000"></textarea>
                                         </div>
-                                        &nbsp&nbsp&nbsp이미지 파일 첨부
-                                        <div class="filebox">
-                                            <input class="textAreaMp3" id="mp3File"> <label
-                                                for="file">파일찾기</label> <input type="file" id="file"
-                                                name="imgFile" onchange="readURL(this)">
+                                        <div class="inInfo7">
+                                             <label for="file">앨범 업로드</label> <input type="file" id="file" name="imgFile" onchange="readURL(this)">
                                         </div>
-                                        <div class="mp3File">
-                                            mp3 첨부<br> <input type="file" name="mp3File" id="imgFile">
+                                        <div class="inInfo8">
+                                            <b>· mp3 첨부</b><br> <input type="file" name="mp3File" id="imgFile">
                                         </div>
-                                        <br>
-    
                                         <div class="btnBox">
                                             <button type="button" id="saveMusic">저장하기</button>
                                             <button type="button" id="cancelMusic">취소하기</button>
@@ -384,30 +497,44 @@
 			}
 		}
 
-		// 파일 첨부시 파일경로 표시(placeholder) 
-		$("#file").on('change', function() {
-			var fileName = $("#file").val();
-			$(".textAreaMp3").val(fileName);
-		});
+          let span = $("<span>");
+          let chartChk = false;
+          // 음원등록 유효성 검사
+          $("#musicChart").on("keyup",function(){
+              let regex = /^[0-9]{1,4}$/;
+              let result = regex.test($("#musicChart").val());
 
-		// 음악 추가 저장 버튼
-		$("#saveMusic").on("click",function() {
-			if ($("#file").val() == ""
-					|| $(".textArea").val() == ""
-					|| $("#imgFile").val() == ""
-					|| $("#lylics").val() == "") {
-				alert("노래이름, 아티스트, 앨범명, 장르, 가사, 이미지, MP3파일 모두 입력되어야 합니다.");
-			} else {
-				if (confirm("추가하시겠습니까?")) {
-					$("#form")
-							.attr("action", "/addMusic.music");
-					$("#form").attr("enctype",
-							"multipart/form-data");
-					$("#form").attr("method", "post");
-					$("#form").submit();
-				}
-			}
-		})
+              if(!result){
+                  $("#musicChart").after(span);
+                  span.text("1~4자리 숫자만 입력할 수 있습니다.");
+                  span.css("color","#FF0050");
+                  chartChk = false;
+              }else{
+                  chartChk = true;
+                  span.remove();
+              }
+          })
+
+  		// 음악 추가 저장 버튼
+  		$("#saveMusic").on("click",function() {
+  			if ($("#file").val() == ""
+  					|| $(".textArea").val() == ""
+  					|| $("#imgFile").val() == ""
+  					|| $("#lylics").val() == "") {
+  				alert("노래이름, 아티스트, 앨범명, 장르, 가사, 이미지, MP3파일 모두 입력되어야 합니다.");
+  			}else if(chartChk == false){
+                  alert("차트 입력 양식을 확인해주세요.");
+              }else {
+  				if (confirm("추가하시겠습니까?")) {
+  					$("#form")
+  							.attr("action", "/addMusic.music");
+  					$("#form").attr("enctype",
+  							"multipart/form-data");
+  					$("#form").attr("method", "post");
+  					$("#form").submit();
+  				}
+  			}
+  		})
 		// 삭제 버튼
 		$(".delete").on("click", function() {
 			if (confirm("삭제하시겠습니까?")) {
@@ -421,38 +548,39 @@
         updCancelBtn.attr("type", "button");
         updCancelBtn.addClass("updCancelBtn");
         updCancelBtn.css({
-            "border": "none",
             "color": "black",
-            "margin-top": "25px",
-            "margin-left": "10px"
+            "margin-left": "5px"
         })
-        updCancelBtn.text("수정취소");
+        updCancelBtn.text("취소");
 
         let updConfirmBtn = $("<button>");
         updConfirmBtn.attr("type", "button");
         updConfirmBtn.addClass("updConfirmBtn");
         updConfirmBtn.css({
-            "border": "none",
-            "color": "black",
-            "margin-top": "25px"
+            "color": "black"
         })
         updConfirmBtn.text("저장");
 
         // 수정 버튼 클릭 시 readonly > false로 변경
-        $(".update").on("click", function () {
+		$(".update").on("click", function () {
             $(this).parent().find(".delete").css("display", "none");
             $(this).parent().find(".update").css("display", "none");
             $(this).parent().append(updConfirmBtn);
             $(this).parent().append(updCancelBtn);
             $(this).parent().parent().find("input").removeAttr("readonly");
             $(this).parent().parent().find("textarea").removeAttr("readonly");
-            $(this).parent().parent().find("input").css("color", "red");
+            $(this).parent().parent().find("input").css({
+            	"color": "#FF0050",
+            	"border":"1px solid black"
+            });
+            $(this).parent().parent().find("textarea").css("color", "#FF0050");
             $(this).parent().parent().find(".inMusicName").attr("name", "musicName");
             $(this).parent().parent().find(".inMusicArtist").attr("name", "musicArtist");
             $(this).parent().parent().find(".inMusicAlbum").attr("name", "musicAlbum");
             $(this).parent().parent().find(".inMusicGenre").attr("name", "musicGenre");
             $(this).parent().parent().find(".inMusicLylics").attr("name", "musicLylics");
         })
+
 
         // 수정사항 저장 버튼
         updConfirmBtn.on("click", function () {
@@ -470,18 +598,8 @@
             }
         })
 		
-		// 리스트 마우스 호버 이벤트
-		$("div[class^=listWrap]:not(#listWrap1)").on("mouseover",function(){
-			$(this).find("div").css("color","black");
-			$(this).find("button").css("color","black");
-		})
-		$("div[class^=listWrap]:not(#listWrap1)").on("mouseout",function(){
-			$(this).find("div").css("color","silver");
-			$(this).find("button").css("color","silver");
-		})
-		
 		// 음원등록 유효성 검사
-		
+		musicChart
 	</script>
 </body>
 
