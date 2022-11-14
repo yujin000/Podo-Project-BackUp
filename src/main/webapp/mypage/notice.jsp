@@ -39,9 +39,9 @@
             border: none;
         }
 
-         div { 
-             border: 1px solid #fff; 
-         }
+/*          div {  */
+/*              border: 1px solid #fff;  */
+/*          } */
 
         body {
             width: 100vw;
@@ -54,15 +54,14 @@
             padding: 0 75px;
             height: 100%;
             width: 100vw;
-			background-color: bisque; 
-            overflow-y: scroll;
+/* 			background-color: bisque;  */
             margin-bottom:200px;
         }
 		
 		.main {
             height: 100%;
             margin-top: 8vh;
-		    background-color: lightgray;
+/* 		    background-color: lightgray; */
         }
         
         .titleText {
@@ -70,7 +69,7 @@
             font-weight: var(--font-weight);
             line-height: var(--line-height);
             margin-bottom: 2vw;
-			background-color: #00000d50;
+/* 			background-color: #00000d50; */
         }
         
         /*category css*/
@@ -92,14 +91,14 @@
         width:10vw;
         line-height: var(--line-height);
         color: var(--font-color);
-        background-color: #00000d80;
+/*         background-color: #00000d80; */
         }
         #myInquiry{
         float:left;
         width:15vw;
         line-height: var(--line-height);
         color: var(--font-color);
-        background-color: #00000d90;
+/*         background-color: #00000d90; */
         }
         
         /*division css*/
@@ -111,6 +110,11 @@
             line-height: var(--line-height);
         }
         
+        
+        
+        /*글 css*/
+        
+        /* 유형 */
         #category {
             float: left;
             width: 20%;
@@ -118,24 +122,28 @@
             border-bottom: var(--boder-silver);
         }
         
-		#qnaCategory{
+		#noticeCategory{
 			float: left;
             width: 20%;
             border-width: 0 0 1px;
             line-height: var(--line-height);
 		}
+		
+		/* 제목 */
         #history {
             float: left;
             width: 45%;
             border-width: 0 0 1px;
             border-bottom: var(--boder-silver);
         }
-		#qnaTitle{
+		#noticeTitle{
 			float: left;
             width: 45%;
             border-width: 0 0 1px;
             line-height: var(--line-height);
 		}
+		
+		/*작성자 */
 		#writer{
 			float: left;
             width: 20%;
@@ -146,15 +154,17 @@
 			float: left;
             width: 20%;
             border-width: 0 0 1px;
-            border-bottom: var(--boder-silver);
+            border-bottom: var(--line-height);
 		}
+		
+		/* 작성일 */
         #date{
             float: left;
             width: 15%;
             border-width: 0 0 1px;
             border-bottom: var(--boder-silver);
         }
-        #qnaWriteDate{
+        #noticeWriteDate{
         	float: left;
             width: 15%;
             border-width: 0 0 1px;
@@ -166,7 +176,22 @@
 		margin-top: 2vh;
 		width: 100%;
 		height: 48vh;
-		border: 1px solid black;
+		border: 1px solid transparent;
+        }
+        
+        .writelist{
+        width: 100%;
+		height: 46px;
+		font-size: 18px;
+		margin-top:2vh;
+		margin-bottom:2vh;
+        }
+        
+        #navi{
+        text-align:center;
+        }
+        #navi>a{
+        color:white;
         }
     </style>
         <script
@@ -194,16 +219,17 @@
             </div>
             
             <div class="list">
+            
 				<c:choose>
 					<c:when test="${not empty noticeBoardList}">
 						<c:forEach var="n" items="${noticeBoardList }">
 							<div class="writelist">
-								<div id="qnaCategory">${n.noticeCategory }</div>
-								<div id="qnaTitle">
-									<a href="/detailLook.notice?noticeSeq=${n.noticeSeq }">${n.noticeTitle }</a>
+								<div id="noticeCategory">${n.noticeCategory }</div>
+								<div id="noticeTitle">
+									<a href="/detailLook.notice?noticeSeq=${n.noticeSeq }" style="color:white;">${n.noticeTitle }</a>
 								</div>
 								<div id="noticeWriter">${n.noticeWriter }</div>
-								<div id="qnaWriteDate">${n.noticeWriteDate }</div>
+								<div id="noticeWriteDate">${n.noticeWriteDate }</div>
 							</div>
 						</c:forEach>
 					</c:when>
@@ -211,9 +237,10 @@
          문의가 없습니다
          </c:otherwise>
 				</c:choose>
+				
 			</div>
 
-			<div>${naviLook }</div>
+			<div id="navi">${naviLook }</div>
         </div>
     </div>
 </body>

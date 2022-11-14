@@ -39,9 +39,9 @@
             border: none;
         }
 
-         div { 
-             border: 1px solid #fff; 
-         }
+/*          div {  */
+/*              border: 1px solid #fff;  */
+/*          } */
 
         body {
             width: 100vw;
@@ -53,14 +53,15 @@
         .container {
             padding: 0 75px;
             height: 100%;
-			background-color: bisque; 
-            overflow-y: scroll;
+/* 			background-color: bisque;  */
+            width: 100vw;
+    		margin-bottom:200px;
         }
 		
 		.main {
             height: 100%;
             margin-top: 8vh;
-		    background-color: lightgray;
+/* 		    background-color: lightgray; */
         }
         
         .titleText {
@@ -68,7 +69,7 @@
             font-weight: var(--font-weight);
             line-height: var(--line-height);
             margin-bottom: 2vw;
-			background-color: #00000d50;
+/* 			background-color: #00000d50; */
         }
         
         /*category css*/
@@ -81,7 +82,7 @@
         width:100%;
         height: 59px;
         font-size: 28px;
-        background-color:#00000d50;
+/*         background-color:#00000d50; */
         text-aline:center;
         }
         #home{
@@ -89,7 +90,7 @@
    		width:4vw;
    		line-height: var(--line-height);
         color: var(--font-color);
-   		background-color: #00000d50;
+/*    		background-color: #00000d50; */
         }
         
         
@@ -98,9 +99,27 @@
 		margin-top: 2vh;
 		width: 100%;
 		height: 55vh;
-		overflow-y: auto;
-		border: 1px solid black;
+		border: 1px solid transparent;
         }
+         
+        #songName{
+			float: left;
+            width: 30%;
+            border-width: 0 0 1px;
+            line-height: var(--line-height);
+		}
+		#album{
+            float: left;
+            width: 15%;
+            border-width: 0 0 1px;
+            border-bottom: var(--line-height);
+        }
+		#artistName{
+			float: left;
+            width: 55%;
+            border-width: 0 0 1px;
+            line-height: var(--line-height);
+		}
     </style>
         <script
       src="https://code.jquery.com/jquery-3.6.1.min.js"
@@ -115,7 +134,7 @@
             <div class="titleText">위시리스트</div>
             <div class="category">
                     <div id="home"><a href="/mypage/wishList.jsp">노래</a>
-                    <hr style="border: solid 5px #3e065f; width: 20%"></div>
+                    <hr style="border: solid 5px #3e065f; width: 60%"></div>
             </div>
             
             
@@ -124,10 +143,9 @@
 					<c:when test="${not empty wish}">
 						<c:forEach var="w" items="${wish }">
 							<div class="writelist">
-								<div id="qnaCategory">${w.musicName }</div>
-								<div id="noticeWriter">${w.musicArtist }</div>
-								<div id="noticeWriter">${w.musicAlbum }</div>
-												
+								<div id="songName">${w.musicName }</div>
+								<div id="album">${w.musicAlbum }</div>
+								<div id="artistName">${w.musicArtist }</div>												
 							</div>
 						</c:forEach>
 					</c:when>

@@ -11,7 +11,6 @@ import javax.naming.InitialContext;
 import javax.sql.DataSource;
 
 import DTO.MusicDTO;
-import DTO.SelectWishDTO;
 
 public class MusicDAO {
 	private static MusicDAO instance = null;
@@ -144,14 +143,14 @@ public class MusicDAO {
 		}
 	}
 	
-	public List<SelectWishDTO> selectAll(String wishEmail) throws Exception {
+	public List<MusicDTO> selectAll(String wishEmail) throws Exception {
 		String sql = "select * from music inner join wishList on musicSeq=parentmusicSeq where wishEmail=?";
 		try (Connection con = this.getConnection(); PreparedStatement pstat = con.prepareStatement(sql);) {
 			pstat.setString(1, wishEmail);
 			try (ResultSet rs = pstat.executeQuery();) {
-				List<SelectWishDTO> dtoWish = new ArrayList<>();
+				List<MusicDTO> dtoWish = new ArrayList<>();
 				while (rs.next()) {
-					SelectWishDTO dto = new SelectWishDTO();
+					MusicDTO dto = new MusicDTO();
 					dto.setMusicName(rs.getString("musicName"));
 					dto.setMusicArtist(rs.getString("musicArtist"));
 					dto.setMusicAlbum(rs.getString("musicAlbum"));

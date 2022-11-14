@@ -14,7 +14,6 @@ import com.google.gson.Gson;
 import DAO.MusicDAO;
 import DAO.WishDAO;
 import DTO.MusicDTO;
-import DTO.SelectWishDTO;
 import DTO.WishDTO;
 
 @WebServlet("*.wish")
@@ -52,7 +51,7 @@ public class Wish extends HttpServlet {
 			}else if (uri.equals("/list.wish")) {
 				MusicDAO dao = MusicDAO.getInstance();
 				String WishEmail = request.getSession().getAttribute("loginEmail").toString();
-				List<SelectWishDTO> dtoWish = dao.selectAll(WishEmail);
+				List<MusicDTO> dtoWish = dao.selectAll(WishEmail);
 				request.setAttribute("wish", dtoWish);
 				request.getRequestDispatcher("/mypage/wishList.jsp").forward(request, response);
 			}
