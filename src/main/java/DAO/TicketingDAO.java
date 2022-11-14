@@ -27,12 +27,15 @@ public class TicketingDAO {
 	}
 
 	public int ticketing(TicketingDTO dto) throws Exception {
-		String sql = "insert into ticketing values(ticketing_seq.nextval,?,?,?,sysdate)";
+		String sql = "insert into ticketing values(ticketing_seq.nextval,?,?,?,?,?,?,sysdate)";
 		try (Connection con = this.getConnection(); 
 			 PreparedStatement pstat = con.prepareStatement(sql)) {
 			pstat.setString(1, dto.getEmail());
 			pstat.setInt(2, dto.getPerformSeq());
 			pstat.setString(3, dto.getPerformTitle());
+			pstat.setString(4, dto.getTheaterName());
+			pstat.setString(5,dto.getPerformPrice());
+			pstat.setInt(6, dto.getSeatNum());
 			int result = pstat.executeUpdate();
 			con.commit();
 			return result;

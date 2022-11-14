@@ -274,6 +274,12 @@
 </head>
 
 <body>
+	<form action="/payment.perform" id="formSub" method="post">
+	<input type="hidden" value="${performSeq }" name="performSeq">
+	<input type="hidden" value="${list.performTitle }" name="performTitle">
+	<input type="hidden" value="${list.theaterName }" name="theaterName">
+	<input type="hidden" value="${list.performPrice }" name="performPrice">
+	<input type="hidden" value="${seat.seatNum }" name="seatNum">
     <div class="wrap">
         <div class="header">
             <h1 class="logoName"><img src="image/perform/logo-f-b.png" alt="">
@@ -316,11 +322,12 @@
 
             <div class="MidContents2">
                 <div class="BtnCss">
-                    <a href="/payment.perform?performSeq=${list.performSeq }&?performTitle=${list.performTitle }" class="payment">결제하기</a>
+                    <a class="payment">결제하기</a>
                 </div>
             </div>
         </div>
     </div>
+    </form>
 </body>
 <script>
 
@@ -392,6 +399,7 @@
                     })
                     input.classList.remove("clicked");
                     count = 0;
+                    $("#formSub").submit();
                 }
             });
         }

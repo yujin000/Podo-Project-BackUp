@@ -24,30 +24,16 @@ public class SeatDAO {
 		Context ctx = new InitialContext();
 		DataSource ds = (DataSource) ctx.lookup("java:comp/env/jdbc/oracle");
 		return ds.getConnection();
-	}
+	}	
 	
-	public int saleSeat(int seatSeq) throws Exception {
-		String sql = "update seat set saleState = where seatSeq = ?";
-		try (Connection con = this.getConnection(); 
-			PreparedStatement pstat = con.prepareStatement(sql);) {
-			pstat.setInt(1, seatSeq);
-			int result = pstat.executeUpdate();
-			con.commit();
-			return result;
-		}
-	}
-	
-	public SeatDTO seatDetail(int seatSeq) throws Exception {
-		String sql = "select * from seat where seatSeq = ?";
+	public SeatDTO seatDetail(int performSeq) throws Exception {
+		String sql = "select * from seat where performSeq = ?";
 		try (Connection con = this.getConnection(); PreparedStatement pstat = con.prepareStatement(sql);) {
-			pstat.setInt(1, seatSeq);
+			pstat.setInt(1, performSeq);
 			try (ResultSet rs = pstat.executeQuery();) {
 				rs.next();
 				SeatDTO dto = new SeatDTO();
-				dto.setTheaterSeq(rs.getInt("theaterSeq"));
-				dto.setSeatRow(rs.getString("seatRow"));
 				dto.setSeatNum(rs.getInt("seatNum"));
-				dto.setSaleState(rs.getString("saleState"));
 				return dto;
 			}
 		}

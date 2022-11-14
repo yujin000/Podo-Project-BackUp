@@ -2,22 +2,18 @@ package DTO;
 
 public class SeatDTO {
 	private int seatSeq;
-	private int theaterSeq;
-	private String seatRow;
+	private int performSeq;
 	private int seatNum;
-	private String saleState;
 	
 	public SeatDTO() {
 		
 	}
 
-	public SeatDTO(int seatSeq, int theaterSeq, String seatRow, int seatNum, String saleState) {
+	public SeatDTO(int seatSeq, int performSeq, int seatNum) {
 		super();
 		this.seatSeq = seatSeq;
-		this.theaterSeq = theaterSeq;
-		this.seatRow = seatRow;
+		this.performSeq = performSeq;
 		this.seatNum = seatNum;
-		this.saleState = saleState;
 	}
 
 	public int getSeatSeq() {
@@ -28,20 +24,12 @@ public class SeatDTO {
 		this.seatSeq = seatSeq;
 	}
 
-	public int getTheaterSeq() {
-		return theaterSeq;
+	public int getPerformSeq() {
+		return performSeq;
 	}
 
-	public void setTheaterSeq(int theaterSeq) {
-		this.theaterSeq = theaterSeq;
-	}
-
-	public String getSeatRow() {
-		return seatRow;
-	}
-
-	public void setSeatRow(String seatRow) {
-		this.seatRow = seatRow;
+	public void setPerformSeq(int performSeq) {
+		this.performSeq = performSeq;
 	}
 
 	public int getSeatNum() {
@@ -52,12 +40,7 @@ public class SeatDTO {
 		this.seatNum = seatNum;
 	}
 
-	public String getSaleState() {
-		return saleState;
-	}
-
-	public void setSaleState(String saleState) {
-		this.saleState = saleState;
-	}
+	
+	
 	
 }

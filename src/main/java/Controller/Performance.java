@@ -64,28 +64,25 @@ public class Performance extends HttpServlet {
 				PerformanceDTO list = dao1.selectDetail(performSeq);
 				SeatDAO dao2 = SeatDAO.getInstance();
 				
+				SeatDTO seat = dao2.seatDetail(performSeq);
+				
 				request.setAttribute("the", the);
 				request.setAttribute("list", list);
+				request.setAttribute("seat", seat);
 				request.getSession().setAttribute("scheDate", scheDate);
 				request.getRequestDispatcher("/ticketing/seatSelect.jsp").forward(request, response);
 				
 			}else if(uri.equals("/payment.perform")) {
-//					SeatDAO dao = SeatDAO.getInstance();
-//					int seatSeq = Integer.parseInt(request.getParameter("seatSeq"));
-//					dao.saleSeat(seatSeq);
-//					
-//					SeatDTO seat = dao.seatDetail(seatSeq);
-//					request.setAttribute("seat", seat);
-				
 				TicketingDAO dao = TicketingDAO.getInstance();
 				
 				String email = request.getSession().getAttribute("loginEmail").toString();
 				int performSeq = Integer.parseInt(request.getParameter("performSeq"));
+				int seatNum = Integer.parseInt(request.getParameter("seatNum"));
 				String performTitle = request.getParameter("performTitle");
+				String theaterName = request.getParameter("theaterName");
+				String performPrice = request.getParameter("performPrice");
 				
-//				int seatSeq = Integer.parseInt(request.getParameter("seatSeq"));
-				
-				TicketingDTO dto = new TicketingDTO(0,email,performSeq,performTitle,null);
+				TicketingDTO dto = new TicketingDTO(0,email,performSeq,performTitle,theaterName, performPrice, seatNum, null);
 				dao.ticketing(dto);
 				response.sendRedirect("/ticketing/payment.jsp");
 			}
