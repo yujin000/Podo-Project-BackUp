@@ -173,7 +173,12 @@
         	height : 5%;
         	text-align : center;
         }
-        
+        #memberList{
+        	margin-top:10px;
+        }
+        #listHr{
+        	margin:5px 0px 5px 0px;
+        }
         
         /*기본*/
     </style>
@@ -244,6 +249,7 @@
                         					<div class="joinDate">${i.joinDate }</div>
                         					<button class="delBtn" type="button" email="${i.email }" membership="${i.membership }">회원 탈퇴</button>
                         				</div>
+                        				<hr id="listHr">
                         			</c:forEach>                        			
                         		</c:when>                        		
                         	</c:choose>
