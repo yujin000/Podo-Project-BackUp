@@ -249,7 +249,7 @@
                         					<div class="membership">${i.membership }</div>
                         					<div class="scribeDate"><fmt:formatDate value="${i.scribeDate }" pattern="yyyy-MM-dd"/></div>
                         					<div class="joinDate"><fmt:formatDate value="${i.joinDate }" pattern="yyyy-MM-dd"/></div>
-                        					<button class="delBtn" type="button" email="${i.email }" membership="${i.membership }">회원 탈퇴</button>
+                        					<button class="delBtn" type="button" email="${i.email }" membership="${i.membership }" style="color:black;">회원 탈퇴</button>
                         				</div>
                         				<hr id="listHr">
                         			</c:forEach>                        			
