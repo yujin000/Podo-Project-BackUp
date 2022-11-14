@@ -1,7 +1,9 @@
 package DTO;
 
 public class MusicDTO {
-
+	
+	private String wishEmail;
+	
 	private int musicSeq;
 	private String musicName;
 	private String musicArtist;
@@ -12,6 +14,14 @@ public class MusicDTO {
 	private String musicGenre;
 	private String musicLylics;
 	
+	
+	
+	public String getWishEmail() {
+		return wishEmail;
+	}
+	public void setWishEmail(String wishEmail) {
+		this.wishEmail = wishEmail;
+	}
 	public int getMusicSeq() {
 		return musicSeq;
 	}
@@ -82,5 +92,15 @@ public class MusicDTO {
 	public MusicDTO() {
 	}
 	
+	//위시리스트 목록 출력
+	public MusicDTO(String wishEmail, int musicSeq, String musicName,
+			String musicArtist, String musicAlbum) {
+		super();
+		this.wishEmail = wishEmail;
+		this.musicSeq = musicSeq;
+		this.musicName = musicName;
+		this.musicArtist = musicArtist;
+		this.musicAlbum = musicAlbum;
+	}
 	
 }

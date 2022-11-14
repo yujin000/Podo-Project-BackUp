@@ -227,14 +227,13 @@
 		.notInput{
 		color: var(--font-color);
 		font-size:20px;
+		background: var(--background-color);
 		}
 		
 		.Btn label {
     	display: inline-block;
-    	padding: 10px 20px;
+    	line-height: 50px;
     	color: #fff;
-    	vertical-align: middle;
-    	background-color: #3e065f;
     	cursor: pointer;
     	height: 40px;
     	margin-left: 10px;
@@ -247,6 +246,26 @@
     	padding: 0;
     	overflow: hidden;
    		border: 0;
+		}
+		
+		#uploadBtn{
+		float:left;
+		margin-right:1vw;
+		}
+		
+		#pwBtn{
+    	margin-top: 1vh;
+    	margin-bottom: 1vh;
+    	width: 8vw;
+    	height: 35px;
+    	text-align: center;
+    	border-radius: 5px;
+    	font-size: 20px;
+    	font-weight: var(--font-weight);
+    	border: 1px solid gray;
+    	cursor: pointer;
+    	background: var(--background-color);
+    	color: var(--font-color) /* background-color: #00000d50; */;
 		}
     </style>
         <script
@@ -388,8 +407,10 @@
                 <input type="hidden" name="imgView" value="${DTO.profileImg }">
             </div>
             
+            
+            <div style="margin-bottom: 1vh;margin-top: 1vh">
             <!-- 프로필 이미지 업로드 버튼 -->
-            <div class="Btn">
+            <div class="Btn" id="uploadBtn">
             <label for="file">프로필 이미지 업로드</label> 
             <input type="file" id="file" name="file" onchange="readURL(this)">
             </div>
@@ -399,6 +420,9 @@
             <button class="Btn" type="button" id="delImgBtn">프로필 이미지 삭제</button>
             <input type="hidden" value="false" name="delResult">	
             </div>
+            
+            </div>
+            
         </div>
 	
 		
@@ -410,8 +434,8 @@
             </div>
             
             <div>
-                <div>비밀번호</div>
-                <button class="Btn" type="button" id="pwBtn">변경</button>
+                <div style="margin-top : 1vh;">비밀번호</div>
+                <button type="button" id="pwBtn">변경</button>
             </div>
             
             <div>
@@ -420,19 +444,20 @@
             </div>
             
             <div>
-                <div>닉네임</div>
+                <div style="margin-top:1vh;">닉네임</div>
                 <input type="text" value="${DTO.nickname }" name="nickname" id="nickname" class="inputAble">
             	<p id="msg"></p>
             </div>
             
             <div>
-                <div>전화번호</div>
+                <div style="margin-top:1vh;">전화번호</div>
                 <input type="text" value="${DTO.phone }" name="phone" id="phone">
                 <p id="msg"></p>
             </div>
 		
 		
-        <div>
+		<div style="margin-bottom: 1vh;margin-top: 1vh">
+        <div style="float:left; margin-right: 1vw;">
         	<!-- profileBtn : 프로필 수정 완료(정보 변경 완료) 버튼 -->
              <button type="button" id="completionBtn" class="Btn">수정 완료</button>
         </div>
@@ -440,6 +465,7 @@
         <div>
         	<!-- deleteBtn : 회원 탈퇴 버튼 -->
             <button type="button" style="color: var(--font-color)" id="deleteBtn" class="Btn">회원 탈퇴</button>  
+        </div>
         </div>
         
         </div>
@@ -459,7 +485,7 @@
                 
                 <div>
                 <!-- modifyPwBtn : 수정 완료 버튼 -->
-        	    <button type="button" id="modifyPwBtn" class="Btn">수정 완료</button>
+        	    <button type="button" id="modifyPwBtn" class="Btn" style="margin-right: 1vw; float: left;">수정 완료</button>
         	    <!-- backBtn : 뒤로가기 버튼 -->
         	    <button type="button" id="backBtn" class="Btn">뒤로가기</button>
         		</div>
