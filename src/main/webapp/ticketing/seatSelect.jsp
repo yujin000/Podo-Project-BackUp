@@ -280,6 +280,7 @@
 	<input type="hidden" value="${list.theaterName }" name="theaterName">
 	<input type="hidden" value="${list.performPrice }" name="performPrice">
 	<input type="hidden" value="${seat.seatNum }" name="seatNum">
+	<input type="hidden" value="${list.rating }" name="rating">
     <div class="wrap">
         <div class="header">
             <h1 class="logoName"><img src="image/perform/logo-f-b.png" alt="">
@@ -356,7 +357,7 @@
             mapping(input, i, j);
             div.append(input);
             input.addEventListener('click', function (e) {
-                if (count < 2) {
+                if (count < 1) {
                     console.log(e.target.value);
                     //중복방지 함수
                     selectedSeats = selectedSeats.filter((element, index) => selectedSeats.indexOf(element) != index);
@@ -384,7 +385,7 @@
                     console.log(selectedSeats);
                 }
                 else {
-                    alert("최대 2매만 예약 가능합니다.");
+                    alert("최대 1매만 예약 가능합니다.");
                     location.reload();
                 }
             })

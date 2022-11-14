@@ -163,6 +163,7 @@ a {
 			<div class="contentsTitle">
 
 				<div class="imgTop">
+				<a href="/ticketList.perform">예매내역</a>
 					<a href="/performDetail.perform?performSeq=${perform[3].performSeq }"
 						style="color: var(- -font-color);"> <img
 						src="image/perform/${perform[3].poster }"

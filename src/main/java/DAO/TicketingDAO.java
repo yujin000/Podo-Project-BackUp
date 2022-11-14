@@ -3,11 +3,14 @@ package DAO;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.naming.Context;
 import javax.naming.InitialContext;
 import javax.sql.DataSource;
 
+import DTO.PerformanceDTO;
 import DTO.TicketingDTO;
 
 public class TicketingDAO {
@@ -27,24 +30,49 @@ public class TicketingDAO {
 	}
 
 	public int ticketing(TicketingDTO dto) throws Exception {
-		String sql = "insert into ticketing values(ticketing_seq.nextval,?,?,?,?,?,?,sysdate)";
-		try (Connection con = this.getConnection(); 
-			 PreparedStatement pstat = con.prepareStatement(sql)) {
+		String sql = "insert into ticketing values(ticketing_seq.nextval,?,?,?,?,?,?,?,sysdate)";
+		try (Connection con = this.getConnection(); PreparedStatement pstat = con.prepareStatement(sql)) {
 			pstat.setString(1, dto.getEmail());
 			pstat.setInt(2, dto.getPerformSeq());
 			pstat.setString(3, dto.getPerformTitle());
 			pstat.setString(4, dto.getTheaterName());
-			pstat.setString(5,dto.getPerformPrice());
+			pstat.setString(5, dto.getPerformPrice());
 			pstat.setInt(6, dto.getSeatNum());
+			pstat.setString(7, dto.getRating());
 			int result = pstat.executeUpdate();
 			con.commit();
 			return result;
 		}
 	}
+
+	public List<TicketingDTO> TicketingList(String email) throws Exception {
+		String sql = "select * from ticketing where email = ?";
+		try (Connection con = this.getConnection(); PreparedStatement pstat = con.prepareStatement(sql);) {
+			pstat.setString(1, email);
+			try (ResultSet rs = pstat.executeQuery();) {
+
+				List<TicketingDTO> result = new ArrayList<TicketingDTO>();
+
+				while (rs.next()) {
+					TicketingDTO dto = new TicketingDTO();
+					dto.setTicketSeq(rs.getInt("ticketSeq"));
+					dto.setPerformSeq(rs.getInt("performSeq"));
+					dto.setPerformTitle(rs.getString("performTitle"));
+					dto.setTheaterName(rs.getString("theaterName"));
+					dto.setPerformPrice(rs.getString("performPrice"));
+					dto.setSeatNum(rs.getInt("seatNum"));
+					dto.setTicketDate(rs.getTimestamp("ticketDate"));
+					dto.setRating(rs.getString("rating"));
+					result.add(dto);
+				}
+				return result;
+			}
+		}
+	}
+
 	public int getSeq() throws Exception {
 		String sql = "select ticketing_seq.nextval from dual";
-		try (Connection con = this.getConnection(); 
-			PreparedStatement pstat = con.prepareStatement(sql);) {
+		try (Connection con = this.getConnection(); PreparedStatement pstat = con.prepareStatement(sql);) {
 			ResultSet rs = pstat.executeQuery();
 			rs.next();
 			return rs.getInt(1);
