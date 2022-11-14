@@ -16,9 +16,9 @@
 	crossorigin="anonymous"></script>
 <style>
         /* 관리자페이지 세팅 초기값 */
-        @media(max-width:1500px) {
+        @media(max-width:2000px) {
             .html {
-                width: 1500px;
+                width: 2000px;
             }
         }
 
