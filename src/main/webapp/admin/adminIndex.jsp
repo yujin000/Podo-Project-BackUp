@@ -145,14 +145,14 @@
 	<div class="wrap">
 		<div id="Header">
 			<h1 id="logo">
-				<a href="/adminMain.member?nickname=${loginNickname }"><img src="/image/web/logo-f-5.png" alt="" /></a>
-			</h1>
+                    <a href="/adminMain.member?nickname=${loginNickname }"><img src="/image/web/logo-f-5.png"
+                            alt="" /></a>
+                </h1>
 			<div id="mypage">
 				<a class="loginBtn">${loginNickname }</a>
 			</div>
 			<ul class="tog">
 				<li><a href="/chart.music">메인페이지로</a></li>
-				<li><a href="#">계정설정</a></li>
 				<li><a href="/logout.member">로그아웃</a></li>
 			</ul>
 			<div id="GNB">
