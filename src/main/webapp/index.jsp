@@ -8,7 +8,7 @@ uri="http://java.sun.com/jsp/jstl/core"%>
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>PODO</title>
-
+	
     <link
       rel="stylesheet"
       href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200"
@@ -321,7 +321,7 @@ uri="http://java.sun.com/jsp/jstl/core"%>
         	const wish = document.querySelector("#wish");
         	// music list array
         	let musicList = new Array();
-        		<c:forEach items="${musicChartList }" var="i">
+        		<c:forEach items="${musicList }" var="i">
         			musicList.push({
         				musicSeq : "${i.musicSeq}",
         				musicName : "${i.musicName}",
@@ -443,19 +443,25 @@ uri="http://java.sun.com/jsp/jstl/core"%>
         		playAudio.currentTime = (timerOffsetX / gageBarWidth) * playAudio.duration;
         		playMusic();
         	});
-        	// PlayList 목록 출력하기
-        	for (let i=0; i<musicList.length; i++) {
-        		// 각 목록값이 들어갈 li 태그
-        		let li = `<li class="playList" data-index="\${i}">
-        			<div>
-        				<div>\${musicList[i].musicName}</div>
-        				<div>\${musicList[i].musicArtist}</div>
-        				<div>\${musicList[i].musicAlbum}</div>
-        			</div>
-        			</li>
-        		`;
-        		musicListPage.insertAdjacentHTML("beforeend",li);
-        	}
+        	// PlayList 목록을 출력하는 함수
+        	function listMusic(){
+        		musicListPage.innerHTML = "";
+        		for (let i=0; i<musicList.length; i++) {
+            		// 각 목록값이 들어갈 li 태그
+            		let li = `<li class="playList" data-index="\${i}">
+            			<div>
+            				<div>\${musicList[i].musicName}</div>
+            				<div>\${musicList[i].musicArtist}</div>
+            				<div>\${musicList[i].musicAlbum}</div>
+            			</div>
+            			</li>
+            		`;
+            		musicListPage.insertAdjacentHTML("beforeend",li);
+            	}	
+        	};
+        	
+        	listMusic();
+        	
         	// 재생/일시정지 버튼 클릭시
         	playBtn.addEventListener("click",function (){
         		// 일시정지 상태에서 재생버튼을 클릭시 재생
