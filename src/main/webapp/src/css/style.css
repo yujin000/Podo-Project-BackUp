@@ -187,9 +187,6 @@ a {
   color: #fff;
 }
 
-#FloatArea {
-}
-
 #FloatArea a {
   width: 100%;
   height: 50px;
@@ -264,8 +261,7 @@ a {
   display: flex;
 }
 
-.musicInfo li {
-}
+
 .musicInfo li:nth-child(1) {
   width: 60px;
   margin-right: 20px;
@@ -358,8 +354,6 @@ li:nth-child(4) span {
 .volume li:nth-child(1) span {
   font-size: 14px;
   display: inline-block;
-}
-.volume li:last-child {
 }
 
 #openList {
