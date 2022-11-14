@@ -32,6 +32,8 @@ public class Performance extends HttpServlet {
 			if(uri.equals("/list.perform")) {
 				PerformanceDAO dao = PerformanceDAO.getInstance();
 				List<PerformanceDTO> perform = dao.selectPerform();
+				String nickName = request.getSession().getAttribute("loginNickname").toString();
+				request.getSession().setAttribute("nickName", nickName);
 				request.getSession().setAttribute("perform", perform);
 				request.getRequestDispatcher("/ticketing/ticketing.jsp").forward(request, response);
 				

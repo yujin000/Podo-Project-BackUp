@@ -217,7 +217,9 @@ public class Member extends HttpServlet {
 				MemberDAO dao = MemberDAO.getInstance();
 				List <MemberDTO> memberList = dao.selectAllMember(cpage * rcpp - (rcpp-1), cpage * rcpp);
 				
-				String navi = dao.getPageNavi(cpage, rcpp, ncpp);				
+				String navi = dao.getPageNavi(cpage, rcpp, ncpp);
+				String nickName = request.getSession().getAttribute("loginNickname").toString();
+				request.getSession().setAttribute("nickName", nickName);
 				request.setAttribute("memberList", memberList);
 				request.setAttribute("navi", navi);
 				request.getRequestDispatcher("/admin/adminMember.jsp").forward(request, response);

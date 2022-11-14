@@ -158,8 +158,7 @@
 			<div id="GNB">
 				<ul>
 					<li><a href="/list.notice?cpage=1">공지사항 관리</a></li>
-					<li><a id="chart"
-						href="/allList.music?nickname=${loginNickname }">음원 관리</a></li>
+					<li><a href="/allList.music">음원 관리</a></li>
 					<li><a href="/adminPerform.perform">공연 관리</a></li>
 					<li><a href="/list.member?cpage=1">회원 관리</a></li>
 					<li><a href="/goodsList.goods">멤버십 관리</a></li>

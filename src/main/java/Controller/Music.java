@@ -50,7 +50,7 @@ public class Music extends HttpServlet {
 			else if (uri.equals("/allList.music")) {
 				MusicDAO dao = MusicDAO.getInstance();
 				List<MusicDTO> musicList = dao.musicAllList();
-				String nickName = request.getParameter("nickname");
+				String nickName = request.getSession().getAttribute("loginNickname").toString();
 				request.setAttribute("list", musicList);
 				request.setAttribute("nickname", nickName);
 				request.getRequestDispatcher("/admin/adminMusic.jsp").forward(request, response);

@@ -32,6 +32,8 @@ public class QnaBoard extends HttpServlet {
 				QnaBoardDAO dao = QnaBoardDAO.getInstance();
 				List<QnaBoardDTO> qna = dao.selectByRange(qnaWriter, cpage * 5 - 4, cpage * 5);
 				String navi = dao.getPageNavi(cpage,qnaWriter);
+				String nickName = request.getSession().getAttribute("loginNickname").toString();
+				request.getSession().setAttribute("nickName", nickName);
 				request.setAttribute("qna", qna);
 				request.setAttribute("navi", navi);
 				request.getRequestDispatcher("/mypage/myInquiry.jsp").forward(request, response);
@@ -71,7 +73,8 @@ public class QnaBoard extends HttpServlet {
 				
 				BoardFilesDAO fileDao = BoardFilesDAO.getInstance();
 				BoardFilesDTO dto = fileDao.select(qnaSeq);
-
+				String nickName = request.getSession().getAttribute("loginNickname").toString();
+				request.getSession().setAttribute("nickName", nickName);
 				request.setAttribute("fileDto",dto);
 				request.setAttribute("dtoDetail", dtoDetail);
 				// request.getSession().setAttribute("qnaDetailSeq", qnaSeq);
