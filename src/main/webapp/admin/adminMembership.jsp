@@ -331,7 +331,7 @@ div[class^=inInfo],.btnBox{
                                             <div class="navi2"><b>· 상품이름</b><br><input type="text" value="${list.payGoodsName }" class="inProductsName" readonly></div>
                                             <div class="navi3"><b>· 상품가격</b><br><input type="text" value="${list.payGoodsPrice }" class="inProductsPrice" readonly></div>
                                             <div class="navi4"><b>· 이용기간</b><br><input type="text" value="${list.payGoodsExp }" class="inProductsExpire" readonly></div>
-                                            <div class="navi5"><b>· 상품유형</b><br><input type="text" value="${list.payGoodsType }" class="inProductsType" placeholder="프로모션, 이용권 중 하나만 입력하세요" readonly></div>
+                                            <div class="navi5"><b>· 상품유형</b><br><input type="text" value="${list.payGoodsType }" class="inProductsType" readonly></div>
                                             <div class="navi6"><b>· 상품설명</b><br><textarea class="inProductsInfo" style="color:black;"readonly>${list.payGoodsInfo } </textarea></div>
                                             <div id="btnBox2">
                                                 <button type="button" class="update" seq="${list.payGoodsSeq }">수정</button>
@@ -367,11 +367,11 @@ div[class^=inInfo],.btnBox{
                                         </div>
                                         <div class="inInfo3">
                                             <b>· 이용기간</b><br />
-                                            <input type="text" name="payGoodsExp" id="payGoodsExp" class="textArea"  maxlength="40"/><br />
+                                            <input type="text" name="payGoodsExp" id="payGoodsExp" class="textArea" value="1개월" readonly maxlength="40"/><br />
                                         </div>
                                         <div class="inInfo4">
                                             <b>· 상품유형</b><br />
-                                            <input type="text" name="payGoodsType" id="payGoodsType" class="textArea" maxlength="20"/><br />
+                                            <input type="text" name="payGoodsType" id="payGoodsType" class="textArea" placeholder="프로모션 / 이용권" maxlength="20"/><br />
                                         </div>
                                         <div class="inInfo5">
                                             <b>· 상품설명</b><br />
