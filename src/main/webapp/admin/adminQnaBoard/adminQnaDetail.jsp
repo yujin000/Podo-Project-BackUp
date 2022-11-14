@@ -101,7 +101,7 @@
             <a class="loginBtn">${nickName }</a>
          </div>
 			<ul class="tog">
-				<li><a href="/chart.music">메인페이지로</a></li>
+				<li><a href="/start.music">메인페이지로</a></li>
 				<li><a href="/logout.member">로그아웃</a></li>
 			</ul>
 			<div id="GNB">
@@ -142,13 +142,29 @@
                  		첨부파일 : <a href="/download.file?sysname=${boardFile.sysName }&oriname=${boardFile.oriName}">${boardFile.oriName }</a> 
             		</div>            		
             	</div>
-            	<form action="/write.qnaComment" id="form">
+            	
+            	<c:choose>
+            		<c:when test= "${not empty commentList }">
+            			<c:forEach var="i" items = "${commentList }">
+            				<div>답변 작성자 : ${i.qnaCommentWriter }</div>
+            				<div>답변 내용 : ${i.qnaCommentContents }</div>
+            				<div>답변작성 시간 : ${i.qnaCommentWriteDate }</div>            				
+            			</c:forEach>
+            		</c:when>
+            		<c:otherwise>
+            			<div>답변이 없습니다.</div>
+            		</c:otherwise>
+            	</c:choose>
+            	
+            	<form action="/write.qnaC" id="form">
+            	<c:if test="${count eq '0' }">
             	<div id="comments">
             		<div>답변 작성</div>
             		<textarea id="comment" name="comment"></textarea>
             		<button type="button" id="commentBtn">댓글쓰기</button>
             		<input type="hidden" value="${qnaBoard.qnaSeq }" name="qnaSeq">
             	</div>
+            	</c:if>
             	</form>            	
       </div>
    </div>
@@ -161,7 +177,7 @@
       
       // 댓글쓰기
       $("#commentBtn").on("click", function(){
-    	  if (("#comment").val.length>200) {
+    	  if ($("#comment").val().length>200) {
     		  alert("200자 이하로 작성해주세요.");
     	  } else {
     		  $("#form").submit();

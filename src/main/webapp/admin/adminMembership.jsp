@@ -9,16 +9,16 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>음원관리</title>
+    <title>멤버십 관리</title>
     <link rel="stylesheet" href="/src/css/style.css" />
     <script src="https://code.jquery.com/jquery-3.6.1.min.js"
         integrity="sha256-o88AwQnZB+VDvE9tvIXrMQaPlFFSUTR+nldQm1LuPXQ=" crossorigin="anonymous"></script>
     <style>
         /* ---------- 관리자페이지 세팅 초기값 ---------- */
        /* 관리자페이지 세팅 초기값 */
-       @media(max-width:1500px) {
+       @media(max-width:1900px) {
             .html {
-                width: 1500px;
+                width: 1900px;
             }
         }
 
@@ -152,7 +152,7 @@
                     <a class="loginBtn">${nickName }</a>
                 </div>
 			<ul class="tog">
-				<li><a href="/chart.music">메인페이지로</a></li>
+				<li><a href="/start.music">메인페이지로</a></li>
 				<li><a href="/logout.member">로그아웃</a></li>
 			</ul>
 			<div id="GNB">
@@ -174,11 +174,9 @@
                     <ul id="list">
                         <li class="listLi" id="listLi1">
                             &nbsp 현재 판매중인 멤버십
-                            <hr>
                         </li>
                         <li class="listLi" id="listLi2">
                             &nbsp 상품 추가하기
-                            <hr>
                         </li>
                     </ul>
                 </div>

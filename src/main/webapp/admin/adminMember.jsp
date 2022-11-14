@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
    pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -15,9 +16,9 @@
         integrity="sha256-o88AwQnZB+VDvE9tvIXrMQaPlFFSUTR+nldQm1LuPXQ=" crossorigin="anonymous"></script>
     <style>
         /* 관리자페이지 세팅 초기값 */
-        @media(max-width:1500px) {
+        @media(max-width:1900px) {
             .html {
-                width: 1500px;
+                width: 1900px;
             }
         }
 
@@ -112,9 +113,8 @@
             border: 1px solid silver;
             float: left;
             position: relative;
-            width: 95%;
+            width: 100%;
             height: 700px;
-            margin-left: 30px;
             margin-top: 30px;
             overflow: hidden;
         }
@@ -161,11 +161,25 @@
         .member, #listHeader {
         	height : 30px;
         }
+        #listHeader{
+        	height : 60px;
+            line-height:60px;
+        	font-size:20px;
+        	background-color:#01B9FF;
+        }
+        #listHeader>div{
+            color:white !important;
+       	}
         #navi {
         	height : 5%;
         	text-align : center;
         }
-        
+        #memberList{
+        	margin-top:10px;
+        }
+        #listHr{
+        	margin:5px 0px 5px 0px;
+        }
         
         /*기본*/
     </style>
@@ -183,7 +197,7 @@
                     <a class="loginBtn">${nickName }</a>
                 </div>
 			<ul class="tog">
-				<li><a href="/chart.music">메인페이지로</a></li>
+				<li><a href="/start.music">메인페이지로</a></li>
 				<li><a href="/logout.member">로그아웃</a></li>
 			</ul>
 			<div id="GNB">
@@ -219,7 +233,7 @@
                         	<div id="phoneHeader">전화번호</div>
                         	<div id="nickHeader">닉네임</div>
                         	<div id="membershipHeader">멤버십등급</div>
-                        	<div id="scribeHeader">구독만료일</div>
+                        	<div id="scribeHeader">구독일</div>
                         	<div id="joinHeader">가입일</div>
                         </div>
                         <div id="memberList">
@@ -227,15 +241,17 @@
                         		<c:when test="${not empty memberList}">
                         			<c:forEach var="i" items="${memberList }">
                         				<div class="member">
+                        				<input type="hidden" value="${i.scribeDate }" id="dummyDate">
                         					<div class="email">${i.email }</div>
                         					<div class="name">${i.name }</div>
                         					<div class="phone">${i.phone }</div>
                         					<div class="nickname">${i.nickname }</div>
                         					<div class="membership">${i.membership }</div>
-                        					<div class="scribeDate">${i.scribeDate }</div>
-                        					<div class="joinDate">${i.joinDate }</div>
+                        					<div class="scribeDate"><fmt:formatDate value="${i.scribeDate }" pattern="yyyy-MM-dd"/></div>
+                        					<div class="joinDate"><fmt:formatDate value="${i.joinDate }" pattern="yyyy-MM-dd"/></div>
                         					<button class="delBtn" type="button" email="${i.email }" membership="${i.membership }">회원 탈퇴</button>
                         				</div>
+                        				<hr id="listHr">
                         			</c:forEach>                        			
                         		</c:when>                        		
                         	</c:choose>
