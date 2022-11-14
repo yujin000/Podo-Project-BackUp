@@ -1,7 +1,9 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-<!DOCTYPE html> <%@ taglib prefix="c"
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+pageEncoding="UTF-8"%> <%@ taglib prefix="c"
 uri="http://java.sun.com/jsp/jstl/core"%>
-<html lang="en">
+
+<!DOCTYPE html>
+<html lang="ko">
   <head>
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
@@ -41,10 +43,11 @@ uri="http://java.sun.com/jsp/jstl/core"%>
         margin: 0;
         padding: 0;
       }
-      body {
+      body,html {
         width: 100vw;
         background: var(--sub-background-color);
         color: var(--font-color);
+        
       }
 
       /* delete scroll bar */
@@ -374,29 +377,34 @@ uri="http://java.sun.com/jsp/jstl/core"%>
       </div>
       <div class="contents">
    
-  
-          <c:choose>
-            <c:when test="${not empty mainList}">
-                 <h3>차트</h3>
-                  <ul id="chart-list">
-              <c:forEach var="i" items="${mainList}">
-                <li>
-                  <a href="" id="selectChart">
-                    <img src="/image/music/${i.musicImg}.jpg" alt="" />
-                  </a>
-                  <div>
-                    <p>${i.musicSeq}&nbsp; ${i.musicName}</p>
-                    <p class="artist">
-                      &nbsp;&nbsp;&nbsp;&nbsp; ${i.musicArtist}
-                    </p>
-                  </div>
-                </li>
-              </c:forEach>
-                    </ul>
-            </c:when>
-            <c:otherwise>  </c:otherwise>
-          </c:choose>
-  
+        <c:choose>
+   
+          <c:when test="${not empty mainList}">
+        
+                              <h3>차트</h3> 
+                             <ul id="chart-list"> 
+            
+            <c:forEach var="i" items="${mainList}">
+              
+                            <li> 
+                                <a href="" id="selectChart"> 
+                              </a> 
+                               <div>
+            
+              <p>${i.musicSeq}&nbsp; ${i.musicName}</p>
+             
+                                <p class="artist"> 
+           &nbsp;&nbsp;&nbsp;&nbsp; ${i.musicArtist} 
+                                </p> 
+                            </div> 
+          
+            </c:forEach>
+           
+                               </ul> -
+            
+          </c:when>
+        <c:otherwise> </c:otherwise> 
+   </c:choose>
       </div>
     </div>
 
