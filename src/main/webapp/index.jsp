@@ -280,6 +280,10 @@ uri="http://java.sun.com/jsp/jstl/core"%>
       $("#serviceBtn").click(function () {
         $("#iframe").attr("src", "/mypage/serviceCenter.jsp");
       });
+      $("#membership").click(function () {
+          $("#iframe").attr("src", "/index.goods");
+      });
+      
     </script>
     <script>
       let membership = "${loginMembership}";
