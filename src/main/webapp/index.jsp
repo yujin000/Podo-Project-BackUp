@@ -102,7 +102,7 @@ uri="http://java.sun.com/jsp/jstl/core"%>
           <ul>
             <li><a id="today">투데이</a></li>
             <li><a id="chart">차트</a></li>
-            <li><a href="#">보관함</a></li>
+            <li><a id="wishBtn">위시리스트</a></li>
             <li><a id="station">스테이션</a></li>
             <li><a id="mag">매거진</a></li>
             <li><a id="serviceBtn">고객센터</a></li>
@@ -262,6 +262,9 @@ uri="http://java.sun.com/jsp/jstl/core"%>
       $("#chart").click(function () {
         $("#iframe").attr("src", "/lank.music");
       });
+      $("#wishBtn").click(function () {
+      	$("#iframe").attr("src", "/list.wish");
+      });
       $("#mag").click(function () {
         $("#iframe").attr("src", "/view/mag.jsp");
       });
@@ -384,10 +387,16 @@ uri="http://java.sun.com/jsp/jstl/core"%>
         			let result = JSON.parse(resp);
         			if (result==false) {
         				$("#wish").html("favorite");
+        				$("#wish").css({
+                            "font-variation-settings":"'FILL' 0,'wght' 400,'GRAD' 0,'opsz' 48",
+                            "color":"white"});
         				$("#wish").attr("title","위시리스트 추가");
         				$("#wish").attr("data-wish","false");
         			} else {
-        				$("#wish").html("heart_plus");
+        				$("#wish").html("favorite");
+        				$("#wish").css({
+                            "font-variation-settings":"'FILL' 1,'wght' 400,'GRAD' 0,'opsz' 48",
+                            "color":"red"});
         				$("#wish").attr("title","위시리스트 제거");
         				$("#wish").attr("data-wish","true");
         			}
