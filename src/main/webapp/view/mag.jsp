@@ -1,4 +1,7 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+pageEncoding="UTF-8"%><%@ taglib prefix="c"
+uri="http://java.sun.com/jsp/jstl/core"%>
+
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -41,13 +44,13 @@
       }
       body {
         width: 100vw;
+        height: 100vmax;
         background: var(--sub-background-color);
         color: var(--font-color);
       }
       .container {
         width: 100%;
-        padding: 0 80px;
-        height: 100%;
+        padding: 0 50px;
         display: block;
       }
 
@@ -88,25 +91,26 @@
       }
 
       ul {
-        width: 1526px;
+        width: 100%;
         margin-top: 30px;
         display: flex;
         flex-wrap: wrap;
-        justify-content: space-between;
+        justify-content: start;
         gap: 0 20px;
       }
       li {
-        width: 280px;
+        width:302px;
         margin-bottom: 20px;
         position: relative;
         align-items: center;
+        /* text-align: center; */
       }
 
       li a.playBtn {
         width: 50px;
         height: 50px;
         position: absolute;
-        top: 56%;
+        top: 36%;
         left: 2%;
         opacity: 0;
         transition: all 0.5s;
@@ -124,17 +128,27 @@
       li p {
         display: block;
         color: #fff;
-        font-size: 1.8rem;
+        font-size: 1rem;
         margin: 0 auto;
+        margin-top: 5px;
+        font-weight: 700;
       }
 
+      li strong {
+        display: block;
+        color: var(--point-color);
+        font-size: 0.9rem;
+        margin-bottom: 5px;
+      }
+      li span {
+        color: silver;
+      }
       li div {
         width: 100%;
       }
 
       .banner {
-        width: 1526px;
-        height: 360px;
+        width: 100%;
         text-align: center;
         display: flex;
         justify-content: start;
@@ -166,11 +180,14 @@
             <a href="" class="playBtn">
               <span class="material-symbols-outlined"> play_circle </span>
             </a>
-            <p>title</p>
+            <p>이주의 디깅# 146</p>
+            <strong>이찬혁</strong>
             <span
-              >Lorem ipsum dolor sit amet consectetur adipisicing elit. Sequi
-              rerum optio nihil ullam quos ducimus totam sunt autem earum.
-              Reprehenderit
+              >악뮤의 이찬혁이 첫 솔로 앨범 Error 를 발표했다. 앨범에는 이찬혁의
+              생각의 흐름을 담은 신곡 11곡이 세밀하게 배치되어 있어 그의 고민과
+              메시지를 엿볼 수 있으며, 음악 방송 등을 통해 보여준 기묘하고
+              독특한 퍼포먼스 역시 큰 관심을 끌고 있다. 이번 앨범을 통해 그가
+              말하고자 하는 것은 무엇일지
             </span>
           </li>
           <li>
@@ -178,11 +195,13 @@
             <a href="" class="playBtn">
               <span class="material-symbols-outlined"> play_circle </span>
             </a>
-            <p>title</p>
+            <p>그림 같은 한 해를 만들어낸</p>
+            <strong>박장현, 조연호, 이병찬</strong>
             <span
-              >Lorem ipsum dolor sit amet consectetur adipisicing elit. Sequi
-              rerum optio nihil ullam quos ducimus totam sunt autem earum.
-              Reprehenderit
+              >살다 보면 가끔 보고도 믿기지 않는 순간들이 있다. 마이크를 쥔
+              박장현, 조연호, 이병찬이 무대에서 노래를 했을 때가 그랬다. 빼어난
+              보컬과 퍼포먼스 실력을 갖춘 이들이 뿜어내는 흥미로운 에너지는
+              앞으로 써갈 새로운 이야기를 기대케 한다
             </span>
           </li>
           <li>
@@ -190,11 +209,14 @@
             <a href="" class="playBtn">
               <span class="material-symbols-outlined"> play_circle </span>
             </a>
-            <p>title</p>
+            <p>쇼미더머니 11</p>
+            <strong>화제의 참가자는?</strong>
             <span
-              >Lorem ipsum dolor sit amet consectetur adipisicing elit. Sequi
-              rerum optio nihil ullam quos ducimus totam sunt autem earum.
-              Reprehenderit
+              >어김없이 올해도 “쇼미더머니”가 돌아왔다. 한국 오디션 프로그램
+              최초로 열한 번째 시즌을 맞이한 <쇼미더머니>는 시즌마다 루키 래퍼
+              혹은 랩 스타를 배출해 냈다. 미리 공개된 정보에 의하면 이번 시즌의
+              경우에는 기본기가 충실하고, 랩 그 자체에 충실한 참가자들이 등장해
+              좋은 모습을 보일 거라고 한다.
             </span>
           </li>
           <li>
@@ -202,11 +224,13 @@
             <a href="" class="playBtn">
               <span class="material-symbols-outlined"> play_circle </span>
             </a>
-            <p>title</p>
+            <p>막을 수 없는 에너지</p>
+            <strong>르세라핌</strong>
             <span
-              >Lorem ipsum dolor sit amet consectetur adipisicing elit. Sequi
-              rerum optio nihil ullam quos ducimus totam sunt autem earum.
-              Reprehenderit
+              >겁 없이 데뷔한 르세라핌이 기세를 몰아 두 번째 앨범으로 돌아온다.
+              어떤 시련이 와도 당당하게 맞서겠다는 한 단계 더 진화한 메시지로
+              대담한 길을 걸어가는 르세라핌에게 이 강렬한 에너지가 어디에서
+              나오는지 물었다.
             </span>
           </li>
           <li>
@@ -214,11 +238,12 @@
             <a href="" class="playBtn">
               <span class="material-symbols-outlined"> play_circle </span>
             </a>
-            <p>title</p>
+            <p>New Release #115 :</p>
+            <strong>테일러 스위프트, (여자) 아이들</strong>
             <span
-              >Lorem ipsum dolor sit amet consectetur adipisicing elit. Sequi
-              rerum optio nihil ullam quos ducimus totam sunt autem earum.
-              Reprehenderit
+              >새 앨범으로 폭발적인 반응을 얻고 있는 테일러 스위프트부터
+              'Nxde'로 강렬한 메시지와 함께 돌아온 (여자)아이들까지. 지금
+              주목해야 할 신곡들을 VIBE 매거진에서 확인하세요.
             </span>
           </li>
           <li>
@@ -226,11 +251,13 @@
             <a href="" class="playBtn">
               <span class="material-symbols-outlined"> play_circle </span>
             </a>
-            <p>title</p>
+            <p>홀로 선</p>
+            <strong>백호</strong>
             <span
-              >Lorem ipsum dolor sit amet consectetur adipisicing elit. Sequi
-              rerum optio nihil ullam quos ducimus totam sunt autem earum.
-              Reprehenderit
+              >데뷔 11년 만에 처음 내는 솔로 앨범은 백호 자신에게도 팬들에게도
+              감격 그 자체다. 우리가 사랑한 백호의 익숙한 매력 그리고 자신도
+              낯설만큼 새로운 매력을, 한땀한땀 직접 만든 앨범 속에 터질 듯이 꽉
+              채웠다.
             </span>
           </li>
           <li>
@@ -238,11 +265,14 @@
             <a href="" class="playBtn">
               <span class="material-symbols-outlined"> play_circle </span>
             </a>
-            <p>title</p>
+            <p>이주의 디깅 #145</p>
+            <strong>(여자) 아이들</strong>
             <span
-              >Lorem ipsum dolor sit amet consectetur adipisicing elit. Sequi
-              rerum optio nihil ullam quos ducimus totam sunt autem earum.
-              Reprehenderit
+              >4세대 걸그룹의 시대를 활짝 연 아이들이 미니 앨범으로 돌아왔다.
+              역시나 음원과 앨범 차트에서 좋은 성적을 거두며 새로운 기록을 써
+              내려가고 있다. 특히 미니 앨범의 타이틀곡 ‘Nxde’는 음악뿐만 아니라
+              뮤직비디오까지 마치 뮤지컬 영화를 듣고 보는 듯하다. 그렇다면
+              이주의 디깅에서는 아이들과 함께 뮤
             </span>
           </li>
           <li>
@@ -250,11 +280,11 @@
             <a href="" class="playBtn">
               <span class="material-symbols-outlined"> play_circle </span>
             </a>
-            <p>title</p>
+            <p>New Release #116 :</p>
+            <strong>방탄소년단 진, 리아나</strong>
             <span
-              >Lorem ipsum dolor sit amet consectetur adipisicing elit. Sequi
-              rerum optio nihil ullam quos ducimus totam sunt autem earum.
-              Reprehenderit
+              >L솔로 음악을 발표한 방탄소년단 진, 6년 만에 신작을 내놓은
+              리아나까지. 지금 주목해야 할 신곡들을 VIBE 매거진에서 확인하세요.
             </span>
           </li>
           <li>
@@ -262,11 +292,13 @@
             <a href="" class="playBtn">
               <span class="material-symbols-outlined"> play_circle </span>
             </a>
-            <p>title</p>
+            <p>언제나 영화처럼,</p>
+            <strong>쎄이의 시네마</strong>
             <span
-              >Lorem ipsum dolor sit amet consectetur adipisicing elit. Sequi
-              rerum optio nihil ullam quos ducimus totam sunt autem earum.
-              Reprehenderit
+              >데뷔하자마자 ‘완성형 아티스트’로 불린다는 건 어쩌면 꽤 막중한
+              부담일 것이다. 그 무게만큼 많은 고민을 거쳐 4년간 공들여 다듬은
+              2번째 정규앨범을 내는 뮤지션 쎄이가 지난 시간을 흑백영화
+              장면들처럼 회상했다.
             </span>
           </li>
           <li>
@@ -274,11 +306,12 @@
             <a href="" class="playBtn">
               <span class="material-symbols-outlined"> play_circle </span>
             </a>
-            <p>title</p>
+            <p>New Release #117 :</p>
+            <strong>셀레나 고메즈, 조지</strong>
             <span
-              >Lorem ipsum dolor sit amet consectetur adipisicing elit. Sequi
-              rerum optio nihil ullam quos ducimus totam sunt autem earum.
-              Reprehenderit
+              >투병기가 담긴 다큐 공개 후 새 음악을 발표한 셀레나 고메즈, 정통
+              클래식 앨범을 선보이는 젊은 음악가 대니 구까지. 지금 주목해야 할
+              신곡들을 VIBE 매거진에서 확인하세요.
             </span>
           </li>
         </ul>

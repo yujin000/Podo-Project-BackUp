@@ -63,6 +63,7 @@ uri="http://java.sun.com/jsp/jstl/core"%>
         background: #222;
         opacity: 0.9;
       }
+      
     </style>
   </head>
   <body>
@@ -86,7 +87,6 @@ uri="http://java.sun.com/jsp/jstl/core"%>
                     <li><a href="/admin/adminIndex.jsp">관리자페이지</a></li>
                   </c:when>
                 </c:choose>
-                <li><a href="#">공지사항</a></li>
                 <li><a href="#">계정설정</a></li>
                 <li><a href="#">친구초대 </a></li>
                 <li><a href="logout.member">로그아웃</a></li>
@@ -113,9 +113,9 @@ uri="http://java.sun.com/jsp/jstl/core"%>
         </div>
         <div id="events">
           <ul>
-            <li>event1</li>
-            <li>event2</li>
-            <li>event3</li>
+            <li>EVENT1</li>
+            <li>EVENT2</li>
+            <li>EVENT3</li>
           </ul>
         </div>
 
@@ -259,7 +259,7 @@ uri="http://java.sun.com/jsp/jstl/core"%>
     <script>
       // list page move action
       $("#today").click(function () {
-        $("#iframe").attr("src", "/view/main.jsp");
+        $("#iframe").attr("src", "/mainList.music");
       });
       $("#chart").click(function () {
         $("#iframe").attr("src", "/lank.music");
