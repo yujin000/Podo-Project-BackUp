@@ -53,8 +53,10 @@
         .container {
             padding: 0 75px;
             height: 100%;
+            width: 100vw;
 			background-color: bisque; 
             overflow-y: scroll;
+            margin-bottom:200px;
         }
 		
 		.main {
@@ -72,25 +74,19 @@
         }
         
         /*category css*/
-        .category>div>a{
+        .titleCategory>div>a{
         color: var(--font-color);
         font-weight: var(--font-weight);
         line-height: var(--line-height);
         }
-        .category{
+        .titleCategory{
         width:100%;
         height: 59px;
         font-size: 28px;
-        background-color:#00000d50;
+        /* background-color:#00000d50; */
         text-aline:center;
         }
-        #home{
-        float:left;
-   		width:4vw;
-   		line-height: var(--line-height);
-        color: var(--font-color);
-   		background-color: #00000d50;
-        }
+        
         #notice{
         float:left;
         width:10vw;
@@ -106,42 +102,70 @@
         background-color: #00000d90;
         }
         
-        
         /*division css*/
         .division {
             width: 100%;
             font-size: 20px;
+            height: 35px;
             font-weight: var(--font-weight);
             line-height: var(--line-height);
         }
+        
         #category {
             float: left;
-            width: 30%;
+            width: 20%;
             border-width: 0 0 1px;
             border-bottom: var(--boder-silver);
         }
-
+        
+		#qnaCategory{
+			float: left;
+            width: 20%;
+            border-width: 0 0 1px;
+            line-height: var(--line-height);
+		}
         #history {
             float: left;
-            width: 55%;
+            width: 45%;
             border-width: 0 0 1px;
             border-bottom: var(--boder-silver);
         }
-
-        #date {
+		#qnaTitle{
+			float: left;
+            width: 45%;
+            border-width: 0 0 1px;
+            line-height: var(--line-height);
+		}
+		#writer{
+			float: left;
+            width: 20%;
+            border-width: 0 0 1px;
+            border-bottom: var(--boder-silver);
+		}
+		#noticeWriter{
+			float: left;
+            width: 20%;
+            border-width: 0 0 1px;
+            border-bottom: var(--boder-silver);
+		}
+        #date{
             float: left;
             width: 15%;
             border-width: 0 0 1px;
             border-bottom: var(--boder-silver);
         }
-        
+        #qnaWriteDate{
+        	float: left;
+            width: 15%;
+            border-width: 0 0 1px;
+            line-height: var(--line-height);
+        }
         
         /*list css*/
         .list{
 		margin-top: 2vh;
 		width: 100%;
-		height: 55vh;
-		overflow-y: auto;
+		height: 48vh;
 		border: 1px solid black;
         }
     </style>
@@ -156,22 +180,40 @@
     <div class="container">
         <div class="main">
             <div class="titleText">고객센터</div>
-            <div class="category">
-                    <div id="home"><a href="/mypage/serviceCenter.jsp">홈</a></div>
-                    <div id="notice"><a href="/mypage/notice.jsp">공지사항</a>
+            <div class="titleCategory">
+                    <div id="notice"><a href="/listLook.notice?cpage=1">공지사항</a>
                     <hr style="border: solid 5px #3e065f; width: 60%"></div>
                     <div id="myInquiry"><a href="/list.board?cpage=1">내 문의 내역</a></div>
             </div>
             
             <div class="division">
-                    <div id="category">category</div>
-                    <div id="history">title</div>
-                    <div id="date">date</div>
+                    <div id="category">유형</div>
+                    <div id="history">제목</div>
+                    <div id="writer">작성자</div>
+                    <div id="date">작성일</div>
             </div>
-                
+            
             <div class="list">
-            	
-            </div>
+				<c:choose>
+					<c:when test="${not empty noticeBoardList}">
+						<c:forEach var="n" items="${noticeBoardList }">
+							<div class="writelist">
+								<div id="qnaCategory">${n.noticeCategory }</div>
+								<div id="qnaTitle">
+									<a href="/detailLook.notice?noticeSeq=${n.noticeSeq }">${n.noticeTitle }</a>
+								</div>
+								<div id="noticeWriter">${n.noticeWriter }</div>
+								<div id="qnaWriteDate">${n.noticeWriteDate }</div>
+							</div>
+						</c:forEach>
+					</c:when>
+					<c:otherwise>
+         문의가 없습니다
+         </c:otherwise>
+				</c:choose>
+			</div>
+
+			<div>${naviLook }</div>
         </div>
     </div>
 </body>

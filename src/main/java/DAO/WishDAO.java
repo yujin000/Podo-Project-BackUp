@@ -3,6 +3,8 @@ package DAO;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.naming.Context;
 import javax.naming.InitialContext;
@@ -64,6 +66,23 @@ public class WishDAO {
 			int result = pstat.executeUpdate();
 			con.commit();
 			return result;
+		}
+	}
+	
+	public List<WishDTO> selectAll(String wishEmail) throws Exception {
+		String sql = "select * from wishList where wishEmail=?";
+		try (Connection con = this.getConnection(); PreparedStatement pstat = con.prepareStatement(sql);) {
+			pstat.setString(1, wishEmail);
+			try (ResultSet rs = pstat.executeQuery();) {
+				List<WishDTO> dtoWish = new ArrayList<>();
+				while (rs.next()) {
+					WishDTO dto = new WishDTO();
+					dto.setWishEmail(rs.getString("wishEmail"));
+					dto.setParentMusicSeq(rs.getInt("parentMusicSeq"));
+					dtoWish.add(dto);
+				}
+				return dtoWish;
+			}
 		}
 	}
 }

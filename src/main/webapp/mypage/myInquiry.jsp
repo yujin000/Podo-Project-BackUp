@@ -53,8 +53,10 @@
         .container {
             padding: 0 75px;
             height: 100%;
-         background-color: bisque; 
-            overflow-y: scroll;
+         	background-color: bisque; 
+            width: 100vw;
+    		margin-bottom:200px;
+            
         }
       
       .main {
@@ -83,13 +85,6 @@
         font-size: 28px;
         /* background-color:#00000d50; */
         text-aline:center;
-        }
-        #home{
-        float:left;
-         width:4vw;
-         line-height: var(--line-height);
-        color: var(--font-color);
-         /* background-color: #00000d50; */
         }
         #notice{
         float:left;
@@ -200,8 +195,7 @@
         <div class="main">
             <div class="titleText">고객센터</div>
             <div class="titleCategory">
-                    <div id="home"><a href="/mypage/serviceCenter.jsp">홈</a></div>
-                    <div id="notice"><a href="/mypage/notice.jsp">공지사항</a></div>
+                    <div id="notice"><a href="/listLook.notice?cpage=1">공지사항</a></div>
                     <div id="myInquiry"><a href="/list.board?cpage=1">내 문의 내역</a>
                     <hr style="border: solid 5px #3e065f; width: 58%"></div>
             </div>

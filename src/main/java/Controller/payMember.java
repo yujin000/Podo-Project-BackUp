@@ -37,7 +37,7 @@ public class payMember extends HttpServlet {
 				MemberDAO mdao = MemberDAO.getInstance();
 				MemberDTO dto = mdao.getMypage(userEmail);
 				request.getSession().setAttribute("loginMembership", dto.getMembership());
-				request.getRequestDispatcher("/index.jsp").forward(request, response);
+				request.getRequestDispatcher("/start.music").forward(request, response);
 			}
 		}catch(Exception e) {
 			e.printStackTrace();

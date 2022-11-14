@@ -12,14 +12,17 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import DAO.CastDAO;
-
 import DAO.PerformanceDAO;
 import DAO.ScheduleDAO;
+import DAO.SeatDAO;
 import DAO.TheaterDAO;
+import DAO.TicketingDAO;
 import DTO.CastDTO;
 import DTO.PerformanceDTO;
 import DTO.ScheduleDTO;
+import DTO.SeatDTO;
 import DTO.TheaterDTO;
+import DTO.TicketingDTO;
 
 @WebServlet("*.perform")
 public class Performance extends HttpServlet {
@@ -105,16 +108,34 @@ public class Performance extends HttpServlet {
 				
 			} else if(uri.equals("/seatSelect.perform")) {
 				int performSeq = Integer.parseInt(request.getSession().getAttribute("performSeq").toString());
+				String scheDate = request.getParameter("scheDate");
 				TheaterDAO dao = TheaterDAO.getInstance();
 				PerformanceDAO dao1 = PerformanceDAO.getInstance();
 				TheaterDTO the = dao.selectSeat(performSeq);
 				PerformanceDTO list = dao1.selectDetail(performSeq);
+				SeatDAO dao2 = SeatDAO.getInstance();
+				
+				SeatDTO seat = dao2.seatDetail(performSeq);
 				
 				request.setAttribute("the", the);
 				request.setAttribute("list", list);
+				request.setAttribute("seat", seat);
+				request.getSession().setAttribute("scheDate", scheDate);
 				request.getRequestDispatcher("/ticketing/seatSelect.jsp").forward(request, response);
 				
 			}else if(uri.equals("/payment.perform")) {
+				
+				TicketingDAO dao = TicketingDAO.getInstance();
+				
+				String email = request.getSession().getAttribute("loginEmail").toString();
+				int performSeq = Integer.parseInt(request.getParameter("performSeq"));
+				int seatNum = Integer.parseInt(request.getParameter("seatNum"));
+				String performTitle = request.getParameter("performTitle");
+				String theaterName = request.getParameter("theaterName");
+				String performPrice = request.getParameter("performPrice");
+				
+				TicketingDTO dto = new TicketingDTO(0,email,performSeq,performTitle,theaterName, performPrice, seatNum, null);
+				dao.ticketing(dto);
 				request.getRequestDispatcher("/ticketing/payment.jsp").forward(request, response);
 
 			}

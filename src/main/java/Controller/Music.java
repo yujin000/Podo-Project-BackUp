@@ -24,9 +24,8 @@ public class Music extends HttpServlet {
 		request.setCharacterEncoding("utf8"); // post의 한글깨짐현상을 처리하기 위한 로직
 
 		String uri = request.getRequestURI();
-		System.out.println(uri);
 		try {
-			if (uri.equals("/chart.music")) {
+			if (uri.equals("/start.music")) {
 				MusicDAO dao = MusicDAO.getInstance();
 				List<MusicDTO> musicChartList = dao.musicChartList();
 				request.setAttribute("musicChartList", musicChartList);
@@ -34,7 +33,7 @@ public class Music extends HttpServlet {
 				
 			}
 			// chart 목록 출력
-			else if (uri.equals("/lank.music")) {
+			else if (uri.equals("/chart.music")) {
 				MusicDAO dao = MusicDAO.getInstance();
 				List<MusicDTO> list = dao.musicChartList();
 				request.setAttribute("list", list);
@@ -97,14 +96,15 @@ public class Music extends HttpServlet {
 				response.sendRedirect("/allList.music");
 				
 			}else if(uri.equals("/update.music")) {
-				int seq = Integer.parseInt(request.getParameter("modifySeq"));
-				String musicName = request.getParameter("updateName");
-				String musicArtist = request.getParameter("updateArtist");
-				String musicAlbum = request.getParameter("updateAlbum");
-				String musicGenre = request.getParameter("updateGenre");
+				int seq = Integer.parseInt(request.getParameter("seq"));
+				String musicName = request.getParameter("musicName");
+				String musicArtist = request.getParameter("musicArtist");
+				String musicAlbum = request.getParameter("musicAlbum");
+				String musicGenre = request.getParameter("musicGenre");
+				String musicLylics = request.getParameter("musicLylics");
 				
 				MusicDAO dao = MusicDAO.getInstance();
-				dao.updateMusic(musicName, musicArtist, musicAlbum, musicGenre, seq);
+				dao.updateMusic(musicName, musicArtist, musicAlbum, musicGenre,musicLylics, seq);
 				response.sendRedirect("/allList.music");
 			}
 		} catch (Exception e) {
@@ -116,5 +116,4 @@ public class Music extends HttpServlet {
 			throws ServletException, IOException {
 		doGet(request, response);
 	}
-
 }
