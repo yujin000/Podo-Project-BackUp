@@ -228,10 +228,11 @@
                                             <div class="navi1" id="musicImg">
                                                 <img src="/admin/${list.musicImg }.jpg" id="albumImg">
                                             </div>
-                                            <div class="navi2">${list.musicName }</div>
-                                            <div class="navi3">${list.musicArtist }</div>
-                                            <div class="navi4">${list.musicAlbum }</div>
-                                            <div class="navi5">${list.musicGenre }</div>
+                                            <div class="navi2"><input type="text" value="${list.musicName }" class="inMusicName" readonly></div>
+                                            <div class="navi3"><input type="text" value="${list.musicArtist }" class="inMusicArtist" readonly></div>
+                                            <div class="navi4"><input type="text" value="${list.musicAlbum }" class="inMusicAlbum" readonly></div>
+                                            <div class="navi5"><input type="text" value="${list.musicGenre }" class="inMusicGenre" readonly></div>
+                                            <div class="navi6"><textarea class="inMusicLylics" style="color:black;"readonly>${list.musicLylics } </textarea></div>
                                             <div id="btnBox2">
                                                 <button type="button" class="update" seq="${list.musicSeq }">수정</button>
                                                 <button type="button" class="delete" seq="${list.musicSeq }">삭제</button>
@@ -257,17 +258,42 @@
                                     </div>
                                     <div class="contentsInfo">
                                         <div class="infoArea">
-                                            노래이름<br> <input type="text" name="musicName"
-                                                id="musicName" class="textArea"><br> 아티스트<br>
-                                            <input type="text" name="musicArtist" id="musicArtist"
-                                                class="textArea"><br> 앨범명<br> <input
-                                                type="text" name="musicAlbum" id="musicAlbum"
-                                                class="textArea"><br> 장르<br> <input
-                                                type="text" name="musicGenre" id="musicGenre"
-                                                class="textArea"><br> 차트<br> <input
-                                                type="text" name="musicChart" id="musicChart"
-                                                style="color: black;">
-                                        </div>
+										      노래이름<br />
+										      <input
+										        type="text"
+										        name="musicName"
+										        id="musicName"
+										        class="textArea"
+										      /><br />
+										      아티스트<br />
+										      <input
+										        type="text"
+										        name="musicArtist"
+										        id="musicArtist"
+										        class="textArea"
+										      /><br />
+										      앨범명<br />
+										      <input
+										        type="text"
+										        name="musicAlbum"
+										        id="musicAlbum"
+										        class="textArea"
+										      /><br />
+										      장르<br />
+										      <input
+										        type="text"
+										        name="musicGenre"
+										        id="musicGenre"
+										        class="textArea"
+										      /><br />
+										      차트<br />
+										      <input
+										        type="text"
+										        name="musicChart"
+										        id="musicChart"
+										        style="color: black"
+										      />
+										    </div>
                                         <div class="lylics">
                                             가사
                                             <textarea name="musicLylics"
@@ -365,26 +391,23 @@
 		});
 
 		// 음악 추가 저장 버튼
-		$("#saveMusic")
-				.on(
-						"click",
-						function() {
-							if ($("#file").val() == ""
-									|| $(".textArea").val() == ""
-									|| $("#imgFile").val() == ""
-									|| $("#lylics").val() == "") {
-								alert("노래이름, 아티스트, 앨범명, 장르, 가사, 이미지, MP3파일 모두 입력되어야 합니다.");
-							} else {
-								if (confirm("추가하시겠습니까?")) {
-									$("#form")
-											.attr("action", "/addMusic.music");
-									$("#form").attr("enctype",
-											"multipart/form-data");
-									$("#form").attr("method", "post");
-									$("#form").submit();
-								}
-							}
-						})
+		$("#saveMusic").on("click",function() {
+			if ($("#file").val() == ""
+					|| $(".textArea").val() == ""
+					|| $("#imgFile").val() == ""
+					|| $("#lylics").val() == "") {
+				alert("노래이름, 아티스트, 앨범명, 장르, 가사, 이미지, MP3파일 모두 입력되어야 합니다.");
+			} else {
+				if (confirm("추가하시겠습니까?")) {
+					$("#form")
+							.attr("action", "/addMusic.music");
+					$("#form").attr("enctype",
+							"multipart/form-data");
+					$("#form").attr("method", "post");
+					$("#form").submit();
+				}
+			}
+		})
 		// 삭제 버튼
 		$(".delete").on("click", function() {
 			if (confirm("삭제하시겠습니까?")) {
@@ -393,114 +416,59 @@
 			}
 		})
 		// 수정하기 버튼
+        // 현재 판매중인 이용권 수정버튼 생성
+        let updCancelBtn = $("<button>");
+        updCancelBtn.attr("type", "button");
+        updCancelBtn.addClass("updCancelBtn");
+        updCancelBtn.css({
+            "border": "none",
+            "color": "black",
+            "margin-top": "25px",
+            "margin-left": "10px"
+        })
+        updCancelBtn.text("수정취소");
 
-		let updateDiv = $("<div>");
-		updateDiv.attr("class", "addedDiv");
-		updateDiv.css({
-			"overflow" : "hidden",
-			"margin-left" : "200px",
-			"color" : "black"
-		})
-		let addName = $("<input>");
-		addName.attr("type", "text");
-		addName.attr("name", "updateName");
-		addName.css("color", "black");
-		addName.addClass("updTxt");
+        let updConfirmBtn = $("<button>");
+        updConfirmBtn.attr("type", "button");
+        updConfirmBtn.addClass("updConfirmBtn");
+        updConfirmBtn.css({
+            "border": "none",
+            "color": "black",
+            "margin-top": "25px"
+        })
+        updConfirmBtn.text("저장");
 
-		let addArtist = $("<input>");
-		addArtist.attr("type", "text");
-		addArtist.css({
-			"margin-left" : "30px",
-			"color" : "black"
-		});
-		addArtist.attr("name", "updateArtist");
-		addArtist.addClass("updTxt");
+        // 수정 버튼 클릭 시 readonly > false로 변경
+        $(".update").on("click", function () {
+            $(this).parent().find(".delete").css("display", "none");
+            $(this).parent().find(".update").css("display", "none");
+            $(this).parent().append(updConfirmBtn);
+            $(this).parent().append(updCancelBtn);
+            $(this).parent().parent().find("input").removeAttr("readonly");
+            $(this).parent().parent().find("textarea").removeAttr("readonly");
+            $(this).parent().parent().find("input").css("color", "red");
+            $(this).parent().parent().find(".inMusicName").attr("name", "musicName");
+            $(this).parent().parent().find(".inMusicArtist").attr("name", "musicArtist");
+            $(this).parent().parent().find(".inMusicAlbum").attr("name", "musicAlbum");
+            $(this).parent().parent().find(".inMusicGenre").attr("name", "musicGenre");
+            $(this).parent().parent().find(".inMusicLylics").attr("name", "musicLylics");
+        })
 
-		let addAlbum = $("<input>");
-		addAlbum.attr("type", "text");
-		addAlbum.css({
-			"margin-left" : "30px",
-			"color" : "black"
-		});
-		addAlbum.attr("name", "updateAlbum");
-		addAlbum.addClass("updTxt");
+        // 수정사항 저장 버튼
+        updConfirmBtn.on("click", function () {
+            $("#updateForm").attr("action", "/update.music");
+            $("#updateForm").attr("method", "post");
+            if (confirm("입력하신 내용으로 수정하시겠습니까?")) {
+                $("#updateForm").submit();
+            }
+        })
 
-		let addGenre = $("<input>");
-		addGenre.attr("type", "text");
-		addGenre.css({
-			"margin-left" : "30px",
-			"color" : "black"
-		});
-		addGenre.attr("name", "updateGenre");
-		addGenre.addClass("updTxt");
-
-		let updBtn = $("<button>");
-		updBtn.attr("type", "button");
-		updBtn.attr("id", "updateBtn");
-		updBtn.html('수정하기');
-		updBtn.css({
-			"border" : "none",
-			"background-color" : "transparent",
-			"color" : "black"
-		});
-		let cancelBtn = $("<button>");
-		cancelBtn.attr("type", "button");
-		cancelBtn.attr("id", "updateBtn");
-		cancelBtn.html('취소하기');
-		cancelBtn.css({
-			"border" : "none",
-			"background-color" : "transparent",
-			"color" : "black",
-			"margin-left" : "10px"
-		});
-
-		updateDiv.append(addName);
-		updateDiv.append(addArtist);
-		updateDiv.append(addAlbum);
-		updateDiv.append(addGenre);
-
-		// 수정하기 버튼 클릭 시 수정영역 추가   
-		$(".update").on("click", function() {
-			
-			$(this).parent().parent().find('hr').append(updateDiv);
-			$(this).parent().parent().find('hr').append(updBtn);
-			$(this).parent().parent().find('hr').append(cancelBtn);
-		})
-
-		// 수정하기 취소하기 마우스 호버 이벤트
-		updBtn.on("mouseover", function() {
-			$(this).css("font-weight", "bold");
-		})
-		updBtn.on("mouseout", function() {
-			$(this).css("font-weight", "normal");
-		})
-		cancelBtn.on("mouseover", function() {
-			$(this).css("font-weight", "bold");
-		})
-		cancelBtn.on("mouseout", function() {
-			$(this).css("font-weight", "normal");
-		})
-
-		// 수정하기 완료 버튼 클릭
-		updBtn.on("click", function() {
-			$(this).parent().parent().find(".seqHidden").attr("name",
-					"modifySeq");
-			if ($(".updTxt").val() == "") {
-				alert("모든 항목을 입력해 주세요.");
-			} else {
-				if(confirm("변경사항을 저장하시겠습니까?")){
-					$("#updateForm").attr("action", "/update.music");
-					$("#updateForm").submit();
-				}
-			}
-		})
-
-		// 수정 취소하기 버튼 클릭
-		cancelBtn.on("click", function() {
-			if (confirm("수정사항을 취소하시겠습니까?")) {
-				location.reload();
-			}
-		})
+        // 취소버튼
+        updCancelBtn.on("click", function () {
+            if (confirm("수정사항을 취소하시겠습니까?")) {
+                location.reload();
+            }
+        })
 		
 		// 리스트 마우스 호버 이벤트
 		$("div[class^=listWrap]:not(#listWrap1)").on("mouseover",function(){
@@ -511,6 +479,9 @@
 			$(this).find("div").css("color","silver");
 			$(this).find("button").css("color","silver");
 		})
+		
+		// 음원등록 유효성 검사
+		
 	</script>
 </body>
 
