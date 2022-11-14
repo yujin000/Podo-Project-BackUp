@@ -214,7 +214,7 @@
                     <a class="loginBtn">${loginNickname }</a>
                 </div>
 			<ul class="tog">
-				<li><a href="/chart.music">메인페이지로</a></li>
+				<li><a href="/start.music">메인페이지로</a></li>
 				<li><a href="/logout.member">로그아웃</a></li>
 			</ul>
 			<div id="GNB">
