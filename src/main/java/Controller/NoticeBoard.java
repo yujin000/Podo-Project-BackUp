@@ -76,13 +76,13 @@ public class NoticeBoard extends HttpServlet {
 			} else if (uri.equals("/listLook.notice")) {
 				
 				int cpage = Integer.parseInt(request.getParameter("cpage"));
-				int rcpp = 10;
-				int ncpp = 10;
+				int rcpp = 5;
+				int ncpp = 5;
 				NoticeBoardDAO dao = NoticeBoardDAO.getInstance();
 				List<NoticeBoardDTO> noticeBoardList = dao.selectNotice(cpage * rcpp - (rcpp-1), cpage * rcpp);
-				String navi = dao.getPageNavi(cpage, rcpp, ncpp);
+				String naviLook = dao.getPageNaviLook(cpage, rcpp, ncpp);
 				
-				request.setAttribute("navi", navi);
+				request.setAttribute("naviLook", naviLook);
 				request.setAttribute("noticeBoardList", noticeBoardList);
 				request.getRequestDispatcher("/mypage/notice.jsp").forward(request, response);
 			}
