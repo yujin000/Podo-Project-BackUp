@@ -15,8 +15,10 @@ import com.oreilly.servlet.multipart.DefaultFileRenamePolicy;
 
 import DAO.BoardFilesDAO;
 import DAO.QnaBoardDAO;
+import DAO.QnaCommentDAO;
 import DTO.BoardFilesDTO;
 import DTO.QnaBoardDTO;
+import DTO.QnaCommentDTO;
 
 @WebServlet("*.board")
 public class QnaBoard extends HttpServlet {
@@ -99,6 +101,12 @@ public class QnaBoard extends HttpServlet {
 				BoardFilesDTO boardFilesDto = boardFilesDao.select(qnaSeq);
 				qnaBoardDto.setQnaSeq(qnaSeq);
 				
+				List<QnaCommentDTO> qnaCList = QnaCommentDAO.getInstance().selectC(qnaSeq);
+				// 댓글 수를 세서, 1개 이상 달려있으면 댓글 잠금 처리한다. (1질문 1답변 원칙)
+				int count = qnaCList.size();
+				
+				request.setAttribute("count", count);
+				request.setAttribute("commentList", qnaCList);
 				request.setAttribute("boardFile", boardFilesDto);
 				request.setAttribute("qnaBoard", qnaBoardDto);
 				request.getRequestDispatcher("/admin/adminQnaBoard/adminQnaDetail.jsp?qnaSeq="+qnaSeq).forward(request, response);

@@ -142,7 +142,19 @@
                  		첨부파일 : <a href="/download.file?sysname=${boardFile.sysName }&oriname=${boardFile.oriName}">${boardFile.oriName }</a> 
             		</div>            		
             	</div>
-            	<form action="/write.qnaComment" id="form">
+            	
+            	<c:choose>
+            		<c:when test= "${not empty commentList }">
+            			<c:forEach var="i" items = "${commentList }">
+            				<div>${i. }</div>
+            			</c:forEach>
+            		</c:when>
+            		<c:otherwise>
+            			<div>답변이 없습니다.</div>
+            		</c:otherwise>
+            	</c:choose>
+            	
+            	<form action="/write.qnaC" id="form">
             	<div id="comments">
             		<div>답변 작성</div>
             		<textarea id="comment" name="comment"></textarea>
