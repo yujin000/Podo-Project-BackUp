@@ -118,15 +118,16 @@ public class MusicDAO {
 		}
 	}
 
-	public int updateMusic(String musicName, String musicArtist, String musicAlbum, String musicGenre, int seq)
+	public int updateMusic(String musicName, String musicArtist, String musicAlbum, String musicGenre,String musicLylics, int seq)
 			throws Exception {
-		String sql = "update music set musicname = ?, musicartist = ?, musicalbum = ?, musicgenre = ? where musicseq = ?";
+		String sql = "update music set musicname = ?, musicartist = ?, musicalbum = ?, musicgenre = ?,musicLylics=? where musicseq = ?";
 		try (Connection con = this.getConnection(); PreparedStatement pstat = con.prepareStatement(sql);) {
 			pstat.setString(1, musicName);
 			pstat.setString(2, musicArtist);
 			pstat.setString(3, musicAlbum);
 			pstat.setString(4, musicGenre);
-			pstat.setInt(5, seq);
+			pstat.setString(5, musicLylics);
+			pstat.setInt(6, seq);
 			int result = pstat.executeUpdate();
 			con.commit();
 			return result;

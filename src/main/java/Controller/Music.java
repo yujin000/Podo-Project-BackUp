@@ -97,14 +97,15 @@ public class Music extends HttpServlet {
 				response.sendRedirect("/allList.music");
 				
 			}else if(uri.equals("/update.music")) {
-				int seq = Integer.parseInt(request.getParameter("modifySeq"));
-				String musicName = request.getParameter("updateName");
-				String musicArtist = request.getParameter("updateArtist");
-				String musicAlbum = request.getParameter("updateAlbum");
-				String musicGenre = request.getParameter("updateGenre");
+				int seq = Integer.parseInt(request.getParameter("seq"));
+				String musicName = request.getParameter("musicName");
+				String musicArtist = request.getParameter("musicArtist");
+				String musicAlbum = request.getParameter("musicAlbum");
+				String musicGenre = request.getParameter("musicGenre");
+				String musicLylics = request.getParameter("musicLylics");
 				
 				MusicDAO dao = MusicDAO.getInstance();
-				dao.updateMusic(musicName, musicArtist, musicAlbum, musicGenre, seq);
+				dao.updateMusic(musicName, musicArtist, musicAlbum, musicGenre,musicLylics, seq);
 				response.sendRedirect("/allList.music");
 			}
 		} catch (Exception e) {
