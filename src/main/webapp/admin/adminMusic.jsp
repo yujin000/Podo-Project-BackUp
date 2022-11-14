@@ -497,8 +497,7 @@ div[class^=inInfo],.btnBox{
 			}
 		}
 
-          let span = $("<span>");
-          let chartChk = false;
+          let span = $("<span>");           let chartChk = false;
           // 음원등록 유효성 검사
           $("#musicChart").on("keyup",function(){
               let regex = /^[0-9]{1,4}$/;
