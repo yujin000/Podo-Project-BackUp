@@ -124,8 +124,10 @@
 					<c:when test="${not empty wish}">
 						<c:forEach var="w" items="${wish }">
 							<div class="writelist">
-								<div id="qnaCategory">${w.wishEmail }</div>
-								<div id="noticeWriter">${w.parentMusicSeq }</div>				
+								<div id="qnaCategory">${w.musicName }</div>
+								<div id="noticeWriter">${w.musicArtist }</div>
+								<div id="noticeWriter">${w.musicAlbum }</div>
+												
 							</div>
 						</c:forEach>
 					</c:when>
