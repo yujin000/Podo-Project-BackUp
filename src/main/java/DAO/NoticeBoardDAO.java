@@ -163,6 +163,60 @@ public class NoticeBoardDAO {
 		return sb.toString();
 	}
 	
+	public String getPageNaviLook(int currentPage, int rcpp, int ncpp) throws Exception {
+		int recordTotalCount = this.getRecordCount();
+		int recordCountPerPage = rcpp;
+		int naviCountPerPage = ncpp;
+				
+		int pageTotalCount = 0;
+		if (recordTotalCount % recordCountPerPage > 0) {
+			pageTotalCount = (recordTotalCount / recordCountPerPage) + 1;			
+		} else {
+			pageTotalCount = recordTotalCount / recordCountPerPage;
+		}
+		
+		if (currentPage < 1) {
+			currentPage = 1;
+		} else if (currentPage > pageTotalCount) {
+			currentPage = pageTotalCount;
+		}
+		
+		int startNavi = (currentPage - 1) / naviCountPerPage * naviCountPerPage + 1;
+		
+		int endNavi = startNavi + naviCountPerPage - 1;
+		
+		
+		if(endNavi > pageTotalCount) {
+			endNavi = pageTotalCount;
+		}
+				
+		boolean needPrev = true;
+		boolean needNext = true;
+		
+		if(startNavi == 1) {
+			needPrev = false;
+		}
+		if(endNavi == pageTotalCount) {
+			needNext = false;
+		}
+			
+		StringBuilder sb = new StringBuilder();
+		
+		if (needPrev) {
+			sb.append("<a href='/listLook.notice?cpage="+(startNavi-1)+"'> < </a> ");
+		}
+		
+		for (int i=startNavi; i<=endNavi; i++) {
+			sb.append("<a href='/listLook.notice?cpage=" + i + "'>" + i + "</a> ");
+		}
+		
+		if (needNext) {
+			sb.append("<a href='/listLook.notice?cpage=" + (endNavi+1) + "'> > </a>");
+		}
+		
+		return sb.toString();
+	}
+	
 	public int delNotice(int noticeSeq) throws Exception {
 		String sql = "delete from noticeBoard where noticeSeq = ?";
 		try (Connection con = this.getConnection();

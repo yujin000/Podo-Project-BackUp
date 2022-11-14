@@ -407,7 +407,6 @@ a {
 				scheDate : "${s.scheDate}",
 				scheTime : "${s.scheTime}"
 			})
-			
 		</c:forEach>
     </script>
 </head>
@@ -483,7 +482,7 @@ a {
 
 			<div class="MidContents2">
 				<div class="BtnCss">
-					<a href="/seatSelect.perform" class="performTicketing">예매하기</a>
+					<a href="seatSelect.perform" class="performTicketing">예매하기</a>
 				</div>
 			</div>
 
