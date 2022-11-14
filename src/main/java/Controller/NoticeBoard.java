@@ -70,9 +70,33 @@ public class NoticeBoard extends HttpServlet {
 				
 				request.setAttribute("navi", navi);
 				request.setAttribute("noticeBoardList", noticeBoardList);
-				request.getRequestDispatcher("/admin/adminNotice/adminNotice.jsp").forward(request, response);		
+				request.getRequestDispatcher("/admin/adminNotice/adminNotice.jsp").forward(request, response);	
 				
-			} else if (uri.equals("/detail.notice")) {
+				
+			} else if (uri.equals("/listLook.notice")) {
+				
+				int cpage = Integer.parseInt(request.getParameter("cpage"));
+				int rcpp = 10;
+				int ncpp = 10;
+				NoticeBoardDAO dao = NoticeBoardDAO.getInstance();
+				List<NoticeBoardDTO> noticeBoardList = dao.selectNotice(cpage * rcpp - (rcpp-1), cpage * rcpp);
+				String navi = dao.getPageNavi(cpage, rcpp, ncpp);
+				
+				request.setAttribute("navi", navi);
+				request.setAttribute("noticeBoardList", noticeBoardList);
+				request.getRequestDispatcher("/mypage/notice.jsp").forward(request, response);
+			}
+			
+			else if (uri.equals("/detailLook.notice")) {
+				int noticeSeq = Integer.parseInt(request.getParameter("noticeSeq"));
+				NoticeBoardDTO noticeDto = NoticeBoardDAO.getInstance().noticeDetail(noticeSeq);
+				BoardFilesDTO filesDto = BoardFilesDAO.getInstance().selectNotice(noticeSeq);
+				
+				request.setAttribute("noticeDetail", noticeDto);
+				request.setAttribute("noticeDetailFile", filesDto);
+				request.getRequestDispatcher("/mypage/noticeDetail.jsp").forward(request, response);
+			}
+			else if (uri.equals("/detail.notice")) {
 				
 				int noticeSeq = Integer.parseInt(request.getParameter("noticeSeq"));
 				NoticeBoardDTO noticeDto = NoticeBoardDAO.getInstance().noticeDetail(noticeSeq);

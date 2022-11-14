@@ -75,6 +75,7 @@ public class MemberDAO {
       
               
 	public boolean emailDupleCheck(String email) throws Exception{
+		// 이메일 중복체크
 		String sql = "select * from member where email =?";
 		
 		try (Connection con = this.getConnection();
@@ -90,21 +91,23 @@ public class MemberDAO {
 	
 	public String MailSender(String email) throws Exception{
 	
+		// gmail smtp 설정
 		Properties props = new Properties();
-		props.put("mail.smtp.host", "smtp.gmail.com");
-		props.put("mail.smtp.port", "587");
+		props.put("mail.smtp.host", "smtp.gmail.com"); // g메일 연결
+		props.put("mail.smtp.port", "587"); // port 번호
 		props.put("mail.smtp.auth", "true");
 		props.put("mail.smtp.starttls.enable", "true");
 		props.put("mail.smtp.ssl.trust", "smtp.gmail.com");
-		props.put("mail.smtp.ssl.protocols", "TLSv1.2");
+		props.put("mail.smtp.ssl.protocols", "TLSv1.2"); // protocols 없을시 오류
 		
 		Session session = Session.getInstance(props, new Authenticator() {
 			@Override
 			protected PasswordAuthentication getPasswordAuthentication() {
 				return new PasswordAuthentication("dnfqh98@gmail.com", "edzofkldspdupiko");
-			}
+				// gmail id , gmail app password 
+			} 
 		});
-		String key = codeMaker();
+		String key = codeMaker(); // 인증번호 생성
 		String receiver = email; // 메일 받을 주소
 		String title = "podo music 인증번호";
 		String content = "<h2 style='color:blue'>"+"인증번호:"+key+"</h2>";
@@ -119,9 +122,10 @@ public class MemberDAO {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		return key;
+		return key; // 인증번호 호출
 	}
 	public String codeMaker() {
+		// 인증번호 생성 코드
 		String authCode = null;
 		
 		StringBuffer temp = new StringBuffer();
@@ -148,8 +152,8 @@ public class MemberDAO {
 		
 		return authCode;
 	}
+	// 비밀번호 찾기 시 임시비밀번호 전송 
 	public String newPassword(String email) throws Exception{
-		
 		Properties props = new Properties();
 		props.put("mail.smtp.host", "smtp.gmail.com");
 		props.put("mail.smtp.port", "587");
@@ -182,8 +186,8 @@ public class MemberDAO {
 		return key;
 	}
 
+	// 이메일 인증 메일 전송
 	public void signupMail(String email, String nickname) throws Exception{
-		
 		Properties props = new Properties();
 		props.put("mail.smtp.host", "smtp.gmail.com");
 		props.put("mail.smtp.port", "587");
@@ -338,10 +342,14 @@ public class MemberDAO {
 		}
 	}
 	
-	public List<MemberDTO> selectAllMember() throws Exception {
-		String sql = "select * from member";
+	public List<MemberDTO> selectAllMember(int start, int end) throws Exception {
+		String sql = "select * from (select member.*, row_number() over(order by joinDate desc) rn from member) where rn between ? and ?";
 		try (Connection con = this.getConnection();
 				PreparedStatement pstat = con.prepareStatement(sql);) {
+			
+			pstat.setInt(1, start);
+			pstat.setInt(2, end);
+			
 			ResultSet rs = pstat.executeQuery();
 			List<MemberDTO> memberList = new ArrayList<>();
 			
@@ -359,6 +367,72 @@ public class MemberDAO {
 			
 			return memberList;
 		}
-	}		
+	}
+	
+	public int getMemberCount() throws Exception {
+		String sql = "select count(*) from member";
+		try (Connection con = this.getConnection();
+				PreparedStatement pstat = con.prepareStatement(sql);) {
+			ResultSet rs = pstat.executeQuery();
+			rs.next();
+			return rs.getInt(1);
+		}
+	}
+	
+	public String getPageNavi(int currentPage, int rcpp, int ncpp) throws Exception {
+		int recordTotalCount = this.getMemberCount();
+		int recordCountPerPage = rcpp;
+		int naviCountPerPage = ncpp;
+				
+		int pageTotalCount = 0;
+		if (recordTotalCount % recordCountPerPage > 0) {
+			pageTotalCount = (recordTotalCount / recordCountPerPage) + 1;			
+		} else {
+			pageTotalCount = recordTotalCount / recordCountPerPage;
+		}
+		
+		if (currentPage < 1) {
+			currentPage = 1;
+		} else if (currentPage > pageTotalCount) {
+			currentPage = pageTotalCount;
+		}
+		
+		int startNavi = (currentPage - 1) / naviCountPerPage * naviCountPerPage + 1;
+		
+		int endNavi = startNavi + naviCountPerPage - 1;
+		
+		
+		if(endNavi > pageTotalCount) {
+			endNavi = pageTotalCount;
+		}
+				
+		boolean needPrev = true;
+		boolean needNext = true;
+		
+		if(startNavi == 1) {
+			needPrev = false;
+		}
+		if(endNavi == pageTotalCount) {
+			needNext = false;
+		}
+			
+		StringBuilder sb = new StringBuilder();
+		
+		if (needPrev) {
+			sb.append("<a href='/list.member?cpage="+(startNavi-1)+"'> < </a> ");
+		}
+		
+		for (int i=startNavi; i<=endNavi; i++) {
+			sb.append("<a href='/list.member?cpage=" + i + "'>" + i + "</a> ");
+		}
+		
+		if (needNext) {
+			sb.append("<a href='/list.member?cpage=" + (endNavi+1) + "'> > </a>");
+		}
+		
+		return sb.toString();
+	}
+	
+	
 
 }

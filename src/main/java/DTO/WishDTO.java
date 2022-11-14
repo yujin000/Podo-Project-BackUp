@@ -1,8 +1,8 @@
 package DTO;
 
 public class WishDTO {
-	String wishEmail;
-	int parentMusicSeq;
+	private String wishEmail;
+	private int parentMusicSeq;
 	
 	public WishDTO() {}
 	public WishDTO(String wishEmail, int parentMusicSeq) {

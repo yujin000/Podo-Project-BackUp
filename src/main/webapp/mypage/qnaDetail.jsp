@@ -13,7 +13,6 @@
         @import url(src/css/reset.css);
         /* system font */
         @import url("https://fonts.googleapis.com/css2?family=Nanum+Gothic:wght@700&family=Noto+Sans+KR&display=swap");
-
         /* event font */
         @font-face {
             font-family: "EliceDigitalBaeum-Bd";
@@ -21,7 +20,6 @@
             font-weight: normal;
             font-style: normal;
         }
-
         :root {
             --font-color: #fff;
             --background-color: #111;
@@ -32,7 +30,6 @@
             --font-weight: bold;
             --line-height: 45px;
         }
-
         * {
             margin: 0;
             padding: 0;
@@ -40,25 +37,21 @@
             text-decoration: none;
             border: none;
         }
-
         div {
             border: 1px solid #fff;
         }
-
         body {
             width: 100vw;
             background: var(--background-color);
             color: var(--font-color);
             font-family: "Noto Sans KR", sans-serif;
         }
-
         .container {
             padding: 0 75px;
             height: 100%;
             background-color: bisque;
             overflow-y: scroll;
         }
-
         .titleText {
             font-size: 38px;
             font-weight: var(--font-weight);
@@ -66,28 +59,24 @@
             margin-bottom: 2vw;
             background-color: #00000d50;
         }
-
         /*qna css */
         .qna {
             height: 100%;
             margin-top: 8vh;
             background-color: lightgray;
         }
-
         .qnalist {
             width: 100%;
             height: 65vh;
             margin-top: 5vh;
             background-color: #00000d80;
         }
-
         #category {
             width: 100%;
             font-size: 20px;
             font-weight: var(--font-weight);
             line-height: var(--line-height);
         }
-
         #title {
             width: 100%;
             font-size: 20px;
@@ -117,7 +106,6 @@
             color: var(--font-color)
 /*             background-color: #00000d50; */
         }
-
         #listBtn:hover {
             border: 1px solid silver;
         }

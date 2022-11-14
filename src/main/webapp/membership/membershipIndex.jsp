@@ -389,7 +389,7 @@ div {
 				"color":"white",
 				"border":"1px solid #FF0050"
 			});
-			$("#payBtn").text(price.replace(/\B(?=(\d{3})+(?!\d))/g, ",") + "원 결제하기");
+			$("#payBtn").text(price.replace(/\B(?=(\d{3})+(?!\d))/g, ",") + "원 카카오페이 결제하기");
 			$("#payBtn").attr("price",price);
 			warning.remove();
 			
@@ -418,6 +418,12 @@ div {
 					  title: '현재 사용중인 이용권이 있습니다',
 					  text: '이용권 기간이 끝난 후 구매해주세요.',
 					  footer: '<a href="/mypage.member" style="text-decoration:none;color:#3e065f;">마이페이지에서 남은 기간 확인하기</a>'
+					})
+			}else if(nowMembership == "admin"){
+				Swal.fire({
+					  icon: 'warning',
+					  iconColor:'#FF0050',
+					  title: '관리자는 이용권을 구매할 수 없습니다.',
 					})
 			}else{
 				if(price == 0){

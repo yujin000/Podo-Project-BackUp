@@ -2,15 +2,15 @@ package DTO;
 
 public class MusicDTO {
 
-	public int musicSeq;
-	public String musicName;
-	public String musicArtist;
-	public String musicAlbum;
-	public String musicImg;
-	public String musicMp3;
-	public int musicChart;
-	public String musicGenre;
-	public String musicLylics;
+	private int musicSeq;
+	private String musicName;
+	private String musicArtist;
+	private String musicAlbum;
+	private String musicImg;
+	private String musicMp3;
+	private int musicChart;
+	private String musicGenre;
+	private String musicLylics;
 	
 	public int getMusicSeq() {
 		return musicSeq;
@@ -80,7 +80,6 @@ public class MusicDTO {
 		this.musicLylics = musicLylics;
 	}
 	public MusicDTO() {
-		super();
 	}
 	
 	

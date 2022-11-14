@@ -102,7 +102,7 @@
         text-align: center;
         color: silver;
         font-size: 0.8rem;
-        background: #000;
+        background: transparent;
         opacity: 0.5;
       }
       /* delete scroll bar */

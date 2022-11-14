@@ -104,6 +104,7 @@
             height: 400px;
             width: 20%;
             float: left;
+            display : none;
         }
 
         .mainContents {
@@ -111,7 +112,7 @@
             border: 1px solid silver;
             float: left;
             position: relative;
-            width: 77.4%;
+            width: 95%;
             height: 700px;
             margin-left: 30px;
             margin-top: 30px;
@@ -120,9 +121,9 @@
 
         div[id^=mainConArea] {
             width: 100%;
-            height: 100%;
+            height: 95%;
         }
-
+        
         #mainConArea2 {
             display: hidden;
         }
@@ -159,6 +160,10 @@
         }
         .member, #listHeader {
         	height : 30px;
+        }
+        #navi {
+        	height : 5%;
+        	text-align : center;
         }
         
         
@@ -230,14 +235,14 @@
                         					<div class="membership">${i.membership }</div>
                         					<div class="scribeDate">${i.scribeDate }</div>
                         					<div class="joinDate">${i.joinDate }</div>
+                        					<button class="delBtn" type="button" email="${i.email }" membership="${i.membership }">회원 탈퇴</button>
                         				</div>
                         			</c:forEach>                        			
                         		</c:when>                        		
                         	</c:choose>
                         </div>                                                
                     </div>
-                    <div>
-                    </div>
+                    <div id="navi">${navi }</div>
                     <div id="mainConArea2">
                         
                     </div>
@@ -251,6 +256,18 @@
         let adminBtn = document.getElementById("mypage");
         $(adminBtn).click(function () {
             $(this).next(".tog").fadeToggle();
+        });
+        
+        // 회원 탈퇴 클릭 이벤트
+        $(".delBtn").on("click", function(){
+        	if ($(this).attr("membership")=="admin") {
+        		alert("관리자는 강퇴시킬 수 없습니다!");
+        	} else {
+        		if (confirm("정말 탈퇴시키겠습니까? 시행하면 복원할 수 없습니다.")) {
+        			alert("강퇴 완료.");
+        			location.href = "/adminDel.member?email="+$(this).attr("email");
+        		}
+        	}
         });
 
         // 리스트  클릭 이벤트

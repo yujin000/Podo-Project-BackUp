@@ -201,7 +201,7 @@
             <div class="titleText">고객센터</div>
             <div class="titleCategory">
                     <div id="home"><a href="/mypage/serviceCenter.jsp">홈</a></div>
-                    <div id="notice"><a href="/mypage/notice.jsp">공지사항</a></div>
+                    <div id="notice"><a href="/listLook.notice?cpage=1">공지사항</a></div>
                     <div id="myInquiry"><a href="/list.board?cpage=1">내 문의 내역</a>
                     <hr style="border: solid 5px #3e065f; width: 58%"></div>
             </div>
