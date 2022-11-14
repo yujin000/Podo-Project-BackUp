@@ -274,6 +274,12 @@
 </head>
 
 <body>
+	<form action="/payment.perform" id="formSub" method="post">
+	<input type="hidden" value="${performSeq }" name="performSeq">
+	<input type="hidden" value="${list.performTitle }" name="performTitle">
+	<input type="hidden" value="${list.theaterName }" name="theaterName">
+	<input type="hidden" value="${list.performPrice }" name="performPrice">
+	<input type="hidden" value="${seat.seatNum }" name="seatNum">
     <div class="wrap">
         <div class="header">
             <h1 class="logoName"><img src="image/perform/logo-f-b.png" alt="">
@@ -306,7 +312,7 @@
                             </li>
                             <li>
                                 <img src="image/perform/gray2.png" alt=""width="20px" height="20px">
-                                <a style="margin-left: 5px;">25석 / 40000원</a>
+                                <a style="margin-left: 5px;">25석 / ${list.performPrice }</a>
                             </li>
                         </ul>
                     </div>
@@ -321,8 +327,8 @@
             </div>
         </div>
     </div>
+    </form>
 </body>
-
 <script>
 
 	let performList = new Array();
@@ -385,7 +391,7 @@
             
             $(".payment").on("click", function () {
                 if (input.classList.contains("clicked")) {
-                    input.classList.add("soldout")
+                    input.classList.add("soldout");
                     input.disabled = true;
                     clicked = document.querySelectorAll(".clicked");
                     clicked.forEach((data) => {
@@ -393,6 +399,7 @@
                     })
                     input.classList.remove("clicked");
                     count = 0;
+                    $("#formSub").submit();
                 }
             });
         }
