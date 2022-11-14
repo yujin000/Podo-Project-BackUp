@@ -25,7 +25,7 @@ public class Music extends HttpServlet {
 
 		String uri = request.getRequestURI();
 		try {
-			if (uri.equals("/chart.music")) {
+			if (uri.equals("/start.music")) {
 				MusicDAO dao = MusicDAO.getInstance();
 				List<MusicDTO> musicChartList = dao.musicChartList();
 				request.setAttribute("musicChartList", musicChartList);
@@ -33,7 +33,7 @@ public class Music extends HttpServlet {
 				
 			}
 			// chart 목록 출력
-			else if (uri.equals("/lank.music")) {
+			else if (uri.equals("/chart.music")) {
 				MusicDAO dao = MusicDAO.getInstance();
 				List<MusicDTO> list = dao.musicChartList();
 				request.setAttribute("list", list);
