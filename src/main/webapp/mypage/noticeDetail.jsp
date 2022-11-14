@@ -13,6 +13,7 @@
         @import url(src/css/reset.css);
         /* system font */
         @import url("https://fonts.googleapis.com/css2?family=Nanum+Gothic:wght@700&family=Noto+Sans+KR&display=swap");
+
         /* event font */
         @font-face {
             font-family: "EliceDigitalBaeum-Bd";
@@ -20,6 +21,7 @@
             font-weight: normal;
             font-style: normal;
         }
+
         :root {
             --font-color: #fff;
             --background-color: #111;
@@ -30,6 +32,7 @@
             --font-weight: bold;
             --line-height: 45px;
         }
+
         * {
             margin: 0;
             padding: 0;
@@ -37,21 +40,25 @@
             text-decoration: none;
             border: none;
         }
+
         div {
             border: 1px solid #fff;
         }
+
         body {
             width: 100vw;
             background: var(--background-color);
             color: var(--font-color);
             font-family: "Noto Sans KR", sans-serif;
         }
+
         .container {
             padding: 0 75px;
             height: 100%;
             background-color: bisque;
             overflow-y: scroll;
         }
+
         .titleText {
             font-size: 38px;
             font-weight: var(--font-weight);
@@ -59,26 +66,36 @@
             margin-bottom: 2vw;
             background-color: #00000d50;
         }
+
         /*qna css */
         .qna {
             height: 100%;
             margin-top: 8vh;
             background-color: lightgray;
         }
+
         .qnalist {
             width: 100%;
             height: 65vh;
             margin-top: 5vh;
             background-color: #00000d80;
         }
+
         #category {
             width: 100%;
             font-size: 20px;
             font-weight: var(--font-weight);
             line-height: var(--line-height);
         }
+
         #title {
             width: 100%;
+            font-size: 20px;
+            font-weight: var(--font-weight);
+            line-height: var(--line-height);
+        }
+        #writer{
+        	width: 100%;
             font-size: 20px;
             font-weight: var(--font-weight);
             line-height: var(--line-height);
@@ -106,6 +123,7 @@
             color: var(--font-color)
 /*             background-color: #00000d50; */
         }
+
         #listBtn:hover {
             border: 1px solid silver;
         }
@@ -114,37 +132,36 @@
 
 <body>
     <div class="container">
-    <form action="/insert.board" id="insertForm" method="post">
         <div class="qna">
-            <div class="titleText">1:1 문의</div>
+            <div class="titleText">공지사항</div>
             <div class="qnalist">
             
 					<div id="category">
-						문의유형
-						<input type="text" id="qnaCategory" name="qnaCategory" value="${dtoDetail.qnaCategory }" disabled>
+						유형
+						${noticeDetail.noticeCategory }
 
 					</div>
 					<div id="title">제목
-                        ${dtoDetail.qnaTitle }
+                        ${noticeDetail.noticeTitle }
                     </div>
-                    <div id="contents">문의 내용
-                        ${dtoDetail.qnaContents }            
+                    <div id="writer">작성자
+                        ${noticeDetail.noticeWriter }            
+                    </div>
+                    <div id="contents">내용
+                        ${noticeDetail.noticeContents }            
                     </div>
             </div>
             
             <div>
-                 첨부파일 : <a href="/download.file?sysname=${fileDto.sysName }&oriname=${fileDto.oriName}">${fileDto.oriName }</a> 
+                 첨부파일 : <a href="/download.file?sysname=${noticeDetailFile.sysName }&oriname=${noticeDetailFile.oriName}">${noticeDetailFile.oriName }</a> 
             </div>
             
-            <div>
-            댓글 :
-            </div>
+
             <div style="float:right;">
               <button type="button" id="listBtn">목록</button>
             </div>
             
         </div>
-        </form>
     </div>
     <script>
     document.getElementById("listBtn").addEventListener("click",function(){
