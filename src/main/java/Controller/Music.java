@@ -27,8 +27,8 @@ public class Music extends HttpServlet {
 		try {
 			if (uri.equals("/start.music")) {
 				MusicDAO dao = MusicDAO.getInstance();
-				List<MusicDTO> musicChartList = dao.musicChartList();
-				request.setAttribute("musicChartList", musicChartList);
+				List<MusicDTO> musicList = dao.musicAllList();
+				request.setAttribute("musicList", musicList);
 				request.getRequestDispatcher("/index.jsp").forward(request, response);
 				
 			}
