@@ -57,6 +57,8 @@
             height: 100%;
             background-color: bisque;
             overflow-y: scroll;
+            width: 100vw;
+    		margin-bottom:200px;
         }
 
         .titleText {

@@ -53,8 +53,10 @@
         .container {
             padding: 0 75px;
             height: 100%;
+            width: 100vw;
 			background-color: bisque; 
             overflow-y: scroll;
+            margin-bottom:200px;
         }
 		
 		.main {
@@ -85,13 +87,6 @@
         text-aline:center;
         }
         
-        #home{
-        float:left;
-   		width:4vw;
-   		line-height: var(--line-height);
-        color: var(--font-color);
-   		background-color: #00000d50;
-        }
         #notice{
         float:left;
         width:10vw;
@@ -186,7 +181,6 @@
         <div class="main">
             <div class="titleText">고객센터</div>
             <div class="titleCategory">
-                    <div id="home"><a href="/mypage/serviceCenter.jsp">홈</a></div>
                     <div id="notice"><a href="/listLook.notice?cpage=1">공지사항</a>
                     <hr style="border: solid 5px #3e065f; width: 60%"></div>
                     <div id="myInquiry"><a href="/list.board?cpage=1">내 문의 내역</a></div>
@@ -219,7 +213,7 @@
 				</c:choose>
 			</div>
 
-			<div>${navi }</div>
+			<div>${naviLook }</div>
         </div>
     </div>
 </body>

@@ -36,20 +36,17 @@ uri="http://java.sun.com/jsp/jstl/core"%>
         align-items: center;
         justify-content: center;
       }
-
       #mypage > img {
         width: 30px;
         height: 30px;
         border-radius: 40px;
         margin-left: 10px;
       }
-
       #mypage > span {
         width: 140px;
         text-align: left;
         margin-left: 10px;
       }
-
       .tog {
         width: 140px;
         right: 24px;
@@ -63,6 +60,7 @@ uri="http://java.sun.com/jsp/jstl/core"%>
         background: #222;
         opacity: 0.9;
       }
+      
     </style>
   </head>
   <body>
@@ -86,7 +84,6 @@ uri="http://java.sun.com/jsp/jstl/core"%>
                     <li><a href="/admin/adminIndex.jsp">관리자페이지</a></li>
                   </c:when>
                 </c:choose>
-                <li><a href="#">공지사항</a></li>
                 <li><a href="#">계정설정</a></li>
                 <li><a href="#">친구초대 </a></li>
                 <li><a href="logout.member">로그아웃</a></li>
@@ -105,7 +102,7 @@ uri="http://java.sun.com/jsp/jstl/core"%>
           <ul>
             <li><a id="today">투데이</a></li>
             <li><a id="chart">차트</a></li>
-            <li><a href="#">보관함</a></li>
+            <li><a id="wishBtn">위시리스트</a></li>
             <li><a id="station">스테이션</a></li>
             <li><a id="mag">매거진</a></li>
             <li><a id="serviceBtn">고객센터</a></li>
@@ -113,9 +110,9 @@ uri="http://java.sun.com/jsp/jstl/core"%>
         </div>
         <div id="events">
           <ul>
-            <li>event1</li>
-            <li>event2</li>
-            <li>event3</li>
+            <li>EVENT1</li>
+            <li>EVENT2</li>
+            <li>EVENT3</li>
           </ul>
         </div>
 
@@ -260,10 +257,13 @@ uri="http://java.sun.com/jsp/jstl/core"%>
     <script>
       // list page move action
       $("#today").click(function () {
-        $("#iframe").attr("src", "/view/main.jsp");
+        $("#iframe").attr("src", "/mainList.music");
       });
       $("#chart").click(function () {
-        $("#iframe").attr("src", "/lank.music");
+        $("#iframe").attr("src", "/chart.music");
+      });
+      $("#wishBtn").click(function () {
+      	$("#iframe").attr("src", "/list.wish");
       });
       $("#mag").click(function () {
         $("#iframe").attr("src", "/view/mag.jsp");
@@ -288,9 +288,7 @@ uri="http://java.sun.com/jsp/jstl/core"%>
     <script>
       let membership = "${loginMembership}";
       if (membership=="admin" || membership=="vip") {
-
       // Music Controller 부분
-
         	// 목록페이지 전체 div값
         	const musicListPage = document.querySelector(".hidden ul");
         	musicListPage.setAttribute("id","변수확인용");
@@ -309,22 +307,18 @@ uri="http://java.sun.com/jsp/jstl/core"%>
         	
         	const playTitle = document.querySelector("#playTitle");
         	const playArtist = document.querySelector("#playArtist");
-
         	// 컨트롤러 볼륨 바
         	const volumeBar = document.querySelector("#volumeBar");
         	playAudio.volume = volumeBar.value/100; // 처음 홈페이지에 들어왔을 때, 컨트롤러 볼륨 초기화.
         	// 음소거 버튼
         	const volumeMute = document.querySelector("#volumeMute");
-
         	// 타이머 관련 변수 선언
         	const gage = document.querySelector("#gage"); // 현재 시간바
         	const gageBar = document.querySelector("#gageBar"); // 전체 시간바
         	const currentTimeText = document.querySelector("#currentTimeText"); // 화면에 표시되는 재생시간대 타이머
         	const entireTimeText = document.querySelector("#entireTimeText"); // 화면에 표시되는 전체 재생시간
-
         	// 위시리스트 변수 선언
         	const wish = document.querySelector("#wish");
-
         	// music list array
         	let musicList = new Array();
         		<c:forEach items="${musicChartList }" var="i">
@@ -339,30 +333,26 @@ uri="http://java.sun.com/jsp/jstl/core"%>
         				musicLylics : "${i.musicLylics}"
         			})
         		</c:forEach>
-
         	// 페이지 첫 화면 접속시, 받은 목록에서 기본 재생곡으로 맨 앞 곡을 선택해준다.
         	playAudio.setAttribute("src","/audio/" + musicList[playIndex].musicMp3 + ".mp3");
-
         	// 좌측 하단에 재생대기중인 음원의 정보를 표시한다.
         	playTitle.innerHTML = musicList[playIndex].musicName;
         	playArtist.innerHTML = musicList[playIndex].musicArtist;
         	musicImg.src = `/image/music/\${musicList[playIndex].musicImg}.jpg`;
-
         	// 각 함수 구현
         	// 재생 함수
         	function playMusic() {
-      	playAudio.setAttribute("data-status", "play");
-      	playAudio.play();
-      	playBtn.innerText = "pause";
+      			playAudio.setAttribute("data-status", "play");
+      			playAudio.play();
+      			playBtn.innerText = "pause";
+      			wishExist();
         	};
-
         	// 일시정지 함수
         	function pauseMusic() {
         		playAudio.setAttribute("data-status", "pause");
       	playAudio.pause();
       	playBtn.innerText = "play_arrow";
         	}
-
         	// 음악 정보 가져오기 함수
         	function loadMusic(index) {
             	playTitle.innerHTML = musicList[playIndex].musicName;
@@ -370,7 +360,6 @@ uri="http://java.sun.com/jsp/jstl/core"%>
             	musicImg.src = `/image/music/\${musicList[index].musicImg}.jpg`;
             	playAudio.setAttribute("src","/audio/" + musicList[index].musicMp3 + ".mp3");
         	}
-
         	// 이전 곡 듣기 함수
         	function prevMusic(){
         		playIndex--;
@@ -378,7 +367,6 @@ uri="http://java.sun.com/jsp/jstl/core"%>
         		loadMusic(playIndex);
         		playMusic();
         	}
-
         	// 다음 곡 듣기 버튼
         	function nextMusic(){
         		playIndex++;
@@ -386,7 +374,6 @@ uri="http://java.sun.com/jsp/jstl/core"%>
         		loadMusic(playIndex);
         		playMusic();
         	}
-
         	// 위시리스트 여부에 따라 하트모양을 바꿔주는 함수
         	function wishExist(){
         		$.ajax({
@@ -400,70 +387,62 @@ uri="http://java.sun.com/jsp/jstl/core"%>
         			let result = JSON.parse(resp);
         			if (result==false) {
         				$("#wish").html("favorite");
+        				$("#wish").css({
+                            "font-variation-settings":"'FILL' 0,'wght' 400,'GRAD' 0,'opsz' 48",
+                            "color":"white"});
         				$("#wish").attr("title","위시리스트 추가");
         				$("#wish").attr("data-wish","false");
         			} else {
-        				$("#wish").html("heart_plus");
+        				$("#wish").html("favorite");
+        				$("#wish").css({
+                            "font-variation-settings":"'FILL' 1,'wght' 400,'GRAD' 0,'opsz' 48",
+                            "color":"red"});
         				$("#wish").attr("title","위시리스트 제거");
         				$("#wish").attr("data-wish","true");
         			}
         		});
         	};
-
         	// 처음 페이지에서 위시리스트 여부를 판별해준다.
         	wishExist();
-
         	// 컨트롤러 타이머 구현
         	playAudio.addEventListener("timeupdate", e=>{
         		const currentTime = e.target.currentTime;
         		const entireTime = e.target.duration;
         		let currentBar = (currentTime/entireTime)*100; // %값이므로 100을 곱해준다.
         		gage.style.width = `\${currentBar}%`; // 재생시간 진행에 따라 타이머 바가 증가한다.
-
         		let entireMin = Math.floor(entireTime/60); // 음악 전체시간 (분)
         		let entireSec = Math.floor(entireTime%60); // 음악 전체시간 (초)
-
         		if (entireSec < 10) {
         			entireSec = `0\${entireSec}`;
         		} // 10초 미만인 경우, 앞에 0을 붙인다.
-
         		// 화면에 전체 시각 출력
         		entireTimeText.innerText = `\${entireMin} : \${entireSec}`;
-
         		// 컨트롤러가 음원을 받아온 직후
         		playAudio.addEventListener("loadeddata", function() {
         			let audioDuration = playAudio.duration;
-
         			let loadEntireMin = Math.floor(audioDuration/60);
             		let loadEntireSec = Math.floor(audioDuration%60);
             		if (loadEntireSec < 10) {
             			loadEntireSec = `0\${loadEntireSec}`;
             		}
-
             		//화면에 재생 진행 시각 출력
             		entireTimeText.innerText = `\${loadEntireMin} : \${loadEntireSec}`;
-
         		});
-
         		let currentMin = Math.floor(currentTime/60);
         		let currentSec = Math.floor(currentTime%60);
         		if (currentSec < 10) {
         			currentSec = `0\${currentSec}`;
         		}
-
         		//화면에 재생 진행 시각 출력
         		currentTimeText.innerText = `\${currentMin} : \${currentSec}`;
         	});
-
         	// 타이머 클릭시, 해당 시점을 재생하는 이벤트 구현
         	gageBar.addEventListener("click", function(e){
         		let gageBarWidth = gageBar.clientWidth;
         		let timerOffsetX = e.offsetX;
-
         		playAudio.currentTime = (timerOffsetX / gageBarWidth) * playAudio.duration;
         		playMusic();
         	});
-
         	// PlayList 목록 출력하기
         	for (let i=0; i<musicList.length; i++) {
         		// 각 목록값이 들어갈 li 태그
@@ -477,34 +456,27 @@ uri="http://java.sun.com/jsp/jstl/core"%>
         		`;
         		musicListPage.insertAdjacentHTML("beforeend",li);
         	}
-
         	// 재생/일시정지 버튼 클릭시
         	playBtn.addEventListener("click",function (){
         		// 일시정지 상태에서 재생버튼을 클릭시 재생
         		if (playAudio.getAttribute("data-status") == "pause") {
         			playMusic();
-
         		} else if (playAudio.getAttribute("data-status") == "play") {
         			pauseMusic();
         		}
         	});
-
         	// 이전 버튼 클릭시
         	playPrev.addEventListener("click", function(){
         		prevMusic();
         	});
-
         	// 다음 버튼 클릭시
         	playNext.addEventListener("click", function(){
         		nextMusic();
         	});
-
         	// 노래가 끝나고 다음곡 자동재생
         	playAudio.addEventListener("ended", function(){
         		nextMusic();
         	})
-
-
         	// 컨트롤러 볼륨 조절
         	volumeBar.addEventListener("change", function(){
         		playAudio.volume = this.value/100;
@@ -512,7 +484,6 @@ uri="http://java.sun.com/jsp/jstl/core"%>
         	volumeBar.addEventListener("mousemove", function(){
         		playAudio.volume = this.value/100;
         	});
-
         	// 음소거 버튼 클릭시 음소거
         	volumeMute.addEventListener("click", function(){
         		if (playAudio.muted) {
@@ -523,7 +494,6 @@ uri="http://java.sun.com/jsp/jstl/core"%>
         			volumeMute.innerText = "volume_off";
         		}
         	});
-
         	// 목록 클릭시, 해당 노래가 재생
         	let playList = document.querySelectorAll(".playList");
         	for (let i=0; i<playList.length; i++) {
@@ -533,7 +503,6 @@ uri="http://java.sun.com/jsp/jstl/core"%>
         			playMusic();
         		});
         	};
-
         	// 위시리스트 추가
         	$("#wish").on("click",function(){
         		if ($("#wish").attr("data-wish")=="false") {
@@ -557,9 +526,7 @@ uri="http://java.sun.com/jsp/jstl/core"%>
             			wishExist();
             		});
         		}
-
         	});
-
       }
     </script>
 

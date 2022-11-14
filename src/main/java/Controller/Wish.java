@@ -1,6 +1,7 @@
 package Controller;
 
 import java.io.IOException;
+import java.util.List;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -45,6 +46,12 @@ public class Wish extends HttpServlet {
 				WishDTO dto = new WishDTO(WishEmail, parentMusicSeq);
 				int result = WishDAO.getInstance().delWish(dto);
 				
+			}else if (uri.equals("/list.wish")) {
+				String WishEmail = request.getSession().getAttribute("loginEmail").toString();
+				WishDAO dao = WishDAO.getInstance();
+				List<WishDTO> dtoWish = dao.selectAll(WishEmail);
+				request.setAttribute("wish", dtoWish);
+				request.getRequestDispatcher("/mypage/wishList.jsp").forward(request, response);
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
