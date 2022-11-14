@@ -29,12 +29,12 @@ public class QnaCommentDAO {
 	}
 	
 	public int insertC(QnaCommentDTO dto) throws Exception {
-		String sql = "insert into qnaComment values(qnaCommentSeq.nextVal, ?, ?, ?, sysdate)";
+		String sql = "insert into qnaComment values(qnaCommentSeq.nextVal, ?, ?, sysdate, ?)";
 		try (Connection con = this.getConnection();
 				PreparedStatement pstat = con .prepareStatement(sql);) {
 			pstat.setString(1, dto.getQnaCommentWriter());
 			pstat.setString(2, dto.getQnaCommentContents());
-			pstat.setTimestamp(3, dto.getQnaCommentWriteDate());
+			pstat.setInt(3, dto.getQnaParentSeq());
 			
 			int result = pstat.executeUpdate();
 			return result;			
