@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
    pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -146,10 +147,10 @@
        		width : 30%;
         }
         #qnaWriterHeader, .qnaWriter {
-        	width : 10%;
+        	width : 20%;
         }
         #qnaWriteDateHeader, .qnaWriteDate {
-        	width : 10%;
+        	width : 15%;
         }
 
         .qnaList, #listHeader {
@@ -177,8 +178,16 @@
         .qnaTitle>a{
             color:black;
             font-weight: bold;
-        }
+        }        
         /*기본*/
+        .commentWriter, #contentsTitle{
+        	font-weight:bold;
+        }
+        .commentContents, #contentsMain{
+        	border:1px solid black;
+        	width : 1000px;
+        	height : 150px;
+        }
     </style>
 </head>
 
@@ -226,25 +235,33 @@
                                 <div class="qnaSeq">${qnaBoard.qnaSeq }</div>
                                 <div class="qnaCategory">${qnaBoard.qnaCategory }</div>
                                 <div class="qnaTitle">${qnaBoard.qnaTitle }</div>
-                                <div class="qnaWriter">${qnaBoard.qnaWriter }</div>
+                                <div class="qnaWriter">${qnaBoard.qnaWriter }</div>                                
                                 <div class="qnaWriteDate">${qnaBoard.qnaWriteDate }</div>
                             </div>
                             <hr id="listHr">
                         </div>
-                        <div id="contents">
-                            <div>문의 내용</div>
+                        <div >
+                        	<div id="contentsTitle">문의내용<br></div>
+                            <div id="contentsMain">
                             ${qnaBoard.qnaContents }
+                            </div>
                             <div>
                                  첨부파일 : <a href="/download.file?sysname=${boardFile.sysName }&oriname=${boardFile.oriName}">${boardFile.oriName }</a> 
                             </div>            		
                         </div> 
                         
+                        <br>
+                        <br>
+                        
                         <c:choose>
                             <c:when test= "${not empty commentList }">
                                 <c:forEach var="i" items = "${commentList }">
-                                    <div>답변 작성자 : ${i.qnaCommentWriter }</div>
-                                    <div>답변 내용 : ${i.qnaCommentContents }</div>
-                                    <div>답변작성 시간 : ${i.qnaCommentWriteDate }</div>            				
+                                <div class="commentList">
+                                    <div class="commentWriter">답변 작성자 : ${i.qnaCommentWriter }</div>
+                                    <div>답변내용<br></div>
+                                    <div class="commentContents">${i.qnaCommentContents }</div>
+                                    <div class="commentWriteDate"><br>답변작성 시간 : <fmt:formatDate value="${i.qnaCommentWriteDate }" pattern="yyyy-MM-dd hh:mm"/></div>
+                                </div>            				
                                 </c:forEach>
                             </c:when>
                         <c:otherwise>

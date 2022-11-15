@@ -141,19 +141,19 @@
         	width : 15%;
         }
         #qnaCategoryHeader, .qnaCategory {
-        	width : 10%;
+        	width : 15%;
         }
         #qnaTitleHeader, .qnaTitle {
        		width : 30%;
         }
         #qnaWriterHeader, .qnaWriter {
-        	width : 10%;
+        	width : 15%;
         }
         #qnaWriteDateHeader, .qnaWriteDate {
         	width : 10%;
         }
         #qnaStatusHeader, .qnaStatus {
-        	width : 15%;
+        	width : 10%;
         }
         .qnaList, #listHeader {
         	height : 30px;
@@ -236,7 +236,7 @@
                                                 <a href="/adminQnaDetail.board?qnaSeq=${i.qnaSeq }">${i.qnaTitle }</a>
                                             </div>
                         					<div class="qnaWriter">${i.qnaWriter }</div>
-                        					<div class="qnaWriteDate"><fmt:formatDate value="${i.qnaWriteDate }" pattern="yyyy-MM-dd"/></div>
+                        					<div class="qnaWriteDate"><fmt:formatDate value="${i.qnaWriteDate }" pattern="yyyy-MM-dd hh:mm"/></div>
                                             <div class="qnaStatus"></div>
                         				</div>
                         				<hr id="listHr">
