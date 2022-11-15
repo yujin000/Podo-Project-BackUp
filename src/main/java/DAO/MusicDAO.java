@@ -154,6 +154,7 @@ public class MusicDAO {
 					dto.setMusicName(rs.getString("musicName"));
 					dto.setMusicArtist(rs.getString("musicArtist"));
 					dto.setMusicAlbum(rs.getString("musicAlbum"));
+					dto.setMusicImg(rs.getString("musicImg"));
 					dtoWish.add(dto);
 				}
 				return dtoWish;
