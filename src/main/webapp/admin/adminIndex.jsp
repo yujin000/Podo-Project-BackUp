@@ -25,7 +25,7 @@
         }
 
         * div:not(#Header) {
-            color: #515151;
+            color: black;
         }
 
         #list,
@@ -316,10 +316,13 @@
         }
         #countMem{
             text-align: center;
-            font-size: 30px;
+            font-size: 50px;
             margin-top:80px;
+            color:#FF0505 !important;
         }
-        
+        #memCount{
+        	margin-left:25px;
+        }
 </style>
 </head>
 
@@ -375,8 +378,8 @@
                     <div id="profit">0</div>
                 </div>
                 <div class="mainIsland" id="memberCount">
-                    <div class="islandTitle">회원수</div>
-                    <div id="countMem">${memberCount } 명</div>
+                    <div class="islandTitle" id="memCount">회원수</div>
+                    <div id="countMem">0</div>
                 </div>
             </div>
             <div id="qnaArea">
@@ -449,6 +452,8 @@
 	<input type="hidden" value="${promoCount }" id="promoCount">
 	<input type="hidden" value="${event1Count }" id="event1Count">
 	<input type="hidden" value="${event2Count }" id="event2Count">
+	<input type="hidden" value="${memberCount }" id="memberCount1">
+	
 </div>
     <script>
 		// 관리자 버튼 토글
@@ -460,11 +465,11 @@
         let proNum = $("#promoCount").val();
         let	eventNum1 = $("#event1Count").val();
         let eventNum2 = $("#event2Count").val();
-        
+
         $( document ).ready( function() {
             setTimeout(function(){
                 $("#promo").animate( {
-                    width: proNum*3+"%" 
+                    width: proNum*5+"%" 
                 } );
             },2000);
 
@@ -474,7 +479,7 @@
 
             setTimeout(function(){
                 $("#event1").animate( {
-                    width: eventNum1*3+"%" 
+                    width: eventNum1*5+"%" 
                 } );
             },2800);
 
@@ -484,7 +489,7 @@
 
             setTimeout(function(){
                 $("#event2").animate( {
-                    width: eventNum2*3+"%" 
+                    width: eventNum2*5+"%" 
                 } );
             },3600);
 
@@ -492,16 +497,38 @@
                 $("#event2Num").append(eventNum2);
             },4100);
         } );
+		
+        // 회원수 효과
+        const $counter = document.querySelector("#countMem");
+        let countMem = $("#memberCount1").val();
 
-        // 매출액 효과
-        const $counter = document.querySelector("#profit");
-        let profit = $("#adminProfit").val();
-
-        counter($counter, profit);
+        counter($counter, countMem);
         function counter($counter, max) {
             let now = max;
             const handle = setInterval(() => {
                 $counter.innerHTML = Math.ceil(max - now);
+                if (now < 1) {
+                    clearInterval(handle);
+                }
+                const step = now / 10;
+                now -= step;
+            }, 50); 
+        }
+     	// 회원 포맷
+        let myung = "명";
+        setTimeout(function(){
+            $("#countMem").append(myung);
+        },3000);
+        
+        // 매출액 효과
+        const $counter2 = document.querySelector("#profit");
+        let profit = $("#adminProfit").val();
+
+        counter($counter2, profit);
+        function counter2($counter2, max) {
+            let now = max;
+            const handle = setInterval(() => {
+                $counter2.innerHTML = Math.ceil(max - now);
                 if (now < 1) {
                     clearInterval(handle);
                 }

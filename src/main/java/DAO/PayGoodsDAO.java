@@ -268,7 +268,7 @@ public class PayGoodsDAO {
 		
 		// 이벤트2 판매 갯수
 		public int event2Count()throws Exception{
-			String sql = "select count(*) from paymember where paygoodsseq = (select paygoodsseq from (select * from paygoods  order by paygoodsname) where rownum = 2)";
+			String sql = "select count(*) from paymember where paygoodsseq = (select paygoodsseq from (select rownum as num, paygoods.* from paygoods order by paygoodsname) where num = 2)";
 			try(Connection con = this.getConnection(); PreparedStatement pstat = con.prepareStatement(sql);) {
 				ResultSet rs = pstat.executeQuery();
 				int result = 0;

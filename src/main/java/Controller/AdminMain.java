@@ -48,10 +48,7 @@ public class AdminMain extends HttpServlet {
 				int event2Count = dao.event2Count();
 				
 				int profit = (promoCount*promoPrice)+(event1Price*event1Count)+(event2Price*event2Count);
-				
-				System.out.println(profit);
 
-				
 				request.setAttribute("profit", profit);
 				request.setAttribute("promoCode", promoCode);
 				request.setAttribute("event1Code", event1Code);
