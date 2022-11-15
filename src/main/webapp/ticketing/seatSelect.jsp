@@ -272,7 +272,7 @@
             padding-top: 50px;
         }
         .container {
-			padding: 0 40px 200px 0;
+			    padding: 0 0px 200px 40px;
 			width:100%;
 			height: 100%;
 		}
@@ -287,7 +287,7 @@
 	<input type="hidden" value="${list.performPrice }" name="performPrice">
 	<input type="hidden" value="${seat.seatNum }" name="seatNum">
 	<input type="hidden" value="${list.rating }" name="rating">
-    <div class=".container">
+    <div class="container">
         <div class="header">
             <h1 class="logoName"><img src="image/perform/logo-f-b.png" alt="">
                 티켓</h1>
