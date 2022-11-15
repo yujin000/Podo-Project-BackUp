@@ -301,7 +301,7 @@ a {
 }
 
 .container {
-	padding: 0 40px 200px 0;
+	padding: 0 0px 200px 40px;
 	width: 100%;
 	height: 100%;
 }
@@ -312,32 +312,35 @@ a {
 
 .datepicker {
 	width:	647px ;
-	margin: 0 0 0 115px;
+	margin: 0 0 0 80px;
 }
 
 #ticketMenu {
 	display: flex;
 	justify-content: center;
 	align-items: center;
-	margin: 0 0 0 180px;
+	padding-bottom:25px;
+	font-size: 16px;
+	font-weight: bold;
+	margin: 10px 0 0 140px;
 	color: white;
-	margin: 0 0 0 180px;
-	border: 1px solid white;
-	width: 200px;
-	height: 60px
+	width: 350px;
+	height: 70.8px;
+	box-shadow: 0 0 8px rgba(0,0,0,0.3);
+	background-color: black;
 }
 
 #performTime {
 	display: flex;
 	justify-content: center;
 	align-items: center;
-	margin: 0 0 0 180px;
+	margin: 0 0 0 140px;
 	border: 1px solid black;
-	margin: 0 0 0 180px;
 	color: black;
 	background-color: white;
-	width: 200px;
+	width: 350px;
 	height: 200px;
+	box-shadow: 0 0 8px rgba(0,0,0,0.3);
 }
 </style>
 <script>
@@ -485,7 +488,7 @@ a {
 
 			<div class="MidContents2">
 				<div class="BtnCss">
-					<a href="seatSelect.perform" class="performTicketing">예매하기</a>
+					<a class="performTicketing">예매하기</a>
 				</div>
 			</div>
 
@@ -517,5 +520,16 @@ a {
       <img src="../image/web/logo-footer.png" alt="" style="width: 60px" />
       <p>© PODO Music Corp.</p>
     </footer>
+    <script>
+    $(".performTicketing").on("click", function(){
+    	let loginEmail = "${loginEmail }";
+       	if(loginEmail){
+       		location.href = "seatSelect.perform";
+            }else {
+           	 alert("로그인 후 이용해주세요");
+                return false;
+            }
+    });
+    </script>
 </body>
 </html>

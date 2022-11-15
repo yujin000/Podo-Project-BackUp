@@ -8,6 +8,7 @@
 <title>Insert title here</title>
 <script src="https://code.jquery.com/jquery-3.6.1.min.js"
         integrity="sha256-o88AwQnZB+VDvE9tvIXrMQaPlFFSUTR+nldQm1LuPXQ=" crossorigin="anonymous"></script>
+        <script type="text/javascript" src="https://cdn.iamport.kr/js/iamport.payment-1.1.5.js"></script>
     <style>
         /* 기본 Reset css 셋팅입니다 지우지 마세요 */
         @import url(src/css/reset.css);
@@ -272,7 +273,7 @@
             padding-top: 50px;
         }
         .container {
-			padding: 0 40px 200px 0;
+			    padding: 0 0px 200px 40px;
 			width:100%;
 			height: 100%;
 		}
@@ -280,14 +281,7 @@
 </head>
 
 <body>
-	<form action="/payment.perform" id="formSub" method="post">
-	<input type="hidden" value="${performSeq }" name="performSeq">
-	<input type="hidden" value="${list.performTitle }" name="performTitle">
-	<input type="hidden" value="${list.theaterName }" name="theaterName">
-	<input type="hidden" value="${list.performPrice }" name="performPrice">
-	<input type="hidden" value="${seat.seatNum }" name="seatNum">
-	<input type="hidden" value="${list.rating }" name="rating">
-    <div class=".container">
+    <div class="container">
         <div class="header">
             <h1 class="logoName"><img src="image/perform/logo-f-b.png" alt="">
                 티켓</h1>
@@ -334,12 +328,18 @@
             </div>
         </div>
     </div>
-    </form>
     <footer>
       <p>개인정보처리방침 | PODO 이용약관 | 고객센터 | 결제/환불안내 | 상담</p>
       <br />
       <img src="../image/web/logo-footer.png" alt="" style="width: 60px" />
       <p>© PODO Music Corp.</p>
+      <input type="hidden" value="${loginEmail }" id="user">
+      <input type="hidden" value="${performSeq }" name="performSeq">
+	  <input type="hidden" value="${list.performTitle }" name="performTitle">
+	  <input type="hidden" value="${list.theaterName }" name="theaterName">
+	  <input type="hidden" value="${list.performPrice }" name="performPrice">
+	  <input type="hidden" value="${seat.seatNum }" name="seatNum">
+	  <input type="hidden" value="${list.rating }" name="rating">
     </footer>
 </body>
 <script>
@@ -402,6 +402,13 @@
                 }
             })
             
+            let performSeq = "${performSeq }";
+			let performTitle = "${list.performTitle}";
+ 			let theaterName = "${list.theaterName}";
+ 			let performPrice = "${list.performPrice}";
+  			let seatNum = "${seat.seatNum}";
+  			let rating = "${list.rating}";
+            let userEmail = user.value;
             $(".payment").on("click", function () {
                 if (input.classList.contains("clicked")) {
                     input.classList.add("soldout");
@@ -412,12 +419,33 @@
                     })
                     input.classList.remove("clicked");
                     count = 0;
-                    $("#formSub").submit();
+                    
+                    var IMP = window.IMP;
+                    IMP.init('imp66837815');
+                    IMP.request_pay({
+                        pg: "kakaopay",
+                        pay_method: 'card',
+                        merchant_uid: 'merchant_' + new Date().getTime(),
+                        name: performTitle,
+                        amount: performPrice,
+                        buyer_email: userEmail,
+                        buyer_name: '구매자 이름'
+                    }, function (rsp) {
+                        if (rsp.success) {
+                            var msg = '결제가 완료되었습니다.';
+                            setTimeout(function(){
+                            	window.location.href = "/payment.perform?performSeq="+performSeq+"&performTitle="+performTitle+"&theaterName="+theaterName+"&performPrice="+performPrice+"&seatNum="+seatNum+"&rating="+rating;
+                            	alert("결제 완료");
+                            },1200);
+                        } else {
+                            var msg = '결제에 실패하였습니다.';
+                            rsp.error_msg;
+                        }
+                    });
                 }
             });
         }
     }
-
     function mapping(input, i, j) {
         if (i === 0) {
             input.value = "A" + j;

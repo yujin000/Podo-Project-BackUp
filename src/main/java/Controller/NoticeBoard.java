@@ -62,7 +62,7 @@ public class NoticeBoard extends HttpServlet {
 			} else if (uri.equals("/list.notice")) {
 				
 				int cpage = Integer.parseInt(request.getParameter("cpage"));
-				int rcpp = 10;
+				int rcpp = 13;
 				int ncpp = 10;
 				NoticeBoardDAO dao = NoticeBoardDAO.getInstance();
 				List<NoticeBoardDTO> noticeBoardList = dao.selectNotice(cpage * rcpp - (rcpp-1), cpage * rcpp);

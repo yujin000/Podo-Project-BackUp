@@ -327,12 +327,12 @@ div[class^=inInfo],.btnBox{
                                         <input type="hidden" class="seq" name="seq"
                                             value="${list.payGoodsSeq }">
                                         <div class="listWrap">
-                                            <div class="navi1"><b>· 상품코드</b><br><input type="text" value="${list.payGoodsSeq }" class="inProductsSeq" readonly></div>
-                                            <div class="navi2"><b>· 상품이름</b><br><input type="text" value="${list.payGoodsName }" class="inProductsName" readonly></div>
-                                            <div class="navi3"><b>· 상품가격</b><br><input type="text" value="${list.payGoodsPrice }" class="inProductsPrice" readonly></div>
-                                            <div class="navi4"><b>· 이용기간</b><br><input type="text" value="${list.payGoodsExp }" class="inProductsExpire" readonly></div>
-                                            <div class="navi5"><b>· 상품유형</b><br><input type="text" value="${list.payGoodsType }" class="inProductsType" readonly></div>
-                                            <div class="navi6"><b>· 상품설명</b><br><textarea class="inProductsInfo" style="color:black;"readonly>${list.payGoodsInfo } </textarea></div>
+                                            <div class="navi1"><b>상품코드</b><br><input type="text" value="${list.payGoodsSeq }" class="inProductsSeq" readonly></div>
+                                            <div class="navi2"><b>상품이름</b><br><input type="text" value="${list.payGoodsName }" class="inProductsName" readonly></div>
+                                            <div class="navi3"><b>상품가격</b><br><input type="text" value="${list.payGoodsPrice }" class="inProductsPrice" readonly></div>
+                                            <div class="navi4"><b>이용기간</b><br><input type="text" value="${list.payGoodsExp }" class="inProductsExpire" readonly></div>
+                                            <div class="navi5"><b>상품유형</b><br><input type="text" value="${list.payGoodsType }" class="inProductsType" readonly></div>
+                                            <div class="navi6"><b>상품설명</b><br><textarea class="inProductsInfo" style="color:black;"readonly>${list.payGoodsInfo } </textarea></div>
                                             <div id="btnBox2">
                                                 <button type="button" class="update" seq="${list.payGoodsSeq }">수정</button>
                                                 <button type="button" class="delete" seq="${list.payGoodsSeq }">삭제</button>
@@ -358,23 +358,23 @@ div[class^=inInfo],.btnBox{
                                 <div class="container">
                                     <div class="contentsInfo">
                                         <div class="inInfo1">
-                                            <b>· 상품명</b><br />
+                                            <b>상품명</b><br />
                                             <input type="text" name="payGoodsName" id="payGoodsName" class="textArea" maxlength="40"/><br />
                                         </div>
                                         <div class="inInfo2">
-                                            <b>· 상품가격</b><br />
+                                            <b>상품가격</b><br />
                                             <input type="text" name="payGoodsPrice" id="payGoodsPrice" class="textArea" maxlength="40"/><br />
                                         </div>
                                         <div class="inInfo3">
-                                            <b>· 이용기간</b><br />
+                                            <b>이용기간</b><br />
                                             <input type="text" name="payGoodsExp" id="payGoodsExp" class="textArea" value="1개월" readonly maxlength="40"/><br />
                                         </div>
                                         <div class="inInfo4">
-                                            <b>· 상품유형</b><br />
+                                            <b>상품유형</b><br />
                                             <input type="text" name="payGoodsType" id="payGoodsType" class="textArea" placeholder="프로모션 / 이용권" maxlength="20"/><br />
                                         </div>
                                         <div class="inInfo5">
-                                            <b>· 상품설명</b><br />
+                                            <b>상품설명</b><br />
                                             <textarea type="text" name="payGoodsInfo" id="payGoodsInfo" style="color: black" maxlength="50"></textarea>
                                         </div>
                                         <div class="btnBox">
