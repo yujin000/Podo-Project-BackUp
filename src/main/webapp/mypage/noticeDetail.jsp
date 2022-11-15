@@ -112,15 +112,16 @@
         #listBtn {
             margin-top: 2vh;
             width: 6vw;
-            height: 35px;
+            height: 40px;
             text-align: center;
             border-radius: 5px;
-            font-size: 15px;
+            font-size: 18px;
             font-weight: var(--font-weight);
+            line-height: var(--line-height);
             border: 1px solid gray;
             cursor: pointer;
             background: var(--background-color);
-            color: var(--font-color)
+            color: var(--font-color);
 /*             background-color: #00000d50; */
         }
 

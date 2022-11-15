@@ -267,7 +267,13 @@ uri="http://java.sun.com/jsp/jstl/core"%>
         $("#iframe").attr("src", "/chart.music");
       });
       $("#wishBtn").click(function () {
+    	let loginEmail = "${loginEmail}";
+        if (loginEmail) {
       	$("#iframe").attr("src", "/list.wish");
+        }else{
+        	alert("로그인 후 이용할 수 있습니다.");
+        	return false;
+        }
       });
       $("#mag").click(function () {
         $("#iframe").attr("src", "/view/mag.jsp");

@@ -94,13 +94,14 @@ public class MusicDTO {
 	
 	//위시리스트 목록 출력
 	public MusicDTO(String wishEmail, int musicSeq, String musicName,
-			String musicArtist, String musicAlbum) {
+			String musicArtist, String musicAlbum, String musicImg) {
 		super();
 		this.wishEmail = wishEmail;
 		this.musicSeq = musicSeq;
 		this.musicName = musicName;
 		this.musicArtist = musicArtist;
 		this.musicAlbum = musicAlbum;
+		this.musicImg = musicImg;
 	}
 	
 }

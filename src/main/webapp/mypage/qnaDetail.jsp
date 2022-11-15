@@ -58,31 +58,49 @@
             font-weight: var(--font-weight);
             line-height: var(--line-height);
             margin-bottom: 2vw;
-/*             background-color: #00000d50; */
         }
+        
         /*qna css */
         .qna {
             height: 100%;
             margin-top: 8vh;
-/*             background-color: lightgray; */
         }
         .qnalist {
             width: 100%;
-            height: 48vh;
+            height: 49vh;
             margin-top: 5vh;
-/*             background-color: #00000d80; */
         }
         #category {
             width: 100%;
-            font-size: 18px;
+            font-size: 20px;
             font-weight: var(--font-weight);
             line-height: var(--line-height);
+            border-bottom: 1px solid rgb(255,255,255,0.3);
+        }
+        #categoryP{
+    		width: 165px;
+    		font-family: "Noto Sans KR", sans-serif;
+    		font-weight: bold;
+    		background-color: #111;
+    		color: #fff;
+    		display: inline-block;
+    		margin-left: 3vw;
         }
         #title {
             width: 100%;
             font-size: 18px;
             font-weight: var(--font-weight);
             line-height: var(--line-height);
+            border-bottom: 1px solid rgb(255,255,255,0.3);
+        }
+        #titleP{
+        	width: 330px;
+    		font-family: "Noto Sans KR", sans-serif;
+    		font-weight: bold;
+    		background-color: #111;
+    		color: #fff;
+    		display: inline-block;
+    		margin-left: 5.3vw;
         }
         #contents{
             width: 100%;
@@ -90,20 +108,25 @@
             font-weight: var(--font-weight);
             line-height: var(--line-height);
         }
-        
+        #contentsDiv{
+        height:33vh;
+        border: 1px solid rgb(255,255,255,0.3);
+        padding-left: 10px;
+        }
         
         #listBtn {
-        	margin-top:2vh;
+            margin-top: 2vh;
             width: 6vw;
-            height: 35px;
+            height: 40px;
             text-align: center;
             border-radius: 5px;
-            font-size: 15px;
+            font-size: 18px;
             font-weight: var(--font-weight);
+            line-height: var(--line-height);
             border: 1px solid gray;
             cursor: pointer;
             background: var(--background-color);
-            color: var(--font-color)
+            color: var(--font-color);
 /*             background-color: #00000d50; */
         }
         #listBtn:hover {
@@ -120,14 +143,13 @@
             <div class="qnalist">
             
 					<div id="category">문의유형
-						${dtoDetail.qnaCategory }
-
+						<p id="categoryP">${dtoDetail.qnaCategory }</p>
 					</div>
 					<div id="title">제목
-                        ${dtoDetail.qnaTitle }
+                        <p id="titleP">${dtoDetail.qnaTitle }</p>
                     </div>
                     <div id="contents">문의 내용
-                        ${dtoDetail.qnaContents }            
+                        <div id=contentsDiv>${dtoDetail.qnaContents }</div>     
                     </div>
             </div>
             

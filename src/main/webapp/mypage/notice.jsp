@@ -39,10 +39,6 @@
             border: none;
         }
 
-/*          div {  */
-/*              border: 1px solid #fff;  */
-/*          } */
-
         body {
             width: 100vw;
             background: var(--background-color);
@@ -54,14 +50,12 @@
             padding: 0 75px;
             height: 100%;
             width: 100vw;
-/* 			background-color: bisque;  */
             margin-bottom:200px;
         }
 		
 		.main {
             height: 100%;
             margin-top: 8vh;
-/* 		    background-color: lightgray; */
         }
         
         .titleText {
@@ -69,7 +63,7 @@
             font-weight: var(--font-weight);
             line-height: var(--line-height);
             margin-bottom: 2vw;
-/* 			background-color: #00000d50; */
+            font-family: "EliceDigitalBaeum-Bd";
         }
         
         /*category css*/
@@ -82,23 +76,25 @@
         width:100%;
         height: 59px;
         font-size: 28px;
-        /* background-color:#00000d50; */
         text-aline:center;
         }
         
+        /* 공지사항 카테고리 */
         #notice{
+        min-width: 169px;
         float:left;
         width:10vw;
         line-height: var(--line-height);
         color: var(--font-color);
-/*         background-color: #00000d80; */
         }
+        
+        /* 내 문의 카테고리 */
         #myInquiry{
+        min-width: 253.5px;
         float:left;
         width:15vw;
         line-height: var(--line-height);
         color: var(--font-color);
-/*         background-color: #00000d90; */
         }
         
         /*division css*/
@@ -110,9 +106,6 @@
             line-height: var(--line-height);
         }
         
-        
-        
-        /*글 css*/
         
         /* 유형 */
         #category {
@@ -154,7 +147,7 @@
 			float: left;
             width: 20%;
             border-width: 0 0 1px;
-            border-bottom: var(--line-height);
+            line-height: var(--line-height);
 		}
 		
 		/* 작성일 */
@@ -171,20 +164,22 @@
             line-height: var(--line-height);
         }
         
-        /*list css*/
+        /*글 list 전체 틀*/
         .list{
 		margin-top: 2vh;
 		width: 100%;
-		height: 48vh;
+		height: 41vh;
 		border: 1px solid transparent;
         }
         
+        /* 글 1개 div */
         .writelist{
         width: 100%;
 		height: 46px;
 		font-size: 18px;
 		margin-top:2vh;
 		margin-bottom:2vh;
+		border-bottom: 1px solid rgb(255,255,255,0.3);
         }
         
         #navi{
@@ -192,6 +187,7 @@
         }
         #navi>a{
         color:white;
+        margin-right: 10px;
         }
     </style>
         <script
@@ -206,9 +202,10 @@
         <div class="main">
             <div class="titleText">고객센터</div>
             <div class="titleCategory">
-                    <div id="notice"><a href="/listLook.notice?cpage=1">공지사항</a>
-                    <hr style="border: solid 5px #3e065f; width: 60%"></div>
-                    <div id="myInquiry"><a href="/list.board?cpage=1">내 문의 내역</a></div>
+                    <div id="notice"><a href="/listLook.notice?cpage=1" style="color: var(--point-color);">공지사항</a></div>
+                    <div id="myInquiry">
+                    <a href="" id="inquiryBtn">내 문의 내역</a>
+                    </div>
             </div>
             
             <div class="division">
@@ -243,6 +240,19 @@
 			<div id="navi">${naviLook }</div>
         </div>
     </div>
+    
+    <script>
+    let loginEmail = "${loginEmail}";
+    document.getElementById("inquiryBtn").addEventListener("click",function(e){
+    	if (loginEmail) {
+    		e.preventDefault();
+    		location.href="/list.board?cpage=1";
+    	    }else{
+    	    	alert("로그인 후 이용할 수 있습니다.");
+    	    	return false;
+    	    }
+    });
+    </script>
 </body>
 
 </html>
