@@ -199,6 +199,7 @@
             line-height: 30px;
             left:20px;
             bottom:20px;
+            text-align:center;
         }
         #writeBtn:hover{
         	cursor:pointer;
@@ -245,7 +246,6 @@
                         	<div id="noticeTitleHeader">제목</div>
                         	<div id="noticeWriterHeader">작성자</div>
                         	<div id="noticeWriteDateHeader">작성일</div>
-                        	 <div id="writeBtn">공지사항 작성</div>
                         </div>
                         <div id="noticeList">
                         	<c:choose>
@@ -255,7 +255,7 @@
                         					<div class="noticeSeq">${i.noticeSeq }</div>
                         					<div class="noticeCategory">${i.noticeCategory }</div>
                         					<div class="noticeTitle">
-                                                <a href="/adminQnaDetail.board?noticeSeq=${i.noticeSeq }">${i.noticeTitle }</a>
+                                                <a href="/detail.notice?noticeSeq=${i.noticeSeq }">${i.noticeTitle }</a>
                                             </div>
                         					<div class="noticeWriter">${i.noticeWriter }</div>
                         					<div class="noticeWriteDate"><fmt:formatDate value="${i.noticeWriteDate }" pattern="yyyy-MM-dd"/></div>
@@ -269,6 +269,7 @@
                         	</c:choose>
                         </div>                                            
                     </div>
+                    <div id="writeBtn">공지사항 작성</div>
                     <div id="navi">${navi }</div>                    
                 </div>
             </div>
