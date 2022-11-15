@@ -71,16 +71,16 @@ public class QnaBoard extends HttpServlet {
 			} else if (uri.equals("/detail.board")) {
 				QnaBoardDAO dao = QnaBoardDAO.getInstance();
 				int qnaSeq = Integer.parseInt(request.getParameter("qnaSeq"));
-				QnaBoardDTO dtoDetail = dao.isSelect(qnaSeq);
-				
-				 QnaCommentDAO qdao = QnaCommentDAO.getInstance();
-		           List<QnaCommentDTO> qdto = qdao.selectC(qnaSeq);
-
-		           request.setAttribute("qdto",qdto);
+				QnaBoardDTO dtoDetail = dao.isSelect(qnaSeq);	
 		           
 				BoardFilesDAO fileDao = BoardFilesDAO.getInstance();
 				BoardFilesDTO dto = fileDao.select(qnaSeq);
 				String nickName = request.getSession().getAttribute("loginNickname").toString();
+				
+				QnaCommentDAO qdao = QnaCommentDAO.getInstance();
+				List<QnaCommentDTO> qdto = qdao.selectC(qnaSeq);
+				
+				request.setAttribute("qdto",qdto);
 				request.getSession().setAttribute("nickName", nickName);
 				request.setAttribute("fileDto",dto);
 				request.setAttribute("dtoDetail", dtoDetail);
