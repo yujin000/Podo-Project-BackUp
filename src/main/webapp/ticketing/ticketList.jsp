@@ -125,6 +125,7 @@
             background-color: rgba(253, 252, 240);
             color: #000;
             border: 1px solid black;
+            border-radius: 15px;
         }
         .rating{
             display: flex;
@@ -159,7 +160,7 @@
             margin-bottom: 35px;
         }
         .container{
-            padding: 0 40px 200px;
+            padding: 0 0px 200px 40px;
             height: 100%;
         }
         .deleteBtn{

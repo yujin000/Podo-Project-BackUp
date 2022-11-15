@@ -274,6 +274,7 @@ uri="http://java.sun.com/jsp/jstl/core"%>
       $("#mypageBtn").click(function () {
         $("#iframe").attr("src", "/mypage.member");
       });
+      let loginEmail = "${loginEmail }";
       $("#ticketing").click(function () {
         $("#iframe").attr("src", "/list.perform");
       });
