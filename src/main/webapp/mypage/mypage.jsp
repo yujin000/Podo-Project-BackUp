@@ -369,33 +369,18 @@
                 
                 <!-- 현재 회원의 예매내역 출력 -->
                 <tbody>
+                	<c:choose>
+					<c:when test="${not empty ticket}">
+					<c:forEach items="${ticket }" var="t">
                     <tr class="List">
                         <th>
                             <div style="padding-left: 1vw;">
-								<c:choose>
-										<c:when test="${not empty ticket}">
-										<c:forEach items="${ticket }" var="t">
 											${t.performTitle }
-											</c:forEach>
-										</c:when>
-										<c:otherwise>
-											예매한 내역이 없습니다.
-										</c:otherwise>
-								</c:choose>
 							</div>
                         </th>
                         <td>
                             <div>
-								<c:choose>
-										<c:when test="${not empty list}">
-										<c:forEach items="${list }" var="l">
-											<fmt:formatDate value="${l.startDate }" pattern="yyyy-MM-dd" />
-										</c:forEach>
-										</c:when>
-										<c:otherwise>
-											예매한 내역이 없습니다.
-										</c:otherwise>
-								</c:choose>
+							<fmt:formatDate value="${t.startDate }" pattern="yyyy-MM-dd" /> / 1매
 							</div>
                         </td>
                         <td>
@@ -405,6 +390,12 @@
                             </div>
                         </td>
                     </tr>
+                    </c:forEach>
+                    </c:when>
+                    <c:otherwise>
+					예매한 내역이 없습니다.
+					</c:otherwise>
+					</c:choose>
                 </tbody>
             </table>
         </div>
