@@ -268,7 +268,7 @@ uri="http://java.sun.com/jsp/jstl/core"%>
             	  if (resp == null) {
                       alert("요청 실패");
                     } else {
-                      alert("비밀번호가 임시비밀번호로 변경되었습니다!")
+                      alert($("#email").val()+" 로 임시비밀번호를 보내드렸습니다!")
                   	  location.href = "/member/loginForm.jsp"
                     }
               });
