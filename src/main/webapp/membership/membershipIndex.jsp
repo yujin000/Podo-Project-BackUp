@@ -201,7 +201,24 @@ div {
 	line-height:200px;
 	margin-top:100px;
 }
-
+.selectInfo{
+	width:80%;
+	margin-left:100px;
+	resize:none;
+	border:none;
+	background-color:transparent;
+	border-radius:5px;
+	color:white;
+	font-size:20px;
+	font-weight:bold;
+	height:100%;
+	line-height:35px;
+	font-family: 'NanumSquareNeoExtraBold';
+	padding-top:50px;
+}
+.selectInfo::-webkit-scrollbar{
+	display:none;
+}
 /* 결제화면 */
 #payment{
 	text-align:center;
@@ -275,7 +292,7 @@ div {
 			<div id="goodsInfo">
 				<br><span style="font-size:25px; font-weight:bold;">멤버십 혜택을 확인하세요</span>
 				<div id="selectInfo">
-					
+					<textarea class="selectInfo" disabled></textarea>
 				</div>
 				
 			</div>
@@ -284,7 +301,9 @@ div {
 			</div>
 		</div>
 		<!-- My 멤버십 -->
-		<div id="myMembershipArea">My멤버십</div>
+		<div id="myMembershipArea">
+			My멤버십
+		</div>
 		<input type="hidden" value="${loginEmail }" id="user">
 		<input type="hidden" value="${loginMembership }" id="logMemship">
 	</div>
@@ -361,9 +380,9 @@ div {
 			$("#payBtn").attr("price",price);
 			warning.remove();
 			
-			$("#selectInfo").text("");
+			$(".selectInfo").text("");
 			let info = $(this).attr("info");
-			$("#selectInfo").append(info);
+			$(".selectInfo").append("👽"+info);
 		})
 
 			/* 이벤트 상품 */
@@ -393,9 +412,9 @@ div {
 			$("#payBtn").attr("price",price);
 			warning.remove();
 			
-			$("#selectInfo").text("");
+			$(".selectInfo").text("");
 			let info = $(this).attr("info");
-			$("#selectInfo").append(info);
+			$(".selectInfo").append(info);
 		})
 
 		/* 결제하기 버튼 클릭시 결제하기 팝업 및 결제(로그인 여부 확인) */
