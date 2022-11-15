@@ -178,7 +178,7 @@ uri="http://java.sun.com/jsp/jstl/core"%>
         <p id="msg"></p>
         <button type="button" id="numberCheck">확인</button>
         <p>비밀번호</p>
-        <input type="text" name="pw" id="pw" placeholder="최소 7자~최대20자" />
+        <input type="password" name="pw" id="pw" placeholder="최소 7자~최대20자" />
         <p id="msg"></p>
         <p>비밀번호 재확인</p>
         <input type="text" id="pwCheck" />

@@ -80,7 +80,6 @@ a {
   width: 100%;
   border: none;
   cursor: pointer;
-
 }
 
 .loginBtn {
@@ -106,7 +105,6 @@ a {
   display: flex;
   align-items: center;
   justify-content: center;
- 
 }
 
 #mypage > img {
@@ -240,10 +238,65 @@ a {
 
 #MusicControl .hidden {
   width: 100vw;
-  height: 90vh;
+  height: 89vh;
   background: #222;
   display: none;
   opacity: 1;
+}
+.hidden > div {
+  width: 70%;
+  height: 100%;
+  padding: 15% 0px;
+  display: inline-block;
+  float: left;
+  text-align: center;
+}
+.hidden > div img {
+  width: 400px;
+  height: 400px;
+}
+.hidden ul {
+  width: 30%;
+  height: 100%;
+  display: inline-block;
+  background: rgba(0, 0, 0, 0.5);
+  padding: 0 10px;
+}
+.hidden ul > h3 {
+  font-size: 1.8rem;
+  font-family: "EliceDigitalBaeum-Bd";
+  margin-left: 10px;
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+.hidden ul > li.playList {
+  height: 70px;
+  padding: 10px;
+  align-items: center;
+}
+
+.hidden ul > li > div:first-child {
+  width: 12%;
+  display: inline-block;
+  float: left;
+}
+.hidden ul > li > div:last-child {
+  display: inline-block;
+  width: 88%;
+  float: left;
+  padding-left: 10px;
+}
+.hidden ul > li > div:last-child > p {
+  font-size: 15px;
+}
+.hidden ul > li > div:last-child > p:last-child {
+  color: silver;
+  font-size: 12px;
+  opacity: 0.8;
+}
+.hidden ul > li > img {
+  width: 100%;
+  display: inline-block;
 }
 #MusicControl .controller {
   width: 100%;
@@ -259,7 +312,6 @@ a {
 .controller > .musicInfo {
   display: flex;
 }
-
 
 .musicInfo li:nth-child(1) {
   width: 60px;
@@ -320,6 +372,7 @@ a {
   font-size: 25px;
   color: #888;
   line-height: 60px;
+  cursor: pointer;
 }
 
 .controlBtn li:nth-child(3) span {
@@ -375,7 +428,7 @@ li:nth-child(4) span {
   height: 30px;
   line-height: 30px;
   text-align: center;
-   font-family: "EliceDigitalBaeum-Bd";
+  font-family: "EliceDigitalBaeum-Bd";
 }
 
 .service {
