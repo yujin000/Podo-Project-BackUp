@@ -144,9 +144,11 @@
         	width : 10%;
         }
         #qnaTitleHeader, .qnaTitle {
+            margin-left:70px;
        		width : 30%;
         }
         #qnaWriterHeader, .qnaWriter {
+            margin-left:50px;
         	width : 20%;
         }
         #qnaWriteDateHeader, .qnaWriteDate {
@@ -184,9 +186,45 @@
         	font-weight:bold;
         }
         .commentContents, #contentsMain{
-        	border:1px solid black;
-        	width : 1000px;
-        	height : 150px;
+        	width : 1200px;
+        }
+        .commentList{
+            margin-left:100px;
+        }
+        #qnaContents{
+            margin-left:100px;
+        }
+        #comments{
+            margin-left:100px;
+            position:absolute;
+            bottom:40px;
+        }
+        #comment{
+            width:1200px;
+            height:100px;
+            resize: none;
+        }
+        #sectionHr{
+            width:1350px;
+            margin-left:100px;
+        }
+        #commentBtn{
+            background-color: #FF0050;
+            color:white !important;
+            width:100px;
+            height:30px;
+            border-radius: 5px;
+            border:none;
+            position:absolute;
+            margin-right:100px;
+            font-size:15px;
+            line-height: 30px;
+            right:10px;
+            bottom:45px;
+            text-align:center;
+        }
+        #commentBtn:hover{
+        	cursor:pointer;
         }
     </style>
 </head>
@@ -240,43 +278,42 @@
                             </div>
                             <hr id="listHr">
                         </div>
-                        <div >
-                        	<div id="contentsTitle">문의내용<br></div>
+                        <div id="qnaContents">
+                            <div>
+                                첨부파일 : <a href="/download.file?sysname=${boardFile.sysName }&oriname=${boardFile.oriName}">${boardFile.oriName }</a> 
+                           </div>  
                             <div id="contentsMain">
                             ${qnaBoard.qnaContents }
-                            </div>
-                            <div>
-                                 첨부파일 : <a href="/download.file?sysname=${boardFile.sysName }&oriname=${boardFile.oriName}">${boardFile.oriName }</a> 
-                            </div>            		
+                            </div>       		
                         </div> 
                         
                         <br>
                         <br>
-                        
+                        <hr id="sectionHr">
                         <c:choose>
                             <c:when test= "${not empty commentList }">
                                 <c:forEach var="i" items = "${commentList }">
                                 <div class="commentList">
-                                    <div class="commentWriter">답변 작성자 : ${i.qnaCommentWriter }</div>
-                                    <div>답변내용<br></div>
+                                    <div>답변<br></div>
+                                    <div class="commentWriter">${i.qnaCommentWriter } 님의 답변</div>
+                                    <div class="commentWriteDate">작성시간 : <fmt:formatDate value="${i.qnaCommentWriteDate }" pattern="yyyy-MM-dd hh:mm"/></div><br>
                                     <div class="commentContents">${i.qnaCommentContents }</div>
-                                    <div class="commentWriteDate"><br>답변작성 시간 : <fmt:formatDate value="${i.qnaCommentWriteDate }" pattern="yyyy-MM-dd hh:mm"/></div>
                                 </div>            				
                                 </c:forEach>
                             </c:when>
                         <c:otherwise>
-                            <div>답변이 없습니다.</div>
+                            <div style="margin-left:100px;">아직 답변이 없습니다.</div>
                         </c:otherwise>
                         </c:choose>
             	
                         <form action="/write.qnaC" id="form">
                             <c:if test="${count eq '0' }">
                                 <div id="comments">
-                                    <div>답변 작성</div>
+                                    <div>답변하기</div>
                                     <textarea id="comment" name="comment"></textarea>
-                                    <button type="button" id="commentBtn">댓글쓰기</button>
                                     <input type="hidden" value="${qnaBoard.qnaSeq }" name="qnaSeq">
                                 </div>
+                                <button type="button" id="commentBtn">댓글쓰기</button>
                             </c:if>
                         </form>  
                     </div>

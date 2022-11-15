@@ -363,14 +363,14 @@ div[class^=inInfo],.btnBox{
 										<div class="navi1" id="performImg">
 											<img src="/admin/${perform.poster }" id="posterImg">
 										</div>
-                                        <div class="navi2"><b>· 극장명</b><br><input type="text" value="${perform.theaterName }" class="intheaterName" readonly></div>
-                                        <div class="navi3"><b>· 공연이름</b><br><input type="text" value="${perform.performTitle }" class="inperformTitle" readonly></div>
-                                        <div class="navi4"><b>· 상영시간</b><br><input type="text" value="${perform.showtime }" class="inshowtime" readonly></div>
-                                        <div class="navi5"><b>· 시작일</b><input type="text" value="<fmt:formatDate value="${perform.startDate }" pattern="yyyy-MM-dd"/>" class="instartDate" readonly></div>
-                                        <div class="navi6"><b>· 종료일</b><input type="text" value="<fmt:formatDate value="${perform.endDate }" pattern="yyyy-MM-dd"/>" class="inendDate" readonly></div>
-                                        <div class="navi7"><b>· 가격</b><br><input type="text" value="${perform.performPrice }" class="inperformPrice" readonly></div>
-                                        <div class="navi8"><b>· 관람등급</b><br><input type="text" value="${perform.rating }" class="inrating" readonly></div>
-                                        <div class="navi9"><b>· 장르</b><br><input type="text" value="${perform.genre }" class="ingenre" readonly></div>
+                                        <div class="navi2"><b>극장명</b><br><input type="text" value="${perform.theaterName }" class="intheaterName" readonly></div>
+                                        <div class="navi3"><b>공연이름</b><br><input type="text" value="${perform.performTitle }" class="inperformTitle" readonly></div>
+                                        <div class="navi4"><b>상영시간</b><br><input type="text" value="${perform.showtime }" class="inshowtime" readonly></div>
+                                        <div class="navi5"><b>시작일</b><input type="text" value="<fmt:formatDate value="${perform.startDate }" pattern="yyyy-MM-dd"/>" class="instartDate" readonly></div>
+                                        <div class="navi6"><b>종료일</b><input type="text" value="<fmt:formatDate value="${perform.endDate }" pattern="yyyy-MM-dd"/>" class="inendDate" readonly></div>
+                                        <div class="navi7"><b>가격</b><br><input type="text" value="${perform.performPrice }" class="inperformPrice" readonly></div>
+                                        <div class="navi8"><b>관람등급</b><br><input type="text" value="${perform.rating }" class="inrating" readonly></div>
+                                        <div class="navi9"><b>장르</b><br><input type="text" value="${perform.genre }" class="ingenre" readonly></div>
 										<div id="btnBox2">
 											<button type="button" class="update" pSeq="${perform.performSeq }">수정</button>
 											<button type="button" class="delete" seq="${perform.performSeq }">삭제</button>
@@ -396,27 +396,27 @@ div[class^=inInfo],.btnBox{
                                             <img id="preview">
                                         </div>
                                         <div class="inInfo1">
-                                            <b>· 공연장</b><br />
+                                            <b>공연장</b><br />
                                             <input type="text" name="theaterName" id="theaterName" class="textArea" maxlength="40"/><br />
                                         </div>
                                         <div class="inInfo2">
-                                            <b>· 공연이름</b><br />
+                                            <b>공연이름</b><br />
                                             <input type="text" name="performTitle" id="performTitle" class="textArea" maxlength="40"/><br />
                                         </div>
                                         <div class="inInfo3">
-                                            <b>· 상영시간</b><br />
+                                            <b>상영시간</b><br />
                                             <input type="text" name="showtime" id="showtime" class="textArea" maxlength="40"/><br />
                                         </div>
                                         <div class="inInfo4">
-                                            <b>· 티켓 가격</b><br />
+                                            <b>티켓 가격</b><br />
                                             <input type="text" name="performPrice" id="performPrice" class="textArea" maxlength="20"/><br />
                                         </div>
                                         <div class="inInfo5">
-                                            <b>· 관람 등급</b><br />
+                                            <b>관람 등급</b><br />
                                             <input type="text" name="rating" id="rating" style="color: black" maxlength="20"/>
                                         </div>
                                         <div class="inInfo6">
-                                            <b>· 장르</b><br />
+                                            <b>장르</b><br />
                                             <input type="text" name="rating" id="rating" style="color: black" maxlength="20"/>
                                         </div>
                                         <div class="inInfo7">
