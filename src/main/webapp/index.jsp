@@ -60,7 +60,9 @@ uri="http://java.sun.com/jsp/jstl/core"%>
         background: #222;
         opacity: 0.9;
       }
-      
+      .playlist img{
+      	width:20px;
+      }
     </style>
   </head>
   <body>

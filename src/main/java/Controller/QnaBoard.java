@@ -76,6 +76,11 @@ public class QnaBoard extends HttpServlet {
 				BoardFilesDAO fileDao = BoardFilesDAO.getInstance();
 				BoardFilesDTO dto = fileDao.select(qnaSeq);
 				String nickName = request.getSession().getAttribute("loginNickname").toString();
+				
+				QnaCommentDAO qdao = QnaCommentDAO.getInstance();
+				List<QnaCommentDTO> qdto = qdao.selectC(qnaSeq);
+				
+				request.setAttribute("qdto",qdto);
 				request.getSession().setAttribute("nickName", nickName);
 				request.setAttribute("fileDto",dto);
 				request.setAttribute("dtoDetail", dtoDetail);
