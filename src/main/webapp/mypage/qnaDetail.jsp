@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+    <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html>
 
@@ -158,7 +159,11 @@
             </div>
             
             <div>
-            댓글 :
+            
+			<c:forEach var='i' items='${qdto }'>
+				댓글 : ${i.qnaCommentContents }
+			</c:forEach>
+
             </div>
             <div style="float:right;">
               <button type="button" id="listBtn">목록</button>
