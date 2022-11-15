@@ -118,7 +118,7 @@
       </h1>
       <form action="/login.member" method="post">
         <input type="text" name="email" placeholder="email" />
-        <input type="text" name="pw" placeholder="password" />
+        <input type="password" name="pw" placeholder="password" />
         <button type="submit" id="loginBtn">로그인</button>
       </form>
       <a href="inputForm.jsp">회원가입</a>
