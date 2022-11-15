@@ -371,7 +371,7 @@ div[class^=inInfo],.btnBox{
                                         </div>
                                         <div class="inInfo4">
                                             <b>상품유형</b><br />
-                                            <input type="text" name="payGoodsType" id="payGoodsType" class="textArea" placeholder="프로모션 / 이용권" maxlength="20"/><br />
+                                            <input type="text" name="payGoodsType" id="payGoodsType" class="textArea" placeholder="프로모션 / 이벤트" maxlength="20"/><br />
                                         </div>
                                         <div class="inInfo5">
                                             <b>상품설명</b><br />
