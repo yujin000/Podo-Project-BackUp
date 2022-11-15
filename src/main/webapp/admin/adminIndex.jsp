@@ -2,6 +2,7 @@
    pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -206,10 +207,11 @@
         }
         .islandTitle{
             height:45px;
-            line-heifht:45px;
+            line-height:45px;
             font-size:25px;
             font-weight:bold;
             display:inline-block;
+            color:black;
         }
         .islandTitle>a:hover{
         	cursor:pointer;
@@ -276,6 +278,48 @@
         	display:inline;
         	background-color:white;
         }
+        /* 통계 */
+        .chart{
+            width:330px;
+            height:130px;
+            position: relative;
+            overflow: hidden;
+            border-left:1px solid black;
+            margin:20px 0px 0px 20%;
+        }
+        div[class^=graph]{
+            height:25px;
+            margin-top:15px;
+            background-color: #01B9FF;
+            width:0px;
+        }
+        #promoNum,#event1Num,#event2Num{
+            float:right;
+            line-height:25px;
+            border:none;
+            margin-bottom:10px;
+        }
+        .proName{
+            float:left;
+            margin-top:60px;
+        }
+
+        #profit{
+            font-size:30px;
+            font-weight:bold;
+            margin:10px 0px 0px 145px;
+        }
+        #won{
+            float:right;
+            font-size:30px;
+            margin-bottom:30px;
+        }
+        #countMem{
+            text-align: center;
+            font-size: 30px;
+            margin-top:80px;
+        }
+        
 </style>
 </head>
 
@@ -309,9 +353,30 @@
     <div class="mainContents">
         <div class="leftArea">
             <div id="graph">
-                <div class="mainIsland" id="sales">매출액</div>
+                <div class="mainIsland" id="sales">
+                    <div class="islandTitle" id="salesData">판매량 / 매출액</div>
+                    <div class="proName">
+                            <div class="setting">${promoCode }</div>
+                            <div class="setting">${event1Code }</div>
+                            <div class="setting">${event2Code }</div>
+                    </div>
+                        
+                    <div class="chart">
+                        <div class="graph" id="promo">
+                            <div id="promoNum"></div>
+                        </div>
+                        <div class="graph" id="event1">
+                            <div id="event1Num"></div>
+                        </div>
+                        <div class="graph" id="event2">
+                            <div id="event2Num"></div>
+                        </div>
+                    </div>
+                    <div id="profit">0</div>
+                </div>
                 <div class="mainIsland" id="memberCount">
-                	회원 수 = ${memberCount }
+                    <div class="islandTitle">회원수</div>
+                    <div id="countMem">${memberCount } 명</div>
                 </div>
             </div>
             <div id="qnaArea">
@@ -380,6 +445,10 @@
             </div>
         </div>                                          
     </div>
+    <input type="hidden" value="${profit }" id="adminProfit">
+	<input type="hidden" value="${promoCount }" id="promoCount">
+	<input type="hidden" value="${event1Count }" id="event1Count">
+	<input type="hidden" value="${event2Count }" id="event2Count">
 </div>
     <script>
 		// 관리자 버튼 토글
@@ -387,6 +456,65 @@
 		$(adminBtn).click(function() {
 			$(this).next(".tog").fadeToggle();
 		});
+        // 그래프 애니메이션
+        let proNum = $("#promoCount").val();
+        let	eventNum1 = $("#event1Count").val();
+        let eventNum2 = $("#event2Count").val();
+        
+        $( document ).ready( function() {
+            setTimeout(function(){
+                $("#promo").animate( {
+                    width: proNum*3+"%" 
+                } );
+            },2000);
+
+            setTimeout(function(){
+                $("#promoNum").append(proNum);
+            },2500);
+
+            setTimeout(function(){
+                $("#event1").animate( {
+                    width: eventNum1*3+"%" 
+                } );
+            },2800);
+
+            setTimeout(function(){
+                $("#event1Num").append(eventNum1);
+            },3300);
+
+            setTimeout(function(){
+                $("#event2").animate( {
+                    width: eventNum2*3+"%" 
+                } );
+            },3600);
+
+            setTimeout(function(){
+                $("#event2Num").append(eventNum2);
+            },4100);
+        } );
+
+        // 매출액 효과
+        const $counter = document.querySelector("#profit");
+        let profit = $("#adminProfit").val();
+
+        counter($counter, profit);
+        function counter($counter, max) {
+            let now = max;
+            const handle = setInterval(() => {
+                $counter.innerHTML = Math.ceil(max - now);
+                if (now < 1) {
+                    clearInterval(handle);
+                }
+                const step = now / 10;
+                now -= step;
+            }, 50); 
+        }
+
+        // 가격 포맷
+        let won = "원";
+        setTimeout(function(){
+            $("#profit").append(won);
+        },7000);
 	</script>
 </body>
 

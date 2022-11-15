@@ -731,7 +731,9 @@
     
     // 이용권 환불하기
     $("#delBtn").on("click",function(){
-    	window.parent.location.href = "/refund.paymem";
+    	if(confirm("환불은 영업일 기준 1~3일 정도 소요됩니다. 환불하시겠습니까?")){
+    		window.parent.location.href = "/refund.paymem";
+    	}
     })
     
     </script>
