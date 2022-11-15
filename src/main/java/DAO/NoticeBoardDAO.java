@@ -153,7 +153,7 @@ public class NoticeBoardDAO {
 		}
 		
 		for (int i=startNavi; i<=endNavi; i++) {
-			sb.append("<a href='/list.notice?cpage=" + i + "'>" + i + "</a> ");
+			sb.append("<a href='/list.notice?cpage=" + i + "' style='color:black;margin-left:5px;' onclick=\"myfunction(this)\">" + i + "</a> ");
 		}
 		
 		if (needNext) {
