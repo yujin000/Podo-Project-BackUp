@@ -6,100 +6,193 @@
 <html lang="en">
 
 <head>
-<meta charset="UTF-8" />
-<meta http-equiv="X-UA-Compatible" content="IE=edge" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>문의내역 관리</title>
-<link rel="stylesheet" href="/src/css/style.css" />
-<script src="https://code.jquery.com/jquery-3.6.1.min.js"
-   integrity="sha256-o88AwQnZB+VDvE9tvIXrMQaPlFFSUTR+nldQm1LuPXQ="
-   crossorigin="anonymous"></script>
-<style>
-/* 공통 css와 겹쳐서 초기화 */
-.loginBtn {
-   border-top: 0px;
-   border-bottom: 0px;
-   margin-bottom: 0px;
-}
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>문의내역 확인</title>
+    <link rel="stylesheet" href="/src/css/style.css" />
+    <script src="https://code.jquery.com/jquery-3.6.1.min.js"
+        integrity="sha256-o88AwQnZB+VDvE9tvIXrMQaPlFFSUTR+nldQm1LuPXQ=" crossorigin="anonymous"></script>
+    <style>
+        /* 관리자페이지 세팅 초기값 */
+        @media(max-width:1500px) {
+            .html {
+                width: 1500px;
+            }
+        }
 
-#Header {
-   position: fixed !important;
-}
+        * div:not(#Header) {
+            color: #515151;
+        }
 
-.adminContents {
-   position: absolute;
-   left: 230px;
-   background: var(- -background-color);
-   width: 100%;
-   height: 100vh;
-   margin: 50px 0px 0px 140px;
-   overflow-y: scroll;
-}
+        #list,
+        .listLi {
+            color: #515151;
+            height: 50px;
+            line-height: 50px;
+        }
 
-.adminMainHeader {
-   width: 85vw;
-   height: 13vh;
-   background-color: lightgray;
-   margin: 0px 10px 0px 10px;
-   position: relative;
-}
+        .listLi:hover {
+            cursor: pointer;
+            background-color: #01B9FF;
+        }
 
-.mainText {
-   font-size: 36px;
-}
+        .loginBtn {
+            border-top: 0px;
+            border-bottom: 0px;
+            margin-bottom: 0px;
+        }
 
-.adminMainHeader span {
-   margin-left: 30px;
-}
+        body {
+            background: #EEEEEE;
+        }
 
-.adminMainView {
-   color: white;
-   width: 1200px;
-}
+        .html {
+            overflow: hidden;
+        }
 
-.tog {
-   top: 130px;
-}
-.header, #header2{
-	height:30px;
-}
-.header>div, #header2>div{
-	float:left;
-}
-#qnaSeqHeader, #qnaSeq{
-	width : 5%;
-}
-#qnaCategoryHeader, #qnaWriteDateHeader, #qnaCategory, #qnaWriteDate {
-	width : 10%;
-}
-#qnaTitleHeader, #qnaTitle {
-	width : 20%;
-}
-#qnaWriterHeader, #qnaWriter {
-	width : 15%;
-}
-#contents{
-	width : 800px;
-}
-#comment {
-	resize:none;
-	width : 400px;
-	height : 100px;
-}
+        .wrap {
+            width: 230px;
+            height: 100vh;
+            float: left;
+        }
 
-</style>
+        #Header {
+            position: fixed !important;
+            background-color: #515151;
+        }
+
+        .adminContents {
+            width: 84%;
+            height: 100vh;
+            overflow-y: scroll;
+            float: left;
+            padding-left: 2%;
+            padding-top: 2%;
+        }
+
+        .adminMainHeader {
+            width: 85vw;
+            height: 13vh;
+            background-color: lightgray;
+            position: relative;
+        }
+
+        .mainText {
+            font-size: 30px;
+            border: 1px solid silver;
+            width: 100%;
+            height: 70px;
+            background-color: #FFFFFF;
+            line-height: 60px;
+            padding-left: 20px;
+        }
+
+        .adminMainView {
+            width: 100%;
+            margin: auto;
+        }
+
+        .tog {
+            top: 130px;
+        }
+
+        .mainList {
+            margin-top: 30px;
+            background-color: #FFFFFF;
+            border: 1px solid silver;
+            height: 400px;
+            width: 20%;
+            float: left;
+            display : none;
+        }
+
+        .mainContents {
+            background-color: #FFFFFF;
+            border: 1px solid silver;
+            float: left;
+            position: relative;
+            width: 100%;
+            height: 700px;
+            margin-top: 30px;
+            overflow: hidden;
+        }
+
+        div[id^=mainConArea] {
+            width: 100%;
+            height: 95%;
+        }
+        
+        #mainConArea2 {
+            display: hidden;
+        }
+        
+        input{
+            color:black;
+        }
+        
+        #listHeader>div, .qnaList>div {
+            float : left;
+            text-align : center;
+            height : 30px;
+        }
+        #qnaSeqHeader, .qnaSeq {
+        	width : 15%;
+        }
+        #qnaCategoryHeader, .qnaCategory {
+        	width : 10%;
+        }
+        #qnaTitleHeader, .qnaTitle {
+       		width : 30%;
+        }
+        #qnaWriterHeader, .qnaWriter {
+        	width : 10%;
+        }
+        #qnaWriteDateHeader, .qnaWriteDate {
+        	width : 10%;
+        }
+
+        .qnaList, #listHeader {
+        	height : 30px;
+        }
+        #listHeader{
+        	height : 60px;
+            line-height:60px;
+        	font-size:20px;
+        	background-color:#01B9FF;
+        }
+        #listHeader>div{
+            color:white !important;
+       	}
+        #navi {
+        	height : 5%;
+        	text-align : center;
+        }
+        #qnaList{
+        	margin-top:10px;
+        }
+        #listHr{
+        	margin:5px 0px 5px 0px;
+        }
+        .qnaTitle>a{
+            color:black;
+            font-weight: bold;
+        }
+        /*기본*/
+    </style>
 </head>
 
 <body>
-   <div class="wrap">
-      <div id="Header">
-         <h1 id="logo">
+    <div class="html">
+        <div class="wrap">
+            <div id="Header">
+                <h1 id="logo">
                     <a href="/adminMain.member?nickname=${loginNickname }"><img src="/image/web/logo-f-5.png"
                             alt="" /></a>
                 </h1>
-         <div id="mypage">
-            <a class="loginBtn">${nickName }</a>
-         </div>
+                <div id="mypage">
+                    <a class="loginBtn">${nickName }</a>
+                </div>
 			<ul class="tog">
 				<li><a href="/start.music">메인페이지로</a></li>
 				<li><a href="/logout.member">로그아웃</a></li>
@@ -114,61 +207,68 @@
 					<li><a href="/adminList.board?cpage=1">문의내역 확인</a></li>
 				</ul>
 			</div>
-      </div>
-      <div class="adminContents">
-         <div class="adminMainView">
-            <div class="mainText">문의내역 확인</div>
-            <br>
-            <hr>   
-         </div>
-         <div class="header">
-         			<div id="qnaSeqHeader">문의 번호</div>
-            		<div id="qnaCategoryHeader">문의 유형</div>
-            		<div id="qnaTitleHeader">제목</div>
-            		<div id="qnaWriterHeader">작성자</div>
-            		<div id="qnaWriteDateHeader">문의 날짜</div>
             </div>
-            	<div id="header2">            				
-            		<div id="qnaSeq">${qnaBoard.qnaSeq }</div>
-            		<div id="qnaCategory">${qnaBoard.qnaCategory }</div>
-            		<div id="qnaTitle">${qnaBoard.qnaTitle }</div>
-            		<div id="qnaWriter">${qnaBoard.qnaWriter }</div>
-            		<div id="qnaWriteDate">${qnaBoard.qnaWriteDate }</div>
-            	</div>
-            	<div id="contents">
-            		<div>문의 내용</div>
-            		${qnaBoard.qnaContents }
-            		<div>
-                 		첨부파일 : <a href="/download.file?sysname=${boardFile.sysName }&oriname=${boardFile.oriName}">${boardFile.oriName }</a> 
-            		</div>            		
-            	</div>
+        </div>
+        <div class="adminContents">
+            <div class="adminMainView">
+                <div class="mainText">문의내역 확인</div>
+                <div class="mainContents">
+                    <div id="mainConArea1">
+                    	<div id="listHeader">
+                        	<div id="qnaSeqHeader">문의 번호</div>
+                        	<div id="qnaCategoryHeader">문의 유형</div>
+                        	<div id="qnaTitleHeader">제목</div>
+                        	<div id="qnaWriterHeader">작성자</div>
+                        	<div id="qnaWriteDateHeader">문의 날짜</div>
+                        </div>
+                        <div id="qnaList">
+                            <div class="qnaList">
+                                <div class="qnaSeq">${qnaBoard.qnaSeq }</div>
+                                <div class="qnaCategory">${qnaBoard.qnaCategory }</div>
+                                <div class="qnaTitle">${qnaBoard.qnaTitle }</div>
+                                <div class="qnaWriter">${qnaBoard.qnaWriter }</div>
+                                <div class="qnaWriteDate">${qnaBoard.qnaWriteDate }</div>
+                            </div>
+                            <hr id="listHr">
+                        </div>
+                        <div id="contents">
+                            <div>문의 내용</div>
+                            ${qnaBoard.qnaContents }
+                            <div>
+                                 첨부파일 : <a href="/download.file?sysname=${boardFile.sysName }&oriname=${boardFile.oriName}">${boardFile.oriName }</a> 
+                            </div>            		
+                        </div> 
+                        
+                        <c:choose>
+                            <c:when test= "${not empty commentList }">
+                                <c:forEach var="i" items = "${commentList }">
+                                    <div>답변 작성자 : ${i.qnaCommentWriter }</div>
+                                    <div>답변 내용 : ${i.qnaCommentContents }</div>
+                                    <div>답변작성 시간 : ${i.qnaCommentWriteDate }</div>            				
+                                </c:forEach>
+                            </c:when>
+                        <c:otherwise>
+                            <div>답변이 없습니다.</div>
+                        </c:otherwise>
+                        </c:choose>
             	
-            	<c:choose>
-            		<c:when test= "${not empty commentList }">
-            			<c:forEach var="i" items = "${commentList }">
-            				<div>답변 작성자 : ${i.qnaCommentWriter }</div>
-            				<div>답변 내용 : ${i.qnaCommentContents }</div>
-            				<div>답변작성 시간 : ${i.qnaCommentWriteDate }</div>            				
-            			</c:forEach>
-            		</c:when>
-            		<c:otherwise>
-            			<div>답변이 없습니다.</div>
-            		</c:otherwise>
-            	</c:choose>
-            	
-            	<form action="/write.qnaC" id="form">
-            	<c:if test="${count eq '0' }">
-            	<div id="comments">
-            		<div>답변 작성</div>
-            		<textarea id="comment" name="comment"></textarea>
-            		<button type="button" id="commentBtn">댓글쓰기</button>
-            		<input type="hidden" value="${qnaBoard.qnaSeq }" name="qnaSeq">
-            	</div>
-            	</c:if>
-            	</form>            	
-      </div>
-   </div>
-   <script>
+                        <form action="/write.qnaC" id="form">
+                            <c:if test="${count eq '0' }">
+                                <div id="comments">
+                                    <div>답변 작성</div>
+                                    <textarea id="comment" name="comment"></textarea>
+                                    <button type="button" id="commentBtn">댓글쓰기</button>
+                                    <input type="hidden" value="${qnaBoard.qnaSeq }" name="qnaSeq">
+                                </div>
+                            </c:if>
+                        </form>  
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
       // 관리자 버튼 토글
       let adminBtn = document.getElementById("mypage");
       $(adminBtn).click(function() {
@@ -183,8 +283,11 @@
     		  $("#form").submit();
     	  }
       });
-      
-   </script>
+
+
+
+
+    </script>
 </body>
 
 </html>
