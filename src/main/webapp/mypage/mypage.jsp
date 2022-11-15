@@ -383,7 +383,7 @@
                         <td>
                         	<!-- detailBtn: 예매내역 상세보기 버튼 -->
                             <div id="detailBtn">
-                                <a href="" style="color: var(--font-color)">상세보기</a>
+                                <a href="/ticketList.perform" style="color: var(--font-color)">상세보기</a>
                             </div>
                         </td>
                     </tr>
@@ -533,6 +533,8 @@
         		 $("#pwChang").attr("disabled", false);
         		 $("#pwCheck").attr("disabled", false);
         		 pwOk = true;
+        		 console.log(pwOk);
+        		 console.log(result);
              } else { 
                  $("#pw").next("#msg").html("일치하지 않습니다.").css("color", "#888");
                  $("#pwChang").attr("disabled", true);
@@ -546,22 +548,32 @@
     //비밀번호 재설정
     $("#pwChang").keyup(function () {
         let result = pwRegex.test($(this).val());
+        if($(this).val() == ""){
+        	pwResult = false;
+        }
         if ($(this).val() !== "" && !result) {
         	$(this).next("#msg").css("color", "#888").text("대문자, 소문자, 숫자, !@#$% 만 사용 가능합니다. ");
         	$("#pwCheck").next("#msg").text("");
         	pwResult = false;
-        } else{
+        	console.log("pwChang / if : "+pwResult);
+        } 
+        else{
+        	pwResult = true;
         	$("#pwChang").next("#msg").text("");
         	$("#pwCheck").next("#msg").text("");
         	if($(this).val()=== $("#pwCheck").val() && $(this).val()!=="" 
         		&& $("#pwCheck").val()!=="" ) {
         	$("#pwCheck").next("#msg").text("비밀번호가 일치합니다");
         	pwResult = true;
+        	console.log("true : "+pwResult);
         } else if($(this).val()==""||$("#pwCheck").val()=="") {
           $(this).next("#msg").text("");
+          console.log("pwChang / else if : "+pwResult);
+          pwResult = false;
         } else {
         	$("#pwCheck").next("#msg").text("비밀번호가 일치하지 않습니다.");
         	pwResult = false;
+        	console.log("pwChang / else : "+pwResult);
 		}
         }
       });
@@ -574,17 +586,22 @@
         if(!result){
         	$(this).next("#msg").css("color", "#888").text("비밀번호가 일치하지 않습니다!");
         	pwCheckResult = false;
+        	console.log("pwcheck / if : "+pwCheckResult);
         }else{
         	$("#pwCheck").next("#msg").text("");
         	if($(this).val()=== $("#pwChang").val() && $(this).val()!=="" 
         		&& $("#pwChang").val()!=="") {
         	$(this).next("#msg").text("비밀번호가 일치합니다");
         	pwCheckResult = true;
+        	console.log("pwcheck / true : "+pwCheckResult);
         } else if($(this).val()==""||$("#pwChang").val()=="") {
           $(this).next("#msg").text("");
+          pwCheckResult = false;
+          console.log("else if : "+pwCheckResult);
         } else {
         	$("#pwCheck").next("#msg").text("비밀번호가 일치하지 않습니다.");
         	pwCheckResult = false;
+        	console.log("pwcheck / else : "+pwCheckResult);
 		}
         	
         }
@@ -675,11 +692,11 @@
 		}
 		if(pwOk){
 			if(!pwResult){
-				alert("변경하실 비밀번호를 확인해주세요");
+				alert("변경하실 비밀번호를 확인해주세요(pwResult)");
 				return false;
 			}
 			if(!pwCheckResult){
-				alert("변경하실 비밀번호를 확인해주세요");
+				alert("변경하실 비밀번호를 확인해주세요(pwCheckResult)");
 				return false;
 			}
 		}
