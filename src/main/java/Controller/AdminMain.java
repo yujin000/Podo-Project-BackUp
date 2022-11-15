@@ -19,17 +19,17 @@ import DTO.NoticeBoardDTO;
 import DTO.QnaBoardDTO;
 
 // 관리자 메인페이지 출력용 서블릿
-@WebServlet("*.admin")
+@WebServlet("*.adminMain")
 public class AdminMain extends HttpServlet {
 	
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String uri = request.getRequestURI();
-		
+		System.out.println(uri);
 		request.setCharacterEncoding("utf8");
 		
 		if (uri.equals("/adminMain.adminMain")) {
 			try {
-				List<MemberDTO> memberList = MemberDAO.getInstance().selectAllMember(1, 10);
+				List<MemberDTO> memberList = MemberDAO.getInstance().selectAllMember(1,50);
 				List<NoticeBoardDTO> noticeList = NoticeBoardDAO.getInstance().selectNotice(1, 10);
 				List<QnaBoardDTO> qnaList = QnaBoardDAO.getInstance().selectAll(1, 10);
 				List<MusicDTO> chartList = MusicDAO.getInstance().musicChartList();
@@ -38,7 +38,7 @@ public class AdminMain extends HttpServlet {
 				request.setAttribute("noticeList", noticeList);
 				request.setAttribute("qnaList", qnaList);
 				request.setAttribute("chartList", chartList);
-				
+
 				request.getRequestDispatcher("/admin/adminIndex.jsp").forward(request, response);
 				
 			} catch (Exception e) {

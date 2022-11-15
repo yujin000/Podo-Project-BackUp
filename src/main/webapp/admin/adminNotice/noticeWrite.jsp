@@ -15,9 +15,9 @@
         integrity="sha256-o88AwQnZB+VDvE9tvIXrMQaPlFFSUTR+nldQm1LuPXQ=" crossorigin="anonymous"></script>
     <style>
         /* 관리자페이지 세팅 초기값 */
-        @media(min-width:1800px) {
+        @media(max-width:1700px) {
             .html {
-                width: 1800px;
+                width: 1700px;
             }
         }
 

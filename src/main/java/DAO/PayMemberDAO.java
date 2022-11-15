@@ -40,7 +40,7 @@ public class PayMemberDAO {
 	}
 	// 멤버십 구매시 vip등급으로 조정
 	public int updateMembershipStatus(String email)throws Exception{
-		String sql = "update member set membership = 'vip' where email = ? ";
+		String sql = "update member set membership = 'VIP' where email = ? ";
 		try(Connection con = this.getConnection(); PreparedStatement pstat = con.prepareStatement(sql);) {
 			pstat.setString(1, email);
 			int result = pstat.executeUpdate();

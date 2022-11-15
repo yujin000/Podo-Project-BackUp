@@ -41,9 +41,9 @@ div {
 	margin-bottom:200px;
 }
 
-@media ( max-width :1500px) {
+@media ( max-width :1700px) {
 	.container {
-		width: 1500px;
+		width: 1700px;
 	}
 }
 /* 헤더 네비 영역 */
