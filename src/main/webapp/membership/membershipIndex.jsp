@@ -39,6 +39,7 @@ div {
 .container {
 	width: 100vw;
 	margin-bottom:200px;
+	padding-right:200px;
 }
 
 @media ( max-width :1700px) {
@@ -354,7 +355,7 @@ div {
 		<div id="myMembershipArea">
             <div id="isVip">
             	<c:choose>
-                  <c:when test="${loginMembership eq 'admin' || loginMembership eq 'vip'}">
+                  <c:when test="${loginMembership eq 'admin' || loginMembership eq 'VIP'}">
                 	<img src="/image/web/eventimg.png" alt="">
                 	<div class="vipText">현재 멤버십 등급은 ${loginMembership }입니다.</div>
                   </c:when>
@@ -493,7 +494,7 @@ div {
 			if(userEmail == ""){
 				alert("로그인 후 이용할 수 있습니다.");
 				window.parent.location.href = "/member/loginForm.jsp";
-			}else if(nowMembership == "vip"){
+			}else if(nowMembership == "VIP"){
 				Swal.fire({
 					  icon: 'warning',
 					  iconColor:'#FF0050',

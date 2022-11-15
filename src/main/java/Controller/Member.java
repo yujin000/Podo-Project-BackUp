@@ -50,6 +50,7 @@ public class Member extends HttpServlet {
 					MemberDTO dto = dao.getMypage(email);	
 					
 					request.getSession().setAttribute("loginEmail", dto.getEmail());
+					request.getSession().setAttribute("loginPw", dto.getPw());
 					request.getSession().setAttribute("loginProfileimg", dto.getProfileImg());
 					request.getSession().setAttribute("loginNickname", dto.getNickname());
 					request.getSession().setAttribute("loginName", dto.getName());
