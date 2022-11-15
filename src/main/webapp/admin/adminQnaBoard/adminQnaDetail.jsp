@@ -205,8 +205,7 @@
             resize: none;
         }
         #sectionHr{
-            width:1350px;
-            margin-left:100px;
+            width:1800px;
         }
         #commentBtn{
             background-color: #FF0050;
@@ -302,7 +301,7 @@
                                 </c:forEach>
                             </c:when>
                         <c:otherwise>
-                            <div style="margin-left:100px;">아직 답변이 없습니다.</div>
+                            <div style="margin-left:100px;">아직 답변이 없습니다.<br>답변을 작성해주세요.</div>
                         </c:otherwise>
                         </c:choose>
             	
@@ -310,7 +309,7 @@
                             <c:if test="${count eq '0' }">
                                 <div id="comments">
                                     <div>답변하기</div>
-                                    <textarea id="comment" name="comment"></textarea>
+                                    <textarea id="comment" name="comment"style="color:black;"></textarea>
                                     <input type="hidden" value="${qnaBoard.qnaSeq }" name="qnaSeq">
                                 </div>
                                 <button type="button" id="commentBtn">댓글쓰기</button>

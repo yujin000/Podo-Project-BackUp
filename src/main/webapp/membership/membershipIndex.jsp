@@ -255,7 +255,33 @@ div {
 	border-radius: 5px;
 	font-size:20px;
 }
-
+/* My멤버십 */
+#myMembershipArea{
+    position:relative;
+    width:100%;
+    height:1000px;
+}
+#isVip{
+   width:500px;
+   position:absolute;
+   left:600px;
+   top:80px;
+}
+#vip img{
+    width:500px;
+    height:500px;
+}
+#cancelImg{
+    margin-left:20px;
+}
+.vipText{
+    text-align: center;
+    position:relative;
+    left:20px;
+    font-size: 30px;
+    font-weight: bold;
+    margin-top:50px;
+}
 </style>
 </head>
 <body>
@@ -326,7 +352,18 @@ div {
 		</div>
 		<!-- My 멤버십 -->
 		<div id="myMembershipArea">
-			My멤버십
+            <div id="isVip">
+            	<c:choose>
+                  <c:when test="${loginMembership eq 'admin' || loginMembership eq 'vip'}">
+                	<img src="/image/web/eventimg.png" alt="">
+                	<div class="vipText">현재 멤버십 등급은 ${loginMembership }입니다.</div>
+                  </c:when>
+                  <c:otherwise>
+                  	<img id="cancelImg"src="/image/web/close.png" alt="">
+                	<div class="vipText">아직 멤버십이 없습니다.</div>
+                  </c:otherwise>
+                </c:choose>
+            </div>
 		</div>
 		<input type="hidden" value="${loginEmail }" id="user">
 		<input type="hidden" value="${loginMembership }" id="logMemship">
