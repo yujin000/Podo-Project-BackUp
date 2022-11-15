@@ -24,7 +24,7 @@
 
         :root {
             --font-color: #fff;
-            --background-color: #111;
+            --background-color: #000;
             --sub-background-color: #333;
             --boder-silver: 1px solid silver;
             --main-color: #3e065f;
