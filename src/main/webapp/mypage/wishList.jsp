@@ -7,6 +7,7 @@
 <head>
     <meta charset="UTF-8">
     <title>Insert title here</title>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
     <style>
         @import url(src/css/reset.css);
         /* system font */
@@ -69,15 +70,11 @@
             font-weight: var(--font-weight);
             line-height: var(--line-height);
             margin-bottom: 2vw;
+            font-family: "EliceDigitalBaeum-Bd";
 /* 			background-color: #00000d50; */
         }
         
         /*category css*/
-        .category>div>a{
-        color: var(--font-color);
-        font-weight: var(--font-weight);
-        line-height: var(--line-height);
-        }
         .category{
         width:100%;
         height: 59px;
@@ -87,38 +84,71 @@
         }
         #home{
         float:left;
+        min-width: 57.53px;
    		width:4vw;
    		line-height: var(--line-height);
         color: var(--font-color);
+    	font-weight: var(--font-weight);
+    	line-height: var(--line-height);
 /*    		background-color: #00000d50; */
         }
         
         
         /*list css*/
         .list{
-		margin-top: 2vh;
+		margin-top: 1vh;
 		width: 100%;
 		height: 55vh;
 		border: 1px solid transparent;
         }
-         
+        .writelist{
+            height: 96px;
+    		width: 100%;
+    		font-size: 20px;
+    		font-weight: var(--font-weight);
+    		border-bottom: 1px solid rgb(255,255,255,0.3);
+    		margin-top: 10px;
+		}
+        #heart{
+        	float: left;
+            width: 5%;
+            border-width: 0 0 1px;
+            line-height: 85px;
+        }
+        #musicImg{
+        	float: left;
+            width: 10%;
+            border-width: 0 0 1px;
+        }
         #songName{
 			float: left;
-            width: 30%;
+            width: 25%;
             border-width: 0 0 1px;
-            line-height: var(--line-height);
+            line-height: 75px;
 		}
 		#album{
             float: left;
-            width: 15%;
+            width: 25%;
             border-width: 0 0 1px;
-            border-bottom: var(--line-height);
+            line-height: 75px;
         }
 		#artistName{
 			float: left;
-            width: 55%;
+            width: 35%;
             border-width: 0 0 1px;
-            line-height: var(--line-height);
+            line-height: 75px;
+		}
+		img{
+		width: 80px;
+    	height: 80px;
+		}
+		.material-symbols-outlined {
+  			font-variation-settings:
+  			'FILL' 1,
+  			'wght' 400,
+  			'GRAD' 0,
+  			'opsz' 48;
+  			color:red;
 		}
     </style>
         <script
@@ -133,8 +163,7 @@
         <div class="main">
             <div class="titleText">위시리스트</div>
             <div class="category">
-                    <div id="home"><a href="/mypage/wishList.jsp">노래</a>
-                    <hr style="border: solid 5px #3e065f; width: 60%"></div>
+                    <div id="home">노래</div>
             </div>
             
             
@@ -143,6 +172,8 @@
 					<c:when test="${not empty wish}">
 						<c:forEach var="w" items="${wish }">
 							<div class="writelist">
+								<span class="material-symbols-outlined" id="heart">favorite</span>
+								<div id="musicImg"><img src="/image/music/${w.musicImg }.jpg"> </div>
 								<div id="songName">${w.musicName }</div>
 								<div id="album">${w.musicAlbum }</div>
 								<div id="artistName">${w.musicArtist }</div>												

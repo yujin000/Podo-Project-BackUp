@@ -65,6 +65,7 @@
             font-weight: var(--font-weight);
             line-height: var(--line-height);
             margin-bottom: 2vw;
+            font-family: "EliceDigitalBaeum-Bd";
 /*             background-color: #00000d50; */
         }
 

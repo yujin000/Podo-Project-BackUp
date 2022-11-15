@@ -70,6 +70,7 @@
             font-weight: var(--font-weight);
             line-height: var(--line-height);
             margin-bottom: 2vw;
+            font-family: "EliceDigitalBaeum-Bd";
          	/* background-color: #00000d50; */
         }
         
@@ -87,6 +88,7 @@
         text-aline:center;
         }
         #notice{
+        min-width: 169px;
         float:left;
         width:10vw;
         line-height: var(--line-height);
@@ -94,6 +96,7 @@
         /* background-color: #00000d80; */
         }
         #myInquiry{
+        min-width: 253.5px;
         float:left;
         width:15vw;
         line-height: var(--line-height);
@@ -149,32 +152,34 @@
         
         /*list css*/
         .list{
-      margin-top: 2vh;
-      width: 100%;
-      height: 48vh;
-      border: 1px solid transparent;
+      		margin-top: 2vh;
+      		width: 100%;
+      		height: 41vh;
+      		border: 1px solid transparent;
         }
         
         .writelist{
-        width: 100%;
-		height: 46px;
-		font-size: 18px;
-		margin-top:2vh;
-		margin-bottom:2vh;
+            width: 100%;
+    		height: 55px;
+    		font-size: 20px;
+    		margin-top: 2vh;
+    		margin-bottom: 2vh;
+    		border-bottom: 1px solid rgb(255,255,255,0.3);
         }
 
         #writeBtn {
-        	float:right;
-            width: 8vw;
-            height: 35px;
+            margin-top: 2vh;
+            width: 6vw;
+            height: 40px;
             text-align: center;
             border-radius: 5px;
-            font-size: 15px;
+            font-size: 18px;
             font-weight: var(--font-weight);
+            line-height: var(--line-height);
             border: 1px solid gray;
             cursor: pointer;
             background: var(--background-color);
-            color: var(--font-color)
+            color: var(--font-color);
 /*             background-color: #00000d50; */
         }
 
@@ -187,6 +192,7 @@
         }
         #navi>a{
         color:white;
+        margin-right: 10px;
         }
     </style>
         <script
@@ -202,8 +208,7 @@
             <div class="titleText">고객센터</div>
             <div class="titleCategory">
                     <div id="notice"><a href="/listLook.notice?cpage=1">공지사항</a></div>
-                    <div id="myInquiry"><a href="/list.board?cpage=1">내 문의 내역</a>
-                    <hr style="border: solid 5px #3e065f; width: 58%"></div>
+                    <div id="myInquiry"><a href="/list.board?cpage=1" style="color: var(--point-color);">내 문의 내역</a></div>
             </div>
             
             <div class="division">
@@ -219,7 +224,7 @@
 							<div class="writelist">
 								<div id="qnaCategory">${q.qnaCategory }</div>
 								<div id="qnaTitle">
-									<a href="/detail.board?qnaSeq=${q.qnaSeq }">${q.qnaTitle }</a>
+									<a href="/detail.board?qnaSeq=${q.qnaSeq }" style="color:white;">${q.qnaTitle }</a>
 								</div>
 								<div id="qnaWriteDate">${q.qnaWriteDate }</div>
 							</div>
@@ -232,7 +237,7 @@
 			</div>
 
 			<div id="navi">${navi }</div>
-            <div>
+            <div style="float:right;">
               <button type="button" id="writeBtn">문의하기</button>
             </div>
         </div>

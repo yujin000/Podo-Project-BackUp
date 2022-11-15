@@ -74,27 +74,58 @@
             margin-top: 8vh;
 /*             background-color: lightgray; */
         }
-
+		
+		/*틀*/
         .qnalist {
             width: 100%;
-            height: 48vh;
+            height: 51vh;
             margin-top: 5vh;
 /*             background-color: #00000d80; */
         }
-
+		
+		/*문의 유형 css */
         #category {
             width: 100%;
             font-size: 20px;
             font-weight: var(--font-weight);
             line-height: var(--line-height);
+            margin-bottom: 0.5vh;
         }
-
+        
+        /*문의 유형 카테고리 css */
+		#categoryList{
+			width: 165px;
+		    height: 30px;
+		    margin-left: 1.5vw;
+    		font-family: "Noto Sans KR", sans-serif;
+    		font-weight: bold;
+    		background-color: #111;
+    		color: #fff;
+    		border: 1px solid;
+		}
+		
+		/*제목 css */
         #title {
             width: 100%;
             font-size: 20px;
             font-weight: var(--font-weight);
             line-height: var(--line-height);
+            margin-bottom: 0.5vh;
         }
+        
+        /* 제목 input css */
+        #qnaTitle{
+        	width: 330px;
+		    height: 30px;
+		    margin-left: 3.7vw;
+    		font-family: "Noto Sans KR", sans-serif;
+    		font-weight: bold;
+    		background-color: #111;
+    		color: #fff;
+    		border: 1px solid;
+        }
+        
+        /*문의내용 css*/
         #contents{
             width: 100%;
             font-size: 20px;
@@ -102,9 +133,26 @@
             line-height: var(--line-height);
         }
         
+        /*textareaDiv css*/
+        #textareaDiv{
+        	height: 34vh;
+    		border: 1px solid;
+        }
         
+        /*textarea css*/
+        #qnaContents{
+          	background: var(--background-color);
+          	width:100%;
+          	height:100%;
+          	font-size:15px;
+          	color: var(--font-color);
+          	resize: none;
+        }
+        
+        /*목록, 작성완료 버튼 css */
         #writeBtn, #listBtn {
             margin-top: 2vh;
+            margin-right: 0.5vw;
             width: 6vw;
             height: 40px;
             text-align: center;
@@ -115,7 +163,7 @@
             border: 1px solid gray;
             cursor: pointer;
             background: var(--background-color);
-            color: var(--font-color)
+            color: var(--font-color);
 /*             background-color: #00000d50; */
         }
 
@@ -136,7 +184,7 @@
 						문의유형
 						<select id="categoryList">
 							<option selected>가입/결제/인증</option>
-							<option>위시리스트/플레이리스트</option>
+							<option>위시리스트</option>
 							<option>정보 수정/음원/가사등록</option>
 							<option>장애/오류</option>
 							<option>기타</option>
@@ -148,8 +196,10 @@
                         <input type="text" placeholder="제목을 입력하세요" name="qnaTitle" id="qnaTitle">
                     </div>
                     <div id="contents">문의 내용
+                    	<div id="textareaDiv">
                         <textarea placeholder="내용을 입력해주세요" name="qnaContents" 
-                        cols="120" rows="5" id="qnaContents"></textarea>
+                         id="qnaContents"></textarea>
+                        </div>
                     </div>
             </div>
             <div>
@@ -173,7 +223,7 @@
     		alert("문의 내용을 입력해주세요.");
 			return false;
     	};
-    	if(!maxLengthCheck("qnaTitle", "제목","40")){
+    	if(!maxLengthCheck("qnaTitle", "제목","50")){
             return false;
         }
     	if(!maxLengthCheck("qnaContents", "문의 내용")){
