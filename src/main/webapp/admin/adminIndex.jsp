@@ -17,9 +17,9 @@
 <style>
  /* ---------- 관리자페이지 세팅 초기값 ---------- */
         /* 관리자페이지 세팅 초기값 */
-        @media(min-width:1800px) {
+        @media(min-width:1700px) {
             .html {
-                width: 1800px;
+                width: 1700px;
             }
         }
 
@@ -125,31 +125,31 @@
             height:100%;
         }
         .leftArea{
-            width:70%;
+            width:65%;
         }
         .rightArea{
-            width:30%;
+            width:35%;
         }
         #sales{
-            width:450px;
+            width:420px;
             height:300px;
-            margin:120px 0px 0px 100px;
+            margin:100px 0px 0px 50px;
         }
         #memberCount{
-            width:450px;
+            width:420px;
             height:300px;
-            margin:120px 0px 0px 50px;
+            margin:100px 0px 0px 50px;
         }
         #inquire{
-            width:950px;
+            width:890px;
             height:400px;
-            overflow-y: scroll;
-            margin:50px 0px 0px 100px;
+            margin:50px 0px 0px 50px;
         }
         #memberArea{
-        	margin-top:120px;
+        	margin-top:100px;
             height:750px;
             width:100%;
+            overflow-y:scroll;
         }
         /* 문의사항 */
         #listHeader>div, .qnaList>div {
@@ -159,7 +159,7 @@
         }
         #qnaSeqHeader, .qnaSeq, #emailHeader {
         	width : 15%;
-     		margin-left:30px;
+
         }
         #qnaCategoryHeader, .qnaCategory {
         	width : 15%;
@@ -168,10 +168,12 @@
        		width : 30%;
         }
         #qnaWriterHeader, .qnaWriter {
-        	width : 15%;
+        	width : 10%;
+        	margin-left:45px;
         }
         #qnaWriteDateHeader, .qnaWriteDate {
         	width : 10%;
+        	margin-left:40px;
         }
         #qnaStatusHeader, .qnaStatus {
         	width : 10%;
@@ -207,7 +209,6 @@
             line-heifht:45px;
             font-size:25px;
             font-weight:bold;
-            margin-left:10px;
             display:inline-block;
         }
         .islandTitle>a:hover{
@@ -215,7 +216,7 @@
         	color:#ff0505;
         }
         /* 회원 */
-                #listHeader2>div, .member>div {
+        #listHeader2>div, .member>div {
             float : left;
             text-align : center;
             height : 30px;
@@ -252,6 +253,9 @@
             line-height:30px;
         	font-size:15px;
         	background-color:#01B9FF;
+        	position:fixed;
+        	margin-top:45px;
+        	width:512px;
         }
         #listHeader2>div{
             color:white !important;
@@ -260,15 +264,17 @@
         	height : 5%;
         	text-align : center;
         }
-        #memberList::-webkit-scrollbar{
-        	display:block;
-        }
         #memberList{
-        	margin-top:10px;
-        	overflow-y:scroll;
+        	margin-top:75px;
         }
         #listHr{
         	margin:5px 0px 5px 0px;
+        }
+        #listMember{
+        	position:fixed;
+        	width:512px;
+        	display:inline;
+        	background-color:white;
         }
 </style>
 </head>
@@ -304,7 +310,9 @@
         <div class="leftArea">
             <div id="graph">
                 <div class="mainIsland" id="sales">매출액</div>
-                <div class="mainIsland" id="memberCount">회원 수</div>
+                <div class="mainIsland" id="memberCount">
+                	회원 수 = ${memberCount }
+                </div>
             </div>
             <div id="qnaArea">
                 <div class="mainIsland" id="inquire">
@@ -344,11 +352,11 @@
 
         <div class="rightArea">
             <div class="mainIsland" id="memberArea">
-            	<div class="islandTitle"><a href="/list.member?cpage=1">회원목록</a></div>
+            	<div class="islandTitle" id="listMember"><a href="/list.member?cpage=1">회원목록</a></div>
           	        <div id="listHeader2">
                       	<div id="nameHeader">이름</div>
                       	<div id="nickHeader">닉네임</div>
-                      	<div id="membershipHeader">멤버십등급</div>
+                      	<div id="membershipHeader">멤버십</div>
                       	<div id="scribeHeader">구독일</div>
                       	<div id="joinHeader">가입일</div>
                       </div>

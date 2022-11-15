@@ -233,7 +233,7 @@
         <div class="wrap">
             <div id="Header">
                 <h1 id="logo">
-                    <a href="/adminMain.member?nickname=${loginNickname }"><img src="/image/web/logo-f-5.png"
+                    <a href="/adminMain.adminMain"><img src="/image/web/logo-f-5.png"
                             alt="" /></a>
                 </h1>
                 <div id="mypage">

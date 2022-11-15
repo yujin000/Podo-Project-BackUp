@@ -34,11 +34,14 @@ public class AdminMain extends HttpServlet {
 				List<QnaBoardDTO> qnaList = QnaBoardDAO.getInstance().selectAll(1, 10);
 				List<MusicDTO> chartList = MusicDAO.getInstance().musicChartList();
 				
+				int memberCount = MemberDAO.getInstance().memberCount();
+				
 				request.setAttribute("memberList", memberList);
 				request.setAttribute("noticeList", noticeList);
 				request.setAttribute("qnaList", qnaList);
 				request.setAttribute("chartList", chartList);
-
+				request.setAttribute("memberCount", memberCount);
+				
 				request.getRequestDispatcher("/admin/adminIndex.jsp").forward(request, response);
 				
 			} catch (Exception e) {

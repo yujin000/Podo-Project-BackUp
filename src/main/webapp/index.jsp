@@ -83,7 +83,7 @@ uri="http://java.sun.com/jsp/jstl/core"%>
                 <li><a id="mypageBtn">마이페이지</a></li>
                 <c:choose>
                   <c:when test="${loginMembership eq 'admin'}">
-                    <li><a href="/admin/adminIndex.jsp">관리자페이지</a></li>
+                    <li><a href="/adminMain.adminMain">관리자페이지</a></li>
                   </c:when>
                 </c:choose>
                 <li><a href="#">계정설정</a></li>
