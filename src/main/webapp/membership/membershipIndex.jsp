@@ -201,7 +201,47 @@ div {
 	line-height:200px;
 	margin-top:100px;
 }
-
+.selectInfo{
+	width:80%;
+	margin-left:100px;
+	resize:none;
+	border:none;
+	background-color:transparent;
+	border-radius:5px;
+	color:white;
+	font-size:20px;
+	font-weight:bold;
+	height:100%;
+	line-height:35px;
+	font-family: 'NanumSquareNeoExtraBold';
+	padding-top:50px;
+}
+.selectInfo::-webkit-scrollbar{
+	display:none;
+}
+#kakaoIcon{
+    position:relative;
+    background-color:  #F7E600;
+    border-radius: 5px;
+    color:#3A1D1D;
+    padding:0px 5px 0px 5px;
+    width:120px;
+    text-align: center;
+    font-size:15px;
+    font-weight: bold;
+    height:25px;
+    line-height: 25px;
+    left:570px;
+    top:32px;
+    display:none;
+}
+#kakaoIcon::before{
+  content: '';
+  border-top: 10px solid #F7E600;
+  border-left: 15px solid transparent;
+  position:absolute;
+  top:90%;
+}
 /* 결제화면 */
 #payment{
 	text-align:center;
@@ -275,7 +315,8 @@ div {
 			<div id="goodsInfo">
 				<br><span style="font-size:25px; font-weight:bold;">멤버십 혜택을 확인하세요</span>
 				<div id="selectInfo">
-					
+					<textarea class="selectInfo" disabled></textarea>
+					<div id="kakaoIcon">kakaoPay</div>
 				</div>
 				
 			</div>
@@ -284,7 +325,9 @@ div {
 			</div>
 		</div>
 		<!-- My 멤버십 -->
-		<div id="myMembershipArea">My멤버십</div>
+		<div id="myMembershipArea">
+			My멤버십
+		</div>
 		<input type="hidden" value="${loginEmail }" id="user">
 		<input type="hidden" value="${loginMembership }" id="logMemship">
 	</div>
@@ -357,13 +400,14 @@ div {
 				"color":"white",
 				"border":"1px solid #FF0050"
 			});
-			$("#payBtn").text(price.replace(/\B(?=(\d{3})+(?!\d))/g, ",") + "원 카카오페이 결제하기");
+			$("#payBtn").text(price.replace(/\B(?=(\d{3})+(?!\d))/g, ",") + "원 결제하기");
 			$("#payBtn").attr("price",price);
 			warning.remove();
 			
-			$("#selectInfo").text("");
+			$(".selectInfo").text("");
 			let info = $(this).attr("info");
-			$("#selectInfo").append(info);
+			$(".selectInfo").append(info);
+			$("#kakaoIcon").css("display","block");
 		})
 
 			/* 이벤트 상품 */
@@ -389,13 +433,14 @@ div {
 				"color":"white",
 				"border":"1px solid #FF0050"
 			});
-			$("#payBtn").text(price.replace(/\B(?=(\d{3})+(?!\d))/g, ",") + "원 카카오페이 결제하기");
+			$("#payBtn").text(price.replace(/\B(?=(\d{3})+(?!\d))/g, ",") + "원 결제하기");
 			$("#payBtn").attr("price",price);
 			warning.remove();
 			
-			$("#selectInfo").text("");
+			$(".selectInfo").text("");
 			let info = $(this).attr("info");
-			$("#selectInfo").append(info);
+			$(".selectInfo").append(info);
+			$("#kakaoIcon").css("display","block");
 		})
 
 		/* 결제하기 버튼 클릭시 결제하기 팝업 및 결제(로그인 여부 확인) */
