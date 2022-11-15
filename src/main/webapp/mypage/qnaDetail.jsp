@@ -37,9 +37,9 @@
             text-decoration: none;
             border: none;
         }
-        div {
-            border: 1px solid #fff;
-        }
+/*         div { */
+/*             border: 1px solid #fff; */
+/*         } */
         body {
             width: 100vw;
             background: var(--background-color);
@@ -49,8 +49,7 @@
         .container {
             padding: 0 75px;
             height: 100%;
-            background-color: bisque;
-            overflow-y: scroll;
+/*             background-color: bisque; */
             width: 100vw;
     		margin-bottom:200px;
         }
@@ -59,49 +58,48 @@
             font-weight: var(--font-weight);
             line-height: var(--line-height);
             margin-bottom: 2vw;
-            background-color: #00000d50;
+/*             background-color: #00000d50; */
         }
         /*qna css */
         .qna {
             height: 100%;
             margin-top: 8vh;
-            background-color: lightgray;
+/*             background-color: lightgray; */
         }
         .qnalist {
             width: 100%;
-            height: 65vh;
+            height: 48vh;
             margin-top: 5vh;
-            background-color: #00000d80;
+/*             background-color: #00000d80; */
         }
         #category {
             width: 100%;
-            font-size: 20px;
+            font-size: 18px;
             font-weight: var(--font-weight);
             line-height: var(--line-height);
         }
         #title {
             width: 100%;
-            font-size: 20px;
+            font-size: 18px;
             font-weight: var(--font-weight);
             line-height: var(--line-height);
         }
         #contents{
             width: 100%;
-            font-size: 20px;
+            font-size: 18px;
             font-weight: var(--font-weight);
             line-height: var(--line-height);
         }
         
         
         #listBtn {
-            margin-top: 2vh;
+        	margin-top:2vh;
             width: 6vw;
-            height: 40px;
+            height: 35px;
             text-align: center;
             border-radius: 5px;
-            font-size: 18px;
+            font-size: 15px;
             font-weight: var(--font-weight);
-            line-height: var(--line-height);
             border: 1px solid gray;
             cursor: pointer;
             background: var(--background-color);
@@ -121,9 +119,8 @@
             <div class="titleText">1:1 문의</div>
             <div class="qnalist">
             
-					<div id="category">
-						문의유형
-						<input type="text" id="qnaCategory" name="qnaCategory" value="${dtoDetail.qnaCategory }" disabled>
+					<div id="category">문의유형
+						${dtoDetail.qnaCategory }
 
 					</div>
 					<div id="title">제목

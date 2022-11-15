@@ -53,7 +53,7 @@
         .container {
             padding: 0 75px;
             height: 100%;
-         	background-color: bisque; 
+/*          	background-color: bisque;  */
             width: 100vw;
     		margin-bottom:200px;
             
@@ -152,26 +152,25 @@
       margin-top: 2vh;
       width: 100%;
       height: 48vh;
-      border: 1px solid black;
+      border: 1px solid transparent;
         }
         
         .writelist{
         width: 100%;
 		height: 46px;
-		font-size: 20px;
+		font-size: 18px;
 		margin-top:2vh;
 		margin-bottom:2vh;
         }
 
         #writeBtn {
-            margin-top: 2vh;
-            width: 6vw;
-            height: 40px;
+        	float:right;
+            width: 8vw;
+            height: 35px;
             text-align: center;
             border-radius: 5px;
-            font-size: 18px;
+            font-size: 15px;
             font-weight: var(--font-weight);
-            line-height: var(--line-height);
             border: 1px solid gray;
             cursor: pointer;
             background: var(--background-color);
@@ -181,6 +180,13 @@
 
         #writeBtn:hover {
             border: 1px solid silver;
+        }
+        
+        #navi{
+        text-align:center;
+        }
+        #navi>a{
+        color:white;
         }
     </style>
         <script
@@ -225,8 +231,8 @@
 				</c:choose>
 			</div>
 
-			<div>${navi }</div>
-            <div style="float:right;">
+			<div id="navi">${navi }</div>
+            <div>
               <button type="button" id="writeBtn">문의하기</button>
             </div>
         </div>

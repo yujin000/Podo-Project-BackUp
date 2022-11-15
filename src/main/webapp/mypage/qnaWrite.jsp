@@ -41,9 +41,9 @@
             border: none;
         }
 
-        div {
-            border: 1px solid #fff;
-        }
+/*         div { */
+/*             border: 1px solid #fff; */
+/*         } */
 
         body {
             width: 100vw;
@@ -55,8 +55,9 @@
         .container {
             padding: 0 75px;
             height: 100%;
-            background-color: bisque;
-            overflow-y: scroll;
+/*             background-color: bisque; */
+/*             width: 100vw; */
+    		margin-bottom:200px;
         }
 
         .titleText {
@@ -64,21 +65,21 @@
             font-weight: var(--font-weight);
             line-height: var(--line-height);
             margin-bottom: 2vw;
-            background-color: #00000d50;
+/*             background-color: #00000d50; */
         }
 
         /*qna css */
         .qna {
             height: 100%;
             margin-top: 8vh;
-            background-color: lightgray;
+/*             background-color: lightgray; */
         }
 
         .qnalist {
             width: 100%;
-            height: 65vh;
+            height: 48vh;
             margin-top: 5vh;
-            background-color: #00000d80;
+/*             background-color: #00000d80; */
         }
 
         #category {
@@ -164,6 +165,20 @@
     </div>
     <script>
     document.getElementById("writeBtn").addEventListener("click", function() {
+    	if($("#qnaTitle").val()=="" || $("#qnaTitle").val()==null){
+    		alert("제목을 입력해주세요.");
+			return false;
+    	};
+    	if($("#qnaContents").val()=="" || $("#qnaTitle").val()==null){
+    		alert("문의 내용을 입력해주세요.");
+			return false;
+    	};
+    	if(!maxLengthCheck("qnaTitle", "제목","40")){
+            return false;
+        }
+    	if(!maxLengthCheck("qnaContents", "문의 내용")){
+            return false;
+        }
     	document.getElementById("insertForm").submit();
     })
     document.getElementById("listBtn").addEventListener("click",function(){
@@ -181,6 +196,37 @@
             });
 
         });
+    
+    function maxLengthCheck(id, title, maxLength){
+        let obj = $("#"+id);
+        if(maxLength == null) {
+            maxLength = obj.attr("maxLength") != null ? obj.attr("maxLength") : 200;
+        }
+        
+        if(Number(byteCheck(obj)) > Number(maxLength)) {
+            alert(title + " 입력 가능 문자 수를 초과하였습니다.\n(영문, 숫자, 일반 특수문자 : " + maxLength + " / 한글, 한자, 기타 특수문자 : " + parseInt(maxLength/2, 10) + ").");
+            obj.focus();
+            return false;
+        } else {
+            return true;
+       }
+   }
+    
+    function byteCheck(el){
+        let codeByte = 0;
+        for (let idx = 0; idx < el.val().length; idx++) {
+            let oneChar = escape(el.val().charAt(idx));
+            if ( oneChar.length == 1 ) {
+                codeByte ++;
+            } else if (oneChar.indexOf("%u") != -1) {
+                codeByte += 2;
+            } else if (oneChar.indexOf("%") != -1) {
+                codeByte ++;
+            }
+        }
+        return codeByte;
+    }
+
     </script>
 </body>
 </html>
