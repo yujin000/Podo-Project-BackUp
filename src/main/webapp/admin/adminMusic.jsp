@@ -362,11 +362,11 @@ div[class^=inInfo],.btnBox{
                                             <div class="navi1" id="musicImg">
                                                 <img src="/admin/${list.musicImg }" id="albumImg">
                                             </div>
-                                            <div class="navi2"><b>· 곡제목</b><br><input type="text" value="${list.musicName }" class="inMusicName" readonly></div>
-                                            <div class="navi3"><b>· 아티스트</b><br><input type="text" value="${list.musicArtist }" class="inMusicArtist" readonly></div>
-                                            <div class="navi4"><b>· 앨범명</b><br><input type="text" value="${list.musicAlbum }" class="inMusicAlbum" readonly></div>
-                                            <div class="navi5"><b>· 장르</b><br><input type="text" value="${list.musicGenre }" class="inMusicGenre" readonly></div>
-                                            <div class="navi6"><b>· 가사</b><br><textarea class="inMusicLylics" style="color:black;"readonly>${list.musicLylics } </textarea></div>
+                                            <div class="navi2"><b>곡제목</b><br><input type="text" value="${list.musicName }" class="inMusicName" readonly></div>
+                                            <div class="navi3"><b>아티스트</b><br><input type="text" value="${list.musicArtist }" class="inMusicArtist" readonly></div>
+                                            <div class="navi4"><b>앨범명</b><br><input type="text" value="${list.musicAlbum }" class="inMusicAlbum" readonly></div>
+                                            <div class="navi5"><b>장르</b><br><input type="text" value="${list.musicGenre }" class="inMusicGenre" readonly></div>
+                                            <div class="navi6"><b>가사</b><br><textarea class="inMusicLylics" style="color:black;"readonly>${list.musicLylics } </textarea></div>
                                             <div id="btnBox2">
                                                 <button type="button" class="update" seq="${list.musicSeq }">수정</button>
                                                 <button type="button" class="delete" seq="${list.musicSeq }">삭제</button>
@@ -393,27 +393,27 @@ div[class^=inInfo],.btnBox{
                                             <img id="preview">
                                         </div>
                                         <div class="inInfo1">
-                                            <b>· 노래이름</b><br />
+                                            <b>노래이름</b><br />
                                             <input type="text" name="musicName" id="musicName" class="textArea" maxlength="40"/><br />
                                         </div>
                                         <div class="inInfo2">
-                                            <b>· 아티스트</b><br />
+                                            <b>아티스트</b><br />
                                             <input type="text" name="musicArtist" id="musicArtist" class="textArea" maxlength="40"/><br />
                                         </div>
                                         <div class="inInfo3">
-                                            <b>· 앨범명</b><br />
+                                            <b>앨범명</b><br />
                                             <input type="text" name="musicAlbum" id="musicAlbum" class="textArea" maxlength="40"/><br />
                                         </div>
                                         <div class="inInfo4">
-                                            <b>· 장르</b><br />
+                                            <b>장르</b><br />
                                             <input type="text" name="musicGenre" id="musicGenre" class="textArea" maxlength="20"/><br />
                                         </div>
                                         <div class="inInfo5">
-                                            <b>· 차트</b><br />
+                                            <b>차트</b><br />
                                             <input type="text" name="musicChart" id="musicChart" style="color: black" maxlength="4"/>
                                         </div>
                                         <div class="inInfo6">
-                                            <b>· 가사</b><br>
+                                            <b>가사</b><br>
                                             <textarea name="musicLylics"
                                                 style="width: 500; height: 100px; resize: none; color: black;"
                                                 id="lylics" maxlength="1000"></textarea>
@@ -422,7 +422,7 @@ div[class^=inInfo],.btnBox{
                                              <label for="file">앨범 업로드</label> <input type="file" id="file" name="imgFile" onchange="readURL(this)">
                                         </div>
                                         <div class="inInfo8">
-                                            <b>· mp3 첨부</b><br> <input type="file" name="mp3File" id="imgFile">
+                                            <b>mp3 첨부</b><br> <input type="file" name="mp3File" id="imgFile">
                                         </div>
                                         <div class="btnBox">
                                             <button type="button" id="saveMusic">저장하기</button>
