@@ -65,7 +65,6 @@ public class Music extends HttpServlet {
 				int maxSize = 1024*1024*10;
 				String savePath = request.getServletContext().getRealPath("/audio");
 				File fileSavePath = new File(savePath);
-				System.out.println(savePath);
 
 				if(!fileSavePath.exists()){
 					fileSavePath.mkdir(); 
@@ -83,7 +82,8 @@ public class Music extends HttpServlet {
 				String musicLylics = multi.getParameter("musicLylics");
 				MusicDAO dao = MusicDAO.getInstance();
 
-				String imgSysName = multi.getFilesystemName("imgFile");
+//				String imgSysName = multi.getFilesystemName("imgFile");
+				String imgSysName = multi.getOriginalFileName("imgFile");
 				String mp3SysName = multi.getFilesystemName("mp3File");
 
 				MusicDTO dto = new MusicDTO(getSeq,musicName,musicArtist,musicAlbum,imgSysName,mp3SysName,musicChart,musicGenre,musicLylics);
