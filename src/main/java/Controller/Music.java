@@ -65,6 +65,7 @@ public class Music extends HttpServlet {
 				int maxSize = 1024*1024*10;
 				String savePath = request.getServletContext().getRealPath("/audio");
 				File fileSavePath = new File(savePath);
+				System.out.println(savePath);
 
 				if(!fileSavePath.exists()){
 					fileSavePath.mkdir(); 
