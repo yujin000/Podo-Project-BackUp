@@ -191,7 +191,7 @@ div[class^=navi]{
 .navi6{
     top:10px;
     left:550px;
-    width:300px;
+    width:500px;
     height:110px;
 }
 .navi6>textarea{
@@ -375,7 +375,7 @@ div[class^=inInfo],.btnBox{
                                         </div>
                                         <div class="inInfo5">
                                             <b>상품설명</b><br />
-                                            <textarea type="text" name="payGoodsInfo" id="payGoodsInfo" style="color: black" maxlength="50"></textarea>
+                                            <textarea type="text" name="payGoodsInfo" id="payGoodsInfo" style="color: black" maxlength="500"></textarea>
                                         </div>
                                         <div class="btnBox">
                                             <button type="button" id="addProductsBtn">저장하기</button>

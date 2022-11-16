@@ -37,14 +37,23 @@ div {
 }
 
 .container {
-	width: 100vw;
+	width: 1900px;
 	margin-bottom:200px;
-	padding-right:200px;
 }
 
-@media ( max-width :1700px) {
+@media ( max-width :1800px) {
 	.container {
-		width: 1700px;
+		width: 100vw;
+	}
+}
+@media(max-width:1750px){
+	.container {
+		width: 100vw;
+	}
+}
+@media(max-width:1400px){
+	.container {
+		width: 1400px;
 	}
 }
 /* 헤더 네비 영역 */
@@ -186,6 +195,7 @@ div {
 #hr{
 	width:80%;
 	margin:auto;
+	margin-top:40px;
 }
 #goodsInfo {
 	width:80%;
@@ -195,7 +205,7 @@ div {
 #selectInfo{
 	width:100%;
 	margin:auto;
-	height:200px;
+	height:350px;
 	border:1px solid #FF0050;
 	overflow:none;
 	border-radius: 5px;
@@ -203,7 +213,7 @@ div {
 	margin-top:100px;
 }
 .selectInfo{
-	width:80%;
+	width:85%;
 	margin-left:100px;
 	resize:none;
 	border:none;
@@ -215,7 +225,7 @@ div {
 	height:100%;
 	line-height:35px;
 	font-family: 'NanumSquareNeoExtraBold';
-	padding-top:50px;
+	padding-top:25px;
 }
 .selectInfo::-webkit-scrollbar{
 	display:none;
@@ -232,8 +242,8 @@ div {
     font-weight: bold;
     height:25px;
     line-height: 25px;
-    left:570px;
-    top:32px;
+    left:560px;
+    top:-20px;
     display:none;
 }
 #kakaoIcon::before{
@@ -246,6 +256,7 @@ div {
 /* 결제화면 */
 #payment{
 	text-align:center;
+	margin-top:100px;
 }
 #payBtn{
 	border:1px solid silver;
@@ -282,6 +293,16 @@ div {
     font-size: 30px;
     font-weight: bold;
     margin-top:50px;
+}
+footer {
+  width: 100%;
+  height: 100px;
+  margin-top: 5vh;
+  text-align: center;
+  color: silver;
+  font-size: 0.8rem;
+  background: transparent;
+  opacity: 0.5;
 }
 </style>
 </head>
@@ -368,7 +389,14 @@ div {
 		</div>
 		<input type="hidden" value="${loginEmail }" id="user">
 		<input type="hidden" value="${loginMembership }" id="logMemship">
+			          <footer>
+      <p>개인정보처리방침 | PODO 이용약관 | 고객센터 | 결제/환불안내 | 상담</p>
+      <br />
+      <img src="../image/web/logo-footer.png" alt="" style="width: 60px" />
+      <p>© PODO Music Corp.</p>
+    </footer>
 	</div>
+
 	<script>
 		/* 헤더 네비게이션 이벤트( 페이지 전환 : 해당 메뉴 선택시 display속성 변동, 아래 바 추가 ) */
 		let bar = $("<div>");
@@ -515,6 +543,8 @@ div {
 					warning.remove();
 					let price = $(this).attr("price");
 					
+					alert("현재 qr결제는 되지 않습니다. 테스트 금액이 차감됩니다.(출금 X)");
+						
 					var IMP = window.IMP;
 		            IMP.init('imp66837815');
 		            IMP.request_pay({

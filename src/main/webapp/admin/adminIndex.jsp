@@ -13,8 +13,8 @@
 <title>관리자페이지</title>
 <link rel="stylesheet" href="/src/css/style.css" />
 <script src="https://code.jquery.com/jquery-3.6.1.min.js"
-	integrity="sha256-o88AwQnZB+VDvE9tvIXrMQaPlFFSUTR+nldQm1LuPXQ="
-	crossorigin="anonymous"></script>
+   integrity="sha256-o88AwQnZB+VDvE9tvIXrMQaPlFFSUTR+nldQm1LuPXQ="
+   crossorigin="anonymous"></script>
 <style>
  /* ---------- 관리자페이지 세팅 초기값 ---------- */
         /* 관리자페이지 세팅 초기값 */
@@ -36,7 +36,7 @@
         }
         
         #listLi1{
-        	background-color:#01B9FF;
+           background-color:#01B9FF;
         }
         
         .listLi:hover {
@@ -102,7 +102,7 @@
             top: 130px;
         }
         .mainContents a{
-        	color:black;
+           color:black;
         }
 /*------------------------------------------------*/
         div[id^=mainConArea] {
@@ -147,7 +147,7 @@
             margin:50px 0px 0px 50px;
         }
         #memberArea{
-        	margin-top:100px;
+           margin-top:100px;
             height:750px;
             width:100%;
             overflow-y:scroll;
@@ -159,44 +159,44 @@
             height : 30px;
         }
         #qnaSeqHeader, .qnaSeq, #emailHeader {
-        	width : 15%;
+           width : 15%;
 
         }
         #qnaCategoryHeader, .qnaCategory {
-        	width : 15%;
+           width : 15%;
         }
         #qnaTitleHeader, .qnaTitle {
-       		width : 30%;
+             width : 30%;
         }
         #qnaWriterHeader, .qnaWriter {
-        	width : 10%;
-        	margin-left:45px;
+           width : 10%;
+           margin-left:45px;
         }
         #qnaWriteDateHeader, .qnaWriteDate {
-        	width : 10%;
-        	margin-left:40px;
+           width : 10%;
+           margin-left:40px;
         }
         #qnaStatusHeader, .qnaStatus {
-        	width : 10%;
+           width : 10%;
         }
         .qnaList, #listHeader {
-        	height : 30px;
+           height : 30px;
         }
         #listHeader{
-        	height : 30px;
+           height : 30px;
             line-height:30px;
-        	font-size:12px;
-        	background-color:#01B9FF;
+           font-size:12px;
+           background-color:#01B9FF;
         }
         #listHeader>div{
             color:white !important;
-       	}
+          }
         #navi {
-        	height : 5%;
-        	text-align : center;
+           height : 5%;
+           text-align : center;
         }
         #qnaList{
-        	margin-top:5px;
+           margin-top:5px;
         }
         .qnaTitle>a{
             color:black;
@@ -214,8 +214,8 @@
             color:black;
         }
         .islandTitle>a:hover{
-        	cursor:pointer;
-        	color:#ff0505;
+           cursor:pointer;
+           color:#ff0505;
         }
         /* 회원 */
         #listHeader2>div, .member>div {
@@ -224,59 +224,59 @@
             height : 30px;
         }
         #nameHeader, .name {
-        	width : 15%;
-        	margin-left:20px;
+           width : 15%;
+           margin-left:20px;
         }
         #nickHeader, .nickname {
-        	width : 20%;
-        	margin-left:20px;
+           width : 20%;
+           margin-left:20px;
         }
         #membershipHeader, .membership {
-        	width : 10%;
-        	margin-left:20px;
+           width : 10%;
+           margin-left:20px;
         }
         #scribeHeader, .scribeDate {
-        	width : 15%;
-        	margin-left:20px;
+           width : 15%;
+           margin-left:20px;
         }
         #joinHeader, .joinDate {
-        	width : 15%;
-        	margin-left:20px;
+           width : 15%;
+           margin-left:20px;
         }
         .member, #listHeader2 {
-        	height : 30px;
-        	font-size:12px;
+           height : 30px;
+           font-size:12px;
         }
         .member{
-        	overflow-y:scroll;
+           overflow-y:scroll;
         }
         #listHeader2{
-        	height : 30px;
+           height : 30px;
             line-height:30px;
-        	font-size:15px;
-        	background-color:#01B9FF;
-        	position:fixed;
-        	margin-top:45px;
-        	width:512px;
+           font-size:15px;
+           background-color:#01B9FF;
+           position:fixed;
+           margin-top:45px;
+           width:512px;
         }
         #listHeader2>div{
             color:white !important;
-       	}
+          }
         #navi {
-        	height : 5%;
-        	text-align : center;
+           height : 5%;
+           text-align : center;
         }
         #memberList{
-        	margin-top:75px;
+           margin-top:75px;
         }
         #listHr{
-        	margin:5px 0px 5px 0px;
+           margin:5px 0px 5px 0px;
         }
         #listMember{
-        	position:fixed;
-        	width:512px;
-        	display:inline;
-        	background-color:white;
+           position:fixed;
+           width:512px;
+           display:inline;
+           background-color:white;
         }
         /* 통계 */
         .chart{
@@ -301,7 +301,7 @@
         }
         .proName{
             float:left;
-            margin-top:60px;
+            margin: 80px 0 0 10px;
         }
 
         #profit{
@@ -321,47 +321,50 @@
             color:#FF0505 !important;
         }
         #memCount{
-        	margin-left:25px;
+           margin-left:25px;
+        }
+        .setting{
+        margin: 0 0 15px 0;
         }
 </style>
 </head>
 
 <body>
     <div class="html">
-	<div class="wrap">
-		<div id="Header">
-			<h1 id="logo">
+   <div class="wrap">
+      <div id="Header">
+         <h1 id="logo">
                     <a href="/adminMain.adminMain"><img src="/image/web/logo-f-5.png"
                             alt="" /></a>
                 </h1>
-			<div id="mypage">
-				<a class="loginBtn">${loginNickname }</a>
-			</div>
-			<ul class="tog">
-				<li><a href="/start.music">메인페이지로</a></li>
-				<li><a href="/logout.member">로그아웃</a></li>
-			</ul>
-			<div id="GNB">
-				<ul>
-					<li><a href="/list.notice?cpage=1">공지사항 관리</a></li>
-					<li><a href="/allList.music">음원 관리</a></li>
-					<li><a href="/adminPerform.perform">공연 관리</a></li>
-					<li><a href="/list.member?cpage=1">회원 관리</a></li>
-					<li><a href="/goodsList.goods">멤버십 관리</a></li>
-					<li><a href="/adminList.board?cpage=1">문의내역 확인</a></li>
-				</ul>
-			</div>
-		</div>
-	</div>
+         <div id="mypage">
+            <a class="loginBtn">${loginNickname }</a>
+         </div>
+         <ul class="tog">
+            <li><a href="/start.music">메인페이지로</a></li>
+            <li><a href="/logout.member">로그아웃</a></li>
+         </ul>
+         <div id="GNB">
+            <ul>
+               <li><a href="/list.notice?cpage=1">공지사항 관리</a></li>
+               <li><a href="/allList.music">음원 관리</a></li>
+               <li><a href="/adminPerform.perform">공연 관리</a></li>
+               <li><a href="/list.member?cpage=1">회원 관리</a></li>
+               <li><a href="/goodsList.goods">멤버십 관리</a></li>
+               <li><a href="/adminList.board?cpage=1">문의내역 확인</a></li>
+            </ul>
+         </div>
+      </div>
+   </div>
     <div class="mainContents">
         <div class="leftArea">
             <div id="graph">
                 <div class="mainIsland" id="sales">
-                    <div class="islandTitle" id="salesData">판매량 / 매출액</div>
+                    <div class="islandTitle" id="salesData">상품 코드별 판매량 / 매출액</div>
                     <div class="proName">
-                            <div class="setting">${promoCode }</div>
-                            <div class="setting">${event1Code }</div>
-                            <div class="setting">${event2Code }</div>
+                         <div class="setting">${promoCode }</div>
+                         <div class="setting">${event1Code }</div>
+                         <div class="setting">${event2Code }</div>
                     </div>
                         
                     <div class="chart">
@@ -407,11 +410,11 @@
                                         <div class="qnaStatus"></div>
                                     </div>
                                     <hr id="listHr">
-                                </c:forEach>                        			
+                                </c:forEach>                                 
                             </c:when>    
                             <c:otherwise>
                                 <div>글이 없습니다.</div>
-                            </c:otherwise>                    		
+                            </c:otherwise>                          
                         </c:choose>
                     </div>   
                 </div>        
@@ -420,51 +423,51 @@
 
         <div class="rightArea">
             <div class="mainIsland" id="memberArea">
-            	<div class="islandTitle" id="listMember"><a href="/list.member?cpage=1">회원목록</a></div>
-          	        <div id="listHeader2">
-                      	<div id="nameHeader">이름</div>
-                      	<div id="nickHeader">닉네임</div>
-                      	<div id="membershipHeader">멤버십</div>
-                      	<div id="scribeHeader">구독일</div>
-                      	<div id="joinHeader">가입일</div>
+               <div class="islandTitle" id="listMember"><a href="/list.member?cpage=1">회원목록</a></div>
+                     <div id="listHeader2">
+                         <div id="nameHeader">이름</div>
+                         <div id="nickHeader">닉네임</div>
+                         <div id="membershipHeader">멤버십</div>
+                         <div id="scribeHeader">구독일</div>
+                         <div id="joinHeader">가입일</div>
                       </div>
                       <div id="memberList">
-                      	<c:choose>
-                      		<c:when test="${not empty memberList}">
-                      			<c:forEach var="i" items="${memberList }">
-                      				<div class="member">
-                      				<input type="hidden" value="${i.scribeDate }" id="dummyDate">
-                      					<div class="name">${i.name }</div>
-                      					<div class="nickname">${i.nickname }</div>
-                      					<div class="membership">${i.membership }</div>
-                      					<div class="scribeDate"><fmt:formatDate value="${i.scribeDate }" pattern="yyyy-MM-dd"/></div>
-                      					<div class="joinDate"><fmt:formatDate value="${i.joinDate }" pattern="yyyy-MM-dd"/></div>
-                      				</div>
-                      				<hr id="listHr">
-                      			</c:forEach>                        			
-                      		</c:when>                        		
-                      	</c:choose>
+                         <c:choose>
+                            <c:when test="${not empty memberList}">
+                               <c:forEach var="i" items="${memberList }">
+                                  <div class="member">
+                                  <input type="hidden" value="${i.scribeDate }" id="dummyDate">
+                                     <div class="name">${i.name }</div>
+                                     <div class="nickname">${i.nickname }</div>
+                                     <div class="membership">${i.membership }</div>
+                                     <div class="scribeDate"><fmt:formatDate value="${i.scribeDate }" pattern="yyyy-MM-dd"/></div>
+                                     <div class="joinDate"><fmt:formatDate value="${i.joinDate }" pattern="yyyy-MM-dd"/></div>
+                                  </div>
+                                  <hr id="listHr">
+                               </c:forEach>                                 
+                            </c:when>                              
+                         </c:choose>
                       </div>  
             </div>
         </div>                                          
     </div>
     <input type="hidden" value="${profit }" id="adminProfit">
-	<input type="hidden" value="${promoCount }" id="promoCount">
-	<input type="hidden" value="${event1Count }" id="event1Count">
-	<input type="hidden" value="${event2Count }" id="event2Count">
-	<input type="hidden" value="${memberCount }" id="memberCount1">
-	
+   <input type="hidden" value="${promoCount }" id="promoCount">
+   <input type="hidden" value="${event1Count }" id="event1Count">
+   <input type="hidden" value="${event2Count }" id="event2Count">
+   <input type="hidden" value="${memberCount }" id="memberCount1">
+   
 </div>
     <script>
-		// 관리자 버튼 토글
-		let adminBtn = document.getElementById("mypage");
-		$(adminBtn).click(function() {
-			$(this).next(".tog").fadeToggle();
-		});
+      // 관리자 버튼 토글
+      let adminBtn = document.getElementById("mypage");
+      $(adminBtn).click(function() {
+         $(this).next(".tog").fadeToggle();
+      });
         // 그래프 애니메이션
         let proNum = $("#promoCount").val();
-        let	eventNum1 = $("#event1Count").val();
-        let eventNum2 = $("#event2Count").val();
+        let eventNum1 = $("#event1Count").val();
+        let eventNum2 = $("#event2Count").val(); 
 
         $( document ).ready( function() {
             setTimeout(function(){
@@ -497,12 +500,13 @@
                 $("#event2Num").append(eventNum2);
             },4100);
         } );
-		
+      
         // 회원수 효과
         const $counter = document.querySelector("#countMem");
         let countMem = $("#memberCount1").val();
 
         counter($counter, countMem);
+        
         function counter($counter, max) {
             let now = max;
             const handle = setInterval(() => {
@@ -514,7 +518,7 @@
                 now -= step;
             }, 50); 
         }
-     	// 회원 포맷
+        // 회원 포맷
         let myung = "명";
         setTimeout(function(){
             $("#countMem").append(myung);
@@ -525,6 +529,7 @@
         let profit = $("#adminProfit").val();
 
         counter($counter2, profit);
+        
         function counter2($counter2, max) {
             let now = max;
             const handle = setInterval(() => {
@@ -542,7 +547,7 @@
         setTimeout(function(){
             $("#profit").append(won);
         },7000);
-	</script>
+   </script>
 </body>
 
 </html>

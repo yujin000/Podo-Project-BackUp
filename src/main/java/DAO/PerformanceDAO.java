@@ -105,18 +105,17 @@ public class PerformanceDAO {
 	}
 
 	public int addPerform(PerformanceDTO dto) throws Exception {
-		String sql = "insert into performance values(performance_seq.nextval,1,?,?,?,?,?,?,?,?,?,?)";
+		String sql = "insert into performance values(performance_seq.nextval,1,?,?,'mamamoo.jfif',?,?,?,?,?,?,?)";
 		try (Connection con = this.getConnection(); PreparedStatement pstat = con.prepareStatement(sql)) {
 			pstat.setString(1, dto.getTheaterName());
 			pstat.setString(2, dto.getPerformTitle());
-			pstat.setString(3, dto.getPoster());
-			pstat.setInt(4, dto.getShowtime());
-			pstat.setTimestamp(5, dto.getStartDate());
-			pstat.setTimestamp(6, dto.getEndDate());
-			pstat.setString(7, dto.getPerformPrice());
-			pstat.setString(8, dto.getRating());
-			pstat.setString(9, dto.getGenre());
-			pstat.setString(10, dto.getPerformPoster());
+			pstat.setInt(3, dto.getShowtime());
+			pstat.setTimestamp(4, dto.getStartDate());
+			pstat.setTimestamp(5, dto.getEndDate());
+			pstat.setString(6, dto.getPerformPrice());
+			pstat.setString(7, dto.getRating());
+			pstat.setString(8, dto.getGenre());
+			pstat.setString(9, dto.getPerformPoster());
 			int result = pstat.executeUpdate();
 			con.commit();
 			return result;

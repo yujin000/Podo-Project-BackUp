@@ -82,7 +82,8 @@ public class Music extends HttpServlet {
 				String musicLylics = multi.getParameter("musicLylics");
 				MusicDAO dao = MusicDAO.getInstance();
 
-				String imgSysName = multi.getFilesystemName("imgFile");
+//				String imgSysName = multi.getFilesystemName("imgFile");
+				String imgSysName = multi.getOriginalFileName("imgFile");
 				String mp3SysName = multi.getFilesystemName("mp3File");
 
 				MusicDTO dto = new MusicDTO(getSeq,musicName,musicArtist,musicAlbum,imgSysName,mp3SysName,musicChart,musicGenre,musicLylics);

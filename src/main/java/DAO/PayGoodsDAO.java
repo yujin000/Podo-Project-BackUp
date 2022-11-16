@@ -146,8 +146,8 @@ public class PayGoodsDAO {
 	}
 	
 	
-	// 프로모션 코드
-	public int promoCode()throws Exception{
+	// 프로모션 코드 >> 이벤트2
+	public int event2Code()throws Exception{
 		String sql = "select paygoodsseq from (select rownum as num, paygoods.* from paygoods order by paygoodsname) where num = 3";
 		try(Connection con = this.getConnection(); PreparedStatement pstat = con.prepareStatement(sql);) {
 			ResultSet rs = pstat.executeQuery();
@@ -162,7 +162,7 @@ public class PayGoodsDAO {
 	}
 	
 	// 프로모션 가격
-	public int promoPrice()throws Exception{
+	public int event2Price()throws Exception{
 		String sql = "select paygoodsPrice from paygoods where paygoodsseq = (select paygoodsseq from (select rownum as num, paygoods.* from paygoods order by paygoodsname) where num = 3)";
 		try(Connection con = this.getConnection(); PreparedStatement pstat = con.prepareStatement(sql);) {
 			ResultSet rs = pstat.executeQuery();
@@ -177,7 +177,7 @@ public class PayGoodsDAO {
 	}
 	
 	// 프로모션 판매 갯수
-	public int promoCount()throws Exception{
+	public int event2Count()throws Exception{
 		String sql = "select count(*) from paymember where paygoodsseq = (select paygoodsseq from (select rownum as num, paygoods.* from paygoods order by paygoodsname) where num = 3)";
 		try(Connection con = this.getConnection(); PreparedStatement pstat = con.prepareStatement(sql);) {
 			ResultSet rs = pstat.executeQuery();
@@ -192,7 +192,7 @@ public class PayGoodsDAO {
 	}
 	
 		// 이벤트1 코드
-		public int event1Code()throws Exception{
+		public int promoCode()throws Exception{
 			String sql = "select paygoodsseq from (select rownum as num, paygoods.* from paygoods order by paygoodsname) where num = 1";
 			try(Connection con = this.getConnection(); PreparedStatement pstat = con.prepareStatement(sql);) {
 				ResultSet rs = pstat.executeQuery();
@@ -207,7 +207,7 @@ public class PayGoodsDAO {
 		}
 		
 		// 이벤트1 가격
-		public int event1Price()throws Exception{
+		public int promoPrice()throws Exception{
 			String sql = "select paygoodsPrice from paygoods where paygoodsseq = (select paygoodsseq from (select * from paygoods order by paygoodsname) where rownum = 1)";
 			try(Connection con = this.getConnection(); PreparedStatement pstat = con.prepareStatement(sql);) {
 				ResultSet rs = pstat.executeQuery();
@@ -222,7 +222,7 @@ public class PayGoodsDAO {
 		}
 		
 		// 이벤트1 판매 갯수
-		public int event1Count()throws Exception{
+		public int promoCount()throws Exception{
 			String sql = "select count(*) from paymember where paygoodsseq = (select paygoodsseq from (select * from paygoods  order by paygoodsname) where rownum = 1)";
 			try(Connection con = this.getConnection(); PreparedStatement pstat = con.prepareStatement(sql);) {
 				ResultSet rs = pstat.executeQuery();
@@ -237,7 +237,7 @@ public class PayGoodsDAO {
 		}
 	
 		// 이벤트2 코드
-		public int event2Code()throws Exception{
+		public int event1Code()throws Exception{
 			String sql = "select paygoodsseq from (select rownum as num, paygoods.* from paygoods order by paygoodsname) where num = 2";
 			try(Connection con = this.getConnection(); PreparedStatement pstat = con.prepareStatement(sql);) {
 				ResultSet rs = pstat.executeQuery();
@@ -252,7 +252,7 @@ public class PayGoodsDAO {
 		}
 		
 		// 이벤트2 가격
-		public int event2Price()throws Exception{
+		public int event1Price()throws Exception{
 			String sql = "select paygoodsPrice from paygoods where paygoodsseq = (select paygoodsseq from (select rownum as num, paygoods.* from paygoods order by paygoodsname) where num = 2)";
 			try(Connection con = this.getConnection(); PreparedStatement pstat = con.prepareStatement(sql);) {
 				ResultSet rs = pstat.executeQuery();
@@ -267,7 +267,7 @@ public class PayGoodsDAO {
 		}
 		
 		// 이벤트2 판매 갯수
-		public int event2Count()throws Exception{
+		public int event1Count()throws Exception{
 			String sql = "select count(*) from paymember where paygoodsseq = (select paygoodsseq from (select rownum as num, paygoods.* from paygoods order by paygoodsname) where num = 2)";
 			try(Connection con = this.getConnection(); PreparedStatement pstat = con.prepareStatement(sql);) {
 				ResultSet rs = pstat.executeQuery();
