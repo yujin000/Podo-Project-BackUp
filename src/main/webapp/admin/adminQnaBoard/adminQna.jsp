@@ -35,7 +35,7 @@
 
         .listLi:hover {
             cursor: pointer;
-            background-color: #01B9FF;
+            background-color: purple;
         }
 
         .loginBtn {
@@ -162,7 +162,7 @@
         	height : 60px;
             line-height:60px;
         	font-size:20px;
-        	background-color:#01B9FF;
+        	background-color:purple;
         }
         #listHeader>div{
             color:white !important;

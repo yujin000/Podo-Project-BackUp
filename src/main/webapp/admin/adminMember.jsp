@@ -35,7 +35,7 @@
 
         .listLi:hover {
             cursor: pointer;
-            background-color: #01B9FF;
+            background-color: purple;
         }
 
         .loginBtn {
@@ -165,7 +165,7 @@
         	height : 60px;
             line-height:60px;
         	font-size:20px;
-        	background-color:#01B9FF;
+        	background-color:purple;
         }
         #listHeader>div{
             color:white !important;
@@ -287,7 +287,7 @@
 
         // 리스트  클릭 이벤트
 //         $("#listLi1").on("click", function () {
-//             $(this).css("background-color", "#01B9FF");
+//             $(this).css("background-color", "purple");
 //             $("#listLi2").css("background-color", "#FFFFFF")
 //             $("#mainConArea1").css({
 //                 "display": "block"
@@ -297,7 +297,7 @@
 //             })
 //         })
 //         $("#listLi2").on("click", function () {
-//             $(this).css("background-color", "#01B9FF");
+//             $(this).css("background-color", "purple");
 //             $("#listLi1").css("background-color", "#FFFFFF")
 //             $("#mainConArea1").css({
 //                 "display": "none"
