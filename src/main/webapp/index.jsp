@@ -86,7 +86,7 @@ uri="http://java.sun.com/jsp/jstl/core"%>
                 <li><a id="mypageBtn">마이페이지</a></li>
                 <c:choose>
                   <c:when test="${loginMembership eq 'admin'}">
-                    <li><a href="/admin/adminIndex.jsp">관리자페이지</a></li>
+                    <li><a href="/adminMain.adminMain">관리자페이지</a></li>
                   </c:when>
                 </c:choose>
                 <li><a href="#">계정설정</a></li>
@@ -138,7 +138,7 @@ uri="http://java.sun.com/jsp/jstl/core"%>
       ></iframe>
       <c:choose>
         <c:when
-          test="${loginMembership eq 'admin' || loginMembership eq 'vip'}"
+          test="${loginMembership eq 'admin' || loginMembership eq 'VIP'}"
         >
           <div id="MusicControl">
             <div class="hidden">
@@ -303,7 +303,7 @@ uri="http://java.sun.com/jsp/jstl/core"%>
     </script>
     <script>
       let membership = "${loginMembership}";
-      if (membership=="admin" || membership=="vip") {
+      if (membership=="admin" || membership=="VIP") {
       // Music Controller 부분
         	// 목록페이지 전체 div값
         	const musicListPage = document.querySelector(".hidden ul");

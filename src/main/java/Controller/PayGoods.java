@@ -27,6 +27,8 @@ public class PayGoods extends HttpServlet {
 				PayGoodsDAO dao = PayGoodsDAO.getInstance();
 				List<PayGoodsDTO> goodsList = dao.selectAll();
 				String nickName = request.getSession().getAttribute("loginNickname").toString();
+				String membership = request.getSession().getAttribute("loginMembership").toString();
+				request.getSession().setAttribute("membership", membership);
 				request.getSession().setAttribute("nickName", nickName);
 				request.setAttribute("goodsList", goodsList);
 				request.getRequestDispatcher("/admin/adminMembership.jsp").forward(request, response);
@@ -77,6 +79,7 @@ public class PayGoods extends HttpServlet {
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
+			response.sendRedirect("/error.jsp");
 		}
 	}
 

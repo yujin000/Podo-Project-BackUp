@@ -181,7 +181,7 @@ uri="http://java.sun.com/jsp/jstl/core"%>
         <input type="password" name="pw" id="pw" placeholder="최소 7자~최대20자" />
         <p id="msg"></p>
         <p>비밀번호 재확인</p>
-        <input type="text" id="pwCheck" />
+        <input type="password" id="pwCheck" />
         <p id="msg"></p>
         <p>닉네임</p>
         <input type="text" name="nickname" id="nickname" placeholder="10자" />
@@ -404,6 +404,8 @@ uri="http://java.sun.com/jsp/jstl/core"%>
               .text("비밀번호가 같지 않습니다!");
           } else {
             $(this).next("#msg").text("");
+            $("#pw").prop("readonly", true);
+            $("#pwCheck").prop("readonly", true);
           }
         });
 

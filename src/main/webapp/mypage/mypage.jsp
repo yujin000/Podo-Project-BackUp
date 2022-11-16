@@ -23,7 +23,7 @@
 
         :root {
             --font-color: #fff;
-            --background-color: #111;
+            --background-color: #000;
             --sub-background-color: #333;
             --boder-silver: 1px solid silver;
             --main-color: #3e065f;
@@ -83,10 +83,6 @@
 			height : 182px;
 			border: none;
        		border-radius: 50%;
-       		overflow : hidden;
-            background-image: url( "/profile/profile-default.jpg" );
-            background-repeat : no-repeat;
-        	background-size : cover;
         }
 
         .profile {
@@ -268,6 +264,14 @@
     	background: var(--background-color);
     	color: var(--font-color) /* background-color: #00000d50; */;
 		}
+		
+		/* 환불버튼 */
+		#delBtn{
+			margin-left:10px;
+		}
+		#delBtn:hover{
+			cursor:pointer;
+		}
     </style>
         <script
       src="https://code.jquery.com/jquery-3.6.1.min.js"
@@ -331,6 +335,7 @@
 									<c:choose>
 										<c:when test="${passName != null}">
 											${passName }
+											<button type='button' id="delBtn">이용권 환불</button>
 										</c:when>
 										<c:otherwise>
 											이용중인 이용권이 없습니다.
@@ -373,20 +378,33 @@
                 
                 <!-- 현재 회원의 예매내역 출력 -->
                 <tbody>
+                	<c:choose>
+					<c:when test="${not empty ticket}">
+					<c:forEach items="${ticket }" var="t">
                     <tr class="List">
                         <th>
-                            <div style="padding-left: 1vw;">마룬파이브 내한공연 (Maroon 5 Live in Seoul)</div>
+                            <div style="padding-left: 1vw;">
+											${t.performTitle }
+							</div>
                         </th>
                         <td>
-                            <div>2022.11.03 / 1매</div>
+                            <div>
+							<fmt:formatDate value="${t.startDate }" pattern="yyyy-MM-dd" /> / 1매
+							</div>
                         </td>
                         <td>
                         	<!-- detailBtn: 예매내역 상세보기 버튼 -->
                             <div id="detailBtn">
-                                <a href="" style="color: var(--font-color)">상세보기</a>
+                                <a href="/ticketList.perform" style="color: var(--font-color)">상세보기</a>
                             </div>
                         </td>
                     </tr>
+                    </c:forEach>
+                    </c:when>
+                    <c:otherwise>
+					예매한 내역이 없습니다.
+					</c:otherwise>
+					</c:choose>
                 </tbody>
             </table>
         </div>
@@ -404,8 +422,7 @@
             
             <!-- 프로필 이미지 -->
             <div class="profileDiv">
-                <img src="/profile/${DTO.profileImg }" class="profile" id="preview"  onerror="this.style.background='transperent'" >
-                <input type="hidden" name="imgView" value="${DTO.profileImg }">
+                <img src="/profile/${DTO.profileImg }" class="profile" id="preview">
             </div>
             
             
@@ -413,7 +430,7 @@
             <!-- 프로필 이미지 업로드 버튼 -->
             <div class="Btn" id="uploadBtn">
             <label for="file">프로필 이미지 업로드</label> 
-            <input type="file" id="file" name="file" onchange="readURL(this)">
+            <input type="file" id="file" name="file">
             </div>
             
             <!-- 프로필 이미지 삭제 버튼(구현중) -->
@@ -503,6 +520,26 @@
 	
     //시작하자마자 wrap2(프로필 수정 페이지) 꺼짐
     window.onload = function() {
+		
+    	$(document).ready(function () {
+            $("#file").on("change", readURL);
+        });
+    	
+    	//이미지 미리보기
+    	function readURL(e) {
+    	    var files = e.target.files;
+    	    var filesArr = Array.prototype.slice.call(files);
+    		filesArr.forEach(function (f) {
+    			sel_file=f;
+    			let reader = new FileReader();
+    			reader.onload = function(e){
+    				$("#preview").attr("src", e.target.result);
+                }
+                reader.readAsDataURL(f);
+    		});
+    	}
+		
+
     	$('#wrap2').css("display","none");
     	$('#pwDiv').css("display", "none");
     	
@@ -533,6 +570,8 @@
         		 $("#pwChang").attr("disabled", false);
         		 $("#pwCheck").attr("disabled", false);
         		 pwOk = true;
+        		 console.log(pwOk);
+        		 console.log(result);
              } else { 
                  $("#pw").next("#msg").html("일치하지 않습니다.").css("color", "#888");
                  $("#pwChang").attr("disabled", true);
@@ -546,22 +585,35 @@
     //비밀번호 재설정
     $("#pwChang").keyup(function () {
         let result = pwRegex.test($(this).val());
+        if($(this).val() == ""){
+        	pwResult = false;
+        	pwCheckResult = false;
+        }
         if ($(this).val() !== "" && !result) {
         	$(this).next("#msg").css("color", "#888").text("대문자, 소문자, 숫자, !@#$% 만 사용 가능합니다. ");
         	$("#pwCheck").next("#msg").text("");
         	pwResult = false;
-        } else{
+        	pwCheckResult = false;
+        	console.log("pwChang / if : "+pwResult);
+        } 
+        else{
+        	pwResult = true;
         	$("#pwChang").next("#msg").text("");
         	$("#pwCheck").next("#msg").text("");
         	if($(this).val()=== $("#pwCheck").val() && $(this).val()!=="" 
         		&& $("#pwCheck").val()!=="" ) {
         	$("#pwCheck").next("#msg").text("비밀번호가 일치합니다");
         	pwResult = true;
+        	pwCheckResult = true;
+        	console.log("true : "+pwResult);
         } else if($(this).val()==""||$("#pwCheck").val()=="") {
           $(this).next("#msg").text("");
+          pwResult = false;
+          pwCheckResult = false;
         } else {
         	$("#pwCheck").next("#msg").text("비밀번호가 일치하지 않습니다.");
         	pwResult = false;
+        	pwCheckResult = false;
 		}
         }
       });
@@ -569,22 +621,26 @@
       //비밀번호 재설정 확인
       $("#pwCheck").keyup(function () {
         let result = $(this).val() === $("#pwChang").val();
-        let result2 = pwRegex.test($(this).val());
         
         if(!result){
         	$(this).next("#msg").css("color", "#888").text("비밀번호가 일치하지 않습니다!");
         	pwCheckResult = false;
+        	pwResult = false;
         }else{
         	$("#pwCheck").next("#msg").text("");
         	if($(this).val()=== $("#pwChang").val() && $(this).val()!=="" 
         		&& $("#pwChang").val()!=="") {
         	$(this).next("#msg").text("비밀번호가 일치합니다");
         	pwCheckResult = true;
+        	pwResult = true;
         } else if($(this).val()==""||$("#pwChang").val()=="") {
           $(this).next("#msg").text("");
+          pwCheckResult = false;
+          pwResult = false;
         } else {
         	$("#pwCheck").next("#msg").text("비밀번호가 일치하지 않습니다.");
         	pwCheckResult = false;
+        	pwResult = false;
 		}
         	
         }
@@ -675,11 +731,11 @@
 		}
 		if(pwOk){
 			if(!pwResult){
-				alert("변경하실 비밀번호를 확인해주세요");
+				alert("변경하실 비밀번호를 확인해주세요(pwResult)");
 				return false;
 			}
 			if(!pwCheckResult){
-				alert("변경하실 비밀번호를 확인해주세요");
+				alert("변경하실 비밀번호를 확인해주세요(pwCheckResult)");
 				return false;
 			}
 		}
@@ -696,18 +752,16 @@
 		}
 	});
 	
-	//이미지 미리보기
-	function readURL(input) {
-		if (input.files && input.files[0]) {
-			let reader = new FileReader();
-			reader.onload = function(e) {
-				document.getElementById('preview').src = e.target.result;
-			};
-			reader.readAsDataURL(input.files[0]);
-		} else {
-			document.getElementById('preview').src = "";
-		}
-	}
+
+// 		if (input.files && input.files[0]) {
+// 			let reader = new FileReader();
+// 			reader.onload = function(e) {
+// 				document.getElementById('preview').src = e.target.result;
+// 			};
+// 			reader.readAsDataURL(input.files[0]);
+// 		} else {
+// 			document.getElementById('preview').src = "";
+// 		}
 	
 	//프로필 이미지 삭제
 	$("#delImgBtn").on("click", function(){
@@ -719,6 +773,14 @@
 	document.getElementById("backBtn").addEventListener("click",function(){
 		location.href = "/mypage.member"
     })
+    
+    // 이용권 환불하기
+    $("#delBtn").on("click",function(){
+    	if(confirm("환불은 영업일 기준 1~3일 정도 소요됩니다. 환불하시겠습니까?")){
+    		window.parent.location.href = "/refund.paymem";
+    	}
+    })
+    
     </script>
 </body>
 
