@@ -360,7 +360,7 @@
         <div class="leftArea">
             <div id="graph">
                 <div class="mainIsland" id="sales">
-                    <div class="islandTitle" id="salesData">판매량 / 매출액</div>
+                    <div class="islandTitle" id="salesData">상품 코드별 판매량 / 매출액</div>
                     <div class="proName">
                          <div class="setting">${promoCode }</div>
                          <div class="setting">${event1Code }</div>
@@ -506,6 +506,7 @@
         let countMem = $("#memberCount1").val();
 
         counter($counter, countMem);
+        
         function counter($counter, max) {
             let now = max;
             const handle = setInterval(() => {
@@ -528,6 +529,7 @@
         let profit = $("#adminProfit").val();
 
         counter($counter2, profit);
+        
         function counter2($counter2, max) {
             let now = max;
             const handle = setInterval(() => {

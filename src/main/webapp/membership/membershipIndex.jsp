@@ -294,6 +294,16 @@ div {
     font-weight: bold;
     margin-top:50px;
 }
+footer {
+  width: 100%;
+  height: 100px;
+  margin-top: 5vh;
+  text-align: center;
+  color: silver;
+  font-size: 0.8rem;
+  background: transparent;
+  opacity: 0.5;
+}
 </style>
 </head>
 <body>
@@ -379,7 +389,14 @@ div {
 		</div>
 		<input type="hidden" value="${loginEmail }" id="user">
 		<input type="hidden" value="${loginMembership }" id="logMemship">
+			          <footer>
+      <p>개인정보처리방침 | PODO 이용약관 | 고객센터 | 결제/환불안내 | 상담</p>
+      <br />
+      <img src="../image/web/logo-footer.png" alt="" style="width: 60px" />
+      <p>© PODO Music Corp.</p>
+    </footer>
 	</div>
+
 	<script>
 		/* 헤더 네비게이션 이벤트( 페이지 전환 : 해당 메뉴 선택시 display속성 변동, 아래 바 추가 ) */
 		let bar = $("<div>");
