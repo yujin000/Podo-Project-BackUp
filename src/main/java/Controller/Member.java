@@ -109,9 +109,9 @@ public class Member extends HttpServlet {
 					fileSavePath.mkdir();
 				}
 				MultipartRequest multi = new MultipartRequest(request,savePath,maxSize,"UTF8",new DefaultFileRenamePolicy());	
-				System.out.println(savePath);
+				// System.out.println(savePath);
 				String sysName = multi.getFilesystemName("file");
-				System.out.println(sysName);
+				// System.out.println(sysName);
 				if(sysName==null) {
 					sysName = multi.getParameter("preview");
 				}

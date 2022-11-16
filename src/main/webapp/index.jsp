@@ -348,11 +348,11 @@ uri="http://java.sun.com/jsp/jstl/core"%>
         			})
         		</c:forEach>
         	// 페이지 첫 화면 접속시, 받은 목록에서 기본 재생곡으로 맨 앞 곡을 선택해준다.
-        	playAudio.setAttribute("src","/audio/" + musicList[playIndex].musicMp3 + ".mp3");
+        	playAudio.setAttribute("src","/audio/" + musicList[playIndex].musicMp3);
         	// 좌측 하단에 재생대기중인 음원의 정보를 표시한다.
         	playTitle.innerHTML = musicList[playIndex].musicName;
         	playArtist.innerHTML = musicList[playIndex].musicArtist;
-        	musicImg.src = `/image/music/\${musicList[playIndex].musicImg}`;
+        	musicImg.src = `/audio/\${musicList[playIndex].musicImg}`;
         	// 각 함수 구현
         	// 재생 함수
         	function playMusic() {
@@ -371,8 +371,8 @@ uri="http://java.sun.com/jsp/jstl/core"%>
         	function loadMusic(index) {
             	playTitle.innerHTML = musicList[playIndex].musicName;
             	playArtist.innerHTML = musicList[playIndex].musicArtist;
-            	musicImg.src = `/image/music/\${musicList[index].musicImg}.jpg`;
-            	playAudio.setAttribute("src","/audio/" + musicList[index].musicMp3 + ".mp3");
+            	musicImg.src = `/audio/\${musicList[index].musicImg}`;
+            	playAudio.setAttribute("src","/audio/" + musicList[index].musicMp3);
         	}
         	// 이전 곡 듣기 함수
         	function prevMusic(){
@@ -465,7 +465,7 @@ uri="http://java.sun.com/jsp/jstl/core"%>
             	    let li = `
             	    <li class="playList" data-index="\${i}">
                             <div>
-                            <img src ="image/music/\${musicList[i].musicImg}" ></div>
+                            <img src ="/audio/\${musicList[i].musicImg}" ></div>
                             <div>
                             <p>\${musicList[i].musicName}</p>
                             <p>\${musicList[i].musicArtist}</p>
