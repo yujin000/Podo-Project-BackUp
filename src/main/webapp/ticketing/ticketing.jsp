@@ -159,7 +159,6 @@ a {
 				<p style="color: white;">
 					<img src="image/perform/logo-f-b.png" alt="">티켓
 				</p>
-				<div><a href="/ticketList.perform">예매내역</a></div>
 			</h1>
 		</div>
 		<div class="contents">
