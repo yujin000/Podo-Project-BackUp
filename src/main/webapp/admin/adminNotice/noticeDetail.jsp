@@ -258,7 +258,7 @@
                         	<div id="noticeWriterHeader">작성자</div>
                         	<div id="noticeWriteDateHeader">작성일</div>
                         </div>
-                        <form action="/del.notice" id="form"></form>
+                        <form action="/del.notice" id="form">
                         <div id="qnaList">
                             <div class="qnaList">
                                 <div class="noticeSeq">${noticeDetail.noticeSeq }</div>
