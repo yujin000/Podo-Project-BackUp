@@ -187,7 +187,7 @@ uri="http://java.sun.com/jsp/jstl/core"%>
                 </li>
               </ul>
               <ul class="controlBtn">
-                <li><span class="material-symbols-rounded"> repeat </span></li>
+                <li><span class="material-symbols-rounded" style="display:none"> repeat </span></li>
                 <li>
                   <span class="material-symbols-rounded" id="playPrev">
                     skip_previous
@@ -208,7 +208,7 @@ uri="http://java.sun.com/jsp/jstl/core"%>
                     skip_next
                   </span>
                 </li>
-                <li><span class="material-symbols-rounded"> replay </span></li>
+                <li><span class="material-symbols-rounded" style="display:none"> replay </span></li>
               </ul>
 
               <ul class="volume">
