@@ -173,7 +173,7 @@ div[class^=navi]{
 #performImg{
     width:90px;
     height:120px;
-    top:50%;
+    top:45%;
     transform: translateY(-50%);
     left:25px;
 }
@@ -190,17 +190,20 @@ div[class^=navi]{
     top:15px;
     left:360px;
 }
+.navi3>input{
+	width:500px;
+}
 .navi4{
     bottom:20px;
     left:150px;
 }
 .navi5{
     top:15px;
-    left:750px;
+    left:840px;
 }
 .navi6{
     top:40px;
-    left:750px;
+    left:840px;
 }
 .navi7{
     bottom:20px;
@@ -208,11 +211,11 @@ div[class^=navi]{
 }
 .navi8{
     top:15px;
-    left:580px;
+    left:660px;
 }
 .navi9{
     bottom:20px;
-    left:580px;
+    left:660px;
 }
 #btnBox2{
     display:inline-block;
@@ -361,7 +364,7 @@ div[class^=inInfo],.btnBox{
 								<form id="upForm">
 									<div class="listWrap">
 										<div class="navi1" id="performImg">
-											<img src="/admin/${perform.poster }" id="posterImg">
+											<img src="/image/perform/${perform.poster }" id="posterImg">
 										</div>
                                         <div class="navi2"><b>극장명</b><br><input type="text" value="${perform.theaterName }" class="intheaterName" readonly></div>
                                         <div class="navi3"><b>공연이름</b><br><input type="text" value="${perform.performTitle }" class="inperformTitle" readonly></div>

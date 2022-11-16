@@ -191,7 +191,7 @@ div[class^=navi]{
 .navi6{
     top:10px;
     left:550px;
-    width:300px;
+    width:500px;
     height:110px;
 }
 .navi6>textarea{

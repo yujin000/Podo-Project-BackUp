@@ -205,7 +205,7 @@ div {
 #selectInfo{
 	width:100%;
 	margin:auto;
-	height:300px;
+	height:350px;
 	border:1px solid #FF0050;
 	overflow:none;
 	border-radius: 5px;
@@ -242,8 +242,8 @@ div {
     font-weight: bold;
     height:25px;
     line-height: 25px;
-    left:520px;
-    top:30px;
+    left:560px;
+    top:-20px;
     display:none;
 }
 #kakaoIcon::before{

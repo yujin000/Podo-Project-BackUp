@@ -56,7 +56,7 @@ public class Performance extends HttpServlet {
 				
 				String theaterName = request.getParameter("theaterName");
 				String performTitle = request.getParameter("performTitle");
-				String poster = request.getParameter("posterFile");
+				//String poster = request.getParameter("posterFile");
 				int showtime = Integer.parseInt(request.getParameter("showtime"));
 				String getStartDate = request.getParameter("startDate")+" 00:00:00";
 				Timestamp startDate = Timestamp.valueOf(getStartDate);
@@ -67,7 +67,7 @@ public class Performance extends HttpServlet {
 				String genre = request.getParameter("genre");
 				String performPoster = request.getParameter("performPoster");
 				
-				PerformanceDTO dto = new PerformanceDTO(0,0,theaterName,performTitle,poster,showtime,startDate,endDate,performPrice,rating,genre,performPoster);
+				PerformanceDTO dto = new PerformanceDTO(0,0,theaterName,performTitle,null,showtime,startDate,endDate,performPrice,rating,genre,performPoster);
 				dao.addPerform(dto);
 				response.sendRedirect("/adminPerform.perform");
 				
