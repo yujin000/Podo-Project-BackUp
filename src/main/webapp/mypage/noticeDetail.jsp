@@ -25,7 +25,7 @@
         :root {
             --font-color: #fff;
             --background-color: #000;
-            --sub-background-color: #333;
+            --sub-background-color: #222;
             --boder-silver: 1px solid silver;
             --main-color: #3e065f;
             --point-color: #ff00d7;
@@ -41,66 +41,98 @@
             border: none;
         }
 
-/*         div { */
-/*             border: 1px solid #fff; */
-/*         } */
-
         body {
             width: 100vw;
-            background: var(--background-color);
+            background: var(--sub-background-color);
             color: var(--font-color);
             font-family: "Noto Sans KR", sans-serif;
+        	-ms-overflow-style: none;
         }
+		body::-webkit-scrollbar{
+  			display:none;
+		}
 
         .container {
             padding: 0 75px;
             height: 100%;
-/*             background-color: bisque; */
             width: 100vw;
-    		margin-bottom:200px;
         }
-
+		
+		/*공지사항*/
         .titleText {
             font-size: 38px;
             font-weight: var(--font-weight);
             line-height: var(--line-height);
             margin-bottom: 2vw;
-/*             background-color: #00000d50; */
         }
 
-        /*qna css */
-        .qna {
+        /*notice css */
+        .notice {
             height: 100%;
             margin-top: 8vh;
-/*             background-color: lightgray; */
         }
 
-        .qnalist {
+        .noticeList {
             width: 100%;
             height: 48vh;
             margin-top: 5vh;
-/*             background-color: #00000d80; */
         }
-
+		
+		/*유형*/
         #category {
             width: 100%;
-            font-size: 18px;
+            font-size: 20px;
             font-weight: var(--font-weight);
             line-height: var(--line-height);
+            border-bottom: 1px solid rgb(255,255,255,0.3);
         }
-
+		#categoryP{
+    		width: 165px;
+    		font-family: "Noto Sans KR", sans-serif;
+    		font-weight: bold;
+    		background: var(--sub-background-color);
+    		color: #fff;
+    		display: inline-block;
+    		margin-left: 3vw;
+        }
+		/*제목*/
         #title {
             width: 100%;
             font-size: 18px;
             font-weight: var(--font-weight);
             line-height: var(--line-height);
+            border-bottom: 1px solid rgb(255,255,255,0.3);
         }
+        
+       #titleP{
+        	width: 330px;
+    		font-family: "Noto Sans KR", sans-serif;
+    		font-weight: bold;
+    		background: var(--sub-background-color);
+    		color: #fff;
+    		display: inline-block;
+    		margin-left: 3.3vw;
+    		
+        }
+        /*작성자*/
         #writer{
         	width: 100%;
             font-size: 18px;
             font-weight: var(--font-weight);
             line-height: var(--line-height);
+            border-bottom: 1px solid rgb(255,255,255,0.3);
         }
+        #writerP{
+            width: 165px;
+    		font-family: "Noto Sans KR", sans-serif;
+    		font-weight: bold;
+    		background: var(--sub-background-color);
+    		color: #fff;
+    		display: inline-block;
+    		margin-left: 2.4vw;
+        }
+        
+        /*내용*/
         #contents{
             width: 100%;
             font-size: 18px;
@@ -108,9 +140,27 @@
             line-height: var(--line-height);
         }
         
+        #contentsDiv{
+        	height:33vh;
+        	border: 1px solid rgb(255,255,255,0.3);
+        	padding-left: 10px;
+        	padding-right: 10px;
+       		word-break:normal;
+        	word-break:break-all;
+        	white-space: pre-wrap;
+        }
         
+        /*첨부파일*/
+        #file{
+			width: 100%;
+    		height: 35px;
+    		font-size: 17px;
+    		font-weight: var(--font-weight);
+    		line-height: var(--line-height);
+        }
+        
+        /* 목록 버튼*/
         #listBtn {
-            margin-top: 2vh;
             width: 6vw;
             height: 40px;
             text-align: center;
@@ -120,40 +170,50 @@
             line-height: var(--line-height);
             border: 1px solid gray;
             cursor: pointer;
-            background: var(--background-color);
+            background: var(--sub-background-color);
             color: var(--font-color);
-/*             background-color: #00000d50; */
         }
-
         #listBtn:hover {
             border: 1px solid silver;
         }
+        
+        footer {
+        width: 100%;
+        height: 200px;
+        margin-top: 40vh;
+        text-align: center;
+        color: silver;
+        font-size: 0.8rem;
+        background: transparent;
+        opacity: 0.5;
+      }
     </style>
 </head>
 
 <body>
     <div class="container">
-        <div class="qna">
+        <div class="notice">
             <div class="titleText">공지사항</div>
-            <div class="qnalist">
+            <div class="noticeList">
             
-					<div id="category">
-						유형
-						${noticeDetail.noticeCategory }
-
+					<div id="category">유형
+						<p id="categoryP">${noticeDetail.noticeCategory }</p>
 					</div>
+					
 					<div id="title">제목
-                        ${noticeDetail.noticeTitle }
+                     	<p id="titleP">${noticeDetail.noticeTitle }</p>
                     </div>
+                    
                     <div id="writer">작성자
-                        ${noticeDetail.noticeWriter }            
+                        <p id="writerP">${noticeDetail.noticeWriter }</p>         
                     </div>
+                    
                     <div id="contents">내용
-                        ${noticeDetail.noticeContents }            
+                         <div id=contentsDiv>${noticeDetail.noticeContents }            
                     </div>
             </div>
             
-            <div>
+            <div id="file">
                  첨부파일 : <a href="/download.file?sysname=${noticeDetailFile.sysName }&oriname=${noticeDetailFile.oriName}">${noticeDetailFile.oriName }</a> 
             </div>
             
@@ -164,7 +224,17 @@
             
         </div>
     </div>
+    
+    <footer>
+       <p>개인정보처리방침 | PODO 이용약관 | 고객센터 | 결제/환불안내 | 상담</p>
+       <br />
+       <img src="../image/web/logo-footer.png" alt="" style="width: 60px" />
+       <p>© PODO Music Corp.</p>
+    	</footer>
+    	
+   </div>
     <script>
+  //목록버튼 이벤트
     document.getElementById("listBtn").addEventListener("click",function(){
     	history.back();
     })

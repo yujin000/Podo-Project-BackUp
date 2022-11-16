@@ -23,8 +23,8 @@
 
         :root {
             --font-color: #fff;
-            --background-color: #111;
-            --sub-background-color: #333;
+            --background-color: #000;
+            --sub-background-color: #222;
             --boder-silver: 1px solid silver;
             --main-color: #3e065f;
             --point-color: #ff00d7;
@@ -40,38 +40,34 @@
             border: none;
         }
 
-/*          div {  */
-/*              border: 1px solid #fff;  */
-/*          } */
-
         body {
             width: 100vw;
-            background: var(--background-color);
+            background: var(--sub-background-color);
             color: var(--font-color);
             font-family: "Noto Sans KR", sans-serif;
+            -ms-overflow-style: none;
         }
-
+		body::-webkit-scrollbar{
+  			display:none;
+		}
         .container {
             padding: 0 75px;
             height: 100%;
-/* 			background-color: bisque;  */
             width: 100vw;
-    		margin-bottom:200px;
         }
 		
 		.main {
             height: 100%;
             margin-top: 8vh;
-/* 		    background-color: lightgray; */
         }
         
+        /*위시리스트*/
         .titleText {
             font-size: 38px;
             font-weight: var(--font-weight);
             line-height: var(--line-height);
             margin-bottom: 2vw;
             font-family: "EliceDigitalBaeum-Bd";
-/* 			background-color: #00000d50; */
         }
         
         /*category css*/
@@ -79,7 +75,6 @@
         width:100%;
         height: 59px;
         font-size: 28px;
-/*         background-color:#00000d50; */
         text-aline:center;
         }
         #home{
@@ -90,7 +85,6 @@
         color: var(--font-color);
     	font-weight: var(--font-weight);
     	line-height: var(--line-height);
-/*    		background-color: #00000d50; */
         }
         
         
@@ -101,7 +95,8 @@
 		height: 55vh;
 		border: 1px solid transparent;
         }
-        .writelist{
+        
+        .wishlist{
             height: 96px;
     		width: 100%;
     		font-size: 20px;
@@ -109,6 +104,7 @@
     		border-bottom: 1px solid rgb(255,255,255,0.3);
     		margin-top: 10px;
 		}
+		
         #heart{
         	float: left;
             width: 5%;
@@ -138,7 +134,7 @@
             border-width: 0 0 1px;
             line-height: 75px;
 		}
-		img{
+		#imgAlbum{
 		width: 80px;
     	height: 80px;
 		}
@@ -150,6 +146,16 @@
   			'opsz' 48;
   			color:red;
 		}
+		footer {
+        width: 100%;
+        height: 200px;
+        margin-top: 40vh;
+        text-align: center;
+        color: silver;
+        font-size: 0.8rem;
+        background: transparent;
+        opacity: 0.5;
+      }
     </style>
         <script
       src="https://code.jquery.com/jquery-3.6.1.min.js"
@@ -166,14 +172,15 @@
                     <div id="home">노래</div>
             </div>
             
-            
+            <!-- 위시리스트 출력 -->
             <div class="list">
+            
 				<c:choose>
 					<c:when test="${not empty wish}">
 						<c:forEach var="w" items="${wish }">
-							<div class="writelist">
+							<div class="wishlist">
 								<span class="material-symbols-outlined" id="heart">favorite</span>
-								<div id="musicImg"><img src="/image/music/${w.musicImg }.jpg"> </div>
+								<div id="musicImg"><img src="/image/music/${w.musicImg }.jpg" id="imgAlbum"> </div>
 								<div id="songName">${w.musicName }</div>
 								<div id="album">${w.musicAlbum }</div>
 								<div id="artistName">${w.musicArtist }</div>												
@@ -184,9 +191,18 @@
          위시리스트가 없습니다. 노래를 추가해주세요.
          </c:otherwise>
 				</c:choose>
+				
 			</div>
 			
         </div>
+        
+        <footer>
+       <p>개인정보처리방침 | PODO 이용약관 | 고객센터 | 결제/환불안내 | 상담</p>
+       <br />
+       <img src="../image/web/logo-footer.png" alt="" style="width: 60px" />
+       <p>© PODO Music Corp.</p>
+       </footer>
+    	
     </div>
 </body>
 

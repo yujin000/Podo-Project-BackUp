@@ -24,8 +24,8 @@
 
         :root {
             --font-color: #fff;
-            --background-color: #111;
-            --sub-background-color: #333;
+            --background-color: #000;
+            --sub-background-color: #222;
             --boder-silver: 1px solid silver;
             --main-color: #3e065f;
             --point-color: #ff00d7;
@@ -41,38 +41,35 @@
             border: none;
         }
 
-/*         div { */
-/*             border: 1px solid #fff; */
-/*         } */
-
         body {
             width: 100vw;
-            background: var(--background-color);
+            background: var(--sub-background-color);
             color: var(--font-color);
             font-family: "Noto Sans KR", sans-serif;
+        	-ms-overflow-style: none;
         }
+		body::-webkit-scrollbar{
+  			display:none;
+		}
 
         .container {
             padding: 0 75px;
             height: 100%;
-/*             background-color: bisque; */
-/*             width: 100vw; */
     		margin-bottom:200px;
         }
-
+		
+		/*1:1문의*/
         .titleText {
             font-size: 38px;
             font-weight: var(--font-weight);
             line-height: var(--line-height);
             margin-bottom: 2vw;
-/*             background-color: #00000d50; */
         }
 
         /*qna css */
         .qna {
             height: 100%;
             margin-top: 8vh;
-/*             background-color: lightgray; */
         }
 		
 		/*틀*/
@@ -80,7 +77,6 @@
             width: 100%;
             height: 51vh;
             margin-top: 5vh;
-/*             background-color: #00000d80; */
         }
 		
 		/*문의 유형 css */
@@ -99,7 +95,7 @@
 		    margin-left: 1.5vw;
     		font-family: "Noto Sans KR", sans-serif;
     		font-weight: bold;
-    		background-color: #111;
+    		background: var(--sub-background-color);
     		color: #fff;
     		border: 1px solid;
 		}
@@ -120,7 +116,7 @@
 		    margin-left: 3.7vw;
     		font-family: "Noto Sans KR", sans-serif;
     		font-weight: bold;
-    		background-color: #111;
+    		background: var(--sub-background-color);
     		color: #fff;
     		border: 1px solid;
         }
@@ -141,10 +137,11 @@
         
         /*textarea css*/
         #qnaContents{
-          	background: var(--background-color);
+          	background: var(--sub-background-color);
           	width:100%;
           	height:100%;
-          	font-size:15px;
+          	font-size:20px;
+          	font-weight: var(--font-weight);
           	color: var(--font-color);
           	resize: none;
         }
@@ -162,14 +159,23 @@
             line-height: var(--line-height);
             border: 1px solid gray;
             cursor: pointer;
-            background: var(--background-color);
+            background: var(--sub-background-color);
             color: var(--font-color);
-/*             background-color: #00000d50; */
         }
 
         #writeBtn,#listBtn:hover {
             border: 1px solid silver;
         }
+        footer {
+        width: 100%;
+        height: 200px;
+        margin-top: 40vh;
+        text-align: center;
+        color: silver;
+        font-size: 0.8rem;
+        background: transparent;
+        opacity: 0.5;
+      }
     </style>
 </head>
 
@@ -182,6 +188,7 @@
             
 					<div id="category">
 						문의유형
+						
 						<select id="categoryList">
 							<option selected>가입/결제/인증</option>
 							<option>위시리스트</option>
@@ -189,22 +196,29 @@
 							<option>장애/오류</option>
 							<option>기타</option>
 						</select>
+						
 						<input type="hidden" id="qnaCategory" name="qnaCategory">
-
 					</div>
+					
 					<div id="title">제목
                         <input type="text" placeholder="제목을 입력하세요" name="qnaTitle" id="qnaTitle">
                     </div>
+                    
                     <div id="contents">문의 내용
                     	<div id="textareaDiv">
-                        <textarea placeholder="내용을 입력해주세요" name="qnaContents" 
+                        <textarea placeholder="내용을 입력해주세요 (영문, 숫자, 일반 특수문자 : 400글자 / 한글, 한자, 기타 특수문자 : 200글자 )" name="qnaContents" 
                          id="qnaContents"></textarea>
                         </div>
                     </div>
+                    
             </div>
+            
+            <!-- 첨부파일 -->
             <div>
             <input type="file" name="file">
             </div>
+            
+            <!-- 버튼들 -->
             <div style="float:right;">
               <button type="button" id="listBtn">목록으로</button>
               <button type="button" id="writeBtn">작성완료</button>
@@ -212,8 +226,17 @@
             
         </div>
         </form>
+        
+        <footer>
+       <p>개인정보처리방침 | PODO 이용약관 | 고객센터 | 결제/환불안내 | 상담</p>
+       <br />
+       <img src="../image/web/logo-footer.png" alt="" style="width: 60px" />
+       <p>© PODO Music Corp.</p>
+    	</footer>
+    	
     </div>
     <script>
+    //값 비었을때
     document.getElementById("writeBtn").addEventListener("click", function() {
     	if($("#qnaTitle").val()=="" || $("#qnaTitle").val()==null){
     		alert("제목을 입력해주세요.");
@@ -223,17 +246,23 @@
     		alert("문의 내용을 입력해주세요.");
 			return false;
     	};
+    	//최대 한글 25자 영어 50자
     	if(!maxLengthCheck("qnaTitle", "제목","50")){
             return false;
         }
+    	//최대 한글 200글자 영어 400글자
     	if(!maxLengthCheck("qnaContents", "문의 내용")){
             return false;
         }
     	document.getElementById("insertForm").submit();
     })
+    
+    //목록 버튼 이벤트
     document.getElementById("listBtn").addEventListener("click",function(){
     	history.back();
     })
+    
+    //문의 유형 선택
     $(function() {
     	let selectedText = $(":selected").text();
     	$('#qnaCategory').val(selectedText);
@@ -247,10 +276,12 @@
 
         });
     
+    
+    //글자수 제한 함수
     function maxLengthCheck(id, title, maxLength){
         let obj = $("#"+id);
         if(maxLength == null) {
-            maxLength = obj.attr("maxLength") != null ? obj.attr("maxLength") : 200;
+            maxLength = obj.attr("maxLength") != null ? obj.attr("maxLength") : 400;
         }
         
         if(Number(byteCheck(obj)) > Number(maxLength)) {
@@ -261,7 +292,7 @@
             return true;
        }
    }
-    
+    //글자수 제한 함수
     function byteCheck(el){
         let codeByte = 0;
         for (let idx = 0; idx < el.val().length; idx++) {
