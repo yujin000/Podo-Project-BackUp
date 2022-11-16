@@ -34,12 +34,13 @@
         }
         
         #listLi1{
-        	background-color:#01B9FF;
+        	background-color:purple;
+        	color:white;
         }
         
         .listLi:hover {
             cursor: pointer;
-            background-color: #01B9FF;
+            background-color: purple;
         }
 
         .loginBtn {
@@ -146,7 +147,7 @@
 /* 파일첨부 css */
 label{
   padding: 6px 25px;
-  background-color:#01B9FF;
+  background-color:purple;
   border-radius: 4px;
   color: white;
   cursor: pointer;
@@ -467,8 +468,8 @@ div[class^=inInfo],.btnBox{
 
     // 리스트  클릭 이벤트
     $("#listLi1").on("click", function () {
-        $(this).css("background-color", "#01B9FF");
-        $("#listLi2").css("background-color", "#FFFFFF")
+        $(this).css("background-color", "purple").css("color","white");
+        $("#listLi2").css("background-color", "#FFFFFF").css("color","#515151");
         $("#mainConArea1").css({
             "display": "block"
         })
@@ -477,8 +478,8 @@ div[class^=inInfo],.btnBox{
         })
     })
     $("#listLi2").on("click", function () {
-        $(this).css("background-color", "#01B9FF");
-        $("#listLi1").css("background-color", "#FFFFFF")
+        $(this).css("background-color", "purple").css("color","white");
+        $("#listLi1").css("background-color", "#FFFFFF").css("color","#515151");
         $("#mainConArea1").css({
             "display": "none"
         })

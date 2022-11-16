@@ -101,7 +101,8 @@ public class NoticeBoard extends HttpServlet {
 				int noticeSeq = Integer.parseInt(request.getParameter("noticeSeq"));
 				NoticeBoardDTO noticeDto = NoticeBoardDAO.getInstance().noticeDetail(noticeSeq);
 				BoardFilesDTO filesDto = BoardFilesDAO.getInstance().selectNotice(noticeSeq);
-				
+				String nickName = request.getSession().getAttribute("loginNickname").toString();
+				request.getSession().setAttribute("nickName", nickName);
 				request.setAttribute("noticeDetail", noticeDto);
 				request.setAttribute("noticeDetailFile", filesDto);
 				request.getRequestDispatcher("/admin/adminNotice/noticeDetail.jsp").forward(request, response);
