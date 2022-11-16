@@ -159,11 +159,11 @@
             </div>
             
             <div>
-            
+         
 			<c:forEach var='i' items='${qdto }'>
 				댓글 : ${i.qnaCommentContents }
 			</c:forEach>
-
+			
             </div>
             <div style="float:right;">
               <button type="button" id="listBtn">목록</button>

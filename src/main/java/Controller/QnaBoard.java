@@ -71,8 +71,8 @@ public class QnaBoard extends HttpServlet {
 			} else if (uri.equals("/detail.board")) {
 				QnaBoardDAO dao = QnaBoardDAO.getInstance();
 				int qnaSeq = Integer.parseInt(request.getParameter("qnaSeq"));
-				QnaBoardDTO dtoDetail = dao.isSelect(qnaSeq);
-				
+				QnaBoardDTO dtoDetail = dao.isSelect(qnaSeq);	
+		           
 				BoardFilesDAO fileDao = BoardFilesDAO.getInstance();
 				BoardFilesDTO dto = fileDao.select(qnaSeq);
 				String nickName = request.getSession().getAttribute("loginNickname").toString();
@@ -115,17 +115,18 @@ public class QnaBoard extends HttpServlet {
 				request.setAttribute("boardFile", boardFilesDto);
 				request.setAttribute("qnaBoard", qnaBoardDto);
 				request.getRequestDispatcher("/admin/adminQnaBoard/adminQnaDetail.jsp?qnaSeq="+qnaSeq).forward(request, response);
-			}
-		} catch (Exception e) {
-			e.printStackTrace();
-			response.sendRedirect("/error.jsp");
-		}
+				 request.getRequestDispatcher("/admin/adminQnaBoard/adminQnaDetail.jsp?qnaSeq="+qnaSeq).forward(request, response);
+	        }
+	     } catch (Exception e) {
+	        e.printStackTrace();
+	        response.sendRedirect("/error.jsp");
+	     }
+	  }
+
+	  protected void doPost(HttpServletRequest request, HttpServletResponse response)
+	        throws ServletException, IOException {
+
+	     doGet(request, response);
+	  }
+
 	}
-
-	protected void doPost(HttpServletRequest request, HttpServletResponse response)
-			throws ServletException, IOException {
-
-		doGet(request, response);
-	}
-
-}

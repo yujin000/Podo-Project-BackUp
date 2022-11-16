@@ -46,7 +46,7 @@ public class TicketingDAO {
 	}
 
 	public List<TicketingDTO> TicketingList(String email) throws Exception {
-		String sql = "select * from ticketing where email = ?";
+		String sql = "select * from ticketing t inner join performance p on t.performSeq=p.performSeq where email = ?";
 		try (Connection con = this.getConnection(); PreparedStatement pstat = con.prepareStatement(sql);) {
 			pstat.setString(1, email);
 			try (ResultSet rs = pstat.executeQuery();) {
@@ -63,6 +63,7 @@ public class TicketingDAO {
 					dto.setSeatNum(rs.getInt("seatNum"));
 					dto.setTicketDate(rs.getTimestamp("ticketDate"));
 					dto.setRating(rs.getString("rating"));
+					dto.setStartDate(rs.getTimestamp("startDate"));
 					result.add(dto);
 				}
 				return result;
