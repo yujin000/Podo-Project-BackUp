@@ -401,7 +401,7 @@ uri="http://java.sun.com/jsp/jstl/core"%> -->
               
                             <li>
                                 <a href="" id="selectChart"> 
-                                <img src="/image/music/${i.musicImg}.jpg" alt="" />
+                                <img src="/audio/${i.musicImg}" alt="" />
                               </a> 
                                <div>
             

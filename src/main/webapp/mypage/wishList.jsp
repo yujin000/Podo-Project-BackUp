@@ -180,7 +180,7 @@
 						<c:forEach var="w" items="${wish }">
 							<div class="wishlist">
 								<span class="material-symbols-outlined" id="heart">favorite</span>
-								<div id="musicImg"><img src="/image/music/${w.musicImg }.jpg" id="imgAlbum"> </div>
+								<div id="musicImg"><img src="/audio/${w.musicImg }" id="imgAlbum"> </div>
 								<div id="songName">${w.musicName }</div>
 								<div id="album">${w.musicAlbum }</div>
 								<div id="artistName">${w.musicArtist }</div>												
