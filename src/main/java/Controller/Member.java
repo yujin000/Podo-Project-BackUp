@@ -17,7 +17,9 @@ import com.oreilly.servlet.multipart.DefaultFileRenamePolicy;
 
 import DAO.MemberDAO;
 import DAO.PayMemberDAO;
+import DAO.TicketingDAO;
 import DTO.MemberDTO;
+import DTO.TicketingDTO;
 
 @WebServlet("*.member")
 public class Member extends HttpServlet {
@@ -82,7 +84,12 @@ public class Member extends HttpServlet {
 				PayMemberDAO pdao = PayMemberDAO.getInstance();
 				String userEmail = request.getSession().getAttribute("loginEmail").toString();
 				String passName = pdao.myPass(userEmail);
-
+				TicketingDAO tdao = TicketingDAO.getInstance();
+				
+				
+				List<TicketingDTO> ticket = tdao.TicketingList(userEmail);
+				request.setAttribute("ticket", ticket);
+				
 				MemberDTO dto = dao.getMypage(request.getSession().getAttribute("loginEmail").toString());
 				request.setAttribute("DTO", dto);
 				request.setAttribute("passName", passName);
@@ -100,11 +107,11 @@ public class Member extends HttpServlet {
 					fileSavePath.mkdir();
 				}
 				MultipartRequest multi = new MultipartRequest(request,savePath,maxSize,"UTF8",new DefaultFileRenamePolicy());	
-				
+				System.out.println(savePath);
 				String sysName = multi.getFilesystemName("file");
 				System.out.println(sysName);
 				if(sysName==null) {
-					sysName = multi.getParameter("imgView");
+					sysName = multi.getParameter("preview");
 				}
 				
 				String email=request.getSession().getAttribute("loginEmail").toString();

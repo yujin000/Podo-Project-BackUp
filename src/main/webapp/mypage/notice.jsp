@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
     <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+    <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <!DOCTYPE html>
 <html>
 
@@ -22,7 +23,7 @@
 
         :root {
             --font-color: #fff;
-            --background-color: #111;
+            --background-color: #000;
             --sub-background-color: #333;
             --boder-silver: 1px solid silver;
             --main-color: #3e065f;
@@ -226,7 +227,9 @@
 									<a href="/detailLook.notice?noticeSeq=${n.noticeSeq }" style="color:white;">${n.noticeTitle }</a>
 								</div>
 								<div id="noticeWriter">${n.noticeWriter }</div>
-								<div id="noticeWriteDate">${n.noticeWriteDate }</div>
+								<div id="noticeWriteDate">
+								<fmt:formatDate value="${n.noticeWriteDate }" pattern="yyyy-MM-dd" />
+								</div>
 							</div>
 						</c:forEach>
 					</c:when>
