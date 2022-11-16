@@ -16,9 +16,9 @@
         integrity="sha256-o88AwQnZB+VDvE9tvIXrMQaPlFFSUTR+nldQm1LuPXQ=" crossorigin="anonymous"></script>
     <style>
         /* 관리자페이지 세팅 초기값 */
-        @media(max-width:1500px) {
+        @media(max-width:1700px) {
             .html {
-                width: 1500px;
+                width: 1700px;
             }
         }
 
@@ -224,7 +224,7 @@
         <div class="wrap">
             <div id="Header">
                 <h1 id="logo">
-                    <a href="/adminMain.member?nickname=${loginNickname }"><img src="/image/web/logo-f-5.png"
+                    <a href="/adminMain.adminMain"><img src="/image/web/logo-f-5.png"
                             alt="" /></a>
                 </h1>
                 <div id="mypage">
