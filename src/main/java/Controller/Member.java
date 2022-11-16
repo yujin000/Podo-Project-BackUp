@@ -12,6 +12,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.google.gson.Gson;
+import com.google.gson.JsonObject;
 import com.oreilly.servlet.MultipartRequest;
 import com.oreilly.servlet.multipart.DefaultFileRenamePolicy;
 
@@ -59,6 +60,7 @@ public class Member extends HttpServlet {
 					request.getSession().setAttribute("loginPhone", dto.getPhone());
 					request.getSession().setAttribute("scribDate", dto.getScribeDate());
 					request.getSession().setAttribute("loginMembership", dto.getMembership());
+					request.getSession().setAttribute("loginImg", dto.getProfileImg());
 					
 					response.sendRedirect("/start.music");
 				} 
@@ -126,12 +128,24 @@ public class Member extends HttpServlet {
 					MemberDTO dto = new MemberDTO(email,null,null,null,null,sysName,nickname,null,phone);
 					dao.delUpdate(dto);
 					request.getSession().setAttribute("loginNickname", dto.getNickname());
+					request.getSession().setAttribute("loginImg", dto.getProfileImg());
 				}else {
 					MemberDTO dto = new MemberDTO(email,null,null,null,null,sysName,nickname,null,phone);
 					dao.update(dto);
 					request.getSession().setAttribute("loginNickname", dto.getNickname());
+					request.getSession().setAttribute("loginImg", dto.getProfileImg());
 				}
 				request.getRequestDispatcher("/mypage.member").forward(request, response);
+			}
+			//닉네임, 프로필 이미지 ajax
+			else if(uri.equals("/postNickname.member")) {				
+				response.setContentType("text/html;charset=utf8");
+				String ajaxNickname =request.getSession().getAttribute("loginNickname").toString();
+				String ajaxImg =request.getSession().getAttribute("loginImg").toString();
+				String [] arr= new String[] {ajaxNickname,ajaxImg};
+				Gson g = new Gson();
+				String jsonString =g.toJson(arr);
+				response.getWriter().append(jsonString);
 			}
 			
 			//현재 비밀번호 일치하는지

@@ -545,6 +545,26 @@
 	
     
     window.onload = function() {
+		//닉네임, 프로필 이미지 ajax
+		$.ajax({
+            url: "/postNickname.member",
+            type:"post",
+            data: {"loginNickname" : "loginNickname",
+            	    "profileImg" : "profileImg"},
+            error: function (a,b,c) {
+              console.log(a);
+              console.log(b);
+              console.log(c);
+            }
+        }).done(function(resp){
+        	let array=JSON.parse(resp); 
+        	console.log(array[0]);
+        	console.log(array[1]);
+        	window.parent.$("#nickname").html(array[0]);
+        	let rray = array[1];
+        	console.log(rray);
+        	window.parent.$("#imgPro").attr("src","/profile/"+rray+"");
+        });		
 		
     	//이미지 미리보기
     	$(document).ready(function () {
@@ -745,6 +765,7 @@
 			alert("전화번호를 확인해주세요.")
 			return false;
 		}
+	
 		document.getElementById("updateForm").submit();
 		
 	});
@@ -757,11 +778,11 @@
 		}
 		if(pwOk){
 			if(!pwResult){
-				alert("변경하실 비밀번호를 확인해주세요(pwResult)");
+				alert("변경하실 비밀번호를 확인해주세요");
 				return false;
 			}
 			if(!pwCheckResult){
-				alert("변경하실 비밀번호를 확인해주세요(pwCheckResult)");
+				alert("변경하실 비밀번호를 확인해주세요");
 				return false;
 			}
 		}
