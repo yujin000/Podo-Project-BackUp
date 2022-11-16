@@ -141,7 +141,7 @@ uri="http://java.sun.com/jsp/jstl/core"%>
           <div id="MusicControl">
             <div class="hidden">
               <div>	
-                    <img src="image/web/album-p.png" alt="">	
+                    <img src="image/web/logo-f-5.png" alt="">	
                 </div>
               <ul>
               
@@ -352,7 +352,7 @@ uri="http://java.sun.com/jsp/jstl/core"%>
         	// 좌측 하단에 재생대기중인 음원의 정보를 표시한다.
         	playTitle.innerHTML = musicList[playIndex].musicName;
         	playArtist.innerHTML = musicList[playIndex].musicArtist;
-        	musicImg.src = `/image/music/\${musicList[playIndex].musicImg}.jpg`;
+        	musicImg.src = `/image/music/\${musicList[playIndex].musicImg}`;
         	// 각 함수 구현
         	// 재생 함수
         	function playMusic() {
@@ -465,7 +465,7 @@ uri="http://java.sun.com/jsp/jstl/core"%>
             	    let li = `
             	    <li class="playList" data-index="\${i}">
                             <div>
-                            <img src ="image/music/\${musicList[i].musicImg}.jpg" ></div>
+                            <img src ="image/music/\${musicList[i].musicImg}" ></div>
                             <div>
                             <p>\${musicList[i].musicName}</p>
                             <p>\${musicList[i].musicArtist}</p>

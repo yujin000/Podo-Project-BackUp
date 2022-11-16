@@ -36,12 +36,12 @@
         }
         
         #listLi1{
-           background-color:#01B9FF;
+           background-color:purple;
         }
         
         .listLi:hover {
             cursor: pointer;
-            background-color: #01B9FF;
+            background-color: purple;
         }
 
         .loginBtn {
@@ -186,7 +186,7 @@
            height : 30px;
             line-height:30px;
            font-size:12px;
-           background-color:#01B9FF;
+           background-color:purple;
         }
         #listHeader>div{
             color:white !important;
@@ -254,7 +254,7 @@
            height : 30px;
             line-height:30px;
            font-size:15px;
-           background-color:#01B9FF;
+           background-color:purple;
            position:fixed;
            margin-top:45px;
            width:512px;
@@ -290,7 +290,7 @@
         div[class^=graph]{
             height:25px;
             margin-top:15px;
-            background-color: #01B9FF;
+            background-color: purple;
             width:0px;
         }
         #promoNum,#event1Num,#event2Num{
@@ -334,7 +334,7 @@
    <div class="wrap">
       <div id="Header">
          <h1 id="logo">
-                    <a href="/adminMain.adminMain"><img src="/image/web/logo-f-5.png"
+                    <a href="/adminMain.adminMain"><img src="/image/web/logo-f-admin.png"
                             alt="" /></a>
                 </h1>
          <div id="mypage">
@@ -477,7 +477,7 @@
             },2000);
 
             setTimeout(function(){
-                $("#promoNum").append(proNum);
+                $("#promoNum").append(proNum).css("color","white");
             },2500);
 
             setTimeout(function(){
@@ -487,7 +487,7 @@
             },2800);
 
             setTimeout(function(){
-                $("#event1Num").append(eventNum1);
+                $("#event1Num").append(eventNum1).css("color","white");
             },3300);
 
             setTimeout(function(){
@@ -497,7 +497,7 @@
             },3600);
 
             setTimeout(function(){
-                $("#event2Num").append(eventNum2);
+                $("#event2Num").append(eventNum2).css("color","white");
             },4100);
         } );
       
