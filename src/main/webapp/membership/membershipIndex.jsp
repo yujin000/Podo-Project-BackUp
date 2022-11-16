@@ -526,11 +526,7 @@ div {
 					warning.remove();
 					let price = $(this).attr("price");
 					
-					Swal.fire({
-						  icon: 'info',
-						  iconColor:'#FF0050',
-						  title: '현재 qr결제는 되지 않습니다. 테스트 금액이 차감됩니다.(실결제X)',
-						})
+					alert("현재 qr결제는 되지 않습니다. 테스트 금액이 차감됩니다.(출금 X)");
 						
 					var IMP = window.IMP;
 		            IMP.init('imp66837815');
