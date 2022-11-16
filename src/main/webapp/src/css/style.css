@@ -247,13 +247,12 @@ a {
   width: 70%;
   height: 100%;
   padding: 11.1% 0px;
-  display: inline-block;
+  display: flex;
   float: left;
-  text-align: center;
+      align-items: center;
+    justify-content: center;
 }
 .hidden > div img {
-  width: 400px;
-  height: 400px;
 }
 .hidden ul {
   width: 30%;
