@@ -37,14 +37,23 @@ div {
 }
 
 .container {
-	width: 100vw;
+	width: 1900px;
 	margin-bottom:200px;
-	padding-right:200px;
 }
 
-@media ( max-width :1700px) {
+@media ( max-width :1800px) {
 	.container {
-		width: 1700px;
+		width: 100vw;
+	}
+}
+@media(max-width:1750px){
+	.container {
+		width: 100vw;
+	}
+}
+@media(max-width:1400px){
+	.container {
+		width: 1400px;
 	}
 }
 /* 헤더 네비 영역 */
@@ -186,6 +195,7 @@ div {
 #hr{
 	width:80%;
 	margin:auto;
+	margin-top:40px;
 }
 #goodsInfo {
 	width:80%;
@@ -195,7 +205,7 @@ div {
 #selectInfo{
 	width:100%;
 	margin:auto;
-	height:200px;
+	height:300px;
 	border:1px solid #FF0050;
 	overflow:none;
 	border-radius: 5px;
@@ -203,7 +213,7 @@ div {
 	margin-top:100px;
 }
 .selectInfo{
-	width:80%;
+	width:85%;
 	margin-left:100px;
 	resize:none;
 	border:none;
@@ -215,7 +225,7 @@ div {
 	height:100%;
 	line-height:35px;
 	font-family: 'NanumSquareNeoExtraBold';
-	padding-top:50px;
+	padding-top:25px;
 }
 .selectInfo::-webkit-scrollbar{
 	display:none;
@@ -232,8 +242,8 @@ div {
     font-weight: bold;
     height:25px;
     line-height: 25px;
-    left:570px;
-    top:32px;
+    left:520px;
+    top:30px;
     display:none;
 }
 #kakaoIcon::before{
@@ -246,6 +256,7 @@ div {
 /* 결제화면 */
 #payment{
 	text-align:center;
+	margin-top:100px;
 }
 #payBtn{
 	border:1px solid silver;
