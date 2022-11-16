@@ -63,6 +63,9 @@ uri="http://java.sun.com/jsp/jstl/core"%>
       .playlist img{
       	width:20px;
       }
+      #playPrev:hover, #playNext:hover, #playBtn:hover {
+      	cursor:pointer;
+      }
     </style>
   </head>
   <body>
