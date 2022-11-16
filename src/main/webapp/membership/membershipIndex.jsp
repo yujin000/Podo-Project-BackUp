@@ -526,6 +526,8 @@ div {
 					warning.remove();
 					let price = $(this).attr("price");
 					
+					alert("현재 qr결제는 되지 않습니다. 테스트 금액이 차감됩니다(실결제X)");
+					
 					var IMP = window.IMP;
 		            IMP.init('imp66837815');
 		            IMP.request_pay({
