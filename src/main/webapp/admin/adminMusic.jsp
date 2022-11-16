@@ -361,7 +361,7 @@ div[class^=inInfo],.btnBox{
                                             value="${list.musicSeq }">
                                         <div class="listWrap">
                                             <div class="navi1" id="musicImg">
-                                                <img src="/image/music/${list.musicImg }" id="albumImg">
+                                                <img src="/audio/${list.musicImg }" id="albumImg">
                                             </div>
                                             <div class="navi2"><b>곡제목</b><br><input type="text" value="${list.musicName }" class="inMusicName" readonly></div>
                                             <div class="navi3"><b>아티스트</b><br><input type="text" value="${list.musicArtist }" class="inMusicArtist" readonly></div>
