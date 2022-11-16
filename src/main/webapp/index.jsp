@@ -122,7 +122,7 @@ uri="http://java.sun.com/jsp/jstl/core"%>
         </div>
 
         <div id="FloatArea">
-          <a id="membership">멤버쉽 구독</a>
+          <a id="membership">멤버십 구독</a>
           <a id="ticketing">포도 티켓</a>
         </div>
         <a href="" class="service">서비스 소개</a>
