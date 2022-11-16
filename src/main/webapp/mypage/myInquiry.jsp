@@ -24,7 +24,7 @@
         :root {
             --font-color: #fff;
             --background-color: #000;
-            --sub-background-color: #333;
+            --sub-background-color: #222;
             --boder-silver: 1px solid silver;
             --main-color: #3e065f;
             --point-color: #ff00d7;
@@ -46,24 +46,24 @@
 
         body {
             width: 100vw;
-            background: var(--background-color);
+            background: var(--sub-background-color);
             color: var(--font-color);
             font-family: "Noto Sans KR", sans-serif;
+        	-ms-overflow-style: none;
         }
+		body::-webkit-scrollbar{
+  			display:none;
+		}
 
         .container {
             padding: 0 75px;
             height: 100%;
-/*          	background-color: bisque;  */
             width: 100vw;
-    		margin-bottom:200px;
-            
         }
       
       .main {
             height: 100%;
             margin-top: 8vh;
-          	/* background-color: lightgray; */
         }
         
         .titleText {
@@ -72,7 +72,6 @@
             line-height: var(--line-height);
             margin-bottom: 2vw;
             font-family: "EliceDigitalBaeum-Bd";
-         	/* background-color: #00000d50; */
         }
         
         /*category css*/
@@ -85,24 +84,25 @@
         width:100%;
         height: 59px;
         font-size: 28px;
-        /* background-color:#00000d50; */
         text-aline:center;
         }
+        
+        /*공지사항*/
         #notice{
         min-width: 169px;
         float:left;
         width:10vw;
         line-height: var(--line-height);
         color: var(--font-color);
-        /* background-color: #00000d80; */
         }
+        
+        /*내 문의*/
         #myInquiry{
         min-width: 253.5px;
         float:left;
         width:15vw;
         line-height: var(--line-height);
         color: var(--font-color);
-        /* background-color: #00000d90; */
         }
         
         
@@ -114,36 +114,47 @@
             font-weight: var(--font-weight);
             line-height: var(--line-height);
         }
+        /*문의 유형*/
         #category {
             float: left;
             width: 30%;
             border-width: 0 0 1px;
             border-bottom: var(--boder-silver);
         }
+        
+        /*qnaCategory*/
 		#qnaCategory{
 			float: left;
             width: 30%;
             border-width: 0 0 1px;
             line-height: var(--line-height);
 		}
+		
+		/*문의 내역*/
         #history {
             float: left;
             width: 55%;
             border-width: 0 0 1px;
             border-bottom: var(--boder-silver);
         }
+        
+        /*qnaTitle*/
 		#qnaTitle{
 			float: left;
             width: 55%;
             border-width: 0 0 1px;
             line-height: var(--line-height);
 		}
+		
+		/*문의일*/
         #date{
             float: left;
             width: 15%;
             border-width: 0 0 1px;
             border-bottom: var(--boder-silver);
         }
+        
+        /*작성일 (qnaWriteDate)*/
         #qnaWriteDate{
         	float: left;
             width: 15%;
@@ -158,7 +169,6 @@
       		height: 41vh;
       		border: 1px solid transparent;
         }
-        
         .writelist{
             width: 100%;
     		height: 55px;
@@ -167,7 +177,8 @@
     		margin-bottom: 2vh;
     		border-bottom: 1px solid rgb(255,255,255,0.3);
         }
-
+		
+		/*작성완료 버튼*/
         #writeBtn {
             margin-top: 2vh;
             width: 6vw;
@@ -179,15 +190,14 @@
             line-height: var(--line-height);
             border: 1px solid gray;
             cursor: pointer;
-            background: var(--background-color);
+            background: var(--sub-background-color);
             color: var(--font-color);
-/*             background-color: #00000d50; */
         }
-
         #writeBtn:hover {
             border: 1px solid silver;
         }
         
+        /*네비게이션바*/
         #navi{
         text-align:center;
         }
@@ -195,6 +205,16 @@
         color:white;
         margin-right: 10px;
         }
+        footer {
+        width: 100%;
+        height: 200px;
+        margin-top: 40vh;
+        text-align: center;
+        color: silver;
+        font-size: 0.8rem;
+        background: transparent;
+        opacity: 0.5;
+      }
     </style>
         <script
       src="https://code.jquery.com/jquery-3.6.1.min.js"
@@ -218,7 +238,9 @@
                     <div id="date">문의일</div>
                 </div>
 
+			<!-- 리스트 출력 -->
 			<div class="list">
+			
 				<c:choose>
 					<c:when test="${not empty qna}">
 						<c:forEach var="q" items="${qna }">
@@ -237,16 +259,28 @@
          문의가 없습니다
          </c:otherwise>
 				</c:choose>
+				
 			</div>
-
+			
+			<!-- 네비게이션 바 -->
 			<div id="navi">${navi }</div>
+			
+			<!-- 문의하기 버튼 -->
             <div style="float:right;">
               <button type="button" id="writeBtn">문의하기</button>
             </div>
         </div>
+        
+       <footer>
+       <p>개인정보처리방침 | PODO 이용약관 | 고객센터 | 결제/환불안내 | 상담</p>
+       <br />
+       <img src="../image/web/logo-footer.png" alt="" style="width: 60px" />
+       <p>© PODO Music Corp.</p>
+    	</footer>
     </div>
     
     <script>
+    //글 쓰기 버튼 이벤트
     document.getElementById("writeBtn").addEventListener("click", function() {
        location.href = "/mypage/qnaWrite.jsp"
     })

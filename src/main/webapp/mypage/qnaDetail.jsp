@@ -23,8 +23,8 @@
         }
         :root {
             --font-color: #fff;
-            --background-color: #111;
-            --sub-background-color: #333;
+            --background-color: #000;
+            --sub-background-color: #222;
             --boder-silver: 1px solid silver;
             --main-color: #3e065f;
             --point-color: #ff00d7;
@@ -38,22 +38,25 @@
             text-decoration: none;
             border: none;
         }
-/*         div { */
-/*             border: 1px solid #fff; */
-/*         } */
+
         body {
             width: 100vw;
-            background: var(--background-color);
+            background: var(--sub-background-color);
             color: var(--font-color);
             font-family: "Noto Sans KR", sans-serif;
+            -ms-overflow-style: none;
         }
+		body::-webkit-scrollbar{
+  			display:none;
+		}
+
         .container {
             padding: 0 75px;
             height: 100%;
-/*             background-color: bisque; */
             width: 100vw;
-    		margin-bottom:200px;
         }
+        
+        /* 1:1문의 */
         .titleText {
             font-size: 38px;
             font-weight: var(--font-weight);
@@ -68,9 +71,11 @@
         }
         .qnalist {
             width: 100%;
-            height: 49vh;
+            height: 47vh;
             margin-top: 5vh;
         }
+        
+        /*문의 유형*/
         #category {
             width: 100%;
             font-size: 20px;
@@ -82,11 +87,12 @@
     		width: 165px;
     		font-family: "Noto Sans KR", sans-serif;
     		font-weight: bold;
-    		background-color: #111;
+    		background: var(--sub-background-color);
     		color: #fff;
     		display: inline-block;
     		margin-left: 3vw;
         }
+        /*제목*/
         #title {
             width: 100%;
             font-size: 18px;
@@ -98,11 +104,13 @@
         	width: 330px;
     		font-family: "Noto Sans KR", sans-serif;
     		font-weight: bold;
-    		background-color: #111;
+    		background: var(--sub-background-color);
     		color: #fff;
     		display: inline-block;
     		margin-left: 5.3vw;
         }
+        
+        /*문의내용*/
         #contents{
             width: 100%;
             font-size: 18px;
@@ -113,8 +121,35 @@
         height:33vh;
         border: 1px solid rgb(255,255,255,0.3);
         padding-left: 10px;
+        padding-right: 10px;
+        word-break:normal;
+        word-break:break-all;
+        white-space: pre-wrap;
         }
         
+        /*첨부파일*/
+        #file{
+			width: 100%;
+    		height: 35px;
+    		font-size: 17px;
+    		font-weight: var(--font-weight);
+    		line-height: var(--line-height);
+        }
+        
+        /*댓글*/
+        #comment{
+        	width: 100%;
+            font-size: 18px;
+            font-weight: var(--font-weight);
+            line-height: var(--line-height);
+        }
+        #commentDiv{
+        height:8.5vh;
+        border: 1px solid rgb(255,255,255,0.3);
+        padding-left: 10px;
+        }
+        
+        /*목록 버튼*/
         #listBtn {
             margin-top: 2vh;
             width: 6vw;
@@ -126,13 +161,23 @@
             line-height: var(--line-height);
             border: 1px solid gray;
             cursor: pointer;
-            background: var(--background-color);
+            background: var(--sub-background-color);
             color: var(--font-color);
-/*             background-color: #00000d50; */
         }
         #listBtn:hover {
             border: 1px solid silver;
         }
+        
+        footer {
+        width: 100%;
+        height: 200px;
+        margin-top: 40vh;
+        text-align: center;
+        color: silver;
+        font-size: 0.8rem;
+        background: transparent;
+        opacity: 0.5;
+      }
     </style>
 </head>
 
@@ -154,25 +199,38 @@
                     </div>
             </div>
             
-            <div>
+            <!-- 첨부파일 -->
+            <div id="file">
                  첨부파일 : <a href="/download.file?sysname=${fileDto.sysName }&oriname=${fileDto.oriName}">${fileDto.oriName }</a> 
             </div>
             
+            <!-- 댓글 -->
             <div>
-         
 			<c:forEach var='i' items='${qdto }'>
-				댓글 : ${i.qnaCommentContents }
+				<div id="comment">댓글</div>
+				<div id="commentDiv">${i.qnaCommentContents }</div>
 			</c:forEach>
 			
             </div>
+            
+            <!--  목록 버튼 -->
             <div style="float:right;">
               <button type="button" id="listBtn">목록</button>
             </div>
             
         </div>
         </form>
+        
+        <footer>
+       <p>개인정보처리방침 | PODO 이용약관 | 고객센터 | 결제/환불안내 | 상담</p>
+       <br />
+       <img src="../image/web/logo-footer.png" alt="" style="width: 60px" />
+       <p>© PODO Music Corp.</p>
+    	</footer>
+    	
     </div>
     <script>
+    //목록버튼 이벤트
     document.getElementById("listBtn").addEventListener("click",function(){
     	history.back();
     })

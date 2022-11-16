@@ -24,7 +24,7 @@
         :root {
             --font-color: #fff;
             --background-color: #000;
-            --sub-background-color: #333;
+            --sub-background-color: #222;
             --boder-silver: 1px solid silver;
             --main-color: #3e065f;
             --point-color: #ff00d7;
@@ -40,24 +40,21 @@
             border: none;
         }
 
-/*         div { */
-/*             border: 1px solid #fff; */
-/*         } */
-
         body {
             width: 100vw;
-            background: var(--background-color);
+            background: var(--sub-background-color);
             color: var(--font-color);
             font-family: "Noto Sans KR", sans-serif;
-            
+            -ms-overflow-style: none;
         }
+		body::-webkit-scrollbar{
+  			display:none;
+		}
 
         .container {
             padding: 0 75px;
             height: 100%;
-/*             background-color: bisque; */
             width: 100vw;
-            margin-bottom:200px;
         }
 
         .titleText {
@@ -66,20 +63,18 @@
             line-height: var(--line-height);
             margin-bottom: 2vw;
             font-family: "EliceDigitalBaeum-Bd";
-/*             background-color: #00000d50; */
         }
 
         /*마이페이지 css */
         .mypage {
             height: 100%;
             margin-top: 8vh;
-/*             background-color: lightgray; */
         }
 
         .profileDiv {
             width: 10vw;
             min-width: 100px;
-/*             background-color: #00000d50; */
+            margin-bottom: 1vh;
 			height : 182px;
 			border: none;
        		border-radius: 50%;
@@ -96,37 +91,33 @@
             font-size: 25px;
             font-weight: var(--font-weight);
             line-height: var(--line-height);
-/*             background-color: #00000d50; */
         }
-
+		
+		/*버튼 css*/
         .Btn {
             margin-top: 2vh;
-            width: 20vw;
-            height: 50px;
-            text-align: center;
-            border-radius: 5px;
-            font-size: 20px;
-            font-weight: var(--font-weight);
-            line-height: var(--line-height);
-            border: 1px solid gray;
-            cursor: pointer;
-            background: var(--background-color);
-            color: var(--font-color)
-/*             background-color: #00000d50; */
-        }
+    		margin-bottom: 5vh;
+    		width: 13vw;
+    		height: 50px;
+    		text-align: center;
+    		border-radius: 5px;
+    		font-size: 20px;
+    		font-weight: var(--font-weight);
+    		border: 1px solid gray;
+    		cursor: pointer;
+    		background: var(--sub-background-color);
+    		color: var(--font-color) 
 
+        }
         .Btn:hover {
             border: 1px solid silver;
         }
-
-
 
         /*프로필 수정 css */
         .modify {
             width: 80%;
             height: 100%;
             margin-top: 6vh;
-/*             background-color: lightgray; */
         }
 
         table {
@@ -173,7 +164,6 @@
             height: 100%;
             width: 80%;
             margin-top: 8vh;
-/*             background-color: lightgray; */
         }
         .ticketingName {
             padding-left: 1vw;
@@ -181,37 +171,27 @@
         }
 
         .ticketingStartdate {
-            width: 21vw;
+            width: 19vw;
         }
 
         .ticketingDetail {
             min-width: 90px;
             width: 5vw;
         }
-        #detailBtn {}
-
-        #detailBtn a {
-            width: 100%;
-            height: 50px;
-            text-align: center;
-            line-height: 50px;
-            border-radius: 5px;
-            font-size: 20px;
-            font-weight: var(--font-weight);
-            border: 1px solid gray;
+		
+		/*상세보기 버튼*/
+        #detailBtn{
+    		width: 13vw;
+    		height: 50px;
+    		text-align: center;
+    		border-radius: 5px;
+    		font-size: 20px;
+    		font-weight: var(--font-weight);
+    		cursor: pointer;
+    		background: var(--sub-background-color);
+    		color: var(--font-color) 
         }
 
-        #detailBtn a:hover {
-            color: #fff;
-        }
-
-        #detailBtn a {
-            border: 1px solid #222;
-        }
-
-        #detailBtn a:hover {
-            border: 1px solid silver;
-        }
         
 		/*프로필 수정 css */
 		.membership>div>input{
@@ -221,13 +201,39 @@
 		border: 1px solid silver;
 		color: var(--font-color);
 		}
+		
+		/*input disabled css*/
 		.notInput{
 		color: var(--font-color);
-		font-size:20px;
-		background: var(--background-color);
+		font-size:18px;
+		background: var(--sub-background-color);
+		font-weight: bold;
 		}
 		
-		.Btn label {
+		/*프로필 수정 들어가면 버튼들 css*/
+		.Btnmodify{
+		    margin-top: 1vh;
+    		margin-bottom: 1vh;
+    		width: 13vw;
+    		height: 50px;
+    		text-align: center;
+    		border-radius: 5px;
+    		font-size: 20px;
+    		font-weight: var(--font-weight);
+    		border: 1px solid gray;
+    		cursor: pointer;
+    		background: var(--sub-background-color);
+    		color: var(--font-color);
+		}
+		
+		/*프로필 사진 업로드 div */
+		#uploadBtn{
+		float:left;
+		margin-right:1vw;
+		}
+		
+		/*프로필 사진 업로드 */
+		.Btnmodify label {
     	display: inline-block;
     	line-height: 50px;
     	color: #fff;
@@ -235,8 +241,7 @@
     	height: 40px;
     	margin-left: 10px;
 		}
-
-		.Btn input[type="file"] {
+		.Btnmodify input[type="file"] {
     	position: absolute;
     	width: 0;
     	height: 0;
@@ -245,11 +250,7 @@
    		border: 0;
 		}
 		
-		#uploadBtn{
-		float:left;
-		margin-right:1vw;
-		}
-		
+		/*비밀번호 변경 버튼 css*/
 		#pwBtn{
     	margin-top: 1vh;
     	margin-bottom: 1vh;
@@ -261,10 +262,20 @@
     	font-weight: var(--font-weight);
     	border: 1px solid gray;
     	cursor: pointer;
-    	background: var(--background-color);
-    	color: var(--font-color) /* background-color: #00000d50; */;
+    	background: var(--sub-background-color);
+    	color: var(--font-color);
 		}
 		
+		footer {
+        width: 100%;
+        height: 200px;
+        margin-top: 40vh;
+        text-align: center;
+        color: silver;
+        font-size: 0.8rem;
+        background: transparent;
+        opacity: 0.5;
+      }
 		/* 환불버튼 */
 		#delBtn{
 			margin-left:10px;
@@ -363,7 +374,7 @@
 		
 		<!-- 예매내역 -->
         <div class="ticketingHistory">
-            <div class="titleText">예매 내역</div>
+            <div class="titleText">My 예매 내역</div>
             <table>
                 <thead>
                     <tr>
@@ -372,7 +383,12 @@
                         <!--  table th의 두번째 칸(이용일/매수) -->
                         <th class="ticketingStartdate">이용일/매수</th>
                         <!--  table th의 세번째 칸(상세보기 버튼을 위해 만들었음) -->
-                        <th class="ticketingDetail"></th>
+                        <th class="ticketingDetail">
+                        <!-- detailBtn: 예매내역 상세보기-->
+                            <div>
+                                <a href="/ticketList.perform" style="color: var(--font-color)" id="detailBtn">상세보기 ></a>
+                            </div>
+                        </th>
                     </tr>
                 </thead>
                 
@@ -392,11 +408,7 @@
 							<fmt:formatDate value="${t.startDate }" pattern="yyyy-MM-dd" /> / 1매
 							</div>
                         </td>
-                        <td>
-                        	<!-- detailBtn: 예매내역 상세보기 버튼 -->
-                            <div id="detailBtn">
-                                <a href="/ticketList.perform" style="color: var(--font-color)">상세보기</a>
-                            </div>
+                        <td> 
                         </td>
                     </tr>
                     </c:forEach>
@@ -408,7 +420,12 @@
                 </tbody>
             </table>
         </div>
-        
+        <footer>
+       <p>개인정보처리방침 | PODO 이용약관 | 고객센터 | 결제/환불안내 | 상담</p>
+       <br />
+       <img src="../image/web/logo-footer.png" alt="" style="width: 60px" />
+       <p>© PODO Music Corp.</p>
+    	</footer>
     </div>
     
     
@@ -428,14 +445,14 @@
             
             <div style="margin-bottom: 1vh;margin-top: 1vh">
             <!-- 프로필 이미지 업로드 버튼 -->
-            <div class="Btn" id="uploadBtn">
+            <div class="Btnmodify" id="uploadBtn">
             <label for="file">프로필 이미지 업로드</label> 
             <input type="file" id="file" name="file">
             </div>
             
             <!-- 프로필 이미지 삭제 버튼(구현중) -->
             <div>
-            <button class="Btn" type="button" id="delImgBtn">프로필 이미지 삭제</button>
+            <button class="Btnmodify" type="button" id="delImgBtn">프로필 이미지 삭제</button>
             <input type="hidden" value="false" name="delResult">	
             </div>
             
@@ -462,14 +479,14 @@
             </div>
             
             <div>
-                <div style="margin-top:1vh;">닉네임</div>
-                <input type="text" value="${DTO.nickname }" name="nickname" id="nickname" class="inputAble">
+                <div style="margin-top:1vh; font-weight: bold;">닉네임</div>
+                <input type="text" style="font-weight: bold;" value="${DTO.nickname }" name="nickname" id="nickname" class="inputAble">
             	<p id="msg"></p>
             </div>
             
             <div>
-                <div style="margin-top:1vh;">전화번호</div>
-                <input type="text" value="${DTO.phone }" name="phone" id="phone">
+                <div style="margin-top:1vh; font-weight: bold;">전화번호</div>
+                <input type="text" style="font-weight: bold;" value="${DTO.phone }" name="phone" id="phone">
                 <p id="msg"></p>
             </div>
 		
@@ -477,12 +494,12 @@
 		<div style="margin-bottom: 1vh;margin-top: 1vh">
         <div style="float:left; margin-right: 1vw;">
         	<!-- profileBtn : 프로필 수정 완료(정보 변경 완료) 버튼 -->
-             <button type="button" id="completionBtn" class="Btn">수정 완료</button>
+             <button type="button" id="completionBtn" class="Btnmodify">수정 완료</button>
         </div>
        
         <div>
         	<!-- deleteBtn : 회원 탈퇴 버튼 -->
-            <button type="button" style="color: var(--font-color)" id="deleteBtn" class="Btn">회원 탈퇴</button>  
+            <button type="button" style="color: var(--font-color)" id="deleteBtn" class="Btnmodify">회원 탈퇴</button>  
         </div>
         </div>
         
@@ -492,13 +509,13 @@
         <div id=pwDiv>
         <form action="/modifyPw.member" id="modifyPwForm">
                 <div>현재 비밀번호</div>
-                <input type="text" name="pw" id="pw">
+                <input type="text" style="font-weight: bold;" name="pw" id="pw">
                 <p id="msg"></p>
                 <div>새로운 비밀번호</div>
-                <input type="text" name="pwChang" id="pwChang" disabled>
+                <input type="text" style="font-weight: bold;" name="pwChang" id="pwChang" disabled>
                 <p id="msg"></p>
                 <div>비밀번호 확인</div>
-                <input type="text" name="pwCheck" id="pwCheck" disabled>
+                <input type="text" style="font-weight: bold;" name="pwCheck" id="pwCheck" disabled>
                 <p id="msg"></p>
                 
                 <div>
@@ -509,6 +526,14 @@
         		</div>
        </form>
        </div>
+       
+       <footer>
+       <p>개인정보처리방침 | PODO 이용약관 | 고객센터 | 결제/환불안내 | 상담</p>
+       <br />
+       <img src="../image/web/logo-footer.png" alt="" style="width: 60px" />
+       <p>© PODO Music Corp.</p>
+    	</footer>
+    	
     </div>
 
     <script>
@@ -518,14 +543,14 @@
 	let nickNameResult = false; //닉네임 유효성검사 등등 다 통과 시
 	let phoneResult = false; //전화번호 유효성검사 등등 다 통과 시
 	
-    //시작하자마자 wrap2(프로필 수정 페이지) 꺼짐
+    
     window.onload = function() {
 		
+    	//이미지 미리보기
     	$(document).ready(function () {
             $("#file").on("change", readURL);
         });
     	
-    	//이미지 미리보기
     	function readURL(e) {
     	    var files = e.target.files;
     	    var filesArr = Array.prototype.slice.call(files);
@@ -538,9 +563,10 @@
                 reader.readAsDataURL(f);
     		});
     	}
+		//
 		
-
-    	$('#wrap2').css("display","none");
+		//시작하자마자 wrap2(프로필 수정 페이지) 꺼짐
+    	$('#wrap2').css("display","none"); 
     	$('#pwDiv').css("display", "none");
     	
         let pwRegex = /^([A-Za-z\d\!|\@|\#|\$|\%]){7,20}$/;
@@ -751,17 +777,6 @@
 		} else {
 		}
 	});
-	
-
-// 		if (input.files && input.files[0]) {
-// 			let reader = new FileReader();
-// 			reader.onload = function(e) {
-// 				document.getElementById('preview').src = e.target.result;
-// 			};
-// 			reader.readAsDataURL(input.files[0]);
-// 		} else {
-// 			document.getElementById('preview').src = "";
-// 		}
 	
 	//프로필 이미지 삭제
 	$("#delImgBtn").on("click", function(){

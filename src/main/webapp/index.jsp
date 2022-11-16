@@ -89,8 +89,6 @@ uri="http://java.sun.com/jsp/jstl/core"%>
                     <li><a href="/adminMain.adminMain">관리자페이지</a></li>
                   </c:when>
                 </c:choose>
-                <li><a href="#">계정설정</a></li>
-                <li><a href="#">친구초대 </a></li>
                 <li><a href="logout.member">로그아웃</a></li>
               </ul>
             </c:when>

@@ -24,7 +24,7 @@
         :root {
             --font-color: #fff;
             --background-color: #000;
-            --sub-background-color: #333;
+            --sub-background-color: #222;
             --boder-silver: 1px solid silver;
             --main-color: #3e065f;
             --point-color: #ff00d7;
@@ -42,16 +42,19 @@
 
         body {
             width: 100vw;
-            background: var(--background-color);
+            background: var(--sub-background-color);
             color: var(--font-color);
             font-family: "Noto Sans KR", sans-serif;
+        	-ms-overflow-style: none;
         }
+		body::-webkit-scrollbar{
+  			display:none;
+		}
 
         .container {
             padding: 0 75px;
             height: 100%;
             width: 100vw;
-            margin-bottom:200px;
         }
 		
 		.main {
@@ -190,6 +193,17 @@
         color:white;
         margin-right: 10px;
         }
+        
+        footer {
+        width: 100%;
+        height: 200px;
+        margin-top: 40vh;
+        text-align: center;
+        color: silver;
+        font-size: 0.8rem;
+        background: transparent;
+        opacity: 0.5;
+      }
     </style>
         <script
       src="https://code.jquery.com/jquery-3.6.1.min.js"
@@ -242,6 +256,14 @@
 
 			<div id="navi">${naviLook }</div>
         </div>
+        
+        <footer>
+       <p>개인정보처리방침 | PODO 이용약관 | 고객센터 | 결제/환불안내 | 상담</p>
+       <br />
+       <img src="../image/web/logo-footer.png" alt="" style="width: 60px" />
+       <p>© PODO Music Corp.</p>
+    	</footer>
+    	
     </div>
     
     <script>
