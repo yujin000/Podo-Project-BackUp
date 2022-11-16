@@ -115,7 +115,6 @@ public class QnaBoard extends HttpServlet {
 				request.setAttribute("boardFile", boardFilesDto);
 				request.setAttribute("qnaBoard", qnaBoardDto);
 				request.getRequestDispatcher("/admin/adminQnaBoard/adminQnaDetail.jsp?qnaSeq="+qnaSeq).forward(request, response);
-				 request.getRequestDispatcher("/admin/adminQnaBoard/adminQnaDetail.jsp?qnaSeq="+qnaSeq).forward(request, response);
 	        }
 	     } catch (Exception e) {
 	        e.printStackTrace();

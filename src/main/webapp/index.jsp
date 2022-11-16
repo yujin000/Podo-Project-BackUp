@@ -63,6 +63,9 @@ uri="http://java.sun.com/jsp/jstl/core"%>
       .playlist img{
       	width:20px;
       }
+      #playPrev:hover, #playNext:hover, #playBtn:hover {
+      	cursor:pointer;
+      }
     </style>
   </head>
   <body>
@@ -83,7 +86,7 @@ uri="http://java.sun.com/jsp/jstl/core"%>
                 <li><a id="mypageBtn">마이페이지</a></li>
                 <c:choose>
                   <c:when test="${loginMembership eq 'admin'}">
-                    <li><a href="/admin/adminIndex.jsp">관리자페이지</a></li>
+                    <li><a href="/adminMain.adminMain">관리자페이지</a></li>
                   </c:when>
                 </c:choose>
                 <li><a href="#">계정설정</a></li>
@@ -119,7 +122,7 @@ uri="http://java.sun.com/jsp/jstl/core"%>
         </div>
 
         <div id="FloatArea">
-          <a id="membership">멤버쉽 구독</a>
+          <a id="membership">멤버십 구독</a>
           <a id="ticketing">포도 티켓</a>
         </div>
         <a href="" class="service">서비스 소개</a>
@@ -135,7 +138,7 @@ uri="http://java.sun.com/jsp/jstl/core"%>
       ></iframe>
       <c:choose>
         <c:when
-          test="${loginMembership eq 'admin' || loginMembership eq 'vip'}"
+          test="${loginMembership eq 'admin' || loginMembership eq 'VIP'}"
         >
           <div id="MusicControl">
             <div class="hidden">
@@ -184,7 +187,7 @@ uri="http://java.sun.com/jsp/jstl/core"%>
                 </li>
               </ul>
               <ul class="controlBtn">
-                <li><span class="material-symbols-rounded"> repeat </span></li>
+                <li><span class="material-symbols-rounded" style="display:none"> repeat </span></li>
                 <li>
                   <span class="material-symbols-rounded" id="playPrev">
                     skip_previous
@@ -205,7 +208,7 @@ uri="http://java.sun.com/jsp/jstl/core"%>
                     skip_next
                   </span>
                 </li>
-                <li><span class="material-symbols-rounded"> replay </span></li>
+                <li><span class="material-symbols-rounded" style="display:none"> replay </span></li>
               </ul>
 
               <ul class="volume">
@@ -300,7 +303,7 @@ uri="http://java.sun.com/jsp/jstl/core"%>
     </script>
     <script>
       let membership = "${loginMembership}";
-      if (membership=="admin" || membership=="vip") {
+      if (membership=="admin" || membership=="VIP") {
       // Music Controller 부분
         	// 목록페이지 전체 div값
         	const musicListPage = document.querySelector(".hidden ul");

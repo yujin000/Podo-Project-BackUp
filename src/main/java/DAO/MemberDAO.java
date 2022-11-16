@@ -433,6 +433,19 @@ public class MemberDAO {
 		return sb.toString();
 	}
 	
-	
+	// 현재 회원 수 추출
+	public int memberCount()throws Exception{
+		String sql = "select count(*) from member";
+		try(Connection con = this.getConnection(); PreparedStatement pstat = con.prepareStatement(sql);) {
+			ResultSet rs = pstat.executeQuery();
+			int result = 0;
+			if(rs.next()) {
+				result = rs.getInt("count(*)");
+			}else{
+				result = 0;
+			};
+			return result;
+		}
+	}
 
 }

@@ -276,6 +276,13 @@
         background: transparent;
         opacity: 0.5;
       }
+		/* 환불버튼 */
+		#delBtn{
+			margin-left:10px;
+		}
+		#delBtn:hover{
+			cursor:pointer;
+		}
     </style>
         <script
       src="https://code.jquery.com/jquery-3.6.1.min.js"
@@ -339,6 +346,7 @@
 									<c:choose>
 										<c:when test="${passName != null}">
 											${passName }
+											<button type='button' id="delBtn">이용권 환불</button>
 										</c:when>
 										<c:otherwise>
 											이용중인 이용권이 없습니다.
@@ -780,6 +788,14 @@
 	document.getElementById("backBtn").addEventListener("click",function(){
 		location.href = "/mypage.member"
     })
+    
+    // 이용권 환불하기
+    $("#delBtn").on("click",function(){
+    	if(confirm("환불은 영업일 기준 1~3일 정도 소요됩니다. 환불하시겠습니까?")){
+    		window.parent.location.href = "/refund.paymem";
+    	}
+    })
+    
     </script>
 </body>
 

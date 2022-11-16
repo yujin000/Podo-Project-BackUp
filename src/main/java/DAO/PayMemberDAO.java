@@ -40,7 +40,29 @@ public class PayMemberDAO {
 	}
 	// 멤버십 구매시 vip등급으로 조정
 	public int updateMembershipStatus(String email)throws Exception{
-		String sql = "update member set membership = 'vip' where email = ? ";
+		String sql = "update member set membership = 'VIP' where email = ? ";
+		try(Connection con = this.getConnection(); PreparedStatement pstat = con.prepareStatement(sql);) {
+			pstat.setString(1, email);
+			int result = pstat.executeUpdate();
+			con.commit();
+			return result;
+		}
+	} 
+	
+	// 환불 시 등급 user로 변경
+	public int refund(String email)throws Exception{
+		String sql = "update member set membership = 'user' where email = ? ";
+		try(Connection con = this.getConnection(); PreparedStatement pstat = con.prepareStatement(sql);) {
+			pstat.setString(1, email);
+			int result = pstat.executeUpdate();
+			con.commit();
+			return result;
+		}
+	} 
+	
+	// 환불 시 paymember테이블에서 기존 이력 삭제
+	public int refundDelete(String email)throws Exception{
+		String sql = "delete paymember where paymemberemail = ?";
 		try(Connection con = this.getConnection(); PreparedStatement pstat = con.prepareStatement(sql);) {
 			pstat.setString(1, email);
 			int result = pstat.executeUpdate();
