@@ -132,7 +132,7 @@ uri="http://java.sun.com/jsp/jstl/core"%>
               <c:forEach var="i" items="${list}">
                 <li>
                   <a href="" id="selectChart">
-                    <img src="/image/music/${i.musicImg}" alt="" />
+                    <img src="/audio/${i.musicImg}" alt="" />
                   </a>
                   <div>
                     <p class="musicName" data-index="${i.musicChart }">${i.musicSeq}&nbsp; ${i.musicName}</p>
