@@ -78,9 +78,9 @@ uri="http://java.sun.com/jsp/jstl/core"%>
           <c:choose>
             <c:when test="${loginEmail != null}">
               <div id="mypage">
-                <img src="image/web/profile-default.jpg" alt="" /><span
-                  >${loginNickname}</span
-                >
+                <img src="/profile/${loginImg }" alt="" id="imgPro"/>
+                <span id="nickname">${loginNickname}</span>
+                
               </div>
               <ul class="tog">
                 <li><a id="mypageBtn">마이페이지</a></li>
