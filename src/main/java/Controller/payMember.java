@@ -47,6 +47,7 @@ public class payMember extends HttpServlet {
 				dao.refundDelete(userEmail);
 				
 				MemberDAO mdao = MemberDAO.getInstance();
+				mdao.memberScribeDelete(userEmail);
 				MemberDTO dto = mdao.getMypage(userEmail);
 				request.getSession().setAttribute("loginMembership", dto.getMembership());
 				request.getRequestDispatcher("/start.music").forward(request, response);
