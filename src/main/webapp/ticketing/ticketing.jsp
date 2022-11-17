@@ -71,10 +71,8 @@
 .logoName {
 	font-weight: bold;
 }
-
 .contents {
-	max-width: 1610px;
-	min-width: 1610px;
+	width: 100%;
 	position: relative;
 	height: 100%;
 	margin: 20px;
@@ -84,9 +82,8 @@
 	display: flex;
 	text-align: center;
 	margin-top: 30px;
-	max-width: 1610px;
-	min-width: 1610px;
-	flex-wrap: wrap;
+	width: 100%;
+	min-width: 1000px;
 	justify-content: left;
 	gap: 0px 15px;
 }
@@ -108,9 +105,10 @@ a {
 	display: flex;
 	align-items: center;
 	justify-content: space-around;
+	width: 98%;
+	min-width: 1000px;
 	margin: 30px 0px 30px 0px;
 	height: 80px;
-	width: 1574px;
 	border-top: 1px solid rgba(255, 255, 255, 0.5);
 	border-bottom: 1px solid rgba(255, 255, 255, 0.5);
 	font-size: 20px;
@@ -121,7 +119,7 @@ a {
 }
 
 .imgset {
-	margin-right: 20px;
+	padding-right: 20px;
 }
 
 .listset {
@@ -135,6 +133,8 @@ a {
 .flexli {
 	display: flex;
 	align-items: center;
+	width: 300px;
+	padding: 0 0 0 20px;
 }
 
 .saleText {
@@ -148,7 +148,39 @@ a {
 	padding: 0 40px;
 	width: 100%;
 	height: 100%;
+	
 }
+.imgTop{
+	width: 308px;
+}
+.perform1{
+	width: 100%;
+	min-width: 1000px
+}
+
+@media ( max-width :1900px) {
+	.imgTop {
+		width: 308px;
+	}
+}
+@media(max-width:1600px){
+	.imgTop {
+		width: 270px;
+	}
+}
+@media(max-width:1200px){
+	.imgTop {
+		width: 200px;
+	}
+}
+@media(max-width:600px){
+	.imgTop {
+		hieght: 50px;
+	}
+}
+.liImg{
+}
+
 </style>
 </head>
 
@@ -168,7 +200,7 @@ a {
 					<a href="/performDetail.perform?performSeq=${perform[3].performSeq }"
 						style="color: var(- -font-color);"> <img
 						src="image/perform/${perform[3].poster }"
-						style="width: 308px; height: 420px;">
+						style="width: 308px;">
 					</a>
 					<p>${perform[3].performTitle }</p>
 					<p style="color: lightgray;">허밍어반스테레오, 리소, 밴젝스, 예슬...</p>
@@ -178,7 +210,7 @@ a {
 					<a href="/performDetail.perform?performSeq=${perform[11].performSeq }"
 						style="color: var(- -font-color);"> <img
 						src="image/perform/${perform[11].poster }"
-						style="width: 308px; height: 420px;">
+						style="width: 100%;">
 					</a>
 					<p>${perform[11].performTitle }</p>
 					<p style="color: lightgray;">진짜배기 록밴드 동이혼의 폭발!</p>
@@ -187,7 +219,7 @@ a {
 					<a href="/performDetail.perform?performSeq=${perform[13].performSeq }"
 						style="color: var(- -font-color);"> <img
 						src="image/perform/${perform[13].poster }"
-						style="width: 308px; height: 420px;">
+						style="width: 100%;">
 					</a>
 					<p>${perform[13].performTitle }</p>
 					<p style="color: lightgray;">새로운 의미를 담은 곡들 대방출!</p>
@@ -196,7 +228,7 @@ a {
 					<a href="/performDetail.perform?performSeq=${perform[12].performSeq }"
 						style="color: var(- -font-color);"> <img
 						src="image/perform/${perform[12].poster }"
-						style="width: 308px; height: 420px;">
+						style="width: 100%;">
 					</a>
 					<p>${perform[12].performTitle }</p>
 					<p style="color: lightgray;">PODO티켓 단독 NFT 증정</p>
@@ -205,7 +237,7 @@ a {
 					<a href="/performDetail.perform?performSeq=${perform[1].performSeq }"
 						style="color: var(- -font-color);"> <img
 						src="image/perform/${perform[1].poster }"
-						style="width: 308px; height: 420px;">
+						style="width: 100%;">
 					</a>
 					<p>${perform[1].performTitle }</p>
 					<p style="color: lightgray;">회색단지부터 ㅠㅠ까지</p>
@@ -216,20 +248,19 @@ a {
 				<div style="width: 10px;"></div>
 				<div class="nametitle">공연명</div>
 				<div style="width: 10px;"></div>
-				<div class="nametitle">공연일시</div>
+				<div class="nametitle" style=" margin-left: 30px;padding-left: 10px;">공연일시</div>
 				<div class="nametitle">공연장소</div>
 			</div>
 
-			<c:forEach items="${perform }" var="p" begin="0" end="10" step="1">
 				<div class="perform1">
+				<c:forEach items="${perform }" var="p" begin="0" end="10" step="1">
 					<div class="perform">
 						<ul class="listimg">
 							<li><a href="/performDetail.perform?performSeq=${p.performSeq }" style="color: var(- -font-color);"> 
-							<img src="image/perform/${p.poster }" style="width: 130px; height: 180px;" class="imgset">
+							<img src="image/perform/${p.poster }" style="width: 150px; min-width: 120px;"class="imgset">
 							</a></li>
 
-							<li
-								style="margin: 20px 0 0 0; max-width: 820px; min-width: 820px;">
+							<li class="liImg"style="width: 838px;">
 								<div class="saleText">판매중</div> <br> 
 								<a href="/performDetail.perform?performSeq=${p.performSeq }" style="color: var(- -font-color);">${p.performTitle} </a></li>
 							<li class="flexli" style="width: 350px;">
@@ -238,8 +269,8 @@ a {
 							<li class="flexli">${p.theaterName}</li>
 						</ul>
 					</div>
+					</c:forEach>
 				</div>
-			</c:forEach>
 		</div>
 	</div>
 	<footer>
