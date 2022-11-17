@@ -92,7 +92,7 @@
         .list{
 		margin-top: 1vh;
 		width: 100%;
-		height: 55vh;
+		height: 100%;
 		border: 1px solid transparent;
         }
         

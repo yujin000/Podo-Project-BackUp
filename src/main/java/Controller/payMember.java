@@ -25,6 +25,7 @@ public class payMember extends HttpServlet {
 				String payMemberEmail = request.getParameter("payMemberEmail");
 				PayMemberDAO dao = PayMemberDAO.getInstance();
 				PayMemberDTO dto = new PayMemberDTO(payGoodsSeq,payMemberEmail,null);
+				
 				dao.insertPayStatus(dto);
 				response.sendRedirect("/updMembership.paymem");
 				
@@ -34,6 +35,7 @@ public class payMember extends HttpServlet {
 				dao.updateMembershipStatus(userEmail);
 				
 				MemberDAO mdao = MemberDAO.getInstance();
+				mdao.memberScribe(userEmail);
 				MemberDTO dto = mdao.getMypage(userEmail);
 				request.getSession().setAttribute("loginMembership", dto.getMembership());
 				request.getRequestDispatcher("/start.music").forward(request, response);
