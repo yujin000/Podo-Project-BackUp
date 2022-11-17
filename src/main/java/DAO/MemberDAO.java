@@ -460,4 +460,13 @@ public class MemberDAO {
 		}
 	}
 	
+	public int memberScribeDelete(String email) throws Exception {
+		String sql = "update member set scribedate = null where email = ?";
+		try (Connection con = this.getConnection(); PreparedStatement pstat = con.prepareStatement(sql);) {
+			pstat.setString(1, email);
+			int result = pstat.executeUpdate();
+			con.commit();
+			return result;
+		}
+	}
 }
