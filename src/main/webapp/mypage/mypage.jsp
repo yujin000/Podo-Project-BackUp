@@ -329,9 +329,9 @@
                             <!--  table th의 두번째 칸(이용권) -->
                             <th class="thVoucher">이용중인 이용권</th>
                             <!--  table th의 세번째 칸(멤버십 혜택 기간) -->
-                            <th class="thStartdate">멤버십 혜택 기간</th>
+                            <th class="thStartdate">멤버십 구독일</th>
                             <!--  table th의 네번째 칸(다음 결제일) -->
-                            <th class="thEnddate">다음 결제일</th>
+<!--                             <th class="thEnddate">만료일</th> -->
                         </tr>
                     </thead>
                     
@@ -357,14 +357,14 @@
                             <td>
                                 <div><fmt:formatDate value="${DTO.scribeDate}" pattern="yyyy-MM-dd" /></div>
                             </td>
-                            <td>
-                            	<div>
-                            	<c:choose>
-                            	<c:when test= "${DTO.scribeDate != null}"><fmt:formatDate value="${DTO.scribeDate}" pattern="yyyy-MM-dd" /></c:when>
-                            		<c:otherwise>${DTO.scribeDate}</c:otherwise>
-                            		</c:choose>
-                            	</div>
-                            </td>
+<!--                             <td> -->
+<!--                             	<div> -->
+<%--                             	<c:choose> --%>
+<%--                             	<c:when test= "${DTO.scribeDate != null}"><fmt:formatDate value="${DTO.scribeDate}" pattern="yyyy-MM-dd" /></c:when> --%>
+<%--                             		<c:otherwise>${DTO.scribeDate}</c:otherwise> --%>
+<%--                             		</c:choose> --%>
+<!--                             	</div> -->
+<!--                             </td> -->
                         </tr>
                     </tbody>
                 </table>
@@ -414,7 +414,12 @@
                     </c:forEach>
                     </c:when>
                     <c:otherwise>
-					예매한 내역이 없습니다.
+					<tr>
+					<td>
+					<div style="padding-left: 1vw;">예매한 내역이 없습니다.
+					</div>
+					</td>
+					</tr>
 					</c:otherwise>
 					</c:choose>
                 </tbody>
@@ -440,6 +445,7 @@
             <!-- 프로필 이미지 -->
             <div class="profileDiv">
                 <img src="/profile/${DTO.profileImg }" class="profile" id="preview">
+                <input type="hidden" name=preview value="${DTO.profileImg }">
             </div>
             
             
@@ -558,11 +564,11 @@
             }
         }).done(function(resp){
         	let array=JSON.parse(resp); 
-        	console.log(array[0]);
-        	console.log(array[1]);
+//         	console.log(array[0]);
+//         	console.log(array[1]);
         	window.parent.$("#nickname").html(array[0]);
         	let rray = array[1];
-        	console.log(rray);
+//         	console.log(rray);
         	window.parent.$("#imgPro").attr("src","/profile/"+rray+"");
         });		
 		
