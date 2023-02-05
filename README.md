@@ -1,4 +1,4 @@
-# 🎵Podo-Project
+# 🎵Podo Music
 
 
 ### **① 팀원별 이름 및 역할**
