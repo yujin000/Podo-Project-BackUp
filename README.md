@@ -1,8 +1,6 @@
 # 🎵Podo Music
 Second Project
 
-### [📚PDF 발표자료 보기](https://drive.google.com/file/d/1EYSHZs3QODZcaICPsAtZ-yaOyLj77XIR/view?usp=share_link)
-------------
 ### **① 팀원별 이름 및 역할**
 * 팀장 : 박세진 (PM) (팀원관리 / 일정관리 / 프로젝트 관리 / 뮤직 컨트롤러 구현)
 * 팀원 : 정택구 (Front-end) (웹 디자인 요소 제작 / 퍼블리싱 / 이메일 인증 기능 구현)
@@ -23,3 +21,6 @@ Second Project
 * **DataBase** : Oracle 11
 * **Tool** : Eclipse, Visual Studio Code
 * **etc** : Git, Tomcat 8.5
+
+------------
+### [📚PDF 발표자료 보기](https://drive.google.com/file/d/1EYSHZs3QODZcaICPsAtZ-yaOyLj77XIR/view?usp=share_link)
