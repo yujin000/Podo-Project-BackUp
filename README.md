@@ -23,4 +23,9 @@ Second Project
 * **etc** : Git, Tomcat 8.5
 
 ------------
-### [📚PDF 발표자료 보기](https://drive.google.com/file/d/1EYSHZs3QODZcaICPsAtZ-yaOyLj77XIR/view?usp=share_link)
+# [📄PDF 발표자료 보기](https://drive.google.com/file/d/1EYSHZs3QODZcaICPsAtZ-yaOyLj77XIR/view?usp=share_link)
+
+### **[메인 화면]**
+![image](https://user-images.githubusercontent.com/101914200/217024038-8137443e-7488-4a3f-95df-6214862905cc.png)
+### **[뮤직플레이어 화면]**
+![image](https://user-images.githubusercontent.com/101914200/217024277-aae93a3b-dad0-4ad3-9695-4da488aa6b14.png)
