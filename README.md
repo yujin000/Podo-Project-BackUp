@@ -28,16 +28,16 @@
 # 2. 기획 & 관리
 * **요구사항 정의서**
 
-![5조_요구사항 정의서_최종안 xlsx - 요구사항정의서_1](https://user-images.githubusercontent.com/101914200/220708922-c1190bde-8d6b-4154-a1bd-f581188f72e5.jpg)
-![5조_요구사항 정의서_최종안 xlsx - 요구사항정의서_2](https://user-images.githubusercontent.com/101914200/220708937-bb3a4b73-3322-42de-9765-01a717be772b.jpg)
+<img src="https://user-images.githubusercontent.com/101914200/220877022-d98c8569-b71c-49cb-9bf7-abc98ecf4f89.jpg" height="70%" width="70%">
+<img src="https://user-images.githubusercontent.com/101914200/220877030-48ea1ea2-6e00-4f33-a072-f6b883d169f5.jpg" height="70%" width="70%">
 
 * **작업 일정**
 
-![workSheet (1)](https://user-images.githubusercontent.com/101914200/220710131-5d642553-d4e7-437f-ad52-bba1fdd19e9c.png)
+<img src="https://user-images.githubusercontent.com/101914200/220877364-86fdeb63-fabb-4d58-ae05-9b2290c22825.PNG" height="60%" width="60%">
 
 * **ERD**
 
-![erd](https://user-images.githubusercontent.com/101914200/220710812-c87a5dbd-e096-47ad-bc4f-774c8294d727.png)
+<img src="https://user-images.githubusercontent.com/101914200/220875635-dedebb05-b2a8-4451-ab61-1a3c0c403a37.PNG" height="70%" width="70%">
 
 ----------
 ### **[메인 화면]**
