@@ -1,6 +1,9 @@
 # 🎵Podo Music
 음악 컨트롤러를 활용한 스트리밍 사이트 + 공연 티켓팅 사이트
 
+![image](https://user-images.githubusercontent.com/101914200/220857591-a6165644-0f6a-4f47-ac6b-5e56e111bb2e.png)
+
+
 # [📄PDF 발표자료 보기](https://drive.google.com/file/d/1EYSHZs3QODZcaICPsAtZ-yaOyLj77XIR/view?usp=share_link)
 
 # 목차
