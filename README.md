@@ -47,9 +47,8 @@
 
 ### **[음원 차트,위시리스트 화면]**
 <img width="953" alt="228573360-bddff9ad-d9e2-4d41-8bd8-6c3d59e1f53f" src="https://github.com/ChaSeokHo/Podo-Project-BackUp/assets/116864886/1b67b917-b2be-4e12-8808-a6e9514ade40">
-
 <img width="953" alt="228574578-6e69bc8a-94f8-40c9-a482-97c760e1c346" src="https://github.com/ChaSeokHo/Podo-Project-BackUp/assets/116864886/15e75711-13ff-4aae-997d-06716af251e4">
-<img width="953" alt="228574578-6e69bc8a-94f8-40c9-a482-97c760e1c346" src="https://github.com/ChaSeokHo/Podo-Project-BackUp/assets/116864886/15e75711-13ff-4aae-997d-06716af251e4"> <br>
+
 
 ### **[멤버십 구매]**
 <img width="626" alt="228573765-5cf5a00f-3f35-4325-a385-5a0de1a4a3e4" src="https://github.com/ChaSeokHo/Podo-Project-BackUp/assets/116864886/adfca8a8-e0d8-40b1-90bd-544a339ba885">
