@@ -62,7 +62,7 @@
 
 <img width="1120" alt="228574841-81efec89-a811-4d6d-bdef-d226b92dd514" src="https://github.com/ChaSeokHo/Podo-Project-BackUp/assets/116864886/7a618b32-e8ea-4f49-b5b5-1ceb499784c2">
 
-### **[관리자페이지]**<
+### **[관리자페이지]**
 <img width="855" alt="228574978-e453185b-847b-46c3-9918-50e428854c98" src="https://github.com/ChaSeokHo/Podo-Project-BackUp/assets/116864886/a2bbc5fd-7bb3-4f40-bdf2-22309b36f30e">
 
 
