@@ -44,3 +44,30 @@
 ![image](https://user-images.githubusercontent.com/101914200/217024038-8137443e-7488-4a3f-95df-6214862905cc.png)
 ### **[뮤직플레이어 화면]**
 ![image](https://user-images.githubusercontent.com/101914200/217024277-aae93a3b-dad0-4ad3-9695-4da488aa6b14.png)
+
+### **[음원 차트,위시리스트 화면]**
+<img width="953" alt="228573360-bddff9ad-d9e2-4d41-8bd8-6c3d59e1f53f" src="https://github.com/ChaSeokHo/Podo-Project-BackUp/assets/116864886/1b67b917-b2be-4e12-8808-a6e9514ade40">
+
+<img width="953" alt="228574578-6e69bc8a-94f8-40c9-a482-97c760e1c346" src="https://github.com/ChaSeokHo/Podo-Project-BackUp/assets/116864886/15e75711-13ff-4aae-997d-06716af251e4">
+<img width="953" alt="228574578-6e69bc8a-94f8-40c9-a482-97c760e1c346" src="https://github.com/ChaSeokHo/Podo-Project-BackUp/assets/116864886/15e75711-13ff-4aae-997d-06716af251e4"> <br>
+
+### **[멤버십 구매]**
+<img width="626" alt="228573765-5cf5a00f-3f35-4325-a385-5a0de1a4a3e4" src="https://github.com/ChaSeokHo/Podo-Project-BackUp/assets/116864886/adfca8a8-e0d8-40b1-90bd-544a339ba885">
+
+### **[마이페이지]**
+<img width="882" alt="228574151-00d3c567-b919-4764-8f0d-34e73730f1c5" src="https://github.com/ChaSeokHo/Podo-Project-BackUp/assets/116864886/5f2e05bf-8a57-4f65-a983-279703330fdf">
+
+### **[공연/콘서트 예매]**
+<img width="1133" alt="228574738-66b96061-c5b2-4961-82ed-5c719eedb80f" src="https://github.com/ChaSeokHo/Podo-Project-BackUp/assets/116864886/9a1219e2-5fda-451e-bc94-d099e793c4b3">
+
+
+<img width="1120" alt="228574841-81efec89-a811-4d6d-bdef-d226b92dd514" src="https://github.com/ChaSeokHo/Podo-Project-BackUp/assets/116864886/7a618b32-e8ea-4f49-b5b5-1ceb499784c2">
+
+### **[관리자페이지]**<
+<img width="855" alt="228574978-e453185b-847b-46c3-9918-50e428854c98" src="https://github.com/ChaSeokHo/Podo-Project-BackUp/assets/116864886/a2bbc5fd-7bb3-4f40-bdf2-22309b36f30e">
+
+
+<img width="911" alt="228575378-eb5585e2-dd5c-461e-afc5-671c4b230b42" src="https://github.com/ChaSeokHo/Podo-Project-BackUp/assets/116864886/5e938df9-366d-49bd-92c2-e5840f83b2c9">
+
+
+<img width="914" alt="228575246-4690fa63-b8db-438a-ba7c-ecb89df1b3bf" src="https://github.com/ChaSeokHo/Podo-Project-BackUp/assets/116864886/ffbbb5f7-011f-4b1e-b1d6-7ea108984ce6">
